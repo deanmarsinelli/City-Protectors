@@ -1,5 +1,4 @@
-#pragma once
-/*
+/**
 	EngineStd.h
 
 	This file contains extern declarations for various
@@ -9,6 +8,8 @@
 	for the various application layers that the engine
 	supports.
 */
+
+#pragma once
 
 #ifdef _WIN32
 #include <Windows.h>

@@ -34,8 +34,8 @@
 
 #include <cstdlib>
 
-/*
-class MemoryPool
+/**
+	Represents a fixed pool of the same type of object.
 */
 class MemoryPool
 {

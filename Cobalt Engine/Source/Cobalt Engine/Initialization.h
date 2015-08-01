@@ -1,4 +1,3 @@
-#pragma once
 /**
 	Initialization.h
 
@@ -11,6 +10,8 @@
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham
 */
+
+#pragma once
 
 #include <string>
 #include "EngineStd.h"
@@ -27,8 +28,8 @@ extern DWORD ReadCPUSpeed();
 extern const TCHAR* GetSaveGameDirectory(HWND hWnd, const TCHAR* gameAppDirectory);
 extern bool CheckForJoystick(HWND hWnd);
 
-/*
-class GameOptions
+/**
+	Options to initialize the game.
 */
 struct GameOptions
 {

@@ -1,5 +1,4 @@
-#pragma once
-/*
+/**
 	WindowsApp.h
 
 	The WindowsApp class provides the application
@@ -9,6 +8,8 @@
 	by Mike McShaffry and David Graham
 */
 
+#pragma once
+
 #include <memory>
 #include <string>
 #include <windows.h>
@@ -17,8 +18,8 @@
 
 class IRenderer;
 
-/*
-class WindowsApp
+/**
+	Application Layer interface for a Windows Game.
 */
 class WindowsApp
 {

@@ -1,8 +1,8 @@
-/*
-EngineStd.cpp
+/**
+	EngineStd.cpp
 
-This file contains definitions for various
-global data that is used throughout the engine.
+	This file contains definitions for various
+	global data that is used throughout the engine.
 */
 
 #include "EngineStd.h"

@@ -1,5 +1,3 @@
-#pragma once
-
 /**
 	interfaces.h
 
@@ -7,6 +5,8 @@
 	type definitions for commonly used interface
 	classes in the engine.
 */
+
+#pragma once
 
 #include <memory>
 
