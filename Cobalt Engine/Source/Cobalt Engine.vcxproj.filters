@@ -21,6 +21,11 @@
     <ClInclude Include="Include\Component.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Include\GameObjectFactory.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Logger.h" />
+    <ClInclude Include="Include\BaseGameLogic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -37,6 +42,12 @@
     </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>Application Layer\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectFactory.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtil.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

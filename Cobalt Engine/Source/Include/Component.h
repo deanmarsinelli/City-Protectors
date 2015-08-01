@@ -11,23 +11,29 @@
 
 #pragma once
 
-#include "EngineStd.h"
 #include "interfaces.h"
 #include "StringUtil.h"
 
 /**
 	Represents components that can be attached to Game Objects to run custom logic.
+	Each component has a unique identifier and a game object can only have one component
+	of a particular type.
 */
 class Component
 {
 	friend class GameObjectFactory;
-public:
-	virtual ~Component();
 
+public:
+	virtual ~Component() 
+	{
+		m_pOwner.reset();
+	}
+
+	/// These methods are meant to be overridden
 	virtual bool Init(TiXmlElement* pData) = 0;
-	virtual void PostInit() { }
-	virtual void Update(const float deltaTime) { }
-	virtual void OnChange() { }
+	virtual void PostInit() {}
+	virtual void Update(const int deltaTime) {}
+	virtual void OnChange() {}
 
 	virtual ComponentId GetId() const
 	{
@@ -47,5 +53,6 @@ private:
 	}
 
 protected:
+	/// Strong reference to the object this component is attached to
 	StrongGameObjectPtr m_pOwner;
 };

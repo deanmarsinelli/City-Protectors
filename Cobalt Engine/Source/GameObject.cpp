@@ -9,8 +9,11 @@
 	by Mike McShaffry and David Graham
 */
 
+#include <string>
 #include "GameObject.h"
 #include "Component.h"
+#include "Logger.h"
+#include "StringUtil.h"
 
 GameObject::GameObject(GameObjectId id)
 {
@@ -21,8 +24,9 @@ GameObject::GameObject(GameObjectId id)
 
 GameObject::~GameObject()
 {
-	// if this assert fires, then Destroy() was not called 
-	assert(m_Components.empty());
+	CB_LOG("Object", std::string("Destroying Object ") + ToStr(m_Id));
+	// if this assert fires, then Destroy() was not called on the Object before deleting it (BAD)
+	CB_ASSERT(m_Components.empty());
 }
 
 bool GameObject::Init(TiXmlElement* pData)

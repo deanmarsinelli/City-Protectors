@@ -12,15 +12,15 @@
 #pragma once
 
 #include <map>
-#include "EngineStd.h"
+#include "tinyxml.h"
 #include "interfaces.h"
 
 /**
-	Reprensents any object that can exist in the game world.
+	Represents any object that can exist in the game world. This class is not meant
+	to be subclassed, instead use components to compose your game objects.
 */
 class GameObject
 {
-private:
 	friend class GameObjectFactory;
 	typedef std::map<ComponentId, StrongComponentPtr> Components;
 	typedef std::string GameObjectType;
@@ -32,11 +32,35 @@ public:
 	bool Init(TiXmlElement* pData);
 	void PostInit();
 	void Destroy();
-	void Update(const float deltaTime);
+	void Update(const int deltaTime);
 
-	void AddComponent(StrongComponentPtr pComponent);
+	/**
+		Return the id of the game object
+	*/
+	GameObjectId GetId() const 
+	{ 
+		return m_Id; 
+	}
 
-	// template functions for getting a component
+	/**
+		Return the type of the game object
+	*/
+	GameObjectType GetType() const 
+	{ 
+		return m_Type; 
+	}
+
+	/**
+		Return a read only pointer to the map of components
+	*/
+	const Components* GetComponents()
+	{
+		return &m_Components;
+	}
+
+	/**
+		Return a weak pointer to a particular component by id
+	*/
 	template <typename ComponentType>
 	weak_ptr<ComponentType> GetComponent(ComponentId id)
 	{
@@ -56,7 +80,10 @@ public:
 			return nullptr;
 		}
 	}
-
+	
+	/**
+		Return a weak pointer to a particular component by name
+	*/
 	template <typename ComponentType>
 	weak_ptr<ComponentType> GetComponent(const char* name)
 	{
@@ -77,12 +104,22 @@ public:
 		}
 	}
 
-	const Components* GetComponents();
+private:
+	/**
+		Add a component to the Game Object. This should only be called by the Game Object Factory
+	*/
+	void AddComponent(StrongComponentPtr pComponent);
 
 private:
+	/// Unique id for the game object
 	GameObjectId m_Id;
+
+	/// Type of game object stored as a string
 	GameObjectType m_Type;
+
+	/// Map of component id's to components
 	Components m_Components;
 
+	/// The xml file from which the object was instantiated
 	std::string m_Resource;
 };
