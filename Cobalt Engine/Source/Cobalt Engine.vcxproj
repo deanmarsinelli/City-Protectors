@@ -40,29 +40,31 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\Lib\$(ProjectName)_$(PlatformName)_$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\Temp\$(ProjectName)_$(PlatformName)_$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)..\Lib\$(ProjectName)_$(PlatformName)_$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\Temp\$(ProjectName)_$(PlatformName)_$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_$(PlatformName)_$(Configuration)</TargetName>
-    <IncludePath>$(WindowsSDK_IncludePath);$(IncludePath);</IncludePath>
+    <IncludePath>$(IncludePath);</IncludePath>
     <LibraryPath>$(LibraryPath);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)..\..\Lib\$(ProjectName)_$(PlatformName)_$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\Temp\$(ProjectName)_$(PlatformName)_$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)..\Lib\$(ProjectName)_$(PlatformName)_$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\Temp\$(ProjectName)_$(PlatformName)_$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_$(PlatformName)_$(Configuration)</TargetName>
-    <IncludePath>$(WindowsSDK_IncludePath);$(IncludePath);</IncludePath>
+    <IncludePath>$(IncludePath);</IncludePath>
     <LibraryPath>$(LibraryPath);</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)\Include;$(SolutionDir)\Inc;$(ProjectDir)..\3rdParty\DXUT\Inc;$(ProjectDir)..\3rdParty\tinyxml\Inc;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,7 +80,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)\Include;$(SolutionDir)\Inc;$(ProjectDir)..\3rdParty\DXUT\Inc;$(ProjectDir)..\3rdParty\tinyxml\Inc;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
@@ -90,21 +92,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="EngineStd.h" />
-    <ClInclude Include="Initialization.h" />
-    <ClInclude Include="interfaces.h" />
-    <ClInclude Include="MemoryPool.h" />
-    <ClInclude Include="Random.h" />
-    <ClInclude Include="StringUtil.h" />
-    <ClInclude Include="types.h" />
-    <ClInclude Include="WindowsApp.h" />
+    <ClInclude Include="Include\Component.h" />
+    <ClInclude Include="Include\EngineStd.h" />
+    <ClInclude Include="Include\GameObject.h" />
+    <ClInclude Include="Include\Initialization.h" />
+    <ClInclude Include="Include\interfaces.h" />
+    <ClInclude Include="Include\MemoryPool.h" />
+    <ClInclude Include="Include\Random.h" />
+    <ClInclude Include="Include\StringUtil.h" />
+    <ClInclude Include="Include\types.h" />
+    <ClInclude Include="Include\WindowsApp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="WindowsApp.cpp" />
+    <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

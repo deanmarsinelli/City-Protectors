@@ -1,20 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="EngineStd.h" />
-    <ClInclude Include="WindowsApp.h">
+    <ClInclude Include="Include\WindowsApp.h">
       <Filter>Application Layer\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="Initialization.h" />
-    <ClInclude Include="types.h" />
-    <ClInclude Include="interfaces.h" />
-    <ClInclude Include="Random.h">
+    <ClInclude Include="Include\EngineStd.h" />
+    <ClInclude Include="Include\Initialization.h" />
+    <ClInclude Include="Include\interfaces.h" />
+    <ClInclude Include="Include\MemoryPool.h" />
+    <ClInclude Include="Include\types.h" />
+    <ClInclude Include="Include\Random.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="StringUtil.h">
+    <ClInclude Include="Include\StringUtil.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryPool.h" />
+    <ClInclude Include="Include\GameObject.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Component.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -26,6 +32,12 @@
       <Filter>Utilities</Filter>
     </ClCompile>
     <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Application Layer\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application Layer">
@@ -36,6 +48,9 @@
     </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{fb8a3b55-873b-4485-a14e-dfa040305b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Objects">
+      <UniqueIdentifier>{be3cc618-e5f1-4bcf-aa75-629a2b698ea5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wildfyre 2", "Wildfyre 2\Wi
 		{102E8513-7186-4219-BFF6-BAD0C0FCC489} = {102E8513-7186-4219-BFF6-BAD0C0FCC489}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cobalt Engine", "..\..\Cobalt Engine\Source\Cobalt Engine\Cobalt Engine.vcxproj", "{102E8513-7186-4219-BFF6-BAD0C0FCC489}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cobalt Engine", "..\..\Cobalt Engine\Source\Cobalt Engine.vcxproj", "{102E8513-7186-4219-BFF6-BAD0C0FCC489}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
