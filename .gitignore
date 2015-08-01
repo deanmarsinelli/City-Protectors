@@ -38,7 +38,7 @@ TestResult.xml
 [Rr]eleasePS/
 dlldata.c
 
-*.lib
+
 *.tlog
 *.idb
 *_i.c
