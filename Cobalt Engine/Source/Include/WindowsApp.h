@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include <map>
 #include <memory>
 #include <string>
 #include <windows.h>
@@ -65,10 +66,14 @@ public:
 
 	static Renderer GetRendererImpl();
 
+	virtual BaseGameLogic* CreateGameAndView() = 0;
+
+	int GetExitCode() { return DXUTGetExitCode(); }
 protected:
 	virtual void RegisterGameEvents() { }
 	virtual void CreateNetworkEventForwarder();
 	virtual void DestroyNetworkEventForwarder();
+	void FlashWhileMinimized();
 
 private:
 	void RegisterEngineEvents();
@@ -76,7 +81,7 @@ private:
 	// Member variables
 public:
 	// Game Properties
-	//BaseGameLogic *m_pGame;
+	BaseGameLogic* m_pGame;
 	GameOptions m_Options;
 	std::shared_ptr<IRenderer> m_Renderer;
 
@@ -91,7 +96,7 @@ protected:
 	int m_ColorDepth;
 	bool m_IsEditorRunning;
 
-
+	std::map<std::wstring, std::wstring> m_textResource;
 };
 
 extern WindowsApp* g_pApp;

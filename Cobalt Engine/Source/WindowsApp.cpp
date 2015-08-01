@@ -95,6 +95,8 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 	}
 	SetWindowText(GetHwnd(), GetGameTitle());
 
+	// TODO: save game directory
+
 	m_ScreenSize = Point(screenWidth, screenHeight);
 	// create the d3d device
 	DXUTCreateDevice(D3D_FEATURE_LEVEL_9_3, true, screenWidth, screenHeight);
@@ -110,7 +112,49 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 	m_Renderer->SetBackgroundColor(255, 20, 20, 200);
 	m_Renderer->OnRestore();
 	*/
-	// initialize save game directory
+	 
+	m_pGame = CreateGameAndView();
+	if (!m_pGame)
+		return false;
+	
 
 	return true;
+}
+static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pDoneProcessing, void* pUserContext)
+{
+	LRESULT result = 0;
+	switch (uMsg)
+	{
+	case WM_CLOSE:
+		result = g_pApp->OnClose();
+		break;
+	}
+	return result;
+}
+
+LRESULT WindowsApp::OnClose()
+{
+	CB_SAFE_DELETE(m_pGame);
+	DestroyWindow(GetHwnd());
+	DestroyNetworkEventForwarder();
+	
+	// TODO: finish this function
+
+	return 0;
+}
+
+bool WindowsApp::LoadStrings(std::string language)
+{
+	std::string languageFile = "Strings\\";
+	languageFile += language;
+	languageFile += ".xml";
+
+	/*TiXmlElement* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(languageFile.c_str());
+	if (!pRoot)
+	{
+		//CB_ERROR("String file is missing");
+		return false;
+	}*/
+
+	// TODO: finish this function
 }
