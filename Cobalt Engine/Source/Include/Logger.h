@@ -4,7 +4,7 @@
 
 #define CB_ASSERT(x) assert(x)
 
-#define CB_LOG(tag, string) \
+#define CB_LOG(tag, str) \
 	do \
 	{ \
 		std::string s(str); \
