@@ -102,6 +102,7 @@
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\Logger.h" />
     <ClInclude Include="Include\MemoryPool.h" />
+    <ClInclude Include="Include\Process.h" />
     <ClInclude Include="Include\Random.h" />
     <ClInclude Include="Include\StringUtil.h" />
     <ClInclude Include="Include\Transform.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="Process.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="WindowsApp.cpp" />

@@ -5,7 +5,6 @@
       <Filter>Application Layer\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Include\EngineStd.h" />
-    <ClInclude Include="Include\Initialization.h" />
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\types.h" />
@@ -32,13 +31,18 @@
     <ClInclude Include="Include\Transform.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Initialization.h">
+      <Filter>Main Loop</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Process.h">
+      <Filter>Main Loop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
     <ClCompile Include="WindowsApp.cpp">
       <Filter>Application Layer\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="Random.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -58,14 +62,14 @@
     <ClCompile Include="Geometry.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Initialization.cpp">
+      <Filter>Main Loop</Filter>
+    </ClCompile>
+    <ClCompile Include="Process.cpp">
+      <Filter>Main Loop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Application Layer">
-      <UniqueIdentifier>{7392e3b0-fed1-4af3-adee-237174cc66a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application Layer\Windows">
-      <UniqueIdentifier>{45e7bd0d-13bc-4e3b-b37b-714bc6c9a88f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{fb8a3b55-873b-4485-a14e-dfa040305b89}</UniqueIdentifier>
     </Filter>
@@ -74,6 +78,15 @@
     </Filter>
     <Filter Include="Graphics">
       <UniqueIdentifier>{b1bf7c61-0b95-4b7c-9a0f-0f47014bfccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application Layer">
+      <UniqueIdentifier>{7392e3b0-fed1-4af3-adee-237174cc66a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application Layer\Windows">
+      <UniqueIdentifier>{45e7bd0d-13bc-4e3b-b37b-714bc6c9a88f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main Loop">
+      <UniqueIdentifier>{d346e151-de08-4e8f-a2e4-17e5264cfe3a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

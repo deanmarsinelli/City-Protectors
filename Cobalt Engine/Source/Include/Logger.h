@@ -1,5 +1,6 @@
 #pragma once
 
+#include <assert.h>
 #include <string>
 
 #define CB_ASSERT(x) assert(x)
@@ -10,3 +11,5 @@
 		std::string s(str); \
 	} \
 	while (0)
+
+#define CB_WARNING(str)
