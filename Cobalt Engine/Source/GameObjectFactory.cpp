@@ -8,6 +8,11 @@
 #include "GameObjectFactory.h"
 #include "Component.h"
 
+GameObjectFactory::GameObjectFactory()
+{
+	// Register all the create functions
+}
+
 StrongGameObjectPtr GameObjectFactory::CreateGameObject(const char* objectResource)
 {
 	// TODO: finish this p162

@@ -26,6 +26,12 @@
     <ClInclude Include="Include\GameObjectFactory.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Geometry.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Transform.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -49,6 +55,9 @@
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application Layer">
@@ -62,6 +71,9 @@
     </Filter>
     <Filter Include="Game Objects">
       <UniqueIdentifier>{be3cc618-e5f1-4bcf-aa75-629a2b698ea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{b1bf7c61-0b95-4b7c-9a0f-0f47014bfccb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

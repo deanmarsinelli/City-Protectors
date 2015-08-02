@@ -97,12 +97,14 @@
     <ClInclude Include="Include\EngineStd.h" />
     <ClInclude Include="Include\GameObject.h" />
     <ClInclude Include="Include\GameObjectFactory.h" />
+    <ClInclude Include="Include\Geometry.h" />
     <ClInclude Include="Include\Initialization.h" />
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\Logger.h" />
     <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\Random.h" />
     <ClInclude Include="Include\StringUtil.h" />
+    <ClInclude Include="Include\Transform.h" />
     <ClInclude Include="Include\types.h" />
     <ClInclude Include="Include\WindowsApp.h" />
   </ItemGroup>
@@ -110,6 +112,7 @@
     <ClCompile Include="EngineStd.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="Random.cpp" />

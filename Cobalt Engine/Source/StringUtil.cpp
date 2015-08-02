@@ -1,3 +1,7 @@
+/**
+	StringUtil.cpp
+*/
+
 #include "StringUtil.h"
 
 std::string ToStr(int num, int base)
