@@ -40,6 +40,9 @@
     <ClInclude Include="Include\ProcessManager.h">
       <Filter>Main Loop</Filter>
     </ClInclude>
+    <ClInclude Include="Include\DelayedProcess.h">
+      <Filter>Main Loop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />

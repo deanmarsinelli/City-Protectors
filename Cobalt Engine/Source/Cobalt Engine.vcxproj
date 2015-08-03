@@ -92,6 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\DelayedProcess.h" />
     <ClInclude Include="Include\BaseGameLogic.h" />
     <ClInclude Include="Include\Component.h" />
     <ClInclude Include="Include\EngineStd.h" />
