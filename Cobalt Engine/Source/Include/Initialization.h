@@ -1,4 +1,4 @@
-/**
+/*
 	Initialization.h
 
 	Functions declarations for intialiazing

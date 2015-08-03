@@ -1,4 +1,4 @@
-/**
+/*
 	EngineStd.cpp
 
 	This file contains definitions for various

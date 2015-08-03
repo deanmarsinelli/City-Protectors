@@ -1,4 +1,4 @@
-/**
+/*
 	types.h
 
 	Some basic types used throughout the game.

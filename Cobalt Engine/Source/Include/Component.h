@@ -1,4 +1,4 @@
-/**
+/*
 	Component.h
 
 	Components represent attachments to game

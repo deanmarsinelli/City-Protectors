@@ -1,8 +1,5 @@
-/**
+/*
 	WindowsApp.cpp
-
-	The WindowsApp class provides the application
-	layer for a windows based game.
 
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham

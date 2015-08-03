@@ -1,4 +1,4 @@
-/**
+/*
 	interfaces.h
 
 	This file contains declaration data and

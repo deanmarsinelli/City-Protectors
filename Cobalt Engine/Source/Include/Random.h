@@ -1,4 +1,4 @@
-/**
+/*
 	Random.h
 
 	"Mersenne Twister pseudorandom number generator"

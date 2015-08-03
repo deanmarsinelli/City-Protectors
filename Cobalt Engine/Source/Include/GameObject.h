@@ -1,9 +1,5 @@
-/**
+/*
 	GameObject.h
-
-	GameObjects represent anything that can
-	exist in the engine. These are also commonly
-	referred to as Actors in other engines.
 
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham

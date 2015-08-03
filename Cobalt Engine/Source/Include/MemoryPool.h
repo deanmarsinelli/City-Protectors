@@ -1,33 +1,8 @@
-/**
+/*
 	MemoryPool.h
 
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham
-
-	Memory in this MemoryPool class is allocated in an
-	array of blocks, with each block pointing to an array of
-	chunks.
-
-	Chunks are equal sized and contain the actual objects plus a
-	4-byte header which points to the next chunk. They are linked
-	in a singly linked list with m_pHead pointing to the first
-	unused chunk of free memory. Chunk size and number of chunks
-	per block are written at Init() time and cannot be changed
-	without reinitializing the pool.
-
-	Chunks are obtained by calling Alloc() which returns the
-	first free chunk of memory in the list. If no memory is
-	available, Alloc() will attempt to allocate a new block
-	which can have a high performance cost.
-
-	Free() will release a chunk of memory and insert it into
-	the front of the list of available memory.
-
-	[ raw ] -> [ block ] [ block ]
-	|		 |
-	[ head ] -> [ chunk ] [ chunk ]
-	[ chunk ] [ chunk ]
-	[ chunk ] [ chunk ]
 */
 
 #pragma once
@@ -35,7 +10,30 @@
 #include <cstdlib>
 
 /**
-	Represents a fixed pool of the same type of object.
+	Memory in this MemoryPool class is allocated in an
+	array of blocks, with each block pointing to an array of
+	chunks.
+
+	Chunks are equal sized and contain the actual objects plus a
+	4 - byte header which points to the next chunk.They are linked
+	in a singly linked list with m_pHead pointing to the first
+	unused chunk of free memory.Chunk size and number of chunks
+	per block are written at Init() time and cannot be changed
+	without reinitializing the pool.
+
+	Chunks are obtained by calling Alloc() which returns the
+	first free chunk of memory in the list.If no memory is
+	available, Alloc() will attempt to allocate a new block
+	which can have a high performance cost.
+
+	Free() will release a chunk of memory and insert it into
+	the front of the list of available memory.
+
+	[raw] ->[block][block]
+				|	 |
+	[head] ->[chunk][chunk]
+	   		 [chunk][chunk]
+			 [chunk][chunk]
 */
 class MemoryPool
 {

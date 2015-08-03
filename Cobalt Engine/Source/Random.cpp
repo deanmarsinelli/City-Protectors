@@ -1,4 +1,4 @@
-/**
+/*
 	Random.cpp
 
 	"Mersenne Twister pseudorandom number generator"

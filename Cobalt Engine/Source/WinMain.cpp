@@ -1,4 +1,4 @@
-/**
+/*
 	WinMain.cpp
 
 	Entry-point of the Windows Application Layer

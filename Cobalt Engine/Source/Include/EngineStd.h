@@ -1,4 +1,4 @@
-/**
+/*
 	EngineStd.h
 
 	This file contains extern declarations for various

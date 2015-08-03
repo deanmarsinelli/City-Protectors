@@ -1,4 +1,4 @@
-/**
+/*
 	Process.h
 
 	Inspired by Game Coding Complete 4th ed.

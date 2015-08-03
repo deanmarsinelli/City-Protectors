@@ -1,4 +1,4 @@
-/**
+/*
 	Initialization.cpp
 
 	Functions definitions for intialiazing
@@ -13,7 +13,7 @@
 #include <direct.h>
 #include <tchar.h>
 
-/**
+/*
 	IsOnlyInstance - WINDOWS SPECIFIC
 	Return whether this instance is the only instance of the game
 */
@@ -40,7 +40,7 @@ bool IsOnlyInstance(LPCTSTR gameTitle)
 	return true;
 }
 
-/**
+/*
 	CheckStorage - return whether the system has enough disk space
 */
 bool CheckStorage(const DWORDLONG diskSpaceNeeded)
@@ -64,7 +64,7 @@ bool CheckStorage(const DWORDLONG diskSpaceNeeded)
 	return true;
 }
 
-/**
+/*
 	CheckMemory - WINDOWS SPECIFIC
 	Returns whether the system has the required memory
 */
@@ -99,7 +99,7 @@ bool CheckMemory(DWORDLONG physicalRamNeeded, const DWORDLONG virtualRAMNeeded)
 	return true;
 }
 
-/**
+/*
 	ReadCPUSpeed - WINDOWS SPECIFIC
 	Returns the cpu speed
 */
@@ -120,7 +120,7 @@ DWORD ReadCPUSpeed()
 	return bufferMHz;
 }
 
-/**
+/*
 	GetSaveGameDirectory
 	Returns the directory to store game files
 */
