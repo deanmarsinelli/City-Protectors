@@ -14,7 +14,12 @@ typedef std::shared_ptr<Process> StrongProcessPtr;
 typedef std::weak_ptr<Process> WeakProcessPtr;
 
 /**
-	A Process simulates a running process.
+	A Process simulates a running process. Processes are managed externally by a Process Manager
+	and execute their logic in a chaing. A process can also have a child process which is a
+	suspended process that will begin execution if its parent process completes successfully. 
+	In this case, the child process will be promoted by the Process Manager to a full process and 
+	execute its own behavior in the chain. If a child is added to a process that already has a 
+	child, the new child (grand child) will be added as a child to the processes child.
 */
 class Process
 {
@@ -84,7 +89,7 @@ protected:
 		m_State = RUNNING;
 	}
 
-	/// Update method must be overriden in derived class
+	/// Update method must be overriden in derived class and is called every frame
 	virtual void OnUpdate(unsigned long deltaTime) = 0;
 
 	/// Called if a process ends with sucess

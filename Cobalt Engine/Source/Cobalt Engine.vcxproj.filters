@@ -37,6 +37,9 @@
     <ClInclude Include="Include\Process.h">
       <Filter>Main Loop</Filter>
     </ClInclude>
+    <ClInclude Include="Include\ProcessManager.h">
+      <Filter>Main Loop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -66,6 +69,9 @@
       <Filter>Main Loop</Filter>
     </ClCompile>
     <ClCompile Include="Process.cpp">
+      <Filter>Main Loop</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessManager.cpp">
       <Filter>Main Loop</Filter>
     </ClCompile>
   </ItemGroup>
