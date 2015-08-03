@@ -16,13 +16,28 @@ WindowsApp* g_pApp = nullptr;
 
 WindowsApp::WindowsApp()
 {
+	// TODO finish this
 	g_pApp = this;
-	//m_pGame = nullptr;
+	m_pGame = nullptr;
+
+	m_RCDesktop.top = m_RCDesktop.left = m_RCDesktop.bottom = m_RCDesktop.right = 0;
+	m_ScreenSize = Point(0, 0);
+	m_ColorDepth = 32;
+
+	m_IsRunning = false;
+	m_IsEditorRunning = false;
+	
+	m_HasModalDialog = false;
 }
 
-HWND WindowsApp::GetHwnd()
+inline HWND WindowsApp::GetHwnd()
 {
 	return DXUTGetHWND();
+}
+
+inline HINSTANCE WindowsApp::GetInstance()
+{
+	return m_hInstance;
 }
 
 bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, int screenWidth, int screenHeight)
@@ -127,6 +142,93 @@ static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		break;
 	}
 	return result;
+}
+
+inline bool WindowsApp::HasModalDialog()
+{
+	return m_HasModalDialog;
+}
+
+inline void WindowsApp::ForceModalExit()
+{
+	PostMessage(GetHwnd(), g_MsgEndModal, 0, g_QuitNoPrompt);
+}
+
+LRESULT WindowsApp::OnDisplayChange(int colorDepth, int width, int height)
+{
+	m_RCDesktop.left = 0;
+	m_RCDesktop.top = 0;
+	m_RCDesktop.right = width;
+	m_RCDesktop.bottom = height;
+	m_ColorDepth = colorDepth;
+
+	return 0;
+}
+
+LRESULT WindowsApp::OnPowerBroadcast(int event)
+{
+	if (event == PBT_APMQUERYSUSPEND)
+	{
+		return BROADCAST_QUERY_DENY;
+	}
+	else if (event == PBT_APMBATTERYLOW)
+	{
+		AbortGame();
+	}
+
+	return true;
+}
+
+LRESULT WindowsApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
+{
+	switch (wParam)
+	{
+	case SC_MAXIMIZE:
+	{
+		if (m_WindowedMode && m_IsRunning)
+		{
+			// Maximize into full screen
+			OnAltEnter();
+		}
+		return 0;
+	}
+	case SC_CLOSE:
+	{
+		if (lParam != g_QuitNoPrompt)
+		{
+			if (m_QuitRequested)
+				return true;
+
+			m_QuitRequested = true;
+
+			if (MessageBox::Ask(QUESTION_QUIT_GAME) == IDNO)
+			{
+				m_QuitRequested = false;
+
+				return true;
+			}
+						 
+			m_Quitting = true;
+
+			if (HasModalDialog())
+			{
+				ForceModalExit();
+
+				PostMessage(GetHwnd(), WM_SYSCOMMAND, SC_CLOSE, g_QuitNoPrompt);
+
+				m_QuitRequested = false;
+				return true;
+			}
+			m_QuitRequested = false;
+
+		}
+		return 0;
+	}
+	default:
+		return DefWindowProc(GetHwnd(), WM_SYSCOMMAND, wParam, lParam);
+	}
+
+	return 0;
 }
 
 LRESULT WindowsApp::OnClose()

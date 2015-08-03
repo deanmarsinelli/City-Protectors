@@ -9,6 +9,9 @@
 #include "WindowsApp.h"
 #include "Logger.h"
 
+#pragma comment(lib, "shell32.lib")
+#pragma comment(lib, "advapi32.lib")
+
 // include for heap debugging
 #ifdef _DEBUG
 #include <crtdbg.h>
@@ -59,6 +62,22 @@ int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 		CB_ASSERT(0 && "Unknown renderer specified in game options");
 		return false;
 	}
+
+	// Show cursor
+	DXUTSetCursorSettings(true, true);
+
+	// Init the application
+	if (!g_pApp->InitInstance(hInstance, cmdLine, 0, g_pApp->m_Options.m_ScreenSize.x, g_pApp->m_Options.m_ScreenSize.y));
+	{
+		// TODO release memory and show an error message
+		return false;
+	}
+
+	// Main game loop
+	DXUTMainLoop();
+	DXUTShutdown();
+
+	// TODO destroy logger
 
 	return g_pApp->GetExitCode();
 }

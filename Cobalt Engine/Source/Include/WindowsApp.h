@@ -13,6 +13,7 @@
 #include <windows.h>
 #include "EngineStd.h"
 #include "Initialization.h"
+#include "types.h"
 
 class IRenderer;
 
@@ -31,12 +32,12 @@ public:
 	virtual HICON GetIcon() = 0;
 
 	// Win32 Stuff
-	HWND GetHwnd();
-	HINSTANCE GetInstance();
+	inline HWND GetHwnd();
+	inline HINSTANCE GetInstance();
 	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = nullptr, int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
 	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pDoneProcessing, void* pUserContext);
-	bool HasModalDialog();
-	void ForceModalExit();
+	inline bool HasModalDialog();
+	inline void ForceModalExit();
 	LRESULT OnDisplayChange(int colorDepth, int width, int height);
 	LRESULT OnPowerBroadcast(int event);
 	LRESULT OnSysCommand(WPARAM wParam, LPARAM lParam);
@@ -109,12 +110,14 @@ protected:
 	bool m_IsRunning;
 	bool m_QuitRequested;
 	bool m_Quitting;
-	// rect m_rcDesktop
+	Rect m_RCDesktop;
 	Point m_ScreenSize;
 	int m_ColorDepth;
 	bool m_IsEditorRunning;
 
-	std::map<std::wstring, std::wstring> m_textResource;
+	std::map<std::wstring, std::wstring> m_TextResource;
+	std::map<std::wstring, unsigned int> m_HotKeys;
+	bool m_HasModalDialog;
 };
 
 extern WindowsApp* g_pApp;
