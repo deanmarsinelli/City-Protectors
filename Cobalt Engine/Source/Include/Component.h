@@ -32,7 +32,7 @@ public:
 	/// These methods are meant to be overridden
 	virtual bool Init(TiXmlElement* pData) = 0;
 	virtual void PostInit() {}
-	virtual void Update(const int deltaTime) {}
+	virtual void Update(const float deltaTime) {}
 	virtual void OnChange() {}
 
 	virtual ComponentId GetId() const

@@ -33,7 +33,7 @@ public:
 	bool Init(TiXmlElement* pData);
 	void PostInit();
 	void Destroy();
-	void Update(const int deltaTime);
+	void Update(const float deltaTime);
 
 	/**
 		Return the id of the game object

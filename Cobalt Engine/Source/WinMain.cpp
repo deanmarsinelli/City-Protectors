@@ -7,6 +7,7 @@
 #include <DXUT.h>
 #include <Windows.h>
 #include "WindowsApp.h"
+#include "Logger.h"
 
 // include for heap debugging
 #ifdef _DEBUG
@@ -28,6 +29,36 @@ int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 
 	// Initialize User Options
 	g_pApp->m_Options.Init("UserOptions.xml", cmdLine);
+
+	// Setting up DirectX callbacks
+	DXUTSetCallbackMsgProc(WindowsApp::MsgProc);
+	DXUTSetCallbackFrameMove(WindowsApp::OnUpdate);
+	DXUTSetCallbackDeviceChanging(WindowsApp::ModifyDeviceSettings);
+
+	// Set the correct callbacks depending on D3D9 or D3D11 renderer
+	if (g_pApp->m_Options.m_Renderer == "Direct3D 11")
+	{
+		DXUTSetCallbackD3D11DeviceAcceptable(WindowsApp::IsD3D11DeviceAcceptable);
+		DXUTSetCallbackD3D11DeviceCreated(WindowsApp::OnD3D11CreateDevice);
+		DXUTSetCallbackD3D11SwapChainResized(WindowsApp::OnD3D11ResizedSwapChain);
+		DXUTSetCallbackD3D11SwapChainReleasing(WindowsApp::OnD3D11ReleasingSwapChain);
+		DXUTSetCallbackD3D11DeviceDestroyed(WindowsApp::OnD3D11DestroyDevice);
+		DXUTSetCallbackD3D11FrameRender(WindowsApp::OnD3D11FrameRender);
+	}
+	else if (g_pApp->m_Options.m_Renderer == "Direct3D 9")
+	{
+		DXUTSetCallbackD3D9DeviceAcceptable(WindowsApp::IsD3D9DeviceAcceptable);
+		DXUTSetCallbackD3D9DeviceCreated(WindowsApp::OnD3D9CreateDevice);
+		DXUTSetCallbackD3D9DeviceReset(WindowsApp::OnD3D9ResetDevice);
+		DXUTSetCallbackD3D9DeviceLost(WindowsApp::OnD3D9LostDevice);
+		DXUTSetCallbackD3D9DeviceDestroyed(WindowsApp::OnD3D9DestroyDevice);
+		DXUTSetCallbackD3D9FrameRender(WindowsApp::OnD3D9FrameRender);
+	}
+	else
+	{
+		CB_ASSERT(0 && "Unknown renderer specified in game options");
+		return false;
+	}
 
 	return g_pApp->GetExitCode();
 }

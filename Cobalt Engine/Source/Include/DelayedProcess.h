@@ -19,7 +19,7 @@ class DelayedProcess : public Process
 {
 public:
 	/// Constructor taking a delay timer
-	explicit DelayedProcess(unsigned long delayTimer) :
+	explicit DelayedProcess(const float delayTimer) :
 		Process(),
 		m_DelayTimer(delayTimer),
 		m_ElapsedTime(0)
@@ -27,7 +27,7 @@ public:
 
 protected:
 	/// Update function will succeed after the delay timer
-	virtual void OnUpdate(unsigned long deltaTime)
+	virtual void OnUpdate(const float deltaTime)
 	{
 		m_ElapsedTime += deltaTime;
 		if (m_ElapsedTime >= m_DelayTimer)
@@ -36,8 +36,8 @@ protected:
 
 private:
 	/// The amount of time to delay before success
-	unsigned long m_DelayTimer;
+	const float m_DelayTimer;
 
 	/// Time elapsed since the process was created
-	unsigned long m_ElapsedTime;
+	float m_ElapsedTime;
 };
