@@ -278,7 +278,7 @@ bool ZipFile::ReadFile(int index, void* pBuffer)
 	return ret;
 }
 
-bool ZipFile::ReadLargeFile(int index, void *pBuffer, void(*progressCallback)(int, bool&))
+bool ZipFile::ReadLargeFile(int index, void *pBuffer, std::function<void(int, bool&)> progressCallback)
 {
 	if (pBuffer == nullptr || index < 0 || index >= m_nEntries)
 		return false;

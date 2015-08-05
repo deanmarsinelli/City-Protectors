@@ -33,6 +33,7 @@
 
 #pragma once
 
+#include <functional>
 #include <map>
 #include <string>
 
@@ -73,7 +74,7 @@ public:
 	bool ReadFile(int index, void* pBuffer);
 
 	/// Read a large file into a buffer asynchronously
-	bool ReadLargeFile(int index, void* pBuffer, void(*progressCallback)(int, bool&));
+	bool ReadLargeFile(int index, void* pBuffer, std::function<void(int, bool&)> progressCallback);
 
 	/// Find the index of a particular file
 	int Find(const std::string& path) const;
