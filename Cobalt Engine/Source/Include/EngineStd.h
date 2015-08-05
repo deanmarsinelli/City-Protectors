@@ -17,8 +17,17 @@
 
 #include "tinyxml.h"
 
-#define CB_SAFE_DELETE(p) { if (p) { delete (p); (p) = NULL; } }
-#define CB_COM_RELEASE(p) { if (p) { p->Release(); (p) = NULL; } }
+#define CB_SAFE_DELETE(p) { if (p) { delete (p); (p) = nullptr; } }
+#define CB_SAFE_DELETE_ARRAY(p) { if (p) { delete[](p); (p) = nullptr; } }
+#define CB_COM_RELEASE(p) { if (p) { p->Release(); (p) = nullptr; } }
+
+
+#ifdef _DEBUG
+ #define CB_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#else
+ #define CB_NEW new
+#endif
+
 
 // declare engine application layer entry function
 #ifdef _WIN32

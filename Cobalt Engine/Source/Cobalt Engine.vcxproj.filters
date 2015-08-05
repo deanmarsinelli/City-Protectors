@@ -43,6 +43,9 @@
     <ClInclude Include="Include\DelayedProcess.h">
       <Filter>Main Loop</Filter>
     </ClInclude>
+    <ClInclude Include="Include\ZipFile.h">
+      <Filter>Resource Cache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -77,6 +80,9 @@
     <ClCompile Include="ProcessManager.cpp">
       <Filter>Main Loop</Filter>
     </ClCompile>
+    <ClCompile Include="ZipFile.cpp">
+      <Filter>Resource Cache</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
@@ -96,6 +102,9 @@
     </Filter>
     <Filter Include="Main Loop">
       <UniqueIdentifier>{d346e151-de08-4e8f-a2e4-17e5264cfe3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Cache">
+      <UniqueIdentifier>{ec39fe67-bf41-4c54-a1a2-df240e015f77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
