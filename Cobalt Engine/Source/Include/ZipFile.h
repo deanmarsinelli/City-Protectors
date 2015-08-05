@@ -69,7 +69,7 @@ public:
 	/// Get the uncompressed size of a file given an index
 	int GetFileLength(int index) const;
 
-	/// Uncompress the contents of a file into a buffer
+	/// Uncompress the contents of a file into a buffer. This method will block while the file is loaded.
 	bool ReadFile(int index, void* pBuffer);
 
 	/// Read a large file into a buffer asynchronously

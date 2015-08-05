@@ -13,7 +13,7 @@
 #include "interfaces.h"
 
 /// A map that maps strings (component names stored in xml files) to functions that create components
-typedef std::map<std::string, std::function<Component*>()> ComponentCreatorMap;
+typedef std::map<std::string, std::function<Component*()>> ComponentCreatorMap;
 
 /**
 	TODO: documentation

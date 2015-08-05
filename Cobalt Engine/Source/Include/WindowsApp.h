@@ -103,6 +103,7 @@ public:
 	BaseGameLogic* m_pGame;
 	GameOptions m_Options;
 	std::shared_ptr<IRenderer> m_Renderer;
+	class ResCache* m_ResCache;
 
 protected:
 	HINSTANCE m_hInstance;

@@ -15,7 +15,8 @@
 #include <Windows.h>
 #endif
 
-#include "tinyxml.h"
+#include <tinyxml.h>
+
 
 #define CB_SAFE_DELETE(p) { if (p) { delete (p); (p) = nullptr; } }
 #define CB_SAFE_DELETE_ARRAY(p) { if (p) { delete[](p); (p) = nullptr; } }
@@ -31,6 +32,7 @@
 
 // declare engine application layer entry function
 #ifdef _WIN32
+#include "WindowsApp.h"
 // declaration for the WindowsAppMain function
 extern int WINAPI WindowsAppMain(HINSTANCE hInstance,
 	HINSTANCE prevInstance, LPSTR cmdLine, int showCmd);

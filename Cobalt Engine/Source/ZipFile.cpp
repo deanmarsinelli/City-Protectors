@@ -21,9 +21,9 @@ typedef unsigned long dword;
 typedef unsigned short word;
 typedef unsigned char byte;
 
-// ---------------------------------------
+// --------------------------------------------
 //  ZipFile struct definitions, must be packed
-// ---------------------------------------
+// --------------------------------------------
 #pragma pack(1)
 struct ZipFile::TZipLocalHeader
 {

@@ -46,6 +46,9 @@
     <ClInclude Include="Include\ZipFile.h">
       <Filter>Resource Cache</Filter>
     </ClInclude>
+    <ClInclude Include="Include\ResourceCache.h">
+      <Filter>Resource Cache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -81,6 +84,9 @@
       <Filter>Main Loop</Filter>
     </ClCompile>
     <ClCompile Include="ZipFile.cpp">
+      <Filter>Resource Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceCache.cpp">
       <Filter>Resource Cache</Filter>
     </ClCompile>
   </ItemGroup>
