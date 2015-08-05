@@ -3,8 +3,6 @@
 
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham.
-
-	This file contains various classes for managing resources.
 */
 
 #pragma once
@@ -15,111 +13,9 @@
 #include <string>
 
 #include "interfaces.h"
-#include "ZipFile.h"
-
-/**
-	Stores the name of a resource to be used by a resource handle.
-*/
-class Resource
-{
-public:
-	/// Default constructor sets the name of the resource
-	Resource(const std::string& name);
-
-	/// Name of the resource -- all lowercase
-	std::string m_Name;
-};
-
-/**
-	Implements the IResourceFile interface and manages a single ZipFile object
-	which may contain many individual resources.
-*/
-class ResourceZipFile : public IResourceFile
-{
-public:
-	/// Constructor taking a file name as a param
-	ResourceZipFile(const std::wstring& resFileName);
-
-	/// Virtual Destructor
-	virtual ~ResourceZipFile();
-
-	/// Open the file and return success or failure
-	virtual bool Open();
-
-	/// Return the size of the resource based on the name of the resource
-	virtual int GetRawResourceSize(const Resource& r);
-
-	/// Read the resource into a buffer and return how many bytes were read
-	virtual int GetRawResource(const Resource& r, char* buffer);
-
-	/// Return the number of resources in a resource file
-	virtual int GetNumResources() const;
-
-	/// Return the name of the nth resource
-	virtual std::string GetResourceName(int n) const;
-
-private:
-	/// Pointer to the ZipFile object this class manages
-	ZipFile *m_pZipFile;
-
-	/// Name of the resource file on disk
-	std::wstring m_resFileName;
-};
+#include "ResourceHandle.h"
 
 
-/**
-	This Handle pairs a loaded resource (the name) to the actual loaded data. This Handle manages 
-	individual loaded resources (textures, sounds, etc.) and is responsible for the resource's raw 
-	data buffer. Handles are managed by a Resource Cache.
-*/
-class ResHandle
-{
-	friend class ResCache;
-public:
-	/// Constructor to build a resource handle 
-	ResHandle(const Resource& resource, char* buffer, unsigned int size, ResCache* pCache);
-	
-	/// Virtual Destructor
-	virtual ~ResHandle();
-
-	/// Return the name of the resource stored in the handle
-	inline const std::string& GetName() const;
-
-	/// Return the size of the loaded resource
-	inline unsigned int Size() const;
-
-	/// Return a read only pointer to the data buffer of the loaded resource
-	inline const char* Buffer() const;
-
-	/// Return a writable pointer to the data buffer of the loaded resource
-	inline char* WritableBuffer();
-
-	/// Return the extra data stored in the resource handle
-	inline shared_ptr<IResourceExtraData> GetExtra();
-
-	/// Set the resource handles extra data
-	inline void SetExtra(shared_ptr<IResourceExtraData> extra);
-
-protected:
-	/// The resource that is loaded
-	Resource m_Resouce;
-
-	/// Pointer to the raw loaded data
-	char* m_Buffer;
-
-	/// Size of the loaded resource
-	unsigned int m_Size;
-
-	/// Extra data belonging to the resource
-	shared_ptr<IResourceExtraData> m_Extra;
-	
-	/// Pointer to the resource cache that owns this resource handle
-	ResCache* m_pResCache;
-};
-
-typedef std::list<shared_ptr<ResHandle>> ResHandleList;
-typedef std::map<std::string, shared_ptr<ResHandle>> ResHandleMap;
-typedef std::list<shared_ptr<IResourceLoader>> ResourceLoaders;
 /**
 	Caches resources (as ResHandle's) that are currently loaded into memory in an LRU fashion. 
 	This Resource Cache stores two pointers to every currently loaded ResHandle. 
@@ -135,6 +31,9 @@ typedef std::list<shared_ptr<IResourceLoader>> ResourceLoaders;
 class ResCache
 {
 	friend class ResHandle;
+	typedef std::list<shared_ptr<ResHandle>> ResHandleList;
+	typedef std::map<std::string, shared_ptr<ResHandle>> ResHandleMap;
+	typedef std::list<shared_ptr<IResourceLoader>> ResourceLoaders;
 public:
 	/// Construct the cache with a max size and resource file
 	ResCache(const unsigned int sizeInMb, IResourceFile *resourceFile);
@@ -185,26 +84,4 @@ protected:
 
 	/// Total memory currently allocated
 	unsigned int m_Allocated;
-};
-
-
-/**
-	Used to load resources that need no additional processing on load. It will use the 
-	raw data that has already been loaded into memory from the IResourceFile and is now
-	stored in the ResHandle.
-*/
-class DefaultResourceLoader : public IResourceLoader
-{
-public:
-	/// Return * as the default pattern
-	virtual std::string GetPattern() { return "*"; }
-
-	/// Return true, use the raw file without additional processing
-	virtual bool UseRawFile() { return true; }
-
-	/// Return the raw size
-	virtual unsigned int GetLoadedResourceSize(char* rawBuffer, unsigned int rawSize) { return rawSize; }
-
-	/// Return true, the resource needs no additional logic to load
-	virtual bool LoadResource(char* rawBuffer, unsigned int rawSize, shared_ptr<ResHandle> handle) { return true; }
 };

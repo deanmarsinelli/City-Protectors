@@ -10,130 +10,11 @@
 #include <algorithm>
 #include <cctype>
 
+#include "DefaultResourceLoader.h"
 #include "EngineStd.h"
 #include "Logger.h"
+#include "StringUtil.h"
 
-// --------------------------------------------
-//  Resource methods
-// --------------------------------------------
-Resource::Resource(const std::string& name)
-{
-	m_Name = name;
-	std::transform(m_Name.begin(), m_Name.end(), m_Name.begin(), (int(*)(int)) std::tolower);
-}
-
-// --------------------------------------------
-//  ResourceZipFile methods
-// --------------------------------------------
-ResourceZipFile::ResourceZipFile(const std::wstring& resFileName) :
-m_pZipFile(nullptr),
-m_resFileName(resFileName)
-{}
-
-ResourceZipFile::~ResourceZipFile()
-{
-	CB_SAFE_DELETE(m_pZipFile);
-}
-
-bool ResourceZipFile::Open()
-{
-	m_pZipFile = CB_NEW ZipFile;
-	if (m_pZipFile)
-	{
-		return m_pZipFile->Init(m_resFileName);
-	}
-	return false;
-}
-
-int ResourceZipFile::GetRawResourceSize(const Resource& r)
-{
-	int resourceNum = m_pZipFile->Find(r.m_Name);
-	if (resourceNum == -1)
-		return -1;
-	
-	return m_pZipFile->GetFileLength(resourceNum);
-}
-
-int ResourceZipFile::GetRawResource(const Resource& r, char* buffer)
-{
-	int size = 0;
-	int resourceNum = m_pZipFile->Find(r.m_Name);
-	if (resourceNum >= 0)
-	{
-		size = m_pZipFile->GetFileLength(resourceNum);
-		m_pZipFile->ReadFile(resourceNum, buffer);
-	}
-
-	return size;
-}
-
-int ResourceZipFile::GetNumResources() const
-{
-	return (m_pZipFile == nullptr) ? 0 : m_pZipFile->GetNumFiles();
-}
-
-std::string ResourceZipFile::GetResourceName(int n) const
-{
-	std::string resourceName = "";
-	if (m_pZipFile != nullptr && n >= 0 && n < m_pZipFile->GetNumFiles())
-	{
-		resourceName = m_pZipFile->GetFileName(n);
-	}
-
-	return resourceName;
-}
-
-// --------------------------------------------
-//  ResHandle methods
-// --------------------------------------------
-ResHandle::ResHandle(const Resource& resource, char* buffer, unsigned int size, ResCache* pCache) :
-m_Resouce(resource),
-m_Buffer(buffer),
-m_Size(size),
-m_Extra(nullptr),
-m_pResCache(pCache)
-{}
-
-ResHandle::~ResHandle()
-{
-	CB_SAFE_DELETE(m_Buffer);
-	// tell the resource cache how much memory has been freed
-	m_pResCache->MemoryHasBeenFreed(m_Size);
-}
-
-inline const std::string& ResHandle::GetName() const
-{
-	return m_Resouce.m_Name;
-}
-
-inline unsigned int ResHandle::Size() const
-{
-	return m_Size;
-}
-
-inline const char* ResHandle::Buffer() const
-{
-	return m_Buffer;
-}
-
-inline char* ResHandle::WritableBuffer()
-{
-	return m_Buffer;
-}
-
-inline shared_ptr<IResourceExtraData> ResHandle::GetExtra()
-{
-	return m_Extra;
-}
-
-inline void ResHandle::SetExtra(shared_ptr<IResourceExtraData> extra)
-{
-	m_Extra = extra;
-}
-
-// --------------------------------------------
-//  ResCache methods
-// --------------------------------------------
 ResCache::ResCache(const unsigned int sizeInMb, IResourceFile* resourceFile)
 {
 	m_CacheSize = sizeInMb * 1024 * 1024;
@@ -200,6 +81,9 @@ int ResCache::PreLoad(const std::string& pattern, std::function<void(int, bool&)
 
 	for (int i = 0; i < numFiles; ++i)
 	{
+		if (cancel)
+			break;
+
 		Resource resource(m_File->GetResourceName(i));
 
 		if (WildcardMatch(pattern.c_str(), resource.m_Name.c_str()))

@@ -92,6 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\DefaultResourceLoader.h" />
     <ClInclude Include="Include\DelayedProcess.h" />
     <ClInclude Include="Include\BaseGameLogic.h" />
     <ClInclude Include="Include\Component.h" />
@@ -106,7 +107,10 @@
     <ClInclude Include="Include\Process.h" />
     <ClInclude Include="Include\ProcessManager.h" />
     <ClInclude Include="Include\Random.h" />
+    <ClInclude Include="Include\Resource.h" />
     <ClInclude Include="Include\ResourceCache.h" />
+    <ClInclude Include="Include\ResourceHandle.h" />
+    <ClInclude Include="Include\ResourceZipFile.h" />
     <ClInclude Include="Include\StringUtil.h" />
     <ClInclude Include="Include\Transform.h" />
     <ClInclude Include="Include\types.h" />
@@ -124,6 +128,8 @@
     <ClCompile Include="ProcessManager.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ResourceCache.cpp" />
+    <ClCompile Include="ResourceHandle.cpp" />
+    <ClCompile Include="ResourceZipFile.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="WindowsApp.cpp" />
     <ClCompile Include="WinMain.cpp" />

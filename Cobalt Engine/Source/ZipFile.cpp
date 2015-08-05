@@ -126,7 +126,7 @@ bool ZipFile::Init(const std::wstring& resourceFileName)
 	// go to the beginning of the directory
 	fseek(m_pFile, dhOffset - dh.dirSize, SEEK_SET);
 
-	// allocate a buffer for the raw data and read
+	// allocate enough space for the dir headers PLUS pointers to each dir header
 	m_pDirData = CB_NEW char[dh.dirSize + dh.nDirEntries * sizeof(*m_ppDir)];
 	if (!m_pDirData)
 		return false;
@@ -138,6 +138,19 @@ bool ZipFile::Init(const std::wstring& resourceFileName)
 	// point to the dirFileHeaders
 	m_ppDir = (const TZipDirFileHeader **)(m_pDirData + dh.dirSize);
 
+		////////////////////// <--- m_PDirData 
+		//	DirFileHeader0	//
+		//	DirFileHeader1  //
+		//	DirFileHeader2	//  Raw DirFileHeaders
+		//		 ...		//
+		//	DirFileHeaderN	//
+		//------------------// <--- m_ppDir[]
+		//	pDirFileHeader0	//
+		//	pDirFileHeader1	//	Quick Access Pointers
+		//		 ...		//
+		//	pDirFileHeaderN	//
+		//////////////////////
+	
 	bool success = true;
 	
 	// Fill in the ppDir array with pointers to each dirFileHeader

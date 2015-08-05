@@ -49,6 +49,18 @@
     <ClInclude Include="Include\ResourceCache.h">
       <Filter>Resource Cache</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Resource.h">
+      <Filter>Resource Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ResourceZipFile.h">
+      <Filter>Resource Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ResourceHandle.h">
+      <Filter>Resource Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DefaultResourceLoader.h">
+      <Filter>Resource Cache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -87,6 +99,12 @@
       <Filter>Resource Cache</Filter>
     </ClCompile>
     <ClCompile Include="ResourceCache.cpp">
+      <Filter>Resource Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceHandle.cpp">
+      <Filter>Resource Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceZipFile.cpp">
       <Filter>Resource Cache</Filter>
     </ClCompile>
   </ItemGroup>
