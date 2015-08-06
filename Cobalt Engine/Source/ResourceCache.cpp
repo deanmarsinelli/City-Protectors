@@ -83,15 +83,17 @@ int ResCache::PreLoad(const std::string& pattern, std::function<void(int, bool&)
 	{
 		if (cancel)
 			break;
-
+		// iterate all the files in the resource file
 		Resource resource(m_File->GetResourceName(i));
 
 		if (WildcardMatch(pattern.c_str(), resource.m_Name.c_str()))
 		{
+			// load any resources that match the given pattern
 			shared_ptr<ResHandle> handle = g_pApp->m_ResCache->GetHandle(&resource);
 			++loaded;
 		}
 
+		// if theres a callback, call it (load screen, progress bar, etc)
 		if (progressCallback != nullptr)
 		{
 			progressCallback(i * 100 / numFiles, cancel);
@@ -102,6 +104,7 @@ int ResCache::PreLoad(const std::string& pattern, std::function<void(int, bool&)
 
 void ResCache::Flush()
 {
+	// empty the cache
 	while (!m_LRU.empty())
 	{
 		shared_ptr<ResHandle> handle = m_LRU.front();
@@ -112,6 +115,7 @@ void ResCache::Flush()
 
 shared_ptr<ResHandle> ResCache::Find(Resource* r)
 {
+	// return the resource handle if it's in the cache
 	ResHandleMap::iterator it = m_Resources.find(r->m_Name);
 	if (it == m_Resources.end())
 		return nullptr;
@@ -121,6 +125,7 @@ shared_ptr<ResHandle> ResCache::Find(Resource* r)
 
 const void* ResCache::Update(shared_ptr<ResHandle> handle)
 {
+	// move the handle to the front of the LRU list
 	m_LRU.remove(handle);
 	m_LRU.push_front(handle);
 }
