@@ -10,6 +10,8 @@
 
 #include <memory>
 
+#include "types.h"
+
 using std::shared_ptr;
 using std::weak_ptr;
 
@@ -26,10 +28,14 @@ typedef shared_ptr<Component> StrongComponentPtr;
 typedef weak_ptr<Component> WeakComponentPtr;
 
 
+
+//====================================================
+//	Resource Interfaces
+//====================================================
 class Resource;
 class ResHandle;
 
-/*
+/**
 	Interface for a resource file. This is the base class for a single resource file
 	that contains several resources inside of it. Subclasses must implement all the pure
 	virtual methods in this class.
@@ -90,4 +96,38 @@ public:
 
 	/// Load a resource into a resource handle
 	virtual bool LoadResource(char* rawBuffer, unsigned int rawSize, shared_ptr<ResHandle> handle) = 0;
+};
+ 
+
+//====================================================
+//	Input Interfaces   TODO documentation
+//====================================================
+class IKeyboardHandler
+{
+	virtual bool OnKeyDown(const unsigned int keycode) = 0;
+	virtual bool OnKeyUp(const unsigned int keycode) = 0;
+};
+
+class IPointerHandler
+{
+public:
+	virtual bool OnPointerMove(const Point& pos, const int radius) = 0;
+	virtual bool OnPointerButtonDown(const Point& mousePos, const std::string& buttonName) = 0;
+	virtual bool OnPointerButtonUp(const Point& mousePos, const std::string& buttonName) = 0;
+};
+
+class IGamepadHandler
+{
+	virtual bool OnButtonDown(const std::string& buttonName, const int pressure) = 0;
+	virtual bool OnButtonUp(const std::string& buttonName) = 0;
+	virtual bool OnTrigger(const std::string& triggerName, const float pressure) = 0;
+	virtual bool OnThumbstick(const std::string& stickName, const float x, const float y) = 0;
+	virtual bool OnDirectionalPad(const std::string& direction) = 0;
+};
+
+class IJoystickHandler
+{
+	virtual bool OnButtonDown(const std::string& buttonName, const int pressure) = 0;
+	virtual bool OnButtonUp(const std::string& buttonName) = 0;
+	virtual bool OnJoystick(const float x, const float y) = 0;
 };
