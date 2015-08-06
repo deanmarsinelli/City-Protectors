@@ -25,6 +25,13 @@
  #define CB_NEW new
 #endif
 
+struct AppMsg
+{
+	HWND m_hWnd;
+	UINT m_uMsg;
+	WPARAM m_wParam;
+	LPARAM m_lParam;
+};
 
 //======================================
 //  Windows Specific
@@ -35,15 +42,6 @@
 // declaration for the WindowsAppMain function
 extern int WINAPI WindowsAppMain(HINSTANCE hInstance,
 	HINSTANCE prevInstance, LPSTR cmdLine, int showCmd);
-
-struct AppMsg
-{
-	HWND m_hWnd;
-	UINT m_uMsg;
-	WPARAM m_wParam;
-	LPARAM m_lParam;
-};
-
 #endif
 
 #ifdef _XBOX
