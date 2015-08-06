@@ -79,6 +79,12 @@ public:
 	/// Return true if the resource loader can use the stored data with no extra processing
 	virtual bool UseRawFile() = 0;
 
+	/// Return whether to release the raw buffer of a resource after it has been loaded
+	virtual bool DiscardRawBufferAfterLoad() = 0;
+
+	/// Return whether the file buffer ends in a null terminator after the raw data
+	virtual bool AddNullZero() { return false; }
+
 	/// Return the size of the loaded resource
 	virtual unsigned int GetLoadedResourceSize(char* rawBuffer, unsigned int rawSize) = 0;
 

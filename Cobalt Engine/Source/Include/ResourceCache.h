@@ -47,23 +47,38 @@ public:
 	/// Register a resource loader with this cache
 	void RegisterLoader(shared_ptr<IResourceLoader> loader);
 
-	/// Return a handle given a particular resource
+	/// Return a handle given a particular resource. If it is not yet in the cache it will be loaded
 	shared_ptr<ResHandle> GetHandle(Resource* r);
 
+	/// Preload resources matching the pattern into the cache
 	int PreLoad(const std::string& pattern, std::function<void(int, bool&)> progressCallback);
 
 	/// Flush the cache removing everything from memory
 	void Flush();
 
 protected:
-	// TODO: document these
+	/// Return a handle to a resource if it exists in the cache
 	shared_ptr<ResHandle> Find(Resource* r);
+
+	/// Push the handle to the front of the LRU list marking it as most recently used
 	const void* Update(shared_ptr<ResHandle> handle);
+
+	/// Load a resource from disk into the resource cache
 	shared_ptr<ResHandle> Load(Resource* r);
+
+	/// Remove an item from cache -- memory will not be freed until ref count of the object is 0
 	void Free(shared_ptr<ResHandle> handle);
+
+	/// Attempt to make room in the cache for a given size
 	bool MakeRoom(unsigned int size);
-	char* Allocated(unsigned int size);
+
+	/// Allocate space for an object and return a pointer to that memory
+	char* Allocate(unsigned int size);
+
+	/// Remove the least recently used item from the cache -- memory will not be freed until ref count of the object is 0
 	void FreeOneResource();
+
+	/// Decrease the total amount of allocated memory -- call this when the handle is finally freed
 	void MemoryHasBeenFreed(unsigned int size);
 
 protected:

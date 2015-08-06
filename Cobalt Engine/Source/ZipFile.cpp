@@ -233,7 +233,7 @@ bool ZipFile::ReadFile(int index, void* pBuffer)
 	if (pBuffer == nullptr || index < 0 || index >= m_nEntries)
 		return false;
 
-	// seek to the actual files location and read the local header
+	// seek to the actual files location on disk and read the local header
 	fseek(m_pFile, m_ppDir[index]->hdrOffset, SEEK_SET);
 
 	TZipLocalHeader h;

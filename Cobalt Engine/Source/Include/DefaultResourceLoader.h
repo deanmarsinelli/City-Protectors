@@ -25,6 +25,9 @@ public:
 	/// Return true, use the raw file without additional processing
 	virtual bool UseRawFile() { return true; }
 
+	/// Return true and release the raw buffer 
+	virtual bool DiscardRawBufferAfterLoad() { return true; }
+
 	/// Return the raw size
 	virtual unsigned int GetLoadedResourceSize(char* rawBuffer, unsigned int rawSize) { return rawSize; }
 
