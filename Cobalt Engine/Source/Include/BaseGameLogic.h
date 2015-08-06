@@ -7,15 +7,18 @@
 
 #pragma once
 
+#include "interfaces.h"
 #include "GameObject.h"
 
 typedef std::map<GameObjectId, StrongGameObjectPtr> GameObjectMap;
 
 class BaseGameLogic
 {
-public:
-	virtual weak_ptr<GameObject> GetObject(const GameObjectId id);
-
-private:
+public:	
+	virtual weak_ptr<GameObject> GetGameObject(const GameObjectId id);
+	GameViewList& GetGameViewList();
+	
+protected:
 	GameObjectMap m_Objects;
+	GameViewList m_GameViews;
 };

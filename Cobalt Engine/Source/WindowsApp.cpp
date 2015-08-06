@@ -5,8 +5,11 @@
 	by Mike McShaffry and David Graham
 */
 
-#include <DXUT.h>
 #include "WindowsApp.h"
+
+#include <DXUT.h>
+
+#include "BaseGameLogic.h"
 
 // global pointer for the engine to the application instance
 // this will get set in the constructor of the WindowsApp
@@ -140,6 +143,46 @@ static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	case WM_CLOSE:
 		result = g_pApp->OnClose();
 		break;
+
+	// foward these windows messages to the game views
+	case WM_KEYDOWN:
+	case WM_KEYUP:
+	case WM_CHAR:
+	case WM_MOUSEMOVE:
+	case WM_LBUTTONDOWN:
+	case WM_LBUTTONUP:
+	case WM_RBUTTONDOWN:
+	case WM_RBUTTONUP:
+	case MM_JOY1BUTTONDOWN:
+	case MM_JOY1BUTTONUP:
+	case MM_JOY1MOVE:
+	case MM_JOY1ZMOVE:
+	case MM_JOY2BUTTONDOWN:
+	case MM_JOY2BUTTONUP:
+	case MM_JOY2MOVE:
+	case MM_JOY2ZMOVE:
+	{
+		if (g_pApp->m_pGame)
+		{
+			GameViewList viewList = g_pApp->m_pGame->GameViewList();
+			AppMsg msg;
+			msg.m_hWnd = hWnd;
+			msg.m_uMsg = uMsg;
+			msg.m_wParam = wParam;
+			msg.m_lParam = lParam;
+			// iterate the view list in reverse, forward the message to the view that is on top (last in the list)
+			for (GameViewList::reverse_iterator it = viewList.rbegin(); it != viewList.rend(); ++it)
+			{
+				// if the view returns true, it has consumed this message
+				if ((*it)->OnMsgProc(msg))
+				{
+					result = true;
+					break;
+				}
+			}
+		}
+		break;
+	}
 	}
 	return result;
 }

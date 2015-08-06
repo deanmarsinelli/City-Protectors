@@ -11,10 +11,6 @@
 
 #pragma once
 
-#ifdef _WIN32
-#include <Windows.h>
-#endif
-
 #include <tinyxml.h>
 
 
@@ -30,12 +26,24 @@
 #endif
 
 
-// declare engine application layer entry function
+//======================================
+//  Windows Specific
+//======================================
 #ifdef _WIN32
-#include "WindowsApp.h"
+ #include <Windows.h>
+ #include "WindowsApp.h"
 // declaration for the WindowsAppMain function
 extern int WINAPI WindowsAppMain(HINSTANCE hInstance,
 	HINSTANCE prevInstance, LPSTR cmdLine, int showCmd);
+
+struct AppMsg
+{
+	HWND m_hWnd;
+	UINT m_uMsg;
+	WPARAM m_wParam;
+	LPARAM m_lParam;
+};
+
 #endif
 
 #ifdef _XBOX

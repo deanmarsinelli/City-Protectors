@@ -11,10 +11,12 @@
 #include <memory>
 #include <string>
 #include <windows.h>
+
 #include "EngineStd.h"
 #include "Initialization.h"
 #include "types.h"
 
+class BaseGameLogic;
 class IRenderer;
 
 /**

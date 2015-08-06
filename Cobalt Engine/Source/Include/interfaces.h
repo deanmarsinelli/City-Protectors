@@ -8,8 +8,10 @@
 
 #pragma once
 
+#include <list>
 #include <memory>
 
+#include "EngineStd.h"
 #include "types.h"
 
 using std::shared_ptr;
@@ -26,6 +28,37 @@ typedef shared_ptr<GameObject> StrongGameObjectPtr;
 typedef weak_ptr<GameObject> WeakGameObjectPtr;
 typedef shared_ptr<Component> StrongComponentPtr;
 typedef weak_ptr<Component> WeakComponentPtr;
+
+
+
+//====================================================
+//	UI and Logic Interfaces
+//====================================================
+typedef unsigned int GameViewId;
+
+enum GameViewType
+{
+	GameView_Human,
+	GameView_Remote,
+	GameView_AI,
+	GameView_Recorder,
+	GameView_Other
+};
+
+class IGameView
+{
+public:
+	virtual HRESULT OnRestore() = 0;
+	virtual void OnRender(double time, float deltaTime) = 0;
+	virtual HRESULT OnLostDevice() = 0;
+	virtual GameViewType GetType() = 0;
+	virtual GameViewId GetId() const = 0;
+	virtual void OnAttach(GameViewId viewId, GameObjectId objectId) = 0;
+	virtual LRESULT CALLBACK OnMsgProc(AppMsg msg) = 0;
+	virtual void OnUpdate(float deltaTime) = 0;
+	virtual ~IGameView() { };
+};
+typedef std::list<shared_ptr<IGameView> > GameViewList;
 
 
 
