@@ -7,16 +7,18 @@
 
 #pragma once
 
+#include <DXUT.h>
 #include <map>
 #include <memory>
 #include <string>
 #include <windows.h>
 
+#include "BaseGameLogic.h"
 #include "EngineStd.h"
+#include "HumanView.h"
 #include "Initialization.h"
 #include "types.h"
 
-class BaseGameLogic;
 class IRenderer;
 
 /**
@@ -54,6 +56,7 @@ public:
 	int GetHotKeyForString(std::wstring sID);
 	UINT MapCharToKeycode(const char hotkey);
 
+	HumanView* GetHumanView();
 	int Modal();
 
 	// Renderer
@@ -85,7 +88,6 @@ public:
 	static void CALLBACK OnD3D11ReleasingSwapChain(void* pUserContext);
 	static void CALLBACK OnD3D11DestroyDevice(void* pUserContext);
 	static void CALLBACK OnD3D11FrameRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pd3dImmediateContext, double time, float deltaTime, void* pUserContext);
-
 
 	virtual BaseGameLogic* CreateGameAndView() = 0;
 

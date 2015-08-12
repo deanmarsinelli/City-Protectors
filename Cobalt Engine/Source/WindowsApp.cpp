@@ -7,10 +7,6 @@
 
 #include "WindowsApp.h"
 
-#include <DXUT.h>
-
-#include "BaseGameLogic.h"
-
 // global pointer for the engine to the application instance
 // this will get set in the constructor of the WindowsApp
 // class, but will point to a derived instance that is

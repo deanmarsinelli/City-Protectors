@@ -41,7 +41,6 @@ public:
 	long x, y;
 };
 
-
 /**
 	Represents a rectangle box
 */

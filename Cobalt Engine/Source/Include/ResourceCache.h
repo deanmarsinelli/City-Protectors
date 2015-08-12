@@ -15,7 +15,6 @@
 #include "interfaces.h"
 #include "ResourceHandle.h"
 
-
 /**
 	Caches resources (as ResHandle's) that are currently loaded into memory in an LRU fashion. 
 	This Resource Cache stores two pointers to every currently loaded ResHandle. 

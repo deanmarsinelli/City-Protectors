@@ -12,6 +12,7 @@
 #include <memory>
 
 #include "EngineStd.h"
+#include "Geometry.h"
 #include "types.h"
 
 using std::shared_ptr;
@@ -29,7 +30,15 @@ typedef weak_ptr<GameObject> WeakGameObjectPtr;
 typedef shared_ptr<Component> StrongComponentPtr;
 typedef weak_ptr<Component> WeakComponentPtr;
 
-
+/// Less than compare functor to sort shared_ptr's. If T is a custom class, the less than operator should be overloaded.
+template<class T>
+struct SortBy_SharedPtr_Content
+{
+	bool operator()(const shared_ptr<T> &lhs, const shared_ptr<T> &rhs) const
+	{
+		return *lhs < *rhs;
+	}
+};
 
 //====================================================
 //	UI and Logic Interfaces
@@ -48,7 +57,10 @@ enum GameViewType
 class IGameView
 {
 public:
+	/// Recreates anything that might have been lost while the game is running (because of system sleep, etc). Also used for initialization
 	virtual HRESULT OnRestore() = 0;
+
+	/// Render the Game View
 	virtual void OnRender(double time, float deltaTime) = 0;
 	virtual HRESULT OnLostDevice() = 0;
 	virtual GameViewType GetType() = 0;
@@ -58,9 +70,64 @@ public:
 	virtual void OnUpdate(float deltaTime) = 0;
 	virtual ~IGameView() { };
 };
-typedef std::list<shared_ptr<IGameView> > GameViewList;
 
+class IScreenElement
+{
+public:
+	/// Recreates anything that might have been lost while the game is running (because of system sleep, etc). Also used for initialization
+	virtual HRESULT OnRestore() = 0;
 
+	/// Render the screen element
+	virtual HRESULT OnRender(double time, float deltaTime) = 0;
+	virtual HRESULT OnLostDevice() = 0;
+	virtual void OnUpdate(float deltaTime) = 0;
+	virtual int GetZOrder() const = 0;
+	virtual bool IsVisible() const = 0;
+	virtual void SetVisible(bool visible) = 0;
+	virtual LRESULT CALLBACK OnMsgProc(AppMsg msg) = 0;
+	virtual ~IScreenElement() { };
+
+	/// Less than overloaded operator that compares Z order
+	virtual bool operator <(const IScreenElement &other) { return GetZOrder() < other.GetZOrder(); }
+};
+
+typedef std::list<shared_ptr<IGameView>> GameViewList;
+typedef std::list<shared_ptr<IScreenElement>> ScreenElementList;
+
+//====================================================
+//	Rendering Interfaces
+//====================================================
+class LightNode;
+typedef std::list<shared_ptr<LightNode>> Lights;
+
+/**
+	Interface for representing the state of the renderer.
+*/
+class IRenderState
+{
+public:
+	virtual std::string ToStr() = 0;
+};
+
+/**
+	Generic Interface for implementing a renderer.
+*/
+class IRenderer
+{
+public:
+	virtual void SetBackgroundColor(BYTE r, BYTE g, BYTE b, BYTE a) = 0;
+	virtual HRESULT OnRestore() = 0;
+	virtual void Shutdown() = 0;
+	virtual bool PreRender() = 0;
+	virtual bool PostRender() = 0;
+	virtual void CalcLighting(Lights* lights, int maxLights) = 0;
+	virtual void SetWorldTransform(const Mat4x4* m) = 0;
+	virtual void SetViewTransform(const Mat4x4* m) = 0;
+	virtual void SetProjectionTransform(const Mat4x4* m) = 0;
+	virtual shared_ptr<IRenderState> PrepareAlphaPass() = 0;
+	virtual shared_ptr<IRenderState> PrepareSkyBoxPass() = 0;
+	virtual void DrawLine(const Vec3& from, const Vec3& to, const Color& color) = 0;
+};
 
 //====================================================
 //	Resource Interfaces
@@ -137,16 +204,17 @@ public:
 //====================================================
 class IKeyboardHandler
 {
-	virtual bool OnKeyDown(const unsigned int keycode) = 0;
-	virtual bool OnKeyUp(const unsigned int keycode) = 0;
+public:
+	virtual bool OnKeyDown(const BYTE keycode) = 0;
+	virtual bool OnKeyUp(const BYTE keycode) = 0;
 };
 
 class IPointerHandler
 {
 public:
-	virtual bool OnPointerMove(const Point& pos, const int radius) = 0;
-	virtual bool OnPointerButtonDown(const Point& mousePos, const std::string& buttonName) = 0;
-	virtual bool OnPointerButtonUp(const Point& mousePos, const std::string& buttonName) = 0;
+	virtual bool OnPointerMove(const Point& mousePos, const int radius) = 0;
+	virtual bool OnPointerButtonDown(const Point& mousePos, const int radius, const std::string& buttonName) = 0;
+	virtual bool OnPointerButtonUp(const Point& mousePos, const int radius, const std::string& buttonName) = 0;
 };
 
 class IGamepadHandler

@@ -5,7 +5,7 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "Geometry.h"
+#include "D3DGeometry.h"
 
 const Mat4x4 Mat4x4::Identity(D3DXMATRIX(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
 

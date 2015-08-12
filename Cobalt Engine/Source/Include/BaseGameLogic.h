@@ -12,6 +12,19 @@
 
 typedef std::map<GameObjectId, StrongGameObjectPtr> GameObjectMap;
 
+enum BaseGameState
+{
+	Invalid,
+	Initializing,
+	MainMenu,
+	WaitingForPlayers,
+	LoadingGameEnvironment,
+	WaitingForPlayersToLoadEnvironment,
+	SpawningPlayersObjects,
+	Running
+};
+
+
 class BaseGameLogic
 {
 public:	

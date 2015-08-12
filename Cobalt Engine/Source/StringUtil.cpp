@@ -4,10 +4,13 @@
 
 #include "StringUtil.h"
 
+#include "EngineStd.h"
+
 // The following function was found on http://xoomer.virgilio.it/acantato/dev/wildcard/wildmatch.html, where it was attributed to 
 // the C/C++ Users Journal, written by Mike Cornelison. It is a little ugly, but it is FAST. Use this as an excercise in not reinventing the
 // wheel, even if you see gotos. 
-bool WildcardMatch(const char *pat, const char *str) {
+bool WildcardMatch(const char *pat, const char *str) 
+{
 	int i, star;
 
 new_segment:
@@ -42,8 +45,23 @@ test_match:
 	goto test_match;
 }
 
+HRESULT AnsiToWideCch(WCHAR* wstrDestination, const CHAR* strSource, int cchDestChar)
+{
+	if (wstrDestination == NULL || strSource == NULL || cchDestChar < 1)
+		return E_INVALIDARG;
+
+	int nResult = MultiByteToWideChar(CP_ACP, 0, strSource, -1,
+		wstrDestination, cchDestChar);
+	wstrDestination[cchDestChar - 1] = 0;
+
+	if (nResult == 0)
+		return E_FAIL;
+	return S_OK;
+}
+
 std::string ToStr(int num, int base)
 {
+	// turn an int into a std::string
 	char str[MAX_DIGITS_IN_INT];
 	memset(str, 0, MAX_DIGITS_IN_INT);
 	_itoa_s(num, str, MAX_DIGITS_IN_INT, base);

@@ -25,9 +25,6 @@
     <ClInclude Include="Include\GameObjectFactory.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Geometry.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Transform.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
@@ -61,6 +58,36 @@
     <ClInclude Include="Include\DefaultResourceLoader.h">
       <Filter>Resource Cache</Filter>
     </ClInclude>
+    <ClInclude Include="Include\D3DRenderer.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DRenderer11.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DLineDrawer11.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shaders.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scene.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Geometry.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\HumanView.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UserInterface.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Console.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MovementController.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -83,9 +110,6 @@
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Initialization.cpp">
       <Filter>Main Loop</Filter>
     </ClCompile>
@@ -106,6 +130,27 @@
     </ClCompile>
     <ClCompile Include="ResourceZipFile.cpp">
       <Filter>Resource Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DRenderer11.cpp">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DRenderer.cpp">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DLineDrawer11.cpp">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="HumanView.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementController.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +174,12 @@
     </Filter>
     <Filter Include="Resource Cache">
       <UniqueIdentifier>{ec39fe67-bf41-4c54-a1a2-df240e015f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Direct 3D">
+      <UniqueIdentifier>{2a16b107-ace0-4b83-bc39-b722a4cd4f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User Interface">
+      <UniqueIdentifier>{a7e016d7-8861-4a3d-a25d-b09c827df0d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -13,15 +13,18 @@
 
 #define MAX_DIGITS_IN_INT 12
 
-
 /// Does a classic * & ? pattern match on a file name - this is case sensitive!
 extern bool WildcardMatch(const char *pat, const char *str);
 
+/// Convert an ascii string to unicode string
+extern HRESULT AnsiToWideCch(WCHAR* dest, const CHAR* src, int charCount);
+
+/// Convert an integer to string
 extern std::string ToStr(int num, int base = 10);
+
 
 class HashedString
 {
-
 public:
 	static void* hash_name(char const* pStr);
 };

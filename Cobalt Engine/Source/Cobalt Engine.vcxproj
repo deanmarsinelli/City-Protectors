@@ -92,6 +92,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Console.h" />
+    <ClInclude Include="Include\D3DLineDrawer11.h" />
+    <ClInclude Include="Include\D3DRenderer.h" />
+    <ClInclude Include="Include\D3DRenderer11.h" />
     <ClInclude Include="Include\DefaultResourceLoader.h" />
     <ClInclude Include="Include\DelayedProcess.h" />
     <ClInclude Include="Include\BaseGameLogic.h" />
@@ -100,10 +104,12 @@
     <ClInclude Include="Include\GameObject.h" />
     <ClInclude Include="Include\GameObjectFactory.h" />
     <ClInclude Include="Include\Geometry.h" />
+    <ClInclude Include="Include\HumanView.h" />
     <ClInclude Include="Include\Initialization.h" />
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\Logger.h" />
     <ClInclude Include="Include\MemoryPool.h" />
+    <ClInclude Include="Include\MovementController.h" />
     <ClInclude Include="Include\Process.h" />
     <ClInclude Include="Include\ProcessManager.h" />
     <ClInclude Include="Include\Random.h" />
@@ -111,19 +117,28 @@
     <ClInclude Include="Include\ResourceCache.h" />
     <ClInclude Include="Include\ResourceHandle.h" />
     <ClInclude Include="Include\ResourceZipFile.h" />
+    <ClInclude Include="Include\Scene.h" />
+    <ClInclude Include="Include\Shaders.h" />
     <ClInclude Include="Include\StringUtil.h" />
     <ClInclude Include="Include\Transform.h" />
     <ClInclude Include="Include\types.h" />
+    <ClInclude Include="Include\UserInterface.h" />
     <ClInclude Include="Include\WindowsApp.h" />
     <ClInclude Include="Include\ZipFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="D3DLineDrawer11.cpp" />
+    <ClCompile Include="D3DRenderer.cpp" />
+    <ClCompile Include="D3DRenderer11.cpp" />
     <ClCompile Include="EngineStd.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="HumanView.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="MovementController.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="ProcessManager.cpp" />
     <ClCompile Include="Random.cpp" />

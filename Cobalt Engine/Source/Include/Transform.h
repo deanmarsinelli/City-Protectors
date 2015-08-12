@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Geometry.h"
+#include "D3DGeometry.h"
 
 class Transform
 {
