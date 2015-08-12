@@ -45,6 +45,7 @@ struct SortBy_SharedPtr_Content
 //====================================================
 typedef unsigned int GameViewId;
 
+/// Types of views available
 enum GameViewType
 {
 	GameView_Human,
@@ -54,6 +55,10 @@ enum GameViewType
 	GameView_Other
 };
 
+/**
+	Interface for implementing the view layer in a game. This layer is 
+	separate from the game logic layer, but will represent it on screen.
+*/
 class IGameView
 {
 public:
@@ -62,15 +67,33 @@ public:
 
 	/// Render the Game View
 	virtual void OnRender(double time, float deltaTime) = 0;
+
+	/// Method to handle the device being lost
 	virtual HRESULT OnLostDevice() = 0;
+
+	/// Return the type of game view
 	virtual GameViewType GetType() = 0;
+
+	/// Return the id of the game view
 	virtual GameViewId GetId() const = 0;
+
+	/// Attach a game view to a game object
 	virtual void OnAttach(GameViewId viewId, GameObjectId objectId) = 0;
+
+	/// Msg callback from the application layer to the view
 	virtual LRESULT CALLBACK OnMsgProc(AppMsg msg) = 0;
+
+	/// Update method for the game view
 	virtual void OnUpdate(float deltaTime) = 0;
+
+	/// Default destructor
 	virtual ~IGameView() { };
 };
 
+/**
+	Interface for any element that can be represented in the view such as 
+	a UI element or a 3D scene representation of the game world.
+*/
 class IScreenElement
 {
 public:
@@ -79,12 +102,26 @@ public:
 
 	/// Render the screen element
 	virtual HRESULT OnRender(double time, float deltaTime) = 0;
+
+	/// Method to handle the device being lost
 	virtual HRESULT OnLostDevice() = 0;
-	virtual void OnUpdate(float deltaTime) = 0;
+
+	/// Return the Z-order value of the element
 	virtual int GetZOrder() const = 0;
+
+	/// Return whether or not the element is visible
 	virtual bool IsVisible() const = 0;
+
+	/// Set an element visible or invisible
 	virtual void SetVisible(bool visible) = 0;
+
+	/// Msg callback from the view to the screen element
 	virtual LRESULT CALLBACK OnMsgProc(AppMsg msg) = 0;
+
+	/// Update method for a screen element
+	virtual void OnUpdate(float deltaTime) = 0;
+
+	/// Default destructor
 	virtual ~IScreenElement() { };
 
 	/// Less than overloaded operator that compares Z order

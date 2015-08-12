@@ -40,10 +40,10 @@ public:
 		ABORTED
 	};
 
-	/// Default Constructor
+	/// Default constructor
 	Process();
 
-	/// Virtual Destructor
+	/// Virtual destructor
 	virtual ~Process();
 
 	/// Method for ending a process with success

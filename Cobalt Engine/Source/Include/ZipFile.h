@@ -49,10 +49,10 @@ typedef std::map<std::string, int> ZipContentsMap;
 class ZipFile
 {
 public:
-	/// Default Constructor
+	/// Default constructor
 	ZipFile();
 
-	/// Virtual Destructor
+	/// Virtual destructor
 	virtual ~ZipFile();
 
 	/// Initialize a zip object from a zip file on disk

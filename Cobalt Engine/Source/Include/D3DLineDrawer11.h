@@ -19,10 +19,10 @@
 class D3DLineDrawer11
 {
 public:
-	/// Default Constructor
+	/// Default constructor
 	D3DLineDrawer11();
 
-	/// Default Destructor
+	/// Default destructor
 	~D3DLineDrawer11();
 
 	/// Draw a line in a 3D scene
