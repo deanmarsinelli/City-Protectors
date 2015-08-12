@@ -54,11 +54,3 @@ extern int WINAPI WindowsAppMain(HINSTANCE hInstance,
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
 extern const int MEGABYTE;
-
-extern Vec3 g_Up;
-extern Vec3 g_Right;
-extern Vec3 g_Forward;
-
-extern Vec4 g_Up4;
-extern Vec4 g_Right4;
-extern Vec4 g_Forward4;

@@ -23,9 +23,9 @@ void MovementController::SetObject(shared_ptr<SceneNode> object)
 void MovementController::OnUpdate(float deltaTime)
 {
 	bool translating = false;
-	Vec4 atWorld(0, 0, 0, 0);
-	Vec4 rightWorld(0, 0, 0, 0);
-	Vec4 upWorld(0, 0, 0, 0);
+	Vec4 atWorld(0.0f, 0.0f, 0.0f, 0.0f);
+	Vec4 rightWorld(0.0f, 0.0f, 0.0f, 0.0f);
+	Vec4 upWorld(0.0f, 0.0f, 0.0f, 0.0f);
 
 	if (m_Key['W'] || m_Key['S'])
 	{
