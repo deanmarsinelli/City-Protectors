@@ -44,30 +44,32 @@ D3DXMATRIX()
 
 inline void Mat4x4::SetPosition(const Vec3& position)
 {
-	m[3][0] = position.x;
-	m[3][1] = position.y;
-	m[3][2] = position.z;
+	m[0][3] = position.x;
+	m[1][3] = position.y;
+	m[2][3] = position.z;
 	m[3][3] = 1.0f;
 }
 
 inline void Mat4x4::SetPosition(const Vec4& position)
 {
-	m[3][0] = position.x;
-	m[3][1] = position.y;
-	m[3][2] = position.z;
+	
+	m[0][3] = position.x;
+	m[1][3] = position.y;
+	m[2][3] = position.z;
 	m[3][3] = position.w;
+	
 }
 
 inline void Mat4x4::SetScale(const Vec3& scale)
 {
-	m[1][1] = scale.x;
-	m[2][2] = scale.y;
-	m[3][3] = scale.z;
+	m[0][0] = scale.x;
+	m[1][1] = scale.y;
+	m[2][2] = scale.z;
 }
 
 inline Vec3 Mat4x4::GetPosition() const
 {
-	return Vec3(m[3][0], m[3][1], m[3][2]);
+	return Vec3(m[0][3], m[1][3], m[2][3]);
 }
 
 inline Vec3 Mat4x4::GetDirection() const
