@@ -32,7 +32,7 @@ public:
 	void AbortAllProcesses(bool immediate);
 
 	/// Return the number of processes in the process list
-	inline unsigned int GetProcessCount() const;
+	unsigned int GetProcessCount() const;
 
 private:
 	/// Clears the process list -- called by the destructor

@@ -203,7 +203,7 @@ void ZipFile::End()
 	m_nEntries = 0;
 }
 
-inline int ZipFile::GetNumFiles() const
+int ZipFile::GetNumFiles() const
 {
 	return m_nEntries;
 }

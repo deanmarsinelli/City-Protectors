@@ -125,12 +125,12 @@ bool MovementController::OnPointerButtonUp(const Point& mousePos, const int radi
 	return false;
 }
 
-inline const Mat4x4* MovementController::GetToWorld()
+const Mat4x4* MovementController::GetToWorld()
 {
 	return &m_MatToWorld;
 }
 
-inline const Mat4x4* MovementController::GetFromWorld()
+const Mat4x4* MovementController::GetFromWorld()
 {
 	return &m_MatFromWorld;
 }

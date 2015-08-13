@@ -44,12 +44,12 @@ void Console::SetDisplayText(const std::string& text)
 	m_CurrentOutputString = text;
 }
 
-inline void Console::SetActive(const bool isActive)
+void Console::SetActive(const bool isActive)
 {
 	m_IsActive = isActive;
 }
 
-inline bool Console::IsActive() const
+bool Console::IsActive() const
 {
 	return m_IsActive;
 }

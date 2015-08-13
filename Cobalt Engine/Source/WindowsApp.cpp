@@ -29,12 +29,12 @@ WindowsApp::WindowsApp()
 	m_HasModalDialog = false;
 }
 
-inline HWND WindowsApp::GetHwnd()
+HWND WindowsApp::GetHwnd()
 {
 	return DXUTGetHWND();
 }
 
-inline HINSTANCE WindowsApp::GetInstance()
+HINSTANCE WindowsApp::GetInstance()
 {
 	return m_hInstance;
 }
@@ -183,12 +183,12 @@ static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	return result;
 }
 
-inline bool WindowsApp::HasModalDialog()
+bool WindowsApp::HasModalDialog()
 {
 	return m_HasModalDialog;
 }
 
-inline void WindowsApp::ForceModalExit()
+void WindowsApp::ForceModalExit()
 {
 	PostMessage(GetHwnd(), g_MsgEndModal, 0, g_QuitNoPrompt);
 }

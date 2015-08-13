@@ -27,10 +27,10 @@ public:
 	void SetDisplayText(const std::string& text);
 
 	/// Activate or deactivate the console
-	inline void SetActive(const bool isActive);
+	void SetActive(const bool isActive);
 
 	/// Return whether the console is currently activated
-	inline bool IsActive() const;
+	bool IsActive() const;
 
 	/// Handle input from the keyboard 
 	void HandleKeyboardInput(const unsigned int keyVal, const unsigned int oemKeyVal, const bool keyDown);

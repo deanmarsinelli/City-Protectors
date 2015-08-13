@@ -12,14 +12,14 @@ const double kThreshold = 0.001;
 //====================================================
 //	Vec3 definitions
 //====================================================
-inline Vec3 Vec3::Cross(const Vec3& vec) const
+Vec3 Vec3::Cross(const Vec3& vec) const
 {
 	Vec3 out;
 	D3DXVec3Cross(&out, this, &vec);
 	return out;
 }
 
-inline Vec3::Vec3(const Vec4 &vec4)
+Vec3::Vec3(const Vec4 &vec4)
 { 
 	x = vec4.x; 
 	y = vec4.y; 
@@ -42,7 +42,7 @@ D3DXMATRIX()
 	memcpy(&m, &matrix.m, sizeof(matrix.m));
 }
 
-inline void Mat4x4::SetPosition(const Vec3& position)
+void Mat4x4::SetPosition(const Vec3& position)
 {
 	m[0][3] = position.x;
 	m[1][3] = position.y;
@@ -50,7 +50,7 @@ inline void Mat4x4::SetPosition(const Vec3& position)
 	m[3][3] = 1.0f;
 }
 
-inline void Mat4x4::SetPosition(const Vec4& position)
+void Mat4x4::SetPosition(const Vec4& position)
 {
 	
 	m[0][3] = position.x;
@@ -60,19 +60,19 @@ inline void Mat4x4::SetPosition(const Vec4& position)
 	
 }
 
-inline void Mat4x4::SetScale(const Vec3& scale)
+void Mat4x4::SetScale(const Vec3& scale)
 {
 	m[0][0] = scale.x;
 	m[1][1] = scale.y;
 	m[2][2] = scale.z;
 }
 
-inline Vec3 Mat4x4::GetPosition() const
+Vec3 Mat4x4::GetPosition() const
 {
 	return Vec3(m[0][3], m[1][3], m[2][3]);
 }
 
-inline Vec3 Mat4x4::GetDirection() const
+Vec3 Mat4x4::GetDirection() const
 {
 	Mat4x4 justRot = *this;
 	justRot.SetPosition(Vec3(0.0f, 0.0f, 0.0f));
@@ -80,7 +80,7 @@ inline Vec3 Mat4x4::GetDirection() const
 	return forward;
 }
 
-inline Vec3 Mat4x4::GetUp() const
+Vec3 Mat4x4::GetUp() const
 {
 	Mat4x4 justRot = *this;
 	justRot.SetPosition(Vec3(0.f, 0.f, 0.f));
@@ -88,7 +88,7 @@ inline Vec3 Mat4x4::GetUp() const
 	return up;
 }
 
-inline Vec3 Mat4x4::GetRight() const
+Vec3 Mat4x4::GetRight() const
 {
 	Mat4x4 justRot = *this;
 	justRot.SetPosition(Vec3(0.f, 0.f, 0.f));
@@ -96,7 +96,7 @@ inline Vec3 Mat4x4::GetRight() const
 	return right;
 }
 
-inline Vec3 Mat4x4::GetYawPitchRoll() const
+Vec3 Mat4x4::GetYawPitchRoll() const
 {
 	float yaw, pitch, roll;
 
@@ -117,19 +117,19 @@ inline Vec3 Mat4x4::GetYawPitchRoll() const
 	return Vec3(yaw, pitch, roll);
 }
 
-inline Vec3 Mat4x4::GetScale() const
+Vec3 Mat4x4::GetScale() const
 {
 	return Vec3(m[0][0], m[1][1], m[2][2]);
 }
 
-inline Vec4 Mat4x4::Transform(Vec4 &vec) const
+Vec4 Mat4x4::Transform(Vec4 &vec) const
 {
 	Vec4 temp;
 	D3DXVec4Transform(&temp, &vec, this);
 	return temp;
 }
 
-inline Vec3 Mat4x4::Transform(Vec3 &vec) const
+Vec3 Mat4x4::Transform(Vec3 &vec) const
 {
 	Vec4 temp(vec);
 	Vec4 out;
@@ -137,7 +137,7 @@ inline Vec3 Mat4x4::Transform(Vec3 &vec) const
 	return Vec3(out.x, out.y, out.z);
 }
 
-inline Mat4x4 Mat4x4::Inverse() const
+Mat4x4 Mat4x4::Inverse() const
 {
 	Mat4x4 out;
 	D3DXMatrixInverse(&out, nullptr, this);

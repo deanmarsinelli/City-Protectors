@@ -22,19 +22,19 @@ Process::~Process()
 	}
 }
 
-inline void Process::Succeed()
+void Process::Succeed()
 {
 	CB_ASSERT(m_State == RUNNING || m_State == PAUSED);
 	m_State = SUCCEEDED;
 }
 
-inline void Process::Fail()
+void Process::Fail()
 {
 	CB_ASSERT(m_State == RUNNING || m_State == PAUSED);
 	m_State = FAILED;
 }
 
-inline void Process::Pause()
+void Process::Pause()
 {
 	if (m_State == RUNNING)
 	{
@@ -46,7 +46,7 @@ inline void Process::Pause()
 	}
 }
 
-inline void Process::UnPause()
+void Process::UnPause()
 {
 	if (m_State == PAUSED)
 	{
@@ -58,32 +58,32 @@ inline void Process::UnPause()
 	}
 }
 
-inline Process::State Process::GetState() const
+Process::State Process::GetState() const
 {
 	return m_State;
 }
 
-inline bool Process::IsAlive() const
+bool Process::IsAlive() const
 {
 	return (m_State == RUNNING || m_State == PAUSED);
 }
 
-inline bool Process::IsDead() const
+bool Process::IsDead() const
 {
 	return (m_State == SUCCEEDED || m_State == FAILED || m_State == ABORTED);
 }
 
-inline bool Process::IsRemoved() const
+bool Process::IsRemoved() const
 {
 	return m_State == REMOVED;
 }
 
-inline bool Process::IsPaused() const
+bool Process::IsPaused() const
 {
 	return m_State == PAUSED;
 }
 
-inline void Process::AttachChild(StrongProcessPtr pChild)
+void Process::AttachChild(StrongProcessPtr pChild)
 {
 	if (m_pChild)
 	{
@@ -107,12 +107,12 @@ StrongProcessPtr Process::RemoveChild()
 	return nullptr;
 }
 
-inline StrongProcessPtr Process::PeekChild()
+StrongProcessPtr Process::PeekChild()
 {
 	return m_pChild;
 }
 
-inline void Process::SetState(State newState)
+void Process::SetState(State newState)
 {
 	m_State = newState;
 }

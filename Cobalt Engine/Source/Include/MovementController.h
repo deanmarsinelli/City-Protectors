@@ -30,8 +30,8 @@ public:
 	bool OnPointerButtonDown(const Point& mousePos, const int radius, const std::string& buttonName);
 	bool OnPointerButtonUp(const Point& mousePos, const int radius, const std::string& buttonName);
 
-	inline const Mat4x4* GetToWorld();
-	inline const Mat4x4* GetFromWorld();
+	const Mat4x4* GetToWorld();
+	const Mat4x4* GetFromWorld();
 
 protected:
 	Mat4x4 m_MatFromWorld;

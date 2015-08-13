@@ -62,7 +62,7 @@ public:
 	void End();
 
 	/// Return the number of files in the zip object
-	inline int GetNumFiles() const;
+	int GetNumFiles() const;
 
 	/// Get the name of a file given the index
 	std::string GetFileName(int index) const;

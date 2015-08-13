@@ -47,40 +47,40 @@ public:
 	virtual ~Process();
 
 	/// Method for ending a process with success
-	inline void Succeed();
+	void Succeed();
 
 	/// Method for ending a process with failure
-	inline void Fail();
+	void Fail();
 
 	/// Pause a running process
-	inline void Pause();
+	void Pause();
 
 	/// Resume a paused process
-	inline void UnPause();
+	void UnPause();
 
 	/// Return the state of a process
-	inline State GetState() const;
+	State GetState() const;
 
 	/// Return if a process is currently alive
-	inline bool IsAlive() const;
+	bool IsAlive() const;
 
 	/// Return if a process is currently dead
-	inline bool IsDead() const;
+	bool IsDead() const;
 
 	/// Return if a process is removed
-	inline bool IsRemoved() const;
+	bool IsRemoved() const;
 
 	/// Return whether or not a process is paused
-	inline bool IsPaused() const;
+	bool IsPaused() const;
 
 	/// Attach a child process to this process
-	inline void AttachChild(StrongProcessPtr pChild);
+	void AttachChild(StrongProcessPtr pChild);
 
 	/// Remove the child process from this process
 	StrongProcessPtr RemoveChild();
 
 	/// Return a pointer to the child process
-	inline StrongProcessPtr PeekChild();
+	StrongProcessPtr PeekChild();
 
 protected:
 	/// Default Init method sets the state to RUNNING
@@ -103,7 +103,7 @@ protected:
 
 private:
 	/// Sets the state of a process -- done by the manager
-	inline void SetState(State newState);
+	void SetState(State newState);
 
 private:
 	/// Current State of the Process

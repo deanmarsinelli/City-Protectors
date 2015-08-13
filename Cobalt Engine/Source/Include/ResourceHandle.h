@@ -28,22 +28,22 @@ public:
 	virtual ~ResHandle();
 
 	/// Return the name of the resource stored in the handle
-	inline const std::string& GetName() const;
+	const std::string& GetName() const;
 
 	/// Return the size of the loaded resource
-	inline unsigned int Size() const;
+	unsigned int Size() const;
 
 	/// Return a read only pointer to the data buffer of the loaded resource
-	inline const char* Buffer() const;
+	const char* Buffer() const;
 
 	/// Return a writable pointer to the data buffer of the loaded resource
-	inline char* WritableBuffer();
+	char* WritableBuffer();
 
 	/// Return the extra data stored in the resource handle
-	inline shared_ptr<IResourceExtraData> GetExtra();
+	shared_ptr<IResourceExtraData> GetExtra();
 
 	/// Set the resource handles extra data
-	inline void SetExtra(shared_ptr<IResourceExtraData> extra);
+	void SetExtra(shared_ptr<IResourceExtraData> extra);
 
 protected:
 	/// The resource that is loaded

@@ -29,19 +29,19 @@ public:
 	Vec3(const double x, const double y, const double z) { this->x = (float)x; this->y = (float)y; this->z = (float)z; }
 
 	/// Constructor from a Vec4
-	inline Vec3(const class Vec4& vec4);
+	Vec3(const class Vec4& vec4);
 
 	/// Return the length of the vector
-	inline float Length() const { return D3DXVec3Length(this); }
+	float Length() const { return D3DXVec3Length(this); }
 
 	/// Normalize the vector
-	inline Vec3* Normalize() { return static_cast<Vec3 *>(D3DXVec3Normalize(this, this)); }
+	Vec3* Normalize() { return static_cast<Vec3 *>(D3DXVec3Normalize(this, this)); }
 
 	/// Return the dot product of this vector with another Vec3
-	inline float Dot(const Vec3& vec) const { return D3DXVec3Dot(this, &vec); }
+	float Dot(const Vec3& vec) const { return D3DXVec3Dot(this, &vec); }
 
 	/// Return the cross product of this vector with another Vec3
-	inline Vec3 Cross(const Vec3& vec) const;
+	Vec3 Cross(const Vec3& vec) const;
 };
 
 
@@ -67,13 +67,13 @@ public:
 	Vec4(const Vec3& vec3) { x = vec3.x; y = vec3.y; z = vec3.z; w = 1.0f; }
 
 	/// Return the length of the vector
-	inline float Length() { return D3DXVec4Length(this); }
+	float Length() { return D3DXVec4Length(this); }
 
 	/// Return the dot product of this vector with another Vec4
-	inline Vec4* Normalize() { return static_cast<Vec4 *>(D3DXVec4Normalize(this, this)); }
+	Vec4* Normalize() { return static_cast<Vec4 *>(D3DXVec4Normalize(this, this)); }
 
 	/// Return the dot product of 
-	inline float Dot(const Vec4& vec) { return D3DXVec4Dot(this, &vec); }
+	float Dot(const Vec4& vec) { return D3DXVec4Dot(this, &vec); }
 };
 
 
@@ -89,25 +89,25 @@ public:
 	/// Constructor from another 4x4 matrix
 	Mat4x4(D3DXMATRIX& matrix);
 
-	inline void SetPosition(const Vec3& position);
-	inline void SetPosition(const Vec4& position);
-	inline void SetScale(const Vec3& scale);
+	void SetPosition(const Vec3& position);
+	void SetPosition(const Vec4& position);
+	void SetScale(const Vec3& scale);
 
-	inline Vec3 GetPosition() const;
-	inline Vec3 GetDirection() const;
-	inline Vec3 GetUp() const;
-	inline Vec3 GetRight() const;
-	inline Vec3 GetYawPitchRoll() const;
-	inline Vec3 GetScale() const;
+	Vec3 GetPosition() const;
+	Vec3 GetDirection() const;
+	Vec3 GetUp() const;
+	Vec3 GetRight() const;
+	Vec3 GetYawPitchRoll() const;
+	Vec3 GetScale() const;
 
 	/// Transform a Vec4 by this matrix
-	inline Vec4 Transform(Vec4 &vec) const;
+	Vec4 Transform(Vec4 &vec) const;
 
 	/// Transform a Vec3 by this matrix
-	inline Vec3 Transform(Vec3 &vec) const;
+	Vec3 Transform(Vec3 &vec) const;
 
 	/// Return the Inverse of this matrix
-	inline Mat4x4 Inverse() const;
+	Mat4x4 Inverse() const;
 
 public:
 	/// The identity matrix

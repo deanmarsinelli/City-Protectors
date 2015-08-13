@@ -138,17 +138,17 @@ HRESULT HumanView::OnLostDevice()
 	return S_OK;
 }
 
-inline GameViewType HumanViewGetType()
+GameViewType HumanViewGetType()
 {
 	return GameViewType::GameView_Human;
 }
 
-inline GameViewId HumanView::GetId() const
+GameViewId HumanView::GetId() const
 {
 	return m_ViewId;
 }
 
-inline void HumanView::OnAttach(GameViewId viewId, GameObjectId objectId)
+void HumanView::OnAttach(GameViewId viewId, GameObjectId objectId)
 {
 	m_ViewId = viewId;
 	m_GameObjectId = objectId;
@@ -296,12 +296,12 @@ void HumanView::TogglePause(bool active)
 	}
 }
 
-inline ProcessManager* HumanView::GetProcessManager()
+ProcessManager* HumanView::GetProcessManager()
 {
 	return m_pProcessManager;
 }
 
-inline void HumanView::SetControlledGameObject(GameObjectId objectId)
+void HumanView::SetControlledGameObject(GameObjectId objectId)
 {
 	m_GameObjectId = objectId;
 }
@@ -325,12 +325,12 @@ void HumanView::GameStateDelegate(IEventDataPtr pEventData)
 	// TODO
 }
 
-inline Console& HumanView::GetConsole()
+Console& HumanView::GetConsole()
 {
 	return m_Console;
 }
 
-inline bool HumanView::LoadGameDelegate(TiXmlElement* pLevelData)
+bool HumanView::LoadGameDelegate(TiXmlElement* pLevelData)
 {
 	PushElement(m_pScene);
 

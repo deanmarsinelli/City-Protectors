@@ -103,7 +103,7 @@ void ProcessManager::AbortAllProcesses(bool immediate)
 	}
 }
 
-inline unsigned int ProcessManager::GetProcessCount() const
+unsigned int ProcessManager::GetProcessCount() const
 {
 	return m_ProcessList.size();
 }

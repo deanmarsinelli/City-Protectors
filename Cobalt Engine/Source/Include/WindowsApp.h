@@ -36,12 +36,12 @@ public:
 	virtual HICON GetIcon() = 0;
 
 	// Win32 Stuff
-	inline HWND GetHwnd();
-	inline HINSTANCE GetInstance();
+	HWND GetHwnd();
+	HINSTANCE GetInstance();
 	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = nullptr, int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
 	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pDoneProcessing, void* pUserContext);
-	inline bool HasModalDialog();
-	inline void ForceModalExit();
+	bool HasModalDialog();
+	void ForceModalExit();
 	LRESULT OnDisplayChange(int colorDepth, int width, int height);
 	LRESULT OnPowerBroadcast(int event);
 	LRESULT OnSysCommand(WPARAM wParam, LPARAM lParam);

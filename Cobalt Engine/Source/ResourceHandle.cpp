@@ -25,32 +25,32 @@ ResHandle::~ResHandle()
 	m_pResCache->MemoryHasBeenFreed(m_Size);
 }
 
-inline const std::string& ResHandle::GetName() const
+const std::string& ResHandle::GetName() const
 {
 	return m_Resouce.m_Name;
 }
 
-inline unsigned int ResHandle::Size() const
+unsigned int ResHandle::Size() const
 {
 	return m_Size;
 }
 
-inline const char* ResHandle::Buffer() const
+const char* ResHandle::Buffer() const
 {
 	return m_Buffer;
 }
 
-inline char* ResHandle::WritableBuffer()
+char* ResHandle::WritableBuffer()
 {
 	return m_Buffer;
 }
 
-inline shared_ptr<IResourceExtraData> ResHandle::GetExtra()
+shared_ptr<IResourceExtraData> ResHandle::GetExtra()
 {
 	return m_Extra;
 }
 
-inline void ResHandle::SetExtra(shared_ptr<IResourceExtraData> extra)
+void ResHandle::SetExtra(shared_ptr<IResourceExtraData> extra)
 {
 	m_Extra = extra;
 }

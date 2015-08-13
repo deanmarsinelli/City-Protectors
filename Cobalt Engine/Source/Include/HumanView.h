@@ -47,13 +47,13 @@ public:
 	virtual HRESULT OnLostDevice();
 
 	/// Return the type of the game view
-	inline virtual GameViewType GetType();
+	virtual GameViewType GetType();
 
 	/// Return the id of the game view
-	inline GameViewId GetId() const;
+	GameViewId GetId() const;
 
 	/// Attach a game object to this view
-	inline virtual void OnAttach(GameViewId viewId, GameObjectId objectId);
+	virtual void OnAttach(GameViewId viewId, GameObjectId objectId);
 
 	/// Handle messages sent from the OS
 	virtual LRESULT CALLBACK OnMsgProc(AppMsg msg);
@@ -72,10 +72,10 @@ public:
 	void TogglePause(bool active);
 
 	/// Return a pointer to the process manager
-	inline ProcessManager* GetProcessManager();
+	ProcessManager* GetProcessManager();
 
 	/// Set this view to be associated with a particular game object
-	inline virtual void SetControlledGameObject(GameObjectId objectId);
+	virtual void SetControlledGameObject(GameObjectId objectId);
 
 	/// Set a camera offset -- useful for third person camera
 	virtual void SetCameraOffset(const Vec4& offset);
@@ -84,13 +84,13 @@ public:
 	void GameStateDelegate(IEventDataPtr pEventData);
 
 	/// Return a reference to the console
-	inline Console& GetConsole();
+	Console& GetConsole();
 
 protected:
 	/// Called when text is needed to be drawn on the screen -- should be overriden
 	virtual void RenderText() { };
 
-	inline virtual bool LoadGameDelegate(TiXmlElement* pLevelData);
+	virtual bool LoadGameDelegate(TiXmlElement* pLevelData);
 
 private:
 	void RegisterAllDelegates();
