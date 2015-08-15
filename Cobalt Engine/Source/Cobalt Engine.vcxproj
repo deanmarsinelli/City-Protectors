@@ -151,6 +151,7 @@
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="HumanView.cpp" />
     <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="LuaStateManager.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MemoryPool.cpp" />

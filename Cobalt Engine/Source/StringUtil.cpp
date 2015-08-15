@@ -67,3 +67,24 @@ std::string ToStr(int num, int base)
 	_itoa_s(num, str, MAX_DIGITS_IN_INT, base);
 	return std::string(str);
 }
+
+void Split(const std::string& str, StringVec& vec, char delimiter)
+{
+	vec.clear();
+	size_t strLen = str.size();
+	if (strLen == 0)
+		return;
+
+	size_t startIndex = 0;
+	size_t indexOfDel = str.find_first_of(delimiter, startIndex);
+	while (indexOfDel != std::string::npos)
+	{
+		vec.push_back(str.substr(startIndex, indexOfDel - startIndex));
+		startIndex = indexOfDel + 1;
+		if (startIndex >= strLen)
+			break;
+		indexOfDel = str.find_first_of(delimiter, startIndex);
+	}
+	if (startIndex < strLen)
+		vec.push_back(str.substr(startIndex));
+}

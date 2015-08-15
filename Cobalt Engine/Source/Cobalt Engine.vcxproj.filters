@@ -212,6 +212,9 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="LuaStateManager.cpp">
+      <Filter>Scripting\Lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
