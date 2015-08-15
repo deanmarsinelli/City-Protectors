@@ -14,8 +14,8 @@
 
 /**
 	Manages the Lua scripting layer in this engine. This class is a singleton class
-	that should use Create() and Destroy() to manage the lifetime of the object. Do
-	not use new or delete.
+	that should use Create() and Destroy() to manage the lifetime of the object. This
+	class also encapulates a LuaState which is an execution environment for Lua.
 */
 class LuaStateManager : public IScriptManager
 {
@@ -71,7 +71,7 @@ private:
 	/// Singleton pointer for this object
 	static LuaStateManager* pSingleton;
 
-	/// Pointer to the Lua State
+	/// Represents an execution environment for Lua
 	LuaPlus::LuaState* m_pLuaState;
 
 	/// Last error string
