@@ -1,35 +1,13 @@
 /*
-	Geometry.cpp
+	Matrix.cpp
 
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham
 */
-
-#include "Geometry.h"
+#include "Matrix.h"
 
 const double kThreshold = 0.001;
 
-//====================================================
-//	Vec3 definitions
-//====================================================
-Vec3 Vec3::Cross(const Vec3& vec) const
-{
-	Vec3 out;
-	D3DXVec3Cross(&out, this, &vec);
-	return out;
-}
-
-Vec3::Vec3(const Vec4 &vec4)
-{ 
-	x = vec4.x; 
-	y = vec4.y; 
-	z = vec4.z; 
-}
-
-
-//====================================================
-//	Mat4x4 definitions
-//====================================================
 const Mat4x4 Mat4x4::Identity(D3DXMATRIX(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f));
 
 Mat4x4::Mat4x4() :
@@ -52,12 +30,12 @@ void Mat4x4::SetPosition(const Vec3& position)
 
 void Mat4x4::SetPosition(const Vec4& position)
 {
-	
+
 	m[0][3] = position.x;
 	m[1][3] = position.y;
 	m[2][3] = position.z;
 	m[3][3] = position.w;
-	
+
 }
 
 void Mat4x4::SetScale(const Vec3& scale)
@@ -113,7 +91,7 @@ Vec3 Mat4x4::GetYawPitchRoll() const
 		roll = atan2(-_21, _11);
 		yaw = 0.0f;
 	}
-	
+
 	return Vec3(yaw, pitch, roll);
 }
 
@@ -143,16 +121,3 @@ Mat4x4 Mat4x4::Inverse() const
 	D3DXMatrixInverse(&out, nullptr, this);
 	return out;
 }
-
-
-//====================================================
-//	extern definitions
-//====================================================
-Vec3 g_Right(1.0f, 0.0f, 0.0f);
-Vec3 g_Up(0.0f, 1.0f, 0.0f);
-Vec3 g_Forward(0.0f, 0.0f, 1.0f);
-
-
-Vec4 g_Up4(g_Up.x, g_Up.y, g_Up.z, 0.0f);
-Vec4 g_Right4(g_Right.x, g_Right.y, g_Right.z, 0.0f);
-Vec4 g_Forward4(g_Forward.x, g_Forward.y, g_Forward.z, 0.0f);

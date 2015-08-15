@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "Geometry.h"
 #include "interfaces.h"
+#include "Matrix.h"
 #include "types.h"
 
 class SceneNode;

@@ -93,6 +93,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Include\Console.h" />
+    <ClInclude Include="Include\D3D11Vertex.h" />
+    <ClInclude Include="Include\D3D9Vertex.h" />
     <ClInclude Include="Include\D3DLineDrawer11.h" />
     <ClInclude Include="Include\D3DRenderer.h" />
     <ClInclude Include="Include\D3DRenderer11.h" />
@@ -108,6 +110,7 @@
     <ClInclude Include="Include\Initialization.h" />
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\Logger.h" />
+    <ClInclude Include="Include\Matrix.h" />
     <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\MovementController.h" />
     <ClInclude Include="Include\Process.h" />
@@ -123,6 +126,7 @@
     <ClInclude Include="Include\Transform.h" />
     <ClInclude Include="Include\types.h" />
     <ClInclude Include="Include\UserInterface.h" />
+    <ClInclude Include="Include\Vector.h" />
     <ClInclude Include="Include\WindowsApp.h" />
     <ClInclude Include="Include\ZipFile.h" />
   </ItemGroup>
@@ -134,9 +138,9 @@
     <ClCompile Include="EngineStd.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
-    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="HumanView.cpp" />
     <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MovementController.cpp" />
     <ClCompile Include="Process.cpp" />
@@ -146,6 +150,7 @@
     <ClCompile Include="ResourceHandle.cpp" />
     <ClCompile Include="ResourceZipFile.cpp" />
     <ClCompile Include="StringUtil.cpp" />
+    <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WindowsApp.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="ZipFile.cpp" />

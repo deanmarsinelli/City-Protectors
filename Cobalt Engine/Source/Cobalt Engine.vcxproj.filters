@@ -73,9 +73,6 @@
     <ClInclude Include="Include\Scene.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Geometry.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Include\HumanView.h">
       <Filter>User Interface</Filter>
     </ClInclude>
@@ -87,6 +84,21 @@
     </ClInclude>
     <ClInclude Include="Include\MovementController.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Geometry.h">
+      <Filter>Graphics\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Matrix.h">
+      <Filter>Graphics\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Vector.h">
+      <Filter>Graphics\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3D9Vertex.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3D11Vertex.h">
+      <Filter>Graphics\Direct 3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +152,6 @@
     <ClCompile Include="D3DLineDrawer11.cpp">
       <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="HumanView.cpp">
       <Filter>User Interface</Filter>
     </ClCompile>
@@ -151,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="MovementController.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Graphics\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Graphics\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +195,9 @@
     </Filter>
     <Filter Include="User Interface">
       <UniqueIdentifier>{a7e016d7-8861-4a3d-a25d-b09c827df0d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Geometry">
+      <UniqueIdentifier>{0636e1e3-3bd5-4a6b-be39-8c6da537d074}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
