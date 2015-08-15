@@ -121,3 +121,57 @@ Mat4x4 Mat4x4::Inverse() const
 	D3DXMatrixInverse(&out, nullptr, this);
 	return out;
 }
+
+void Mat4x4::BuildTranslation(const Vec3& position)
+{
+	*this = Mat4x4::Identity;
+	m[0][3] = position.x;
+	m[1][3] = position.y;
+	m[2][3] = position.z;
+}
+
+void Mat4x4::BuildTranslation(const float x, const float y, const float z)
+{
+	*this = Mat4x4::Identity;
+	m[0][3] = x;
+	m[1][3] = y;
+	m[2][3] = z;
+}
+
+void Mat4x4::BuildRotationX(const float radians)
+{
+	D3DXMatrixRotationX(this, radians);
+}
+
+void Mat4x4::BuildRotationY(const float radians)
+{
+	D3DXMatrixRotationY(this, radians);
+}
+
+void Mat4x4::BuildRotationZ(const float radians)
+{
+	D3DXMatrixRotationZ(this, radians);
+}
+
+void Mat4x4::BuildYawPitchRoll(const float yawRadians, const float pitchRadians, const float rollRadians)
+{
+	D3DXMatrixRotationYawPitchRoll(this, yawRadians, pitchRadians, rollRadians);
+}
+
+void Mat4x4::BuildRotationQuaternion(const Quaternion& q)
+{
+	D3DXMatrixRotationQuaternion(this, &q);
+}
+
+void Mat4x4::BuildRotationLookAt(const Vec3& eye, const Vec3& at, const Vec3& up)
+{
+	D3DXMatrixLookAtRH(this, &eye, &at, &up);
+}
+
+void Mat4x4::BuildScale(const float x, const float y, const float z)
+{
+	*this = Mat4x4::Identity;
+	m[0][0] = x;
+	m[1][1] = y;
+	m[2][2] = z;
+}
