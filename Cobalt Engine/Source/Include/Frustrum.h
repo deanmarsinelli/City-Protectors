@@ -27,7 +27,7 @@ public:
 	/// Initialize a frustrum
 	void Init(const float fov, const float aspect, const float nearClip, const float farClip);
 
-	/// Render the view frustrum
+	/// Render the view frustrum outline
 	void Render();
 
 	/// Return whether a point is inside the view frustrum

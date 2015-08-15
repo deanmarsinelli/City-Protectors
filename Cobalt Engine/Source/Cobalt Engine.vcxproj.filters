@@ -103,6 +103,9 @@
     <ClInclude Include="Include\Frustrum.h">
       <Filter>Graphics\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Plane.h">
+      <Filter>Graphics\Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -174,6 +177,9 @@
       <Filter>Graphics\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="Frustrum.cpp">
+      <Filter>Graphics\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
       <Filter>Graphics\Geometry</Filter>
     </ClCompile>
   </ItemGroup>

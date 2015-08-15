@@ -113,6 +113,7 @@
     <ClInclude Include="Include\Matrix.h" />
     <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\MovementController.h" />
+    <ClInclude Include="Include\Plane.h" />
     <ClInclude Include="Include\Process.h" />
     <ClInclude Include="Include\ProcessManager.h" />
     <ClInclude Include="Include\Quaternion.h" />
@@ -145,6 +146,7 @@
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MovementController.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="ProcessManager.cpp" />
     <ClCompile Include="Quaternion.cpp" />

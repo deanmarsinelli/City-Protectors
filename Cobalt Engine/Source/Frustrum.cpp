@@ -106,6 +106,8 @@ void Frustrum::Render()
 bool Frustrum::Inside(const Vec3& point) const
 {
 	// make sure the point is inside each plane
+	// inside is in the direction the normal is facing which is inside 
+	// the view frustrum
 	for (int i = 0; i < NumPlanes; i++)
 	{
 		if (!m_Planes[i].Inside(point))
@@ -117,6 +119,9 @@ bool Frustrum::Inside(const Vec3& point) const
 
 bool Frustrum::Inside(const Vec3& point, const float radius) const
 {
+	// make sure the point is inside each plane
+	// inside is in the direction the normal is facing which is inside 
+	// the view frustrum
 	for (int i = 0; i < NumPlanes; i++)
 	{
 		if (!m_Planes[i].Inside(point, radius))
@@ -126,7 +131,7 @@ bool Frustrum::Inside(const Vec3& point, const float radius) const
 	return true;
 }
 
-const Frustrum::Plane& Get(Frustrum::Side side)
+const Plane& Frustrum::Get(Frustrum::Side side)
 {
 	return m_Planes[side];
 }
