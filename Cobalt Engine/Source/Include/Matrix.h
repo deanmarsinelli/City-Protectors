@@ -21,7 +21,7 @@ public:
 	/// Default constructor
 	Mat4x4();
 
-	/// Constructor from another 4x4 matrix
+	/// Copy constructor
 	Mat4x4(D3DXMATRIX& matrix);
 
 	/// Set a 3D Position

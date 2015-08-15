@@ -97,6 +97,9 @@
     <ClInclude Include="Include\D3D11Vertex.h">
       <Filter>Graphics\Direct 3D</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Quaternion.h">
+      <Filter>Graphics\Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -162,6 +165,9 @@
       <Filter>Graphics\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="Matrix.cpp">
+      <Filter>Graphics\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
       <Filter>Graphics\Geometry</Filter>
     </ClCompile>
   </ItemGroup>

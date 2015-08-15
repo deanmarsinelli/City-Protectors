@@ -114,6 +114,7 @@
     <ClInclude Include="Include\MovementController.h" />
     <ClInclude Include="Include\Process.h" />
     <ClInclude Include="Include\ProcessManager.h" />
+    <ClInclude Include="Include\Quaternion.h" />
     <ClInclude Include="Include\Random.h" />
     <ClInclude Include="Include\Resource.h" />
     <ClInclude Include="Include\ResourceCache.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="MovementController.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="ProcessManager.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="ResourceHandle.cpp" />
