@@ -109,6 +109,9 @@ public:
 	/// Return the Z-order value of the element
 	virtual int GetZOrder() const = 0;
 
+	/// Set the Z-order value of the element
+	virtual void SetZOrder(const int zOrder) = 0;
+
 	/// Return whether or not the element is visible
 	virtual bool IsVisible() const = 0;
 

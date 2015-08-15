@@ -1,7 +1,7 @@
 /*
 	D3DRenderer.h
 
-	Inspired by Game Coding Complete 4th ed.
+	Inspired by Game C oding Complete 4th ed.
 	by Mike McShaffry and David Graham
 */
 
@@ -20,6 +20,7 @@
 class D3DRenderer : public IRenderer 
 {
 public:
+	/// Recreates anything that might have been lost while the game is running (because of system sleep, etc). Also used for initialization
 	virtual HRESULT OnRestore();
 	virtual void Shutdown();
 

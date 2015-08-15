@@ -11,7 +11,6 @@
 
 #include "BaseGameLogic.h"
 #include "Console.h"
-#include "Geometry.h"
 #include "interfaces.h"
 #include "ProcessManager.h"
 #include "UserInterface.h"

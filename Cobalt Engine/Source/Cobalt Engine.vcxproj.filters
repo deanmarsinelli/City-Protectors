@@ -106,6 +106,9 @@
     <ClInclude Include="Include\Plane.h">
       <Filter>Graphics\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="Include\MessageBox.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="Plane.cpp">
       <Filter>Graphics\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageBox.cpp">
+      <Filter>User Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
