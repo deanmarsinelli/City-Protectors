@@ -7,6 +7,8 @@
 
 #include "WindowsApp.h"
 
+#include "Logger.h"
+
 // global pointer for the engine to the application instance
 // this will get set in the constructor of the WindowsApp
 // class, but will point to a derived instance that is
@@ -295,4 +297,115 @@ bool WindowsApp::LoadStrings(std::string language)
 	}*/
 
 	// TODO: finish this function
+}
+
+int WindowsApp::Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer)
+{
+	// find a human view to display the dialog box
+	HumanView* pView = GetHumanView();
+	if (!pView)
+	{
+		// no human view to use
+		return defaultAnswer;
+	}
+
+	CB_ASSERT(GetHwnd() != nullptr && L"Main Window is NULL");
+
+	if (m_HasModalDialog & 0x10000000)
+	{
+		CB_ASSERT(0 && "Too many nested dialogs!");
+		return defaultAnswer;
+	}
+
+	if (GetHwnd() != nullptr && IsIconic(GetHwnd()))
+	{
+		FlashWhileMinimized();
+	}
+
+	// each new modal shifts the bits left by 1
+	m_HasModalDialog <<= 1;
+	m_HasModalDialog |= 1;
+
+	// push the modal screen onto the view
+	pView->PushElement(pModalScreen);
+
+	// process messages in the background while the modal is up using this surrogate windows message pump
+	LPARAM lParam = 0;
+	int result = PumpUntilMessage(g_MsgEndModal, NULL, &lParam);
+
+	if (lParam != 0)
+	{
+		if (lParam == g_QuitNoPrompt)
+		{
+			result = defaultAnswer;
+		}
+		else
+		{
+			result = (int)lParam;
+		}
+	}
+	// remove the modal
+	pView->RemoveElement(pModalScreen);
+	m_HasModalDialog >>= 1;
+	
+	return result;
+}
+
+int WindowsApp::PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
+{
+	int currentTime = timeGetTime();
+	MSG msg;
+	for (;;)
+	{
+		// check to see if there is a message in our queue
+		if (PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE))
+		{
+			if (msg.message == WM_CLOSE)
+			{
+				m_Quitting = true;
+				GetMessage(&msg, NULL, 0, 0);
+				break;
+			}
+			else
+			{
+				if (GetMessage(&msg, NULL, NULL, NULL))
+				{
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
+				}
+				// if the message is the end message signal, we're done
+				if (msg.message == msgEnd)
+				{
+					break;
+				}
+			}
+		}
+		else
+		{
+			// if no message, update the game views but nothing else
+			// there is a modal screen up, so the game is paused
+			if (m_pGame)
+			{
+				int timeNow = timeGetTime();
+				float deltaTime = (float)(timeNow - currentTime) * 1000.0f;
+				GameViewList views = m_pGame->GetGameViewList();
+				for (GameViewList::iterator it = views.begin(); it != views.end(); ++it)
+				{
+					(*it)->OnUpdate(deltaTime);
+				}
+				currentTime = timeNow;
+				DXUTRender3DEnvironment();
+			}
+		}
+	}
+	if (pLParam)
+	{
+		*pLParam = msg.lParam;
+	}
+	if (pWParam)
+	{
+		*pWParam = msg.wParam;
+	}
+
+	return 0;
 }

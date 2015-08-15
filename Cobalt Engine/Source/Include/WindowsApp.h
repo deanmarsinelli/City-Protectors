@@ -57,7 +57,9 @@ public:
 	UINT MapCharToKeycode(const char hotkey);
 
 	HumanView* GetHumanView();
-	int Modal();
+
+	/// Manages displaying a modal UI box on the screen
+	int Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer);
 
 	// Renderer
 	enum Renderer
@@ -96,6 +98,9 @@ protected:
 	virtual void RegisterGameEvents() { }
 	virtual void CreateNetworkEventForwarder();
 	virtual void DestroyNetworkEventForwarder();
+
+	/// Process messages in this pump until a specific message is received
+	int PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam);
 	void FlashWhileMinimized();
 
 private:
@@ -122,7 +127,9 @@ protected:
 
 	std::map<std::wstring, std::wstring> m_TextResource;
 	std::map<std::wstring, unsigned int> m_HotKeys;
-	bool m_HasModalDialog;
+	
+	/// A bit field used to keep track of how many modal dialog's are displayed
+	int m_HasModalDialog;
 };
 
 extern WindowsApp* g_pApp;

@@ -10,6 +10,9 @@
 #include "interfaces.h"
 #include "Scene.h"
 
+const DWORD g_QuitNoPrompt = MAKELPARAM(-1, -1);
+const UINT g_MsgEndModal = (WM_USER + 100);
+
 /**
 	Base class for UI elements. Must be subclassed.
 */
