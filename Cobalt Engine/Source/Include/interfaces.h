@@ -272,3 +272,39 @@ class IJoystickHandler
 	virtual bool OnButtonUp(const std::string& buttonName) = 0;
 	virtual bool OnJoystick(const float x, const float y) = 0;
 };
+
+
+//====================================================
+//	Event Interfaces
+//====================================================
+typedef unsigned long EventType;
+
+/**
+	Interface for every event object.
+*/
+class IEventData
+{
+public:
+	/// Virtual destructor
+	virtual ~IEventData() {}
+	
+	/// Return the type of event
+	virtual const EventType& GetEventType() const = 0;
+
+	/// Return the time that the event occured
+	virtual float GetTimeStamp() const = 0;
+
+	/// Serialze the event to an output stream
+	virtual void Serialize(std::ostream& out) const = 0;
+
+	/// Deserialize an event from an input stream
+	virtual void Deserialize(std::istream& in) = 0;
+
+	/// Copy the event and return a pointer to it
+	virtual IEventDataPtr Copy() const = 0;
+
+	/// Return the name of the event
+	virtual const char* GetName() const = 0;
+};
+
+typedef shared_ptr<IEventData> IEventDataPtr;

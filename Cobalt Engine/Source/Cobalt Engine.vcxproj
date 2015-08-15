@@ -110,6 +110,7 @@
     <ClInclude Include="Include\Initialization.h" />
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\Logger.h" />
+    <ClInclude Include="Include\Math.h" />
     <ClInclude Include="Include\Matrix.h" />
     <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\MessageBox.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="HumanView.cpp" />
     <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MessageBox.cpp" />

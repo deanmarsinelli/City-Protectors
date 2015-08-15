@@ -109,6 +109,9 @@
     <ClInclude Include="Include\MessageBox.h">
       <Filter>User Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Math.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -188,6 +191,9 @@
     <ClCompile Include="MessageBox.cpp">
       <Filter>User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
@@ -219,6 +225,9 @@
     </Filter>
     <Filter Include="Graphics\Geometry">
       <UniqueIdentifier>{0636e1e3-3bd5-4a6b-be39-8c6da537d074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{c153890e-15a3-4f02-95b2-72f8cf013898}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
