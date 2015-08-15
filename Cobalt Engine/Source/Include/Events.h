@@ -9,7 +9,7 @@
 
 #include "BaseEvent.h"
 
-/*
+/**
 	This event is sent when a game object is destroyed.
 */
 class Event_DestroyGameObject : public BaseEvent

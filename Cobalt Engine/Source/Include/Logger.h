@@ -12,4 +12,6 @@
 	} \
 	while (0)
 
+#define CB_ERROR(str)
+
 #define CB_WARNING(str)

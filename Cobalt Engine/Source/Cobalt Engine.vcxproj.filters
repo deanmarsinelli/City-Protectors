@@ -206,6 +206,9 @@
     <ClCompile Include="Events.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">

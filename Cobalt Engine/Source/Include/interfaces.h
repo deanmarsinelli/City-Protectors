@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <concurrent_queue.h>
+#include <FastDelegate.h>
 #include <list>
 #include <memory>
 
@@ -311,3 +313,51 @@ public:
 };
 
 typedef shared_ptr<IEvent> IEventPtr;
+
+// create a typedef for an event listener function aka delegate
+typedef fastdelegate::FastDelegate1<IEventPtr> EventListenerDelegate;
+typedef concurrent_queue<IEventDataPtr> ThreadSafeEventQueue;
+
+/**
+	Interface for an event manager. This object will maintain a list of registered events 
+	and their listeners. A listener may listen for many events and an event may have 
+	many individual listeners.
+*/
+class IEventManager
+{
+public:
+	/// Constructor to set the event manager global or not
+	explicit IEventManager(const char* pName, bool setAsGlobal);
+
+	/// Virtual destructor
+	virtual ~IEventManager();
+
+	/// Registers a delegate function that will get called when the event type is triggered -- returns true if successful
+	virtual bool AddListener(const EventListenerDelegate& eventDelegate, const EventType& type) = 0;
+
+	/// Remove a delegate/event type pairing -- returns false if the pairing is not found
+	virtual bool RemoveListener(const EventListenerDelegate& eventDelegate, const EventType& type) = 0;
+
+	/// Fire this event now and immediately call all delegate functions listening for this event
+	virtual bool TriggerEvent(const IEventPtr& pEvent) const = 0;
+
+	/// Queue the event and fire it on the next update if there is enough time
+	virtual bool QueueEvent(const IEventPtr& pEvent) = 0;
+
+	/// [thread safe] Queue the event and fire it on the next update if there is enough time
+	virtual bool ThreadSafeQueueEvent(const IEventPtr& pEvent) = 0;
+
+	/// Find the next instance of the event type and remove it from the processing queue -- if allOfType is true all events of this type will be removed
+	virtual bool AbortEvent(const EventType& type, bool allOfType = false) = 0;
+
+	/// Process events from the queue and optionally limit the processing time
+	virtual bool Update(unsigned long maxMillis = kINFINITE) = 0;
+
+	/// Return the main global event manager
+	static IEventManager* Get();
+public:
+	enum Constants 
+	{
+		kINFINITE = 0xffffffff
+	};
+};
