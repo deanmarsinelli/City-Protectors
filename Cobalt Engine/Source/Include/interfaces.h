@@ -316,7 +316,7 @@ typedef shared_ptr<IEvent> IEventPtr;
 
 // create a typedef for an event listener function aka delegate
 typedef fastdelegate::FastDelegate1<IEventPtr> EventListenerDelegate;
-typedef concurrent_queue<IEventDataPtr> ThreadSafeEventQueue;
+typedef Concurrency::concurrent_queue<IEventPtr> ThreadSafeEventQueue;
 
 /**
 	Interface for an event manager. This object will maintain a list of registered events 
@@ -360,4 +360,24 @@ public:
 	{
 		kINFINITE = 0xffffffff
 	};
+};
+
+
+//====================================================
+//	Scripting Interfaces
+//====================================================
+class IScriptManager
+{
+public:
+	/// Virtual destructor
+	virtual ~IScriptManager() { }
+
+	/// Initialize the script manager
+	virtual bool Init() = 0;
+
+	/// Execute a script file
+	virtual void ExecuteFile(const char* resource) = 0;
+
+	/// Execute a single line of script code
+	virtual void ExecuteString(const char* str) = 0;
 };

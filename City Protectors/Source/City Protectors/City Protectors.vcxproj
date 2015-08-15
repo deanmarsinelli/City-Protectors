@@ -68,8 +68,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Lib;$(SolutionDir)..\..\Cobalt Engine\Lib\Cobalt Engine_Win32_Debug;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\DXUT\Lib;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\tinyxml\Lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlib.libCobalt Engine_Win32_Debug.lib;d3dx9d.lib;d3dx11d.lib;DXUTd.lib;DXUTOptd.lib;DxErr.lib;tinyxmld.lib;tinyxmlSTLd.lib;Comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Lib;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\luaplus51\Lib;$(SolutionDir)..\..\Cobalt Engine\Lib\Cobalt Engine_Win32_Debug;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\DXUT\Lib;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\tinyxml\Lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlib.libCobalt Engine_Win32_Debug.lib;d3dx9d.lib;d3dx11d.lib;DXUTd.lib;DXUTOptd.lib;DxErr.lib;tinyxmld.lib;tinyxmlSTLd.lib;Comctl32.lib;%(AdditionalDependencies);luaplus51-1201.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,8 +89,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Lib;$(SolutionDir)..\..\Cobalt Engine\Lib\Cobalt Engine_Win32_Release;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\DXUT\Lib;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\tinyxml\Lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlib.libCobalt Engine_Win32_Release.lib;d3dx9.lib;d3dx11.lib;DxErr.lib;DXUT.lib;DXUTOpt.lib;tinyxml.lib;tinyxmlSTL.lib;Comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Lib;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\luaplus51\Lib;$(SolutionDir)..\..\Cobalt Engine\Lib\Cobalt Engine_Win32_Release;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\DXUT\Lib;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\tinyxml\Lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlib.libCobalt Engine_Win32_Release.lib;d3dx9.lib;d3dx11.lib;DxErr.lib;DXUT.lib;DXUTOpt.lib;tinyxml.lib;tinyxmlSTL.lib;Comctl32.lib;%(AdditionalDependencies);luaplus51-1201.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

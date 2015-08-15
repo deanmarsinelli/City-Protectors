@@ -35,5 +35,6 @@ protected:
 	ComponentCreatorMap m_componentFactory;
 
 private:
+	/// Id of the last object created
 	GameObjectId m_lastObjectId;
 };

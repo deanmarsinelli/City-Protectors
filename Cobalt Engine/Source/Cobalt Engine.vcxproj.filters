@@ -121,6 +121,9 @@
     <ClInclude Include="Include\EventManager.h">
       <Filter>Events</Filter>
     </ClInclude>
+    <ClInclude Include="Include\LuaStateManager.h">
+      <Filter>Scripting\Lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -243,6 +246,12 @@
     </Filter>
     <Filter Include="Events">
       <UniqueIdentifier>{c153890e-15a3-4f02-95b2-72f8cf013898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting">
+      <UniqueIdentifier>{2c924f8a-bff5-4214-9397-86d220bd4573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting\Lua">
+      <UniqueIdentifier>{10ed2409-eddc-44b5-814d-bec212c6f297}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
