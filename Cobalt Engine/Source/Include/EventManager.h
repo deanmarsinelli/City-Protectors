@@ -8,10 +8,12 @@
 #pragma once
 
 #include <list>
-#include <map>
+#include <unordered_map>
 
 #include "interfaces.h"
 
+// Multiple Queues are used so that listener delegate functions can queue up more 
+// events in the event queue without causing an endless loop of queueing
 const unsigned int EVENTMANAGER_NUM_QUEUES = 2;
 
 /**
@@ -21,7 +23,7 @@ const unsigned int EVENTMANAGER_NUM_QUEUES = 2;
 class EventManager : public IEventManager
 {
 	typedef std::list<EventListenerDelegate> EventListenerList;
-	typedef std::map<EventType, EventListenerList> EventListenerMap;
+	typedef std::unordered_map<EventType, EventListenerList> EventListenerMap;
 	typedef std::list<IEventPtr> EventQueue;
 
 public:

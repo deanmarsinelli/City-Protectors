@@ -7,13 +7,14 @@
 
 #pragma once
 
-#include <map>
 #include <functional>
-#include "tinyxml.h"
+#include <tinyxml.h>
+#include <unordered_map>
+
 #include "interfaces.h"
 
 /// A map that maps strings (component names stored in xml files) to functions that create components
-typedef std::map<std::string, std::function<Component*()>> ComponentCreatorMap;
+typedef std::unordered_map<std::string, std::function<Component*()>> ComponentCreatorMap;
 
 /**
 	TODO: documentation

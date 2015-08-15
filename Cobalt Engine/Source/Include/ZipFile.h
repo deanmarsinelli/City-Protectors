@@ -34,11 +34,11 @@
 #pragma once
 
 #include <functional>
-#include <map>
 #include <string>
+#include <unordered_map>
 
 // Maps a path to a zip content id
-typedef std::map<std::string, int> ZipContentsMap;
+typedef std::unordered_map<std::string, int> ZipContentsMap;
 
 /**
 	Represents a zip file existing in memory.

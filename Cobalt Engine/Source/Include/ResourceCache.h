@@ -9,8 +9,8 @@
 
 #include <functional>
 #include <list>
-#include <map>
 #include <string>
+#include <unordered_map>
 
 #include "interfaces.h"
 #include "ResourceHandle.h"
@@ -31,7 +31,7 @@ class ResCache
 {
 	friend class ResHandle;
 	typedef std::list<shared_ptr<ResHandle>> ResHandleList;
-	typedef std::map<std::string, shared_ptr<ResHandle>> ResHandleMap;
+	typedef std::unordered_map<std::string, shared_ptr<ResHandle>> ResHandleMap;
 	typedef std::list<shared_ptr<IResourceLoader>> ResourceLoaders;
 public:
 	/// Construct the cache with a max size and resource file

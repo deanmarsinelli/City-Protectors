@@ -7,8 +7,9 @@
 
 #pragma once
 
-#include <map>
-#include "tinyxml.h"
+#include <tinyxml.h>
+#include <unordered_map>
+
 #include "interfaces.h"
 #include "Transform.h"
 
@@ -19,7 +20,7 @@
 class GameObject
 {
 	friend class GameObjectFactory;
-	typedef std::map<ComponentId, StrongComponentPtr> Components;
+	typedef std::unordered_map<ComponentId, StrongComponentPtr> Components;
 	typedef std::string GameObjectType;
 
 public:

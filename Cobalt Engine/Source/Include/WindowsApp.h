@@ -8,9 +8,9 @@
 #pragma once
 
 #include <DXUT.h>
-#include <map>
 #include <memory>
 #include <string>
+#include <unordered_map>
 #include <windows.h>
 
 #include "BaseGameLogic.h"
@@ -125,8 +125,8 @@ protected:
 	int m_ColorDepth;
 	bool m_IsEditorRunning;
 
-	std::map<std::wstring, std::wstring> m_TextResource;
-	std::map<std::wstring, unsigned int> m_HotKeys;
+	std::unordered_map<std::wstring, std::wstring> m_TextResource;
+	std::unordered_map<std::wstring, unsigned int> m_HotKeys;
 	
 	/// A bit field used to keep track of how many modal dialog's are displayed
 	int m_HasModalDialog;

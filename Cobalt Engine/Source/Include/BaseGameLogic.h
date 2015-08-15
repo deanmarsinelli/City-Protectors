@@ -10,7 +10,7 @@
 #include "interfaces.h"
 #include "GameObject.h"
 
-typedef std::map<GameObjectId, StrongGameObjectPtr> GameObjectMap;
+typedef std::unordered_map<GameObjectId, StrongGameObjectPtr> GameObjectMap;
 
 enum BaseGameState
 {
