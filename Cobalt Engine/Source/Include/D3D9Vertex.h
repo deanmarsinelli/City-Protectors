@@ -20,6 +20,7 @@ struct D3D9Vertex_Colored
 	/// Color of the vertex
 	D3DCOLOR	color;
 
+	/// Fixed vertex function type
 	static const DWORD FVF;
 };
 
@@ -37,6 +38,7 @@ struct D3D9Vertex_ColoredTextured
 	/// Texture coordinates
 	FLOAT		tu, tv;
 
+	/// Fixed vertex function type
 	static const DWORD FVF;
 };
 
@@ -57,6 +59,7 @@ struct D3D9Vertex_UnlitColored
 	/// Specular color of the vertex
 	D3DCOLOR	specular;
 
+	/// Fixed vertex function type
 	static const DWORD FVF;
 };
 
@@ -74,5 +77,6 @@ struct D3D9Vertex_UnlitTextured
 	/// Texture coordinates
 	FLOAT		tu, tv;
 
+	/// Fixed vertex function type
 	static const DWORD FVF;
 };

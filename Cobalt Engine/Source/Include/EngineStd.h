@@ -11,6 +11,7 @@
 
 #pragma once
 
+#include <d3dx9math.h>
 #include <tinyxml.h>
 
 
@@ -51,6 +52,26 @@ extern int WINAPI WindowsAppMain(HINSTANCE hInstance,
 // xbox entry function, etc
 #endif
 
+extern const float CB_PI;
+extern const float CB_2PI;
+
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
 extern const int MEGABYTE;
+
+extern const float fOPAQUE;
+extern const int iOPAQUE;
+extern const float fTRANSPARENT;
+extern const int iTRANSPARENT;
+
+extern Color g_White;
+extern Color g_Black;
+extern Color g_Cyan;
+extern Color g_Red;
+extern Color g_Green;
+extern Color g_Blue;
+extern Color g_Yellow;
+extern Color g_Gray40;
+extern Color g_Gray25;
+extern Color g_Gray65;
+extern Color g_Transparent;

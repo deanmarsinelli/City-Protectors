@@ -103,6 +103,7 @@
     <ClInclude Include="Include\BaseGameLogic.h" />
     <ClInclude Include="Include\Component.h" />
     <ClInclude Include="Include\EngineStd.h" />
+    <ClInclude Include="Include\Frustrum.h" />
     <ClInclude Include="Include\GameObject.h" />
     <ClInclude Include="Include\GameObjectFactory.h" />
     <ClInclude Include="Include\HumanView.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="D3DRenderer11.cpp" />
     <ClCompile Include="EngineStd.cpp" />
+    <ClCompile Include="Frustrum.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="HumanView.cpp" />
