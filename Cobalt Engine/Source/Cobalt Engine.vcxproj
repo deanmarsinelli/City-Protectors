@@ -60,7 +60,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdPart\FastDelegate;</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -80,7 +80,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdPart\FastDelegate;</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
@@ -92,6 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\BaseEvent.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
     <ClInclude Include="Include\D3D9Vertex.h" />
@@ -103,6 +104,8 @@
     <ClInclude Include="Include\BaseGameLogic.h" />
     <ClInclude Include="Include\Component.h" />
     <ClInclude Include="Include\EngineStd.h" />
+    <ClInclude Include="Include\EventManager.h" />
+    <ClInclude Include="Include\Events.h" />
     <ClInclude Include="Include\Frustrum.h" />
     <ClInclude Include="Include\GameObject.h" />
     <ClInclude Include="Include\GameObjectFactory.h" />
@@ -140,6 +143,7 @@
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="D3DRenderer11.cpp" />
     <ClCompile Include="EngineStd.cpp" />
+    <ClCompile Include="Events.cpp" />
     <ClCompile Include="Frustrum.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />

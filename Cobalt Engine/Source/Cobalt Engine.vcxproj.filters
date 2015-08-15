@@ -112,6 +112,15 @@
     <ClInclude Include="Include\Math.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Events.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\BaseEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\EventManager.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -193,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Events.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

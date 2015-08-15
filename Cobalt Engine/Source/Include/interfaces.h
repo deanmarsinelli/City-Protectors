@@ -25,6 +25,9 @@ class Component;
 typedef unsigned int GameObjectId;
 typedef unsigned int ComponentId;
 
+const GameObjectId INVALID_GAMEOBJECT_ID = 0;
+const ComponentId INVALID_COMPONENT_ID = 0;
+
 typedef shared_ptr<GameObject> StrongGameObjectPtr;
 typedef weak_ptr<GameObject> WeakGameObjectPtr;
 typedef shared_ptr<Component> StrongComponentPtr;
@@ -282,11 +285,11 @@ typedef unsigned long EventType;
 /**
 	Interface for every event object.
 */
-class IEventData
+class IEvent
 {
 public:
 	/// Virtual destructor
-	virtual ~IEventData() {}
+	virtual ~IEvent() {}
 	
 	/// Return the type of event
 	virtual const EventType& GetEventType() const = 0;
@@ -301,10 +304,10 @@ public:
 	virtual void Deserialize(std::istream& in) = 0;
 
 	/// Copy the event and return a pointer to it
-	virtual IEventDataPtr Copy() const = 0;
+	virtual IEventPtr Copy() const = 0;
 
 	/// Return the name of the event
 	virtual const char* GetName() const = 0;
 };
 
-typedef shared_ptr<IEventData> IEventDataPtr;
+typedef shared_ptr<IEvent> IEventPtr;
