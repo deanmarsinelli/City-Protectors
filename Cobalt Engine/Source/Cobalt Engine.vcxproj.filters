@@ -85,9 +85,6 @@
     <ClInclude Include="Include\MovementController.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Geometry.h">
-      <Filter>Graphics\Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Matrix.h">
       <Filter>Graphics\Geometry</Filter>
     </ClInclude>

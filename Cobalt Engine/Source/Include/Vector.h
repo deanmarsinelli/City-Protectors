@@ -76,6 +76,8 @@ public:
 	float Dot(const Vec4& vec) { return D3DXVec4Dot(this, &vec); }
 };
 
+/// A 2D Vector with x and y coordinates
+typedef D3DXVECTOR2 Vec2;
 
 typedef std::list<Vec3> Vec3List;
 typedef std::list<Vec4> Vec4List;

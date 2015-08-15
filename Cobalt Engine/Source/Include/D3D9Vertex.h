@@ -61,7 +61,7 @@ struct D3D9Vertex_UnlitColored
 };
 
 /**
-	A vertex with position, texture, and lighting data.
+	A vertex with position, normal and texture data.
 */
 struct D3D9Vertex_UnlitTextured
 {

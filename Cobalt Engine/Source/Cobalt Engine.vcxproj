@@ -105,7 +105,6 @@
     <ClInclude Include="Include\EngineStd.h" />
     <ClInclude Include="Include\GameObject.h" />
     <ClInclude Include="Include\GameObjectFactory.h" />
-    <ClInclude Include="Include\Geometry.h" />
     <ClInclude Include="Include\HumanView.h" />
     <ClInclude Include="Include\Initialization.h" />
     <ClInclude Include="Include\interfaces.h" />
