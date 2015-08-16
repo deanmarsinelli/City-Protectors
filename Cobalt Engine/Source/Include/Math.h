@@ -10,6 +10,5 @@
 
 typedef std::vector<Point> Poly;
 
-
 /// Determine if a point exists inside a polygon. Algorithm from Graphics Gems
 extern bool PointInPoly(const Point& test, const Poly& polygon);

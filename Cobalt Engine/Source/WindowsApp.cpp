@@ -9,6 +9,8 @@
 
 #include <SDKmisc.h>
 
+#include "EventManager.h"
+#include "Events.h"
 #include "D3DRenderer.h"
 #include "Logger.h"
 
@@ -724,4 +726,14 @@ int WindowsApp::PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
 	}
 
 	return 0;
+}
+
+
+//====================================================
+//	WindowsApp
+//	Private method definitions
+//====================================================
+void WindowsApp::RegisterEngineEvents()
+{
+	REGISTER_EVENT(Event_DestroyGameObject);
 }

@@ -7,7 +7,6 @@
     <ClInclude Include="Include\EngineStd.h" />
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\MemoryPool.h" />
-    <ClInclude Include="Include\types.h" />
     <ClInclude Include="Include\Random.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -123,6 +122,12 @@
     </ClInclude>
     <ClInclude Include="Include\LuaStateManager.h">
       <Filter>Scripting\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\templates.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\types.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

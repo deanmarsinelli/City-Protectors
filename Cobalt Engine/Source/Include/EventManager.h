@@ -11,6 +11,7 @@
 #include <unordered_map>
 
 #include "interfaces.h"
+#include "templates.h"
 
 // Multiple Queues are used so that listener delegate functions can queue up more 
 // events in the event queue without causing an endless loop of queueing
@@ -67,3 +68,9 @@ private:
 	/// Thread safe event queue
 	ThreadSafeEventQueue m_RealTimeEventQueue;
 };
+
+
+/// Global event factory
+extern GenericObjectFactory<IEvent, EventType> g_EventFactory;
+#define REGISTER_EVENT(eventClass) g_EventFactory.Register<eventClass>(eventClass::sk_EventType)
+#define CREATE_EVENT(eventType) g_eventFactory.Create(eventType)

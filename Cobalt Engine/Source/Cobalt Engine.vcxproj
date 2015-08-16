@@ -131,6 +131,7 @@
     <ClInclude Include="Include\Scene.h" />
     <ClInclude Include="Include\Shaders.h" />
     <ClInclude Include="Include\StringUtil.h" />
+    <ClInclude Include="Include\templates.h" />
     <ClInclude Include="Include\Transform.h" />
     <ClInclude Include="Include\types.h" />
     <ClInclude Include="Include\UserInterface.h" />

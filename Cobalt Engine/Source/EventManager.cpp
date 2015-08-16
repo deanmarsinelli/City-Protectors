@@ -10,6 +10,8 @@
 #include "Logger.h"
 #include "StringUtil.h"
 
+GenericObjectFactory<IEvent, EventType> g_eventFactory;
+
 //====================================================
 //	IEventManager definitions
 //====================================================
