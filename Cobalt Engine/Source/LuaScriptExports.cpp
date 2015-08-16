@@ -87,6 +87,7 @@ public:
 	{
 		m_Listeners.insert(pListener);
 	}
+
 	// destroy a listener
 	void DestroyListener(LuaScriptEventListener* pListener)
 	{

@@ -110,6 +110,7 @@
     <ClInclude Include="Include\GameObject.h" />
     <ClInclude Include="Include\GameObjectFactory.h" />
     <ClInclude Include="Include\LuaScriptExports.h" />
+    <ClInclude Include="Include\LuaScriptProcess.h" />
     <ClInclude Include="Include\LuaStateManager.h" />
     <ClInclude Include="Include\HumanView.h" />
     <ClInclude Include="Include\Initialization.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="HumanView.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="LuaScriptExports.cpp" />
+    <ClCompile Include="LuaScriptProcess.cpp" />
     <ClCompile Include="LuaStateManager.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Matrix.cpp" />
