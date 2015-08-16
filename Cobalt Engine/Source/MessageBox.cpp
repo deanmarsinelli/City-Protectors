@@ -126,7 +126,7 @@ HRESULT MessageBox::OnRestore()
 	return S_OK;
 }
 
-HRESULT MessageBox::OnRender(double time, float deltaTime)
+HRESULT MessageBox::OnRender(float time, float deltaTime)
 {
 	HRESULT hr;
 	V(m_UI.OnRender(deltaTime));

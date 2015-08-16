@@ -7,6 +7,9 @@
 
 #include "WindowsApp.h"
 
+#include <SDKmisc.h>
+
+#include "D3DRenderer.h"
 #include "Logger.h"
 
 // global pointer for the engine to the application instance
@@ -15,6 +18,10 @@
 // global and instantiated before the application begins
 WindowsApp* g_pApp = nullptr;
 
+//====================================================
+//	WindowsApp
+//	Public method definitions
+//====================================================
 WindowsApp::WindowsApp()
 {
 	// TODO finish this
@@ -133,7 +140,8 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 
 	return true;
 }
-static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pDoneProcessing, void* pUserContext)
+
+LRESULT CALLBACK WindowsApp::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pDoneProcessing, void* pUserContext)
 {
 	LRESULT result = 0;
 	switch (uMsg)
@@ -162,7 +170,7 @@ static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	{
 		if (g_pApp->m_pGame)
 		{
-			GameViewList viewList = g_pApp->m_pGame->GameViewList();
+			GameViewList viewList = g_pApp->m_pGame->GetGameViewList();
 			AppMsg msg;
 			msg.m_hWnd = hWnd;
 			msg.m_uMsg = uMsg;
@@ -183,16 +191,6 @@ static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	}
 	}
 	return result;
-}
-
-bool WindowsApp::HasModalDialog()
-{
-	return m_HasModalDialog;
-}
-
-void WindowsApp::ForceModalExit()
-{
-	PostMessage(GetHwnd(), g_MsgEndModal, 0, g_QuitNoPrompt);
 }
 
 LRESULT WindowsApp::OnDisplayChange(int colorDepth, int width, int height)
@@ -248,7 +246,7 @@ LRESULT WindowsApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
 
 				return true;
 			}
-						 
+
 			m_Quitting = true;
 
 			if (HasModalDialog())
@@ -277,10 +275,45 @@ LRESULT WindowsApp::OnClose()
 	CB_SAFE_DELETE(m_pGame);
 	DestroyWindow(GetHwnd());
 	DestroyNetworkEventForwarder();
-	
+
 	// TODO: finish this function
 
 	return 0;
+}
+
+LRESULT WindowsApp::OnAltEnter()
+{
+
+}
+
+LRESULT WindowsApp::OnNcCreate(LPCREATESTRUCT cs)
+{
+
+}
+
+void WindowsApp::AbortGame()
+{
+	m_Quitting = true;
+}
+
+int WindowsApp::GetExitCode()
+{
+	return DXUTGetExitCode();
+}
+
+bool WindowsApp::IsRunning()
+{
+	return m_IsRunning;
+}
+
+void WindowsApp::SetQuitting(bool quitting)
+{
+	m_Quitting = quitting;
+}
+
+BaseGameLogic* WindowsApp::GetGameLogic() const
+{
+	return m_pGame;
 }
 
 bool WindowsApp::LoadStrings(std::string language)
@@ -292,11 +325,65 @@ bool WindowsApp::LoadStrings(std::string language)
 	/*TiXmlElement* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(languageFile.c_str());
 	if (!pRoot)
 	{
-		//CB_ERROR("String file is missing");
-		return false;
+	//CB_ERROR("String file is missing");
+	return false;
 	}*/
 
 	// TODO: finish this function
+}
+
+std::wstring WindowsApp::GetString(std::wstring sID)
+{
+
+}
+
+UINT WindowsApp::MapCharToKeycode(const char hotkey)
+{
+	if (hotkey >= '0' && hotkey <= '9')
+	{
+		return 0x30 + hotkey - '0';
+	}
+	if (hotkey >= 'A' && hotkey <= 'Z')
+	{
+		return 0x41 + hotkey - 'A';
+	}
+
+	CB_ASSERT(0 && "Platform specfic hotkey is undefined");
+	return 0;
+}
+
+bool WindowsApp::HasModalDialog()
+{
+	return m_HasModalDialog;
+}
+
+void WindowsApp::ForceModalExit()
+{
+	PostMessage(GetHwnd(), g_MsgEndModal, 0, g_QuitNoPrompt);
+}
+
+HumanView* WindowsApp::GetHumanView()
+{
+	HumanView* pView = nullptr;
+	GameViewList views = m_pGame->GetGameViewList();
+
+	// iterate the list of views looking for a human view
+	for (GameViewList::iterator it = views.begin(); it != views.end(); ++it)
+	{
+		if ((*it)->GetType() == GameViewType::GameView_Human)
+		{
+			shared_ptr<IGameView> pIGameView(*it);
+			pView = static_cast<HumanView *>(&*pIGameView);
+			break;
+		}
+	}
+
+	return pView;
+}
+
+const Point& WindowsApp::GetScreenSize()
+{
+	return m_ScreenSize;
 }
 
 int WindowsApp::Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer)
@@ -351,6 +438,235 @@ int WindowsApp::Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer
 	return result;
 }
 
+WindowsApp::Renderer WindowsApp::GetRendererImpl()
+{
+	DXUTDeviceVersion version = DXUTGetDeviceSettings().ver;
+	if (version == DXUT_D3D11_DEVICE)
+	{
+		return Renderer::Renderer_D3D11;
+	}
+	else if (version == DXUT_D3D9_DEVICE)
+	{
+		return Renderer::Renderer_D3D9;
+	}
+
+	return Renderer::Renderer_Unknown;
+}
+
+// CALLBACKS
+void CALLBACK WindowsApp::OnUpdate(double time, float deltaTime, void* pUserContext)
+{
+	// dont update the scene if there is a modal up
+	if (g_pApp->HasModalDialog())
+	{
+		return;
+	}
+
+	// if the game is quitting, post the close message
+	if (g_pApp->m_Quitting)
+	{
+		PostMessage(g_pApp->GetHwnd(), WM_CLOSE, 0, 0);
+	}
+
+	// otherwise, process events and update the current game logic
+	if (g_pApp->m_pGame)
+	{
+		// allow 10 ms of events to process
+		IEventManager::Get()->Update(10);
+
+		g_pApp->m_pGame->OnUpdate((float)time, deltaTime);
+	}
+
+}
+
+bool CALLBACK WindowsApp::ModifyDeviceSettings(DXUTDeviceSettings* pDeviceSettings, void* pUserContext)
+{
+	// if the system is creating a d3d9 device, adjust some settings
+	if (pDeviceSettings->ver == DXUT_D3D9_DEVICE)
+	{
+		IDirect3D9* pD3D = DXUTGetD3D9Object();
+		D3DCAPS9 caps;
+		pD3D->GetDeviceCaps(pDeviceSettings->d3d9.AdapterOrdinal, pDeviceSettings->d3d9.DeviceType, &caps);
+
+		// if device doesnt support HW transform and light or at least 1.1 vertex shaders in hardware then use software vertex processing
+		if ((caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT) == 0 || caps.VertexShaderVersion < D3DVS_VERSION(1, 1))
+		{
+			pDeviceSettings->d3d9.BehaviorFlags = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+		}
+	}
+	// for the device created, if its a reference device, display a warning box
+	static bool s_FirstTime = true;
+	if (s_FirstTime)
+	{
+		if ((pDeviceSettings->ver == DXUT_D3D9_DEVICE && pDeviceSettings->d3d9.DeviceType == D3DDEVTYPE_REF) ||
+			(pDeviceSettings->ver == DXUT_D3D11_DEVICE && pDeviceSettings->d3d11.DriverType == D3D_DRIVER_TYPE_REFERENCE))
+		{
+			DXUTDisplaySwitchingToREFWarning(pDeviceSettings->ver);
+		}
+	}
+
+	return true;
+}
+
+// D3D9 Callbacks
+bool CALLBACK WindowsApp::IsD3D9DeviceAcceptable(D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat, bool bWindowed, void* pUserContext)
+{
+	// skip any backbuffer formats that don't support alpha blending
+	IDirect3D9* pD3D = DXUTGetD3D9Object();
+	if (FAILED(pD3D->CheckDeviceFormat(pCaps->AdapterOrdinal, pCaps->DeviceType, AdapterFormat,
+		D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING, D3DRTYPE_TEXTURE, BackBufferFormat)))
+	{
+		return false;
+	}
+	
+	// reject any device that doesn't support at least pixel shader 2.0
+	if (pCaps->PixelShaderVersion < D3DPS_VERSION(2, 0))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+HRESULT CALLBACK WindowsApp::OnD3D9CreateDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext)
+{
+	HRESULT hr;
+
+	V_RETURN(D3DRenderer::g_DialogResourceManager.OnD3D9CreateDevice(pd3dDevice));
+
+	return S_OK;
+}
+
+HRESULT CALLBACK WindowsApp::OnD3D9ResetDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext)
+{
+	HRESULT hr;
+
+	if (g_pApp->m_Renderer)
+	{
+		// restore the renderer
+		V_RETURN(g_pApp->m_Renderer->OnRestore());
+	}
+	
+	if (g_pApp->m_pGame)
+	{
+		// call OnRestore() on all game views
+		GameViewList views = g_pApp->m_pGame->GetGameViewList();
+		for (GameViewList::iterator it = views.begin(); it != views.end(); ++it)
+		{
+			V_RETURN((*it)->OnRestore());
+		}
+	}
+
+	return S_OK;
+}
+
+void CALLBACK WindowsApp::OnD3D9FrameRender(IDirect3DDevice9* pd3dDevice, double time, float deltaTime, void* pUserContext)
+{
+	// iterate the views and call render on each one
+	GameViewList views = g_pApp->m_pGame->GetGameViewList();
+	for (GameViewList::iterator it = views.begin(); it != views.end(); ++it)
+	{
+		(*it)->OnRender((float)time, deltaTime);
+	}
+
+	g_pApp->m_pGame->RenderDiagnostics();
+}
+
+void CALLBACK WindowsApp::OnD3D9LostDevice(void* pUserContext)
+{
+	D3DRenderer::g_DialogResourceManager.OnD3D9LostDevice();
+	
+	if (g_pApp->m_pGame)
+	{
+		// call OnLostDevice() on all game views
+		GameViewList views = g_pApp->m_pGame->GetGameViewList();
+		for (GameViewList::iterator it = views.begin(); it != views.end(); ++it)
+		{
+			(*it)->OnLostDevice();
+		}
+	}
+}
+
+void CALLBACK WindowsApp::OnD3D9DestroyDevice(void* pUserContext)
+{
+	// shut down and destroy the renderer
+	if (g_pApp->m_Renderer)
+	{
+		g_pApp->m_Renderer->Shutdown();
+	}
+	D3DRenderer::g_DialogResourceManager.OnD3D9DestroyDevice();
+	g_pApp->m_Renderer = nullptr;
+}
+
+// D3D11 Callbacks
+bool CALLBACK WindowsApp::IsD3D11DeviceAcceptable(const CD3D11EnumAdapterInfo *AdapterInfo, UINT Output, const CD3D11EnumDeviceInfo *DeviceInfo, DXGI_FORMAT BackBufferFormat, bool bWindowed, void* pUserContext)
+{
+	// accept all d3d11 devices
+	return true;
+}
+
+HRESULT CALLBACK WindowsApp::OnD3D11CreateDevice(ID3D11Device* pd3dDevice, const DXGI_SURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext)
+{
+	HRESULT hr;
+	
+	ID3D11DeviceContext* pd3dImmediateContext = DXUTGetD3D11DeviceContext();
+	V_RETURN(D3DRenderer::g_DialogResourceManager.OnD3D11CreateDevice(pd3dDevice, pd3dImmediateContext));
+
+	return S_OK;
+}
+
+HRESULT CALLBACK WindowsApp::OnD3D11ResizedSwapChain(ID3D11Device* pd3dDevice, IDXGISwapChain* pSwapChain, const DXGI_SURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext)
+{
+	HRESULT hr;
+
+	V_RETURN(D3DRenderer::g_DialogResourceManager.OnD3D11ResizedSwapChain(pd3dDevice, pBackBufferSurfaceDesc));
+
+	if (g_pApp->m_pGame)
+	{
+		// call OnRestore() on all game views
+		GameViewList views = g_pApp->m_pGame->GetGameViewList();
+		for (GameViewList::iterator it = views.begin(); it != views.end(); ++it)
+		{
+			(*it)->OnRestore();
+		}
+	}
+
+	return S_OK;
+}
+
+void CALLBACK WindowsApp::OnD3D11FrameRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pd3dImmediateContext, double time, float deltaTime, void* pUserContext)
+{
+	// iterate the views and call render on each one
+	GameViewList views = g_pApp->m_pGame->GetGameViewList();
+	for (GameViewList::iterator it = views.begin(); it != views.end(); ++it)
+	{
+		(*it)->OnRender((float)time, deltaTime);
+	}
+
+	g_pApp->m_pGame->RenderDiagnostics();
+}
+
+void CALLBACK WindowsApp::OnD3D11ReleasingSwapChain(void* pUserContext)
+{
+	D3DRenderer::g_DialogResourceManager.OnD3D11ReleasingSwapChain();
+}
+
+void CALLBACK WindowsApp::OnD3D11DestroyDevice(void* pUserContext)
+{
+	// shut down and destroy the renderer
+	if (g_pApp->m_Renderer)
+	{
+		g_pApp->m_Renderer->Shutdown();
+	}
+	D3DRenderer::g_DialogResourceManager.OnD3D11DestroyDevice();
+	g_pApp->m_Renderer = nullptr;
+}
+
+
+//====================================================
+//	WindowsApp
+//	Protected method definitions
+//====================================================
 int WindowsApp::PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
 {
 	int currentTime = timeGetTime();

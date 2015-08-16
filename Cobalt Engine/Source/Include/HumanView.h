@@ -40,7 +40,7 @@ public:
 	virtual HRESULT OnRestore();
 
 	/// Render the game view
-	virtual void OnRender(double time, float deltaTime);
+	virtual void OnRender(float time, float deltaTime);
 
 	/// Called when the device is lost
 	virtual HRESULT OnLostDevice();

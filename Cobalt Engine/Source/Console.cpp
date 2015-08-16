@@ -8,6 +8,7 @@
 #include "Console.h"
 
 #include "D3DRenderer.h"
+#include "LuaStateManager.h"
 #include "StringUtil.h"
 #include "WindowsApp.h"
 

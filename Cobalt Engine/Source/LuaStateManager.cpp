@@ -65,7 +65,7 @@ bool LuaStateManager::Init()
 		return false;
 	}
 
-	// register functions
+	// register functions so they can be used in lua
 	m_pLuaState->GetGlobals().RegisterDirect("ExecuteFile", *this, &LuaStateManager::ExecuteFile);
 	m_pLuaState->GetGlobals().RegisterDirect("ExecuteString", *this, &LuaStateManager::ExecuteString);
 
@@ -122,6 +122,10 @@ LuaPlus::LuaState* LuaStateManager::GetLuaState() const
 
 LuaPlus::LuaObject LuaStateManager::CreatePath(const char* pathString, bool toIgnoreLastElement)
 {
+	// this will create a table path in lua from a string
+	// e.g. if you pass in A.B.C it will create a table called A with a single element
+	// named B which has a single element named C
+
 	StringVec splitPath;
 	// split the string using '.' as a delimiter
 	Split(pathString, splitPath, '.');

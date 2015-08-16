@@ -71,7 +71,7 @@ public:
 	virtual HRESULT OnRestore() = 0;
 
 	/// Render the Game View
-	virtual void OnRender(double time, float deltaTime) = 0;
+	virtual void OnRender(float time, float deltaTime) = 0;
 
 	/// Method to handle the device being lost
 	virtual HRESULT OnLostDevice() = 0;
@@ -106,7 +106,7 @@ public:
 	virtual HRESULT OnRestore() = 0;
 
 	/// Render the screen element
-	virtual HRESULT OnRender(double time, float deltaTime) = 0;
+	virtual HRESULT OnRender(float time, float deltaTime) = 0;
 
 	/// Method to handle the device being lost
 	virtual HRESULT OnLostDevice() = 0;

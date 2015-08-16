@@ -46,7 +46,7 @@ public:
 	/// Return the Lua State object
 	LuaPlus::LuaState* GetLuaState() const;
 
-	///
+	/// Create a lua table path from a string
 	LuaPlus::LuaObject CreatePath(const char* pathString, bool toIgnoreLastElement = false);
 	
 	/// Convert a vec3 to a lua table passed in by reference

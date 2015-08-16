@@ -88,7 +88,7 @@ HRESULT HumanView::OnRestore()
 	return hr;
 }
 
-void HumanView::OnRender(double time, float deltaTime)
+void HumanView::OnRender(float time, float deltaTime)
 {
 	m_CurrTick = timeGetTime();
 	if (m_CurrTick = m_LastDraw)

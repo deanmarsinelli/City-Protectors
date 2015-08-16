@@ -40,7 +40,7 @@ public:
 	virtual HRESULT OnRestore();
 
 	/// Render the message box
-	virtual HRESULT OnRender(double time, float deltaTime);
+	virtual HRESULT OnRender(float time, float deltaTime);
 
 	/// Return max z-order -- message boxes are always the top layer
 	virtual int GetZOrder() const;
