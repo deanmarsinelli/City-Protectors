@@ -37,7 +37,7 @@ public:
 	static void RegisterEventTypeWithScript(const char* key, EventType type);
 	/// Map an event creation function with the event type
 	static void AddCreationFunction(EventType type, std::function<LuaScriptEvent*()> creationFunction);
-	static LuaScriptEvent* CreatEventFromScript(EventType type);
+	static LuaScriptEvent* CreateEventFromScript(EventType type);
 
 protected:
 	// This function must be overridden if you want to fire this event from C++ and have it received by the script

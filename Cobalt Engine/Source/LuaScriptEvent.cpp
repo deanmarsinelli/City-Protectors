@@ -55,7 +55,7 @@ void LuaScriptEvent::AddCreationFunction(EventType type, std::function<LuaScript
 	s_CreationFunctions.insert(std::make_pair(type, creationFunction));
 }
 
-LuaScriptEvent* LuaScriptEvent::CreatEventFromScript(EventType type)
+LuaScriptEvent* LuaScriptEvent::CreateEventFromScript(EventType type)
 {
 	// look up the event creation function for this type and return that function
 	auto findIt = s_CreationFunctions.find(type);

@@ -24,6 +24,7 @@
 #include "GameObject.h"
 #include "interfaces.h"
 #include "Logger.h"
+#include "LuaScriptEvent.h"
 #include "LuaStateManager.h"
 #include "Matrix.h"
 #include "ResourceCache.h"
@@ -63,7 +64,7 @@ public:
 	{
 		// make sure its actually a lua function
 		CB_ASSERT(m_ScriptCallbackFunction.IsFunction()); 
-		shared_ptr<LuaScriptEvent> pScriptEvent = static_pointer_cast<LuaScriptEvent>(pEventPtr);
+		shared_ptr<LuaScriptEvent> pScriptEvent(std::static_pointer_cast<LuaScriptEvent>(pEventPtr));
 		LuaPlus::LuaFunction<void> Callback = m_ScriptCallbackFunction;
 		Callback(pScriptEvent->GetEventData());
 	}

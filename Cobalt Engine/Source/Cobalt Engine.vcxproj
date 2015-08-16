@@ -132,6 +132,7 @@
     <ClInclude Include="Include\ResourceHandle.h" />
     <ClInclude Include="Include\ResourceZipFile.h" />
     <ClInclude Include="Include\Scene.h" />
+    <ClInclude Include="Include\ScriptComponent.h" />
     <ClInclude Include="Include\Shaders.h" />
     <ClInclude Include="Include\StringUtil.h" />
     <ClInclude Include="Include\templates.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="ResourceHandle.cpp" />
     <ClCompile Include="ResourceZipFile.cpp" />
+    <ClCompile Include="ScriptComponent.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WindowsApp.cpp" />

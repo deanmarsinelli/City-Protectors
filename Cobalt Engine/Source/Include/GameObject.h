@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <memory>
 #include <tinyxml.h>
 #include <unordered_map>
 
@@ -69,7 +70,7 @@ public:
 			// if it exists, get the component part
 			StrongComponentPtr pBase(it->second);
 			// cast it down to the derived class and return a weak ptr
-			shared_ptr<ComponentType> pDerived(static_pointer_cast<ComponentType>(pBase));
+			shared_ptr<ComponentType> pDerived(std::static_pointer_cast<ComponentType>(pBase));
 			weak_ptr<ComponentType> pWeakDerived(pDerived);
 			return pWeakDerived;
 		}

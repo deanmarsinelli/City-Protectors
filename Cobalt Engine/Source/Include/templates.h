@@ -8,6 +8,7 @@
 #pragma once
 
 #include <functional>
+#include <memory>
 #include <unordered_map>
 
 /**
@@ -59,3 +60,14 @@ private:
 	// map of Id's to object creation functions
 	std::unordered_map<IdType, std::function<BaseClass*()>> m_CreationFunctions;
 };
+
+
+/// Convert a weak ptr to a strong ptr
+template<typename T>
+shared_ptr<T> MakeStrongPtr(weak_ptr<T> pWeakPtr)
+{
+	if (!pWeakPtr.expired())
+		return shared_ptr<T>(pWeakPtr);
+	else
+		return nullptr;
+}
