@@ -7,7 +7,8 @@
 
 #pragma once
 
-#include "D3DGeometry.h"
+#include "Matrix.h"
+#include "Vector.h"
 
 class Transform
 {

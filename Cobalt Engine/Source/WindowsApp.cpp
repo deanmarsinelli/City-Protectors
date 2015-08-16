@@ -735,5 +735,6 @@ int WindowsApp::PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
 //====================================================
 void WindowsApp::RegisterEngineEvents()
 {
+	REGISTER_EVENT(Event_NewGameObject);
 	REGISTER_EVENT(Event_DestroyGameObject);
 }

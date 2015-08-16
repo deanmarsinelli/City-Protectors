@@ -138,3 +138,5 @@ protected:
 	/// Console where the player can input commands
 	Console m_Console;
 };
+
+extern const GameViewId CB_INVALID_GAMEVIEW_ID;
