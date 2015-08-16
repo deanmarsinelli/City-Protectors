@@ -113,6 +113,12 @@ void ResCache::Flush()
 	}
 }
 
+bool ResCache::IsUsingDevelopmentDirectories() const
+{
+	CB_ASSERT(m_File);
+	return m_File->IsUsingDevelopmentDirectories();
+}
+
 shared_ptr<ResHandle> ResCache::Find(Resource* r)
 {
 	// return the resource handle if it's in the cache

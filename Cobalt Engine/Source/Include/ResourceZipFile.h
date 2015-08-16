@@ -42,6 +42,9 @@ public:
 	/// Return the name of the nth resource
 	virtual std::string GetResourceName(int n) const;
 
+	/// Return true if using the games development directories
+	virtual bool IsUsingDevelopmentDirectories() const { return false; }
+
 private:
 	/// Pointer to the ZipFile object this class manages
 	ZipFile *m_pZipFile;

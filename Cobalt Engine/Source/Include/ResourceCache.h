@@ -55,6 +55,9 @@ public:
 	/// Flush the cache removing everything from memory
 	void Flush();
 
+	/// Return true if using the games development directories
+	bool IsUsingDevelopmentDirectories() const;
+
 protected:
 	/// Return a handle to a resource if it exists in the cache
 	shared_ptr<ResHandle> Find(Resource* r);

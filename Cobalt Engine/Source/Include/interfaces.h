@@ -203,6 +203,9 @@ public:
 	/// Return the name of the nth resource
 	virtual std::string GetResourceName(int n) const = 0;
 	
+	/// Return true if using the games development directories
+	virtual bool IsUsingDevelopmentDirectories() const = 0;
+
 	/// Virtual Destructor
 	virtual ~IResourceFile() { }
 };
