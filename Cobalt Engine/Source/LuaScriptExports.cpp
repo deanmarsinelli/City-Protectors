@@ -30,9 +30,9 @@
 #include "Vector.h"
 
 /*
-	This class is a C++ listener for script event listeners. It pairs an event type
-	with a Lua callback function for that event. The event can be defined in C++ or in 
-	Lua, and can be sent from C++ or Lua. 
+	This class is a C++ listener that will listen for events and forward the event fires to a 
+	lua callback listener. It pairs an event type with a Lua callback function for that event. 
+	The event can be defined in C++ or in Lua, and can be sent from C++ or Lua. 
 
 	The Lua callback function shuld take in a table with the event data.
 */
@@ -144,8 +144,8 @@ public:
 	static unsigned long GetTickCount();
 
 	// physics
-	static void ApplyForce(LuaPlus::LuaObject normalDirection, float force, int gameObjectId);
-	static void ApplyTorque(LuaPlus::LuaObject axis, float force, int gameObjectId);
+	static void ApplyForce(LuaPlus::LuaObject normalDirectionLua, float force, int gameObjectId);
+	static void ApplyTorque(LuaPlus::LuaObject axisLua, float force, int gameObjectId);
 
 private:
 	static LuaScriptEventListenerManager* s_pScriptEventListenerMgr;
@@ -229,4 +229,222 @@ int LuaInternalScriptExports::CreateGameObject(const char* objectArchetype, LuaP
 	}
 
 	return INVALID_GAMEOBJECT_ID;
+}
+
+// add a lua listener callback for an event type. this will still be inserted into the C++ event manager
+// which will fire events that are forward to the lua callback
+unsigned long LuaInternalScriptExports::RegisterEventListener(EventType eventType, LuaPlus::LuaObject callbackFunction)
+{
+	CB_ASSERT(s_pScriptEventListenerMgr);
+	// make sure the lua object is a function
+	if (callbackFunction.IsFunction())
+	{
+		// create C++ proxy listener to listen for the event. this will forward the events to the lua callback
+		LuaScriptEventListener* pListener = CB_NEW LuaScriptEventListener(eventType, callbackFunction);
+		// add the listener to the lua listener manager
+		s_pScriptEventListenerMgr->AddListener(pListener);
+		// add its delegate listener function to the C++ event manager. this is where the events actually fire from
+		IEventManager::Get()->AddListener(pListener->GetDelegate(), eventType);
+
+		// conver the pointer to an unsigned long and use that as a handle
+		unsigned long handle = reinterpret_cast<unsigned long>(pListener);
+		return handle;
+	}
+
+	CB_ERROR("Invalid callback. Make sure the lua listener is a function");
+	return 0;
+}
+
+// remove a lua event listener
+void LuaInternalScriptExports::RemoveEventListener(unsigned long listenerId)
+{
+	CB_ASSERT(s_pScriptEventListenerMgr);
+	CB_ASSERT(listenerId != 0);
+
+	// convert the listener handle back to a pointer and destroy it
+	LuaScriptEventListener* pListener = reinterpret_cast<LuaScriptEventListener*>(listenerId);
+	s_pScriptEventListenerMgr->DestroyListener(pListener);
+}
+
+// queue an event from lua script
+bool LuaInternalScriptExports::QueueEvent(EventType eventType, LuaPlus::LuaObject eventData)
+{
+	shared_ptr<LuaScriptEvent> pEvent(BuildEvent(eventType, eventData));
+	if (pEvent)
+	{
+		IEventManager::Get()->QueueEvent(pEvent);
+		return true;
+	}
+
+	return false;
+}
+
+// send an event immediately from lua script
+bool LuaInternalScriptExports::TriggerEvent(EventType eventType, LuaPlus::LuaObject eventData)
+{
+	shared_ptr<LuaScriptEvent> pEvent(BuildEvent(eventType, eventData));
+	if (pEvent)
+	{
+		IEventManager::Get()->TriggerEvent(pEvent);
+		return true;
+	}
+
+	return false;
+}
+
+// attach a process from lua script
+void LuaInternalScriptExports::AttachScriptProcess(LuaPlus::LuaObject scriptProcess)
+{
+	LuaPlus::LuaObject temp = scriptProcess.Lookup("__object");
+	if (!temp.IsNil())
+	{
+		shared_ptr<Process> pProcess(static_cast<Process*>(temp.GetLightUserData()));
+		g_pApp->m_pGame->AttachProcess(pProcess);
+	}
+	else
+	{
+		CB_ERROR("Could not find __object in script process");
+	}
+}
+
+// get the y rotation in radians from a lua vec3
+float LuaInternalScriptExports::GetYRotationFromVector(LuaPlus::LuaObject vec3)
+{
+	// make sure vec3 is a table
+	if (vec3.IsTable())
+	{
+		Vec3 lookAt(vec3["x"].GetFloat(), vec3["y"].GetFloat(), vec3["z"].GetFloat());
+		// use the GetYRotationFromVector from math.h
+		return ::GetYRotationFromVector(lookAt);
+	}
+
+	CB_ERROR("Invalid object passed to GetYRotationFromVector(); type = " + std::string(vec3.TypeName()));
+	return 0;
+}
+
+float LuaInternalScriptExports::WrapPi(float wrapMe)
+{
+	// use the WrapPi from math.h
+	return ::WrapPi(wrapMe);
+}
+
+// create a lua vec3 table from an angle in radians
+LuaPlus::LuaObject LuaInternalScriptExports::GetVectorFromRotation(float angleRadians)
+{
+	// use the GetVectorFromYRotation from math.h
+	Vec3 result = ::GetVectorFromYRotation(angleRadians);
+
+	// create a lua vec3 table from the result
+	LuaPlus::LuaObject luaResult;
+	luaResult.AssignNewTable(LuaStateManager::Get()->GetLuaState());
+	luaResult.SetNumber("x", result.x);
+	luaResult.SetNumber("y", result.y);
+	luaResult.SetNumber("z", result.z);
+
+	return luaResult;
+}
+
+// write to the log from lua script
+void LuaInternalScriptExports::LuaLog(LuaPlus::LuaObject text)
+{
+	if (text.IsConvertibleToString())
+	{
+		CB_LOG("Lua", text.ToString());
+	}
+	else
+	{
+		CB_LOG("Lua", "<" + std::string(text.TypeName()) + ">");
+	}
+}
+
+// get the tick count in lua
+unsigned long LuaInternalScriptExports::GetTickCount()
+{
+	// use the system tick count
+	return ::GetTickCount();
+}
+
+// apply force to an object from lua
+void LuaInternalScriptExports::ApplyForce(LuaPlus::LuaObject normalDirectionLua, float force, int gameObjectId)
+{
+	if (normalDirectionLua.IsTable())
+	{
+		Vec3 normalDir(normalDirectionLua["x"].GetFloat(), normalDirectionLua["y"].GetFloat(), normalDirectionLua["z"].GetFloat());
+		g_pApp->m_pGame->GetGamePhysics()->ApplyForce(normalDir, force, gameObjectId);
+		return;
+	}
+	CB_ERROR("Invalid object passed to ApplyForce(). Type = " + std::string(normalDirectionLua.TypeName()));
+}
+
+// apply torque to an object from lua
+void LuaInternalScriptExports::ApplyTorque(LuaPlus::LuaObject axisLua, float force, int gameObjectId)
+{
+	if (axisLua.IsTable())
+	{
+		Vec3 axis(axisLua["x"].GetFloat(), axisLua["y"].GetFloat(), axisLua["z"].GetFloat());
+		g_pApp->m_pGame->GetGamePhysics()->ApplyTorque(axis, force, gameObjectId);
+		return;
+	}
+	CB_ERROR("Invalid object passed to ApplyForce(). Type = " + std::string(axisLua.TypeName()));
+}
+
+// builds an event to be queued or triggered
+shared_ptr<LuaScriptEvent> LuaInternalScriptExports::BuildEvent(EventType eventType, LuaPlus::LuaObject& eventData)
+{
+	// create the event from the event type
+	shared_ptr<LuaScriptEvent> pEvent(LuaScriptEvent::CreateEventFromScript(eventType));
+	if (!pEvent)
+		return nullptr;
+	
+	// fill the event with event data
+	if (!pEvent->SetEventData(eventData))
+		return nullptr;
+
+	return pEvent;
+}
+
+//=============================================================
+//	C Functions for registering C++ functions to Lua script
+//=============================================================
+void LuaScriptExports::Register()
+{
+	LuaPlus::LuaObject globals = LuaStateManager::Get()->GetGlobalVars();
+
+	// init
+	LuaInternalScriptExports::Init();
+
+	// resource loading
+	globals.RegisterDirect("LoadAndExecuteScriptResource", &LuaInternalScriptExports::LoadAndExecuteScriptResource);
+
+	// gameobjects
+	globals.RegisterDirect("CreateObject", &LuaInternalScriptExports::CreateGameObject);
+
+	// events
+	globals.RegisterDirect("RegisterEventListener", &LuaInternalScriptExports::RegisterEventListener);
+	globals.RegisterDirect("RemoveEventListener", &LuaInternalScriptExports::RemoveEventListener);
+	globals.RegisterDirect("QueueEvent", &LuaInternalScriptExports::QueueEvent);
+	globals.RegisterDirect("TriggerEvent", &LuaInternalScriptExports::TriggerEvent);
+
+	// processes
+	globals.RegisterDirect("AttachProcess", &LuaInternalScriptExports::AttachScriptProcess);
+
+	// math (these are registered to GccMath, not global
+	LuaPlus::LuaObject mathTable = globals.GetByName("GccMath");
+	CB_ASSERT(mathTable.IsTable());
+	mathTable.RegisterDirect("GetYRotationFromVector", &LuaInternalScriptExports::GetYRotationFromVector);
+	mathTable.RegisterDirect("WrapPi", &LuaInternalScriptExports::WrapPi);
+	mathTable.RegisterDirect("GetVectorFromRotation", &LuaInternalScriptExports::GetVectorFromRotation);
+
+	// misc
+	globals.RegisterDirect("Log", &LuaInternalScriptExports::LuaLog);
+	globals.RegisterDirect("GetTickCount", &LuaInternalScriptExports::GetTickCount);
+
+	// physics
+	globals.RegisterDirect("ApplyForce", &LuaInternalScriptExports::ApplyForce);
+	globals.RegisterDirect("ApplyTorque", &LuaInternalScriptExports::ApplyTorque);
+}
+
+void LuaScriptExports::Unregister()
+{
+	LuaInternalScriptExports::Destroy();
 }

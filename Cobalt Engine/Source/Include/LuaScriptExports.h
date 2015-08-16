@@ -11,6 +11,9 @@
 // This allows for a single place to export functions from.
 namespace LuaScriptExports
 {
+	/// Register C++ functions to be used in lua script. Called in WindowsApp::Init()
 	void Register();
+
+	/// Unregister all C++ functions from lua script
 	void Unregister();
 }
