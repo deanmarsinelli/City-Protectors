@@ -135,6 +135,9 @@
     <ClInclude Include="Include\LuaScriptProcess.h">
       <Filter>Scripting\Lua</Filter>
     </ClInclude>
+    <ClInclude Include="Include\LuaScriptEvent.h">
+      <Filter>Scripting\Lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -230,6 +233,9 @@
       <Filter>Scripting\Lua</Filter>
     </ClCompile>
     <ClCompile Include="LuaScriptProcess.cpp">
+      <Filter>Scripting\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaScriptEvent.cpp">
       <Filter>Scripting\Lua</Filter>
     </ClCompile>
   </ItemGroup>
