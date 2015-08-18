@@ -134,12 +134,14 @@
     <ClInclude Include="Include\Scene.h" />
     <ClInclude Include="Include\ScriptComponent.h" />
     <ClInclude Include="Include\Shaders.h" />
+    <ClInclude Include="Include\SoundResourceExtraData.h" />
     <ClInclude Include="Include\StringUtil.h" />
     <ClInclude Include="Include\templates.h" />
     <ClInclude Include="Include\Transform.h" />
     <ClInclude Include="Include\types.h" />
     <ClInclude Include="Include\UserInterface.h" />
     <ClInclude Include="Include\Vector.h" />
+    <ClInclude Include="Include\WaveResourceLoader.h" />
     <ClInclude Include="Include\WindowsApp.h" />
     <ClInclude Include="Include\ZipFile.h" />
   </ItemGroup>
@@ -174,8 +176,10 @@
     <ClCompile Include="ResourceHandle.cpp" />
     <ClCompile Include="ResourceZipFile.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
+    <ClCompile Include="SoundResourceExtraData.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="WaveResourceLoader.cpp" />
     <ClCompile Include="WindowsApp.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="ZipFile.cpp" />
