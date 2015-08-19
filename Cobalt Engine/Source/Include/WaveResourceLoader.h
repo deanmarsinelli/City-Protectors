@@ -8,6 +8,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 #include "interfaces.h"
 #include "ResourceHandle.h"
@@ -34,5 +35,6 @@ public:
 	virtual bool LoadResource(char* rawBuffer, unsigned int rawSize, shared_ptr<ResHandle> handle);
 
 protected:
+	/// Parse the wave file and load it into the resource -handle
 	bool ParseWave(char* wavStream, size_t length, shared_ptr<ResHandle> handle);
 };

@@ -147,6 +147,9 @@
     <ClInclude Include="Include\WaveResourceLoader.h">
       <Filter>Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Include\AudioBuffer.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -254,6 +257,9 @@
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="WaveResourceLoader.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioBuffer.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
   </ItemGroup>

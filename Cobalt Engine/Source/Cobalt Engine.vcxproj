@@ -92,6 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\AudioBuffer.h" />
     <ClInclude Include="Include\BaseEvent.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Include\ZipFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioBuffer.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="D3DLineDrawer11.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />

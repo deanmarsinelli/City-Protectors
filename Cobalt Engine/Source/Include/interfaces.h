@@ -369,6 +369,9 @@ public:
 //====================================================
 //	Scripting Interfaces
 //====================================================
+/**
+	Interface for a script manager that is agnostic to which language is used.
+*/
 class IScriptManager
 {
 public:
@@ -383,4 +386,59 @@ public:
 
 	/// Execute a single line of script code
 	virtual void ExecuteString(const char* str) = 0;
+};
+
+
+//====================================================
+//	Audio Interfaces
+//====================================================
+/**
+	Interface for a buffer that contains audio data. This class
+	is agnostic to what kind of audio data it stores and the 
+	audio platform that plays it.
+*/
+class IAudioBuffer
+{
+public:
+	/// Virtual destructor
+	virtual ~IAudioBuffer() { }
+
+	/// Return an implementation specific handle to the allocated sound
+	virtual void* Get() = 0;
+
+	/// Return a pointer to the resource handle of this audio sound
+	virtual shared_ptr<ResHandle> GetResource() = 0;
+
+	/// Restore an audio buffer that has been lost
+	virtual bool Restore() = 0;
+
+	/// Play an audio sound, volume should be 0 - 100
+	virtual bool Play(int volume, bool looping) = 0;
+
+	/// Pause a sound that is currently playing
+	virtual bool Pause() = 0;
+
+	/// Stop a sound that is playing
+	virtual bool Stop() = 0;
+
+	/// Resume a paused sound
+	virtual bool Resume() = 0;
+
+	/// Pause or unpause a sound based on the current state of the sound
+	virtual bool TogglePause() = 0;
+
+	/// Return true if the sound is currently playing
+	virtual bool IsPlaying() = 0;
+
+	/// Return true if the sound is currently set to loop
+	virtual bool IsLooping() const = 0;
+
+	/// Set the volume of the sound
+	virtual void SetVolume(int volume) = 0;
+
+	/// Return the volume of the sound
+	virtual int GetVolume() const = 0;
+
+	/// Return a value between 0.0 and 1.0 that represents how much of a sound has played
+	virtual float GetProgress() const = 0;
 };
