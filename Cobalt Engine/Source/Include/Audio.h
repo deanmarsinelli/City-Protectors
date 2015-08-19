@@ -24,7 +24,7 @@ public:
 	Audio();
 
 	/// Default destructor calls shutdown
-	~Audio();
+	virtual ~Audio();
 
 	/// Shutdown the sound system
 	virtual void Shutdown() = 0;

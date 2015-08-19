@@ -105,6 +105,7 @@
     <ClInclude Include="Include\DelayedProcess.h" />
     <ClInclude Include="Include\BaseGameLogic.h" />
     <ClInclude Include="Include\Component.h" />
+    <ClInclude Include="Include\DirectSoundAudio.h" />
     <ClInclude Include="Include\EngineStd.h" />
     <ClInclude Include="Include\EventManager.h" />
     <ClInclude Include="Include\Events.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="D3DLineDrawer11.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="D3DRenderer11.cpp" />
+    <ClCompile Include="DirectSoundAudio.cpp" />
     <ClCompile Include="EngineStd.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Events.cpp" />

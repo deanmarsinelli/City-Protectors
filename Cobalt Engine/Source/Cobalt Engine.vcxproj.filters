@@ -153,6 +153,9 @@
     <ClInclude Include="Include\Audio.h">
       <Filter>Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Include\DirectSoundAudio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -266,6 +269,9 @@
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="Audio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectSoundAudio.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
   </ItemGroup>

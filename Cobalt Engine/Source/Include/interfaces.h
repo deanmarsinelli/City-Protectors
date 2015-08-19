@@ -450,7 +450,7 @@ class IAudio
 {
 public:
 	/// Initialize the sound system
-	virtual bool Initialize() = 0;
+	virtual bool Initialize(HWND hWnd) = 0;
 
 	/// Shutdown the sound system
 	virtual void Shutdown() = 0;
