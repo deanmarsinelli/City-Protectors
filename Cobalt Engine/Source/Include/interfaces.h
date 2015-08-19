@@ -442,3 +442,34 @@ public:
 	/// Return a value between 0.0 and 1.0 that represents how much of a sound has played
 	virtual float GetProgress() const = 0;
 };
+
+/**
+	Interface for an audio system that manages a list of sounds.
+*/
+class IAudio
+{
+public:
+	/// Initialize the sound system
+	virtual bool Initialize() = 0;
+
+	/// Shutdown the sound system
+	virtual void Shutdown() = 0;
+
+	/// Return true if the sound system is active
+	virtual bool Active() = 0;
+
+	/// Initialize an audio buffer
+	virtual IAudioBuffer* InitAudioBuffer(shared_ptr<ResHandle> soundResource) = 0;
+
+	/// Release an audio buffer
+	virtual void ReleaseAudioBuffer(IAudioBuffer* audioBuffer) = 0;
+
+	/// Stop all currently playing sounds
+	virtual void StopAllSounds() = 0;
+
+	/// Pause all currently playing sounds
+	virtual void PauseAllSounds() = 0;
+
+	/// Resume all paused sounds
+	virtual void ResumeAllSounds() = 0;
+};
