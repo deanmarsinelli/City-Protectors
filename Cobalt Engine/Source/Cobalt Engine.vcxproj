@@ -106,6 +106,7 @@
     <ClInclude Include="Include\BaseGameLogic.h" />
     <ClInclude Include="Include\Component.h" />
     <ClInclude Include="Include\DirectSoundAudio.h" />
+    <ClInclude Include="Include\DirectSoundAudioBuffer.h" />
     <ClInclude Include="Include\EngineStd.h" />
     <ClInclude Include="Include\EventManager.h" />
     <ClInclude Include="Include\Events.h" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Include\Scene.h" />
     <ClInclude Include="Include\ScriptComponent.h" />
     <ClInclude Include="Include\Shaders.h" />
+    <ClInclude Include="Include\SoundProcess.h" />
     <ClInclude Include="Include\SoundResourceExtraData.h" />
     <ClInclude Include="Include\StringUtil.h" />
     <ClInclude Include="Include\templates.h" />
@@ -156,6 +158,7 @@
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="D3DRenderer11.cpp" />
     <ClCompile Include="DirectSoundAudio.cpp" />
+    <ClCompile Include="DirectSoundAudioBuffer.cpp" />
     <ClCompile Include="EngineStd.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Events.cpp" />
@@ -182,6 +185,7 @@
     <ClCompile Include="ResourceHandle.cpp" />
     <ClCompile Include="ResourceZipFile.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
+    <ClCompile Include="SoundProcess.cpp" />
     <ClCompile Include="SoundResourceExtraData.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="Vector.cpp" />

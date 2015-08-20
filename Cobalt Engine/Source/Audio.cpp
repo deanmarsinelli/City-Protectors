@@ -30,6 +30,7 @@ void Audio::Shutdown()
 		IAudioBuffer* audioBuffer = *it;
 		audioBuffer->Stop();
 		m_AllSamples.pop_front();
+		// dont delete the raw IAudioBuffer's, theyre managed by SoundProcesses
 	}
 }
 

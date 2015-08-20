@@ -9,6 +9,7 @@
 
 #include <winerror.h>
 
+#include "DirectSoundAudioBuffer.h"
 #include "EngineStd.h"
 #include "Logger.h"
 #include "SoundResourceExtraData.h"

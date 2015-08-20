@@ -154,6 +154,12 @@
       <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="Include\DirectSoundAudio.h">
+      <Filter>Audio\DirectSound</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DirectSoundAudioBuffer.h">
+      <Filter>Audio\DirectSound</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SoundProcess.h">
       <Filter>Audio</Filter>
     </ClInclude>
   </ItemGroup>
@@ -272,6 +278,12 @@
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="DirectSoundAudio.cpp">
+      <Filter>Audio\DirectSound</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectSoundAudioBuffer.cpp">
+      <Filter>Audio\DirectSound</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundProcess.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
   </ItemGroup>
@@ -320,6 +332,9 @@
     </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{d4fb7d00-043d-4e24-85b6-28b6f9309cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio\DirectSound">
+      <UniqueIdentifier>{2a5b95df-1e5c-406c-9f12-d59d1dd67d2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

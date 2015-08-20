@@ -410,7 +410,7 @@ public:
 	virtual shared_ptr<ResHandle> GetResource() = 0;
 
 	/// Restore an audio buffer that has been lost
-	virtual bool Restore() = 0;
+	virtual bool OnRestore() = 0;
 
 	/// Play an audio sound, volume should be 0 - 100
 	virtual bool Play(int volume, bool looping) = 0;
@@ -436,11 +436,14 @@ public:
 	/// Set the volume of the sound
 	virtual void SetVolume(int volume) = 0;
 
+	/// Instantly set the sound to a new position
+	virtual void SetPosition(unsigned long newPosition) = 0;
+
 	/// Return the volume of the sound
 	virtual int GetVolume() const = 0;
 
 	/// Return a value between 0.0 and 1.0 that represents how much of a sound has played
-	virtual float GetProgress() const = 0;
+	virtual float GetProgress() = 0;
 };
 
 /**
