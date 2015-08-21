@@ -28,6 +28,6 @@ public:
 	/// Return whether or not a point is inside the plane. This is defined as the direction the normal is facing.
 	bool Inside(const Vec3& point) const;
 
-	/// Return whether or not a point is inside the plane. This is defined as the direction the normal is facing.
+	/// Return whether or not a sphere is inside the plane. This is defined as the direction the normal is facing.
 	bool Inside(const Vec3& point, const float radius) const;
 };

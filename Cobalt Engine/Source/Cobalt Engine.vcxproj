@@ -121,6 +121,7 @@
     <ClInclude Include="Include\Initialization.h" />
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\Logger.h" />
+    <ClInclude Include="Include\Material.h" />
     <ClInclude Include="Include\Math.h" />
     <ClInclude Include="Include\Matrix.h" />
     <ClInclude Include="Include\MemoryPool.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="LuaScriptExports.cpp" />
     <ClCompile Include="LuaScriptProcess.cpp" />
     <ClCompile Include="LuaStateManager.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MemoryPool.cpp" />

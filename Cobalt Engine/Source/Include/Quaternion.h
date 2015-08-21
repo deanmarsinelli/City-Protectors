@@ -46,7 +46,7 @@ public:
 	static const Quaternion Identity;
 };
 
-/// Overloaded multiply operator for 2 quaternions
+/// Overloaded multiply operator for 2 quaternions. Represents rot a followed by rot b
 inline Quaternion operator*(const Quaternion& a, const Quaternion& b)
 {
 	Quaternion out;

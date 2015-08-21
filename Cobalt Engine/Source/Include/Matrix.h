@@ -92,7 +92,7 @@ public:
 	static const Mat4x4 Identity;
 };
 
-/// Overloaded multiply operator for 2 matrices
+/// Overloaded multiply operator for 2 matrices. Represents transformation a followed by transformation b
 inline Mat4x4 operator*(const Mat4x4& a, const Mat4x4 &b)
 {
 	Mat4x4 out;

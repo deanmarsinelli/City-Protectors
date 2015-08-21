@@ -30,7 +30,9 @@ void Frustrum::Init(const float fov, const float aspect, const float nearClip, c
 	m_Near = nearClip;
 	m_Far = farClip;
 
+	// half the height of the near clipping plane
 	float tanFovOver2 = (float)tan(m_Fov / 2.0f);
+
 	// get coordinates for 2 sides of each clipping plane
 	Vec3 nearRight = (m_Near * tanFovOver2) * m_Aspect * g_Right;
 	Vec3 farRight = (m_Far * tanFovOver2) * m_Aspect * g_Right;
