@@ -23,18 +23,18 @@ D3DXMATRIX()
 
 void Mat4x4::SetPosition(const Vec3& position)
 {
-	m[0][3] = position.x;
-	m[1][3] = position.y;
-	m[2][3] = position.z;
+	m[3][0] = position.x;
+	m[3][1] = position.y;
+	m[3][2] = position.z;
 	m[3][3] = 1.0f;
 }
 
 void Mat4x4::SetPosition(const Vec4& position)
 {
 
-	m[0][3] = position.x;
-	m[1][3] = position.y;
-	m[2][3] = position.z;
+	m[3][0] = position.x;
+	m[3][1] = position.y;
+	m[3][2] = position.z;
 	m[3][3] = position.w;
 
 }
@@ -48,7 +48,7 @@ void Mat4x4::SetScale(const Vec3& scale)
 
 Vec3 Mat4x4::GetPosition() const
 {
-	return Vec3(m[0][3], m[1][3], m[2][3]);
+	return Vec3(m[3][0], m[3][1], m[3][2]);
 }
 
 Vec3 Mat4x4::GetDirection() const
@@ -126,17 +126,17 @@ Mat4x4 Mat4x4::Inverse() const
 void Mat4x4::BuildTranslation(const Vec3& position)
 {
 	*this = Mat4x4::Identity;
-	m[0][3] = position.x;
-	m[1][3] = position.y;
-	m[2][3] = position.z;
+	m[3][0] = position.x;
+	m[3][1] = position.y;
+	m[3][2] = position.z;
 }
 
 void Mat4x4::BuildTranslation(const float x, const float y, const float z)
 {
 	*this = Mat4x4::Identity;
-	m[0][3] = x;
-	m[1][3] = y;
-	m[2][3] = z;
+	m[3][0] = x;
+	m[3][1] = y;
+	m[3][2] = z;
 }
 
 void Mat4x4::BuildRotationX(const float radians)

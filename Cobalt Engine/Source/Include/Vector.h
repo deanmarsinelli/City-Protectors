@@ -35,7 +35,7 @@ public:
 	float Length() const { return D3DXVec3Length(this); }
 
 	/// Normalize the vector
-	Vec3* Normalize() { return static_cast<Vec3 *>(D3DXVec3Normalize(this, this)); }
+	Vec3* Normalize() { return static_cast<Vec3*>(D3DXVec3Normalize(this, this)); }
 
 	/// Return the dot product of this vector with another Vec3
 	float Dot(const Vec3& vec) const { return D3DXVec3Dot(this, &vec); }
@@ -70,7 +70,7 @@ public:
 	float Length() { return D3DXVec4Length(this); }
 
 	/// Return the dot product of this vector with another Vec4
-	Vec4* Normalize() { return static_cast<Vec4 *>(D3DXVec4Normalize(this, this)); }
+	Vec4* Normalize() { return static_cast<Vec4*>(D3DXVec4Normalize(this, this)); }
 
 	/// Return the dot product of 
 	float Dot(const Vec4& vec) { return D3DXVec4Dot(this, &vec); }

@@ -6,7 +6,6 @@
     </ClInclude>
     <ClInclude Include="Include\EngineStd.h" />
     <ClInclude Include="Include\interfaces.h" />
-    <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\Random.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -162,6 +161,9 @@
     <ClInclude Include="Include\SoundProcess.h">
       <Filter>Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Include\MemoryPool.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -171,7 +173,6 @@
     <ClCompile Include="Random.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="GameObject.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
@@ -285,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="SoundProcess.cpp">
       <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryPool.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
