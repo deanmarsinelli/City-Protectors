@@ -91,3 +91,11 @@ public:
 	/// The identity matrix
 	static const Mat4x4 Identity;
 };
+
+/// Overloaded multiply operator for 2 matrices
+inline Mat4x4 operator*(const Mat4x4& a, const Mat4x4 &b)
+{
+	Mat4x4 out;
+	D3DXMatrixMultiply(&out, &a, &b);
+	return out;
+}

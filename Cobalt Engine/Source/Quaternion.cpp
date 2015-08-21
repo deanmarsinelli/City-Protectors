@@ -47,10 +47,3 @@ void Quaternion::BuildAxisAngle(const Vec3& axis, const float radians)
 {
 	D3DXQuaternionRotationAxis(this, &axis, radians);
 }
-
-Quaternion Quaternion::operator*(const Quaternion& rhs)
-{
-	Quaternion out;
-	D3DXQuaternionMultiply(&out, this, &rhs);
-	return out;
-}

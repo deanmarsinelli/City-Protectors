@@ -41,10 +41,15 @@ public:
 	/// Build a quaternion from an axis vector and an angle
 	void BuildAxisAngle(const Vec3& axis, const float radians);
 
-	/// Multiply operator
-	Quaternion operator*(const Quaternion& rhs);
-
 public:
 	/// Identity quaternion
 	static const Quaternion Identity;
 };
+
+/// Overloaded multiply operator for 2 quaternions
+inline Quaternion operator*(const Quaternion& a, const Quaternion& b)
+{
+	Quaternion out;
+	D3DXQuaternionMultiply(&out, &a, &b);
+	return out;
+}
