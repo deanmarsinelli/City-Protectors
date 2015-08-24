@@ -167,8 +167,11 @@
     <ClInclude Include="Include\Material.h">
       <Filter>Graphics\Direct 3D</Filter>
     </ClInclude>
+    <ClInclude Include="Include\D3DTextureResourceLoader.h">
+      <Filter>Graphics\Direct 3D\Resources</Filter>
+    </ClInclude>
     <ClInclude Include="Include\D3DTextureResourceExtraData.h">
-      <Filter>Graphics\Direct 3D</Filter>
+      <Filter>Graphics\Direct 3D\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,7 +303,10 @@
       <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
     <ClCompile Include="D3DTextureResourceExtraData.cpp">
-      <Filter>Graphics\Direct 3D</Filter>
+      <Filter>Graphics\Direct 3D\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DTextureResourceLoader.cpp">
+      <Filter>Graphics\Direct 3D\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +357,9 @@
     </Filter>
     <Filter Include="Audio\DirectSound">
       <UniqueIdentifier>{2a5b95df-1e5c-406c-9f12-d59d1dd67d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Direct 3D\Resources">
+      <UniqueIdentifier>{124c3971-5cc2-4cbc-842e-e69ef6520f53}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

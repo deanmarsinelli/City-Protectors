@@ -19,7 +19,7 @@
 */
 class D3DTextureResourceExtraData9 : public IResourceExtraData
 {
-	friend class TextureResourceLoader;
+	friend class D3DTextureResourceLoader;
 	
 public:
 	/// Default constructor
@@ -46,7 +46,7 @@ protected:
 */
 class D3DTextureResourceExtraData11 : public IResourceExtraData
 {
-	friend class TextureResourceLoader;
+	friend class D3DTextureResourceLoader;
 
 public:
 	/// Default constructor
