@@ -167,6 +167,9 @@
     <ClInclude Include="Include\Material.h">
       <Filter>Graphics\Direct 3D</Filter>
     </ClInclude>
+    <ClInclude Include="Include\D3DTextureResourceExtraData.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -294,6 +297,9 @@
       <Filter>Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DTextureResourceExtraData.cpp">
       <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
   </ItemGroup>

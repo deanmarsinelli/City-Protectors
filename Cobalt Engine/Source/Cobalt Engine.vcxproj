@@ -101,6 +101,7 @@
     <ClInclude Include="Include\D3DLineDrawer11.h" />
     <ClInclude Include="Include\D3DRenderer.h" />
     <ClInclude Include="Include\D3DRenderer11.h" />
+    <ClInclude Include="Include\D3DTextureResourceExtraData.h" />
     <ClInclude Include="Include\DefaultResourceLoader.h" />
     <ClInclude Include="Include\DelayedProcess.h" />
     <ClInclude Include="Include\BaseGameLogic.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="D3DLineDrawer11.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="D3DRenderer11.cpp" />
+    <ClCompile Include="D3DTextureResourceExtraData.cpp" />
     <ClCompile Include="DirectSoundAudio.cpp" />
     <ClCompile Include="DirectSoundAudioBuffer.cpp" />
     <ClCompile Include="EngineStd.cpp" />

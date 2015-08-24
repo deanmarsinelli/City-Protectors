@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "Scene.h"
+#include "D3D11Vertex.h"
 
 D3DLineDrawer11::D3DLineDrawer11()
 {
@@ -44,6 +45,10 @@ void D3DLineDrawer11::DrawLine(const Vec3& from, const Vec3& to, const Color& co
 	Vec3* pVertices = (Vec3*)mappedResource.pData;
 	pVertices[0] = from;
 	pVertices[1] = to;
+
+	// store the vertices
+	m_Verts[0] = from;
+	m_Verts[1] = to;
 
 	DXUTGetD3D11DeviceContext()->Unmap(m_pVertexBuffer, 0);
 
