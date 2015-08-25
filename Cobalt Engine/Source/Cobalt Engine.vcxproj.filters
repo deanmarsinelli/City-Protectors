@@ -107,9 +107,6 @@
     <ClInclude Include="Include\MessageBox.h">
       <Filter>User Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Math.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Events.h">
       <Filter>Events</Filter>
     </ClInclude>
@@ -172,6 +169,18 @@
     </ClInclude>
     <ClInclude Include="Include\D3DTextureResourceExtraData.h">
       <Filter>Graphics\Direct 3D\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\PhysicsComponent.h">
+      <Filter>Game Objects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SceneNode.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MathUtils.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CameraNoda.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,9 +260,6 @@
     <ClCompile Include="MessageBox.cpp">
       <Filter>User Interface</Filter>
     </ClCompile>
-    <ClCompile Include="Math.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Events.cpp">
       <Filter>Events</Filter>
     </ClCompile>
@@ -308,6 +314,9 @@
     <ClCompile Include="D3DTextureResourceLoader.cpp">
       <Filter>Graphics\Direct 3D\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="MathUtils.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
@@ -360,6 +369,12 @@
     </Filter>
     <Filter Include="Graphics\Direct 3D\Resources">
       <UniqueIdentifier>{124c3971-5cc2-4cbc-842e-e69ef6520f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Direct 3D\Shaders">
+      <UniqueIdentifier>{4b4add11-65b9-43fa-942c-413209af0957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{e04a17d6-36b3-415e-aa88-f9a7887043b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -11,12 +11,15 @@
 
 #pragma once
 
-#include <d3dx9math.h>
+#include <d3dx9.h>
+#include <FastDelegate.h>
+#include <memory>
 #include <tinyxml.h>
 
+#include "interfaces.h"
 
 #define CB_SAFE_DELETE(p) { if (p) { delete (p); (p) = nullptr; } }
-#define CB_SAFE_DELETE_ARRAY(p) { if (p) { delete[](p); (p) = nullptr; } }
+#define CB_SAFE_DELETE_ARRAY(p) { if (p) { delete[] (p); (p) = nullptr; } }
 #define CB_COM_RELEASE(p) { if (p) { p->Release(); (p) = nullptr; } }
 
 
@@ -25,8 +28,6 @@
 #else
  #define CB_NEW new
 #endif
-
-typedef D3DXCOLOR Color;
 
 struct AppMsg
 {
@@ -40,12 +41,10 @@ struct AppMsg
 //  Windows Specific
 //======================================
 #ifdef _WIN32
- #define DIRECTX
- #include <Windows.h>
- #include "WindowsApp.h"
-// declaration for the WindowsAppMain function
-extern int WINAPI WindowsAppMain(HINSTANCE hInstance,
-	HINSTANCE prevInstance, LPSTR cmdLine, int showCmd);
+	#define DIRECTX
+	#include "WindowsApp.h"
+	// declaration for the WindowsAppMain function
+	extern int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPSTR cmdLine, int showCmd);
 #endif
 
 #ifdef _XBOX
@@ -57,6 +56,7 @@ extern const float CB_2PI;
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
+
 extern const int MEGABYTE;
 
 extern const float fOPAQUE;

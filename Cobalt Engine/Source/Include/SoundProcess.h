@@ -65,7 +65,7 @@ protected:
 	virtual void OnInit();
 
 	/// Update method called once per frame
-	virtual void OnUpdate(float deltaTime);
+	virtual void OnUpdate(const float deltaTime);
 
 	/// Initialize the volume of the sound
 	void InitializeVolume();

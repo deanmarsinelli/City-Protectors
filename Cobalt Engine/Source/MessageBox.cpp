@@ -14,18 +14,19 @@
 #include "Logger.h"
 
 // static method definitions
-void CALLBACK MessageBox::OnGUIEvent(UINT nEvent, int nControlID, CDXUTControl* pControl, void* pUserContext)
+void CALLBACK CBMessageBox::OnGUIEvent(UINT nEvent, int nControlID, CDXUTControl* pControl, void* pUserContext)
 {
 	PostMessage(g_pApp->GetHwnd(), g_MsgEndModal, 0, nControlID);
 }
 
-int MessageBox::Ask(MessageBox_Questions question)
+int CBMessageBox::Ask(MessageBox_Questions question)
 {
 	// TODO
+	return 0;
 }
 
 // method definitions
-MessageBox::MessageBox(std::wstring message, std::wstring title, int buttonFlags = MB_OK)
+CBMessageBox::CBMessageBox(std::wstring message, std::wstring title, int buttonFlags)
 {
 	// initialize directx dialogs
 	m_UI.Init(&D3DRenderer::g_DialogResourceManager);
@@ -114,31 +115,31 @@ MessageBox::MessageBox(std::wstring message, std::wstring title, int buttonFlags
 	}
 }
 
-MessageBox::~MessageBox()
+CBMessageBox::~CBMessageBox()
 {
 	CB_ASSERT(1);
 }
 
-HRESULT MessageBox::OnRestore()
+HRESULT CBMessageBox::OnRestore()
 {
 	m_UI.SetLocation(m_PosX, m_PosY);
 	m_UI.SetSize(m_Width, m_Height);
 	return S_OK;
 }
 
-HRESULT MessageBox::OnRender(float time, float deltaTime)
+HRESULT CBMessageBox::OnRender(float time, float deltaTime)
 {
 	HRESULT hr;
 	V(m_UI.OnRender(deltaTime));
 	return S_OK;
 }
 
-int MessageBox::GetZOrder() const
+int CBMessageBox::GetZOrder() const
 {
 	return 99;
 }
 
-LRESULT CALLBACK MessageBox::OnMsgProc(AppMsg msg)
+LRESULT CALLBACK CBMessageBox::OnMsgProc(AppMsg msg)
 {
 	return m_UI.MsgProc(msg.m_hWnd, msg.m_uMsg, msg.m_wParam, msg.m_lParam);
 }

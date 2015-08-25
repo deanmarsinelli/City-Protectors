@@ -14,7 +14,8 @@
 #pragma once
 
 #include <string>
-#include "EngineStd.h"
+#include <tinyxml.h>
+
 #include "types.h"
 
 // external function declarations
@@ -34,7 +35,7 @@ extern bool CheckForJoystick(HWND hWnd);
 struct GameOptions
 {
 	GameOptions();
-	~GameOptions() { CB_SAFE_DELETE(m_pDoc); }
+	~GameOptions();
 
 	void Init(const char* xmlFilePath, LPWSTR lpCmdLine);
 

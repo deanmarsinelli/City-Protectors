@@ -5,10 +5,12 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "WaveResourceLoader.h"
-
+#include <dsound.h>
 #include <mmsystem.h>
 
+#include "WaveResourceLoader.h"
+
+#include "EngineStd.h"
 #include "Logger.h"
 #include "SoundResourceExtraData.h"
 
@@ -116,7 +118,7 @@ bool WaveResourceLoader::LoadResource(char* rawBuffer, unsigned int rawSize, sha
 
 bool WaveResourceLoader::ParseWave(char* wavStream, size_t bufferLength, shared_ptr<ResHandle> handle)
 {
-	shared_ptr<SoundResourceExtraData> extra = std::static_pointer_cast<SoundResourceExtraData>(handle->GetExtra());
+	shared_ptr<SoundResourceExtraData> extra = static_pointer_cast<SoundResourceExtraData>(handle->GetExtra());
 	
 	DWORD file = 0;
 	DWORD fileEnd = 0;

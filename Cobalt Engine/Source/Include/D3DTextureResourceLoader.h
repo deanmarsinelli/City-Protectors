@@ -10,7 +10,8 @@
 #include <memory>
 
 #include "interfaces.h"
-#include "ResourceHandle.h"
+
+class ResHandle;
 
 /*
 	Base class implementation of a D3D texture resource loader. This class should be

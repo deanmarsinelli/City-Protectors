@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <dsound.h>
 #include <mmsystem.h>
 #include <string>
 

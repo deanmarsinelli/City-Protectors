@@ -7,8 +7,6 @@
 
 #include "DirectSoundAudio.h"
 
-#include <winerror.h>
-
 #include "DirectSoundAudioBuffer.h"
 #include "EngineStd.h"
 #include "Logger.h"
@@ -65,7 +63,7 @@ bool DirectSoundAudio::Active()
 
 IAudioBuffer* DirectSoundAudio::InitAudioBuffer(shared_ptr<ResHandle> soundResource)
 {
-	shared_ptr<SoundResourceExtraData> extra = std::static_pointer_cast<SoundResourceExtraData>(soundResource->GetExtra());
+	shared_ptr<SoundResourceExtraData> extra = static_pointer_cast<SoundResourceExtraData>(soundResource->GetExtra());
 
 	if (!m_pDS)
 		return nullptr;

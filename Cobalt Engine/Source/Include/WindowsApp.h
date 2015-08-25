@@ -11,15 +11,14 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
-#include <windows.h>
 
-#include "BaseGameLogic.h"
-#include "EngineStd.h"
-#include "HumanView.h"
 #include "Initialization.h"
 #include "types.h"
 
+class BaseGameLogic;
 class IRenderer;
+class IScreenElement;
+class HumanView;
 
 /**
 	Application Layer interface for a Windows Game.
@@ -46,7 +45,7 @@ public:
 	HINSTANCE GetInstance();
 	
 	/// Initialize the application layer
-	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = nullptr, int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
+	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = nullptr, int screenWidth = 800, int screenHeight = 600);
 	
 	/// Message procedure callback for handling messages from the operating system
 	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pDoneProcessing, void* pUserContext);
@@ -109,7 +108,7 @@ public:
 	const Point& GetScreenSize();
 
 	/// Manages displaying a modal UI box on the screen
-	int Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer);
+	int Modal(std::shared_ptr<IScreenElement> pModalScreen, int defaultAnswer);
 
 	/// What type of renderer is the game using
 	enum Renderer

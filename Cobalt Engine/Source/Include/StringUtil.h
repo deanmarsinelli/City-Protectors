@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <Windows.h>
 
 #define MAX_DIGITS_IN_INT 12
 

@@ -7,6 +7,10 @@
 
 #include "HumanView.h"
 
+#include "Audio.h"
+#include "DirectSoundAudio.h"
+#include "CameraNoda.h"
+#include "EngineStd.h"
 #include "Frustrum.h"
 #include "Logger.h"
 
@@ -44,7 +48,7 @@ HumanView::~HumanView()
 	// remove all UI elements
 	while (!m_ScreenElements.empty())
 	{
-		m_ScreenElements.pop_front;
+		m_ScreenElements.pop_front();
 	}
 
 	CB_SAFE_DELETE(m_pProcessManager);
@@ -316,12 +320,12 @@ void HumanView::SetCameraOffset(const Vec4& offset)
 	}
 }
 
-void HumanView::PlaySoundDelegate(IEventDataPtr pEventData)
+void HumanView::PlaySoundDelegate(IEventPtr pEventData)
 {
 	// TODO
 }
 
-void HumanView::GameStateDelegate(IEventDataPtr pEventData)
+void HumanView::GameStateDelegate(IEventPtr pEventData)
 {
 	// TODO
 }

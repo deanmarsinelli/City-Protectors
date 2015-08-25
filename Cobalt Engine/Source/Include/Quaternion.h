@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include <d3dx9math.h>
+#include <d3dx9.h>
 
-#include "Vector.h"
+class Vec3;
 
 /**
 	Represents a rotation using a quaternion.

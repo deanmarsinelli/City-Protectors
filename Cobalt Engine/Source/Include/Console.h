@@ -8,8 +8,9 @@
 #pragma once
 
 #include <string>
+#include <Windows.h>
 
-#include "EngineStd.h"
+#include "interfaces.h"
 
 /**
 	The console can be used by players to input script commands directly into the engine.
@@ -67,7 +68,7 @@ private:
 	int m_ConsoleInputSize;
 
 	/// Counter to toggle cursor blink
-	int m_CursorBlinkTimer;
+	float m_CursorBlinkTimer;
 
 	/// Whether or not the cursor is displayed
 	bool m_CursorOn;

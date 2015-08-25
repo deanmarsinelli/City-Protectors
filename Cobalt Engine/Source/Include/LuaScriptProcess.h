@@ -7,8 +7,7 @@
 
 #pragma once
 
-#include <LuaPlus.h>
-
+#include "LuaStateManager.h"
 #include "Process.h"
 
 /**

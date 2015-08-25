@@ -10,7 +10,7 @@
 #include "EngineStd.h"
 #include "D3DTextureResourceExtraData.h"
 #include "Logger.h"
-#include "WindowsApp.h"
+#include "ResourceHandle.h"
 
 //====================================================
 //	D3DTextureResourceLoader methods

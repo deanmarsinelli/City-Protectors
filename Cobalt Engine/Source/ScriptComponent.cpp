@@ -7,9 +7,11 @@
 
 #include "ScriptComponent.h"
 
+#include "EngineStd.h"
+#include "GameObject.h"
 #include "Logger.h"
 #include "LuaStateManager.h"
-#include "Math.h"
+#include "MathUtils.h"
 #include "PhysicsComponent.h"
 #include "templates.h"
 #include "Transform.h"
@@ -235,14 +237,14 @@ float LuaScriptComponent::GetYOrientationRadians() const
 
 void LuaScriptComponent::RotateY(float angleRadians)
 {
-	shared_ptr<PhysicsComponent> pPhysicalComponent = MakeStrongPtr(m_pOwner->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name))
+	shared_ptr<PhysicsComponent> pPhysicalComponent = MakeStrongPtr(m_pOwner->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name));
 	if (pPhysicalComponent)
 		pPhysicalComponent->RotateY(angleRadians);
 }
 
 void LuaScriptComponent::SetPosition(float x, float y, float z)
 {
-	shared_ptr<PhysicsComponent> pPhysicalComponent = MakeStrongPtr(m_pOwner->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name))
+	shared_ptr<PhysicsComponent> pPhysicalComponent = MakeStrongPtr(m_pOwner->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name));
 	if (pPhysicalComponent)
 		pPhysicalComponent->SetPosition(x, y, z);
 }
@@ -254,7 +256,7 @@ void LuaScriptComponent::LookAt(Vec3 target)
 
 void LuaScriptComponent::Stop()
 {
-	shared_ptr<PhysicsComponent> pPhysicalComponent = MakeStrongPtr(m_pOwner->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name))
+	shared_ptr<PhysicsComponent> pPhysicalComponent = MakeStrongPtr(m_pOwner->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name));
 	if (pPhysicalComponent)
 		pPhysicalComponent->Stop();
 }

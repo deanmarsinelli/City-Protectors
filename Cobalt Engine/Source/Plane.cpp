@@ -9,6 +9,8 @@
 
 #include "Plane.h"
 
+#include "Vector.h"
+
 void Plane::Init(const Vec3& p0, const Vec3& p1, const Vec3& p2)
 {
 	D3DXPlaneFromPoints(this, &p0, &p1, &p2);
@@ -19,7 +21,7 @@ void Plane::Normalize()
 {
 	float magnitude;
 
-	magnitude = sqrt(a * a + b * b + c * c);
+	magnitude = std::sqrt(a * a + b * b + c * c);
 	a = a / magnitude;
 	b = b / magnitude;
 	c = c / magnitude;

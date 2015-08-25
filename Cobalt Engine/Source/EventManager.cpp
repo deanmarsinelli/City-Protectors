@@ -7,6 +7,7 @@
 
 #include "EventManager.h"
 
+#include "EngineStd.h"
 #include "Logger.h"
 #include "StringUtil.h"
 
@@ -96,7 +97,7 @@ bool EventManager::RemoveListener(const EventListenerDelegate& eventDelegate, co
 			if (eventDelegate == (*it))
 			{
 				listeners.erase(it);
-				CB_LOG("Events", "Successfully removed delegate listener from event type: ", ToStr(type, 16));
+				CB_LOG("Events", "Successfully removed delegate listener from event type: " + ToStr(type, 16));
 				success = true;
 				// break because there cannot be duplicate delegates for an event type
 				break;
@@ -162,7 +163,7 @@ bool EventManager::ThreadSafeQueueEvent(const IEventPtr& pEvent)
 	return true;
 }
 
-bool EventManager::AbortEvent(const EventType& type, bool allOfType = false)
+bool EventManager::AbortEvent(const EventType& type, bool allOfType)
 {
 	CB_ASSERT(m_ActiveQueue >= 0);
 	CB_ASSERT(m_ActiveQueue < EVENTMANAGER_NUM_QUEUES);
@@ -195,7 +196,7 @@ bool EventManager::AbortEvent(const EventType& type, bool allOfType = false)
 	return success;
 }
 
-bool EventManager::Update(unsigned long maxMillis = kINFINITE)
+bool EventManager::Update(unsigned long maxMillis)
 {
 	unsigned long currMS = GetTickCount();
 	// set the max milliseconds to process events

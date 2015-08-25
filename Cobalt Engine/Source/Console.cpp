@@ -14,8 +14,8 @@
 
 // constants used in the console
 const float kCursorBlinkTimeMS = 500.0f;
-const char const* kExitString = "exit";
-const char const* kClearString = "clear";
+const char* kExitString = "exit";
+const char* kClearString = "clear";
 
 Console::Console() :
 m_IsActive(false),

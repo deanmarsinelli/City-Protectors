@@ -33,7 +33,7 @@ public:
 	{
 		// make sure a function for this type doesn't exist yet
 		auto findIt = m_CreationFunctions.find(id);
-		if (findIt = m_CreationFunctions.end())
+		if (findIt == m_CreationFunctions.end())
 		{
 			// register the function in the map
 			m_CreationFunctions[id] = &GenericObjectCreationFunction<BaseClass, SubClass>;

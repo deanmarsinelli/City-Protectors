@@ -15,6 +15,9 @@
 #include "ProcessManager.h"
 #include "UserInterface.h"
 
+class CameraNode;
+class Vec4;
+
 /**
 	This class represents the Game View layer for a human controlled player. This view
 	can be static for a single screen or attached to a particular game object. This class
@@ -79,8 +82,8 @@ public:
 	/// Set a camera offset -- useful for third person camera
 	virtual void SetCameraOffset(const Vec4& offset);
 
-	void PlaySoundDelegate(IEventDataPtr pEventData);
-	void GameStateDelegate(IEventDataPtr pEventData);
+	void PlaySoundDelegate(IEventPtr pEventData);
+	void GameStateDelegate(IEventPtr pEventData);
 
 	/// Return a reference to the console
 	Console& GetConsole();

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <d3dx9math.h>
+#include "d3dx9.h"
 
 /**
 	A vertex containing position and color data.

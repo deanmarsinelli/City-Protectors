@@ -7,8 +7,12 @@
 
 #include "LuaStateManager.h"
 
+#include "EngineStd.h"
 #include "Logger.h"
 #include "StringUtil.h"
+#include "Vector.h"
+
+#pragma comment(lib, "luaplus51-1201.lib")
 
 LuaStateManager* LuaStateManager::pSingleton = nullptr;
 

@@ -9,16 +9,16 @@
 #pragma once
 
 #include <concurrent_queue.h>
-#include <FastDelegate.h>
+#include <d3dx9.h>
 #include <list>
 #include <memory>
-
-#include "EngineStd.h"
-#include "Matrix.h"
-#include "types.h"
+#include <Windows.h>
+#include <FastDelegate.h>
 
 using std::shared_ptr;
 using std::weak_ptr;
+using std::static_pointer_cast;
+using std::dynamic_pointer_cast;
 
 // forward declarations
 class GameObject;
@@ -48,6 +48,7 @@ struct SortBy_SharedPtr_Content
 //====================================================
 //	UI and Logic Interfaces
 //====================================================
+struct AppMsg;
 typedef unsigned int GameViewId;
 
 /// Types of views available
@@ -92,7 +93,7 @@ public:
 	virtual void OnUpdate(float deltaTime) = 0;
 
 	/// Default destructor
-	virtual ~IGameView() { };
+	virtual ~IGameView() { }
 };
 
 /**
@@ -130,7 +131,7 @@ public:
 	virtual void OnUpdate(float deltaTime) = 0;
 
 	/// Default destructor
-	virtual ~IScreenElement() { };
+	virtual ~IScreenElement() { }
 
 	/// Less than overloaded operator that compares Z order
 	virtual bool operator <(const IScreenElement &other) { return GetZOrder() < other.GetZOrder(); }
@@ -142,6 +143,9 @@ typedef std::list<shared_ptr<IScreenElement>> ScreenElementList;
 //====================================================
 //	Rendering Interfaces
 //====================================================
+typedef D3DXCOLOR Color;
+class Mat4x4;
+class Vec3;
 class LightNode;
 typedef std::list<shared_ptr<LightNode>> Lights;
 
@@ -250,6 +254,8 @@ public:
 //====================================================
 //	Input Interfaces   TODO documentation
 //====================================================
+class Point;
+
 class IKeyboardHandler
 {
 public:
@@ -286,6 +292,8 @@ class IJoystickHandler
 //	Event Interfaces
 //====================================================
 typedef unsigned long EventType;
+class IEvent;
+typedef shared_ptr<IEvent> IEventPtr;
 
 /**
 	Interface for every event object.
@@ -314,8 +322,6 @@ public:
 	/// Return the name of the event
 	virtual const char* GetName() const = 0;
 };
-
-typedef shared_ptr<IEvent> IEventPtr;
 
 // create a typedef for an event listener function aka delegate
 typedef fastdelegate::FastDelegate1<IEventPtr> EventListenerDelegate;
@@ -358,6 +364,7 @@ public:
 
 	/// Return the main global event manager
 	static IEventManager* Get();
+
 public:
 	enum Constants 
 	{
@@ -475,4 +482,14 @@ public:
 
 	/// Resume all paused sounds
 	virtual void ResumeAllSounds() = 0;
+};
+
+//====================================================
+//	Physics Interfaces
+//====================================================
+class IGamePhysics
+{
+public:
+	virtual void ApplyForce(const Vec3& dir, float newtons, GameObjectId id) = 0;
+	virtual void ApplyTorque(const Vec3& dir, float newtons, GameObjectId id) = 0;
 };

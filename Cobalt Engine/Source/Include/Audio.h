@@ -27,16 +27,16 @@ public:
 	virtual ~Audio();
 
 	/// Shutdown the sound system
-	virtual void Shutdown() = 0;
+	virtual void Shutdown();
 
 	/// Stop all currently playing sounds
-	virtual void StopAllSounds() = 0;
+	virtual void StopAllSounds();
 
 	/// Pause all currently playing sounds
-	virtual void PauseAllSounds() = 0;
+	virtual void PauseAllSounds();
 
 	/// Resume all paused sounds
-	virtual void ResumeAllSounds() = 0;
+	virtual void ResumeAllSounds();
 
 	static bool HasSoundCard();
 

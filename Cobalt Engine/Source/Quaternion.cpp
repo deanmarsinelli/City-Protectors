@@ -8,6 +8,7 @@
 #include "Quaternion.h"
 
 #include "Matrix.h"
+#include "Vector.h"
 
 const Quaternion Quaternion::Identity(D3DXQUATERNION(0, 0, 0, 1));
 

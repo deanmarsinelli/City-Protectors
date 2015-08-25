@@ -11,7 +11,7 @@
 #include "Logger.h"
 #include "SoundResourceExtraData.h"
 
-SoundProcess::SoundProcess(shared_ptr<ResHandle> soundResource, int volume = 100, bool looping = false) :
+SoundProcess::SoundProcess(shared_ptr<ResHandle> soundResource, int volume, bool looping) :
 m_Handle(soundResource),
 m_Volume(volume),
 m_IsLooping(looping)
@@ -73,7 +73,7 @@ int SoundProcess::GetLengthMilli()
 	// if the handle has proper sound extra data, return the length
 	if (m_Handle && m_Handle->GetExtra())
 	{
-		shared_ptr<SoundResourceExtraData> extra = std::static_pointer_cast<SoundResourceExtraData>(m_Handle->GetExtra());
+		shared_ptr<SoundResourceExtraData> extra = static_pointer_cast<SoundResourceExtraData>(m_Handle->GetExtra());
 		return extra->GetLengthMilli();
 	}
 	else
@@ -142,7 +142,7 @@ void SoundProcess::OnInit()
 	m_AudioBuffer.reset(buffer);
 }
 
-void SoundProcess::OnUpdate(float deltaTime)
+void SoundProcess::OnUpdate(const float deltaTime)
 {
 	// when the sound is done playing, call succeed
 	if (!IsPlaying())

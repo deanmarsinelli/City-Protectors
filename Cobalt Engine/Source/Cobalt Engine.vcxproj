@@ -58,13 +58,15 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51\Inc;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>
+      </SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus;</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,9 +80,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51\Inc;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus;</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
@@ -95,6 +97,7 @@
     <ClInclude Include="Include\Audio.h" />
     <ClInclude Include="Include\AudioBuffer.h" />
     <ClInclude Include="Include\BaseEvent.h" />
+    <ClInclude Include="Include\CameraNoda.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
     <ClInclude Include="Include\D3D9Vertex.h" />
@@ -124,11 +127,12 @@
     <ClInclude Include="Include\interfaces.h" />
     <ClInclude Include="Include\Logger.h" />
     <ClInclude Include="Include\Material.h" />
-    <ClInclude Include="Include\Math.h" />
+    <ClInclude Include="Include\MathUtils.h" />
     <ClInclude Include="Include\Matrix.h" />
     <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\MessageBox.h" />
     <ClInclude Include="Include\MovementController.h" />
+    <ClInclude Include="Include\PhysicsComponent.h" />
     <ClInclude Include="Include\Plane.h" />
     <ClInclude Include="Include\Process.h" />
     <ClInclude Include="Include\ProcessManager.h" />
@@ -139,6 +143,7 @@
     <ClInclude Include="Include\ResourceHandle.h" />
     <ClInclude Include="Include\ResourceZipFile.h" />
     <ClInclude Include="Include\Scene.h" />
+    <ClInclude Include="Include\SceneNode.h" />
     <ClInclude Include="Include\ScriptComponent.h" />
     <ClInclude Include="Include\Shaders.h" />
     <ClInclude Include="Include\SoundProcess.h" />
@@ -177,7 +182,7 @@
     <ClCompile Include="LuaScriptProcess.cpp" />
     <ClCompile Include="LuaStateManager.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Math.cpp" />
+    <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MessageBox.cpp" />

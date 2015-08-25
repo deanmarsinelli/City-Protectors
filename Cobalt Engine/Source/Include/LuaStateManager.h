@@ -8,9 +8,11 @@
 #pragma once
 
 #include <LuaPlus.h>
+#include <string>
 
 #include "interfaces.h"
-#include "Vector.h"
+
+class Vec3;
 
 /**
 	Manages the Lua scripting layer in this engine. This class is a singleton class

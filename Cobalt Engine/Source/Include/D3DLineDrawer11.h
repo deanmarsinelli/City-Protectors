@@ -9,9 +9,9 @@
 
 #include <D3D11.h>
 
-#include "EngineStd.h"
-#include "Vector.h"
+#include "interfaces.h"
 #include "Shaders.h"
+#include "Vector.h"
 
 /**
 	This class will draw 3D lines in a scene using a D3DRenderer11.

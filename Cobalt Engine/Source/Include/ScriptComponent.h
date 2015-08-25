@@ -9,6 +9,7 @@
 
 #include <LuaPlus.h>
 #include <string>
+#include <tinyxml.h>
 
 #include "Component.h"
 #include "Vector.h"

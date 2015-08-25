@@ -7,12 +7,14 @@
 
 #pragma once
 
+#include <DXUT.h>
 #include <DXUTGui.h>
 #include <string>
 
 #include "UserInterface.h"
 
-enum MessageBox_Questions {
+enum MessageBox_Questions 
+{
 	QUESTION_WHERES_THE_CD,
 	QUESTION_QUIT_GAME,
 };
@@ -20,7 +22,7 @@ enum MessageBox_Questions {
 /**
 	A message box UI element that can contain a title, message text, and buttons.
 */
-class MessageBox : public BaseUI
+class CBMessageBox : public BaseUI
 {
 public:
 	// static methods
@@ -30,10 +32,10 @@ public:
 
 public:
 	/// Constructor to set up the box with a message, title, and buttons
-	MessageBox(std::wstring message, std::wstring title, int buttonFlags = MB_OK);
+	CBMessageBox(std::wstring message, std::wstring title, int buttonFlags = MB_OK);
 	
 	/// Destructor
-	~MessageBox();
+	~CBMessageBox();
 
 	// IScreenElement implementation
 	/// Recreates anything that might have been lost while the game is running (because of system sleep, etc)

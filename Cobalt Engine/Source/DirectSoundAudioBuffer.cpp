@@ -8,6 +8,7 @@
 #include "DirectSoundAudioBuffer.h"
 
 #include "Audio.h"
+#include "EngineStd.h"
 #include "Logger.h"
 #include "SoundResourceExtraData.h"
 
@@ -200,11 +201,13 @@ HRESULT DirectSoundAudioBuffer::FillBufferWithSound()
 		return DXUT_ERR(L"RestoreBuffer", hr);
 
 	int pcmBufferSize = m_Resource->Size();
-	shared_ptr<SoundResourceExtraData> extra = std::static_pointer_cast<SoundResourceExtraData>(m_Resource->GetExtra());
+	shared_ptr<SoundResourceExtraData> extra = static_pointer_cast<SoundResourceExtraData>(m_Resource->GetExtra());
 
 	// lock the buffer down
-	if (FAILED(hr = m_Sample->Lock(0, pcmBufferSize, &pDSLockedBuffer, &dwDSLockedBufferSize, nullptr, nullptr, 0L)));
-	return DXUT_ERR(L"Locl", hr);
+	if (FAILED(hr = m_Sample->Lock(0, pcmBufferSize, &pDSLockedBuffer, &dwDSLockedBufferSize, nullptr, nullptr, 0L)))
+	{
+		return DXUT_ERR(L"Locl", hr);
+	}
 
 	if (pcmBufferSize == 0)
 	{

@@ -23,8 +23,8 @@ public:
 	void OnUpdate(float deltaTime);
 
 	// interface methods
-	bool OnKeyDown(BYTE keycode);
-	bool OnKeyUp(BYTE keycode);
+	bool OnKeyDown(const BYTE keycode);
+	bool OnKeyUp(const BYTE keycode);
 
 	bool OnPointerMove(const Point& mousePos, const int radius);
 	bool OnPointerButtonDown(const Point& mousePos, const int radius, const std::string& buttonName);

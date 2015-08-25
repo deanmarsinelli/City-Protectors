@@ -59,8 +59,37 @@ protected:
 	bool m_IsVisible;
 };
 
-
-class ScreenElementScene : public Scene
+// TODO!
+class ScreenElementScene : public IScreenElement, public Scene
 {
-	
+public: 
+	ScreenElementScene(shared_ptr<IRenderer> renderer) : Scene(renderer) { }
+
+
+	/// Recreates anything that might have been lost while the game is running (because of system sleep, etc). Also used for initialization
+	virtual HRESULT OnRestore();
+
+	/// Render the screen element
+	virtual HRESULT OnRender(float time, float deltaTime);
+
+	/// Method to handle the device being lost
+	virtual HRESULT OnLostDevice();
+
+	/// Return the Z-order value of the element
+	virtual int GetZOrder() const;
+
+	/// Set the Z-order value of the element
+	virtual void SetZOrder(const int zOrder);
+
+	/// Return whether or not the element is visible
+	virtual bool IsVisible() const;
+
+	/// Set an element visible or invisible
+	virtual void SetVisible(bool visible);
+
+	/// Msg callback from the view to the screen element
+	virtual LRESULT CALLBACK OnMsgProc(AppMsg msg);
+
+	/// Update method for a screen element
+	virtual void OnUpdate(float deltaTime);
 };

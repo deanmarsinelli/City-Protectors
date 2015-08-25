@@ -5,13 +5,15 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "D3DLineDrawer11.h"
-
 #include <DXUT.h>
 #include <memory>
 
-#include "Scene.h"
+#include "D3DLineDrawer11.h"
+
 #include "D3D11Vertex.h"
+#include "EngineStd.h"
+#include "HumanView.h"
+#include "Scene.h"
 
 D3DLineDrawer11::D3DLineDrawer11()
 {

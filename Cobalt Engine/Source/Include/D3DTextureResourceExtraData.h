@@ -59,10 +59,10 @@ public:
 	virtual std::string ToString();
 
 	/// Return a pointer to the shader resource view that holds the texture
-	const ID3D11ShaderResourceView** GetTexture();
+	ID3D11ShaderResourceView** GetTexture();
 
 	/// Return a pointer to the sampler state for the texture
-	const ID3D11SamplerState** GetSampler();
+	ID3D11SamplerState** GetSampler();
 
 protected:
 	/// Pointer to the D3D11 shader resource view holding the texture

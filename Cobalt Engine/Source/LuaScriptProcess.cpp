@@ -7,10 +7,8 @@
 
 #include "LuaScriptProcess.h"
 
-#include <string>
-
+#include "EngineStd.h"
 #include "Logger.h"
-#include "LuaStateManager.h"
 
 const char* SCRIPT_PROCESS_NAME = "LuaScriptProcess";
 
@@ -66,7 +64,7 @@ void LuaScriptProcess::OnUpdate(const float deltaTime)
 	{
 		LuaPlus::LuaFunction<void> func(m_ScriptUpdateFunction);
 		func(m_Self, m_Time);
-		m_Time = 0;
+		m_Time = 0.0f;
 	}
 }
 
@@ -107,10 +105,10 @@ void LuaScriptProcess::RegisterScriptClassFunctions(LuaPlus::LuaObject& metaTabl
 	metaTableObj.RegisterObjectDirect("Fail",		 (Process*)0, &Process::Fail);
 	metaTableObj.RegisterObjectDirect("Pause",		 (Process*)0, &Process::Pause);
 	metaTableObj.RegisterObjectDirect("UnPause",	 (Process*)0, &Process::UnPause);
-	metaTableObj.RegisterObjectDirect("IsAlive",	 (Process*)0, &LuaScriptProcess::ScriptIsAlive);
-	metaTableObj.RegisterObjectDirect("IsDead",		 (Process*)0, &LuaScriptProcess::ScriptIsDead);
-	metaTableObj.RegisterObjectDirect("IsPaused",	 (Process*)0, &LuaScriptProcess::ScriptIsPaused);
-	metaTableObj.RegisterObjectDirect("AttachChild", (Process*)0, &LuaScriptProcess::ScriptAttachChild);
+	metaTableObj.RegisterObjectDirect("IsAlive",	 (LuaScriptProcess*)0, &LuaScriptProcess::ScriptIsAlive);
+	metaTableObj.RegisterObjectDirect("IsDead",		 (LuaScriptProcess*)0, &LuaScriptProcess::ScriptIsDead);
+	metaTableObj.RegisterObjectDirect("IsPaused",	 (LuaScriptProcess*)0, &LuaScriptProcess::ScriptIsPaused);
+	metaTableObj.RegisterObjectDirect("AttachChild", (LuaScriptProcess*)0, &LuaScriptProcess::ScriptAttachChild);
 }
 
 LuaPlus::LuaObject LuaScriptProcess::CreateFromScript(LuaPlus::LuaObject /*self*/, LuaPlus::LuaObject constructionData, LuaPlus::LuaObject originalSubClass)

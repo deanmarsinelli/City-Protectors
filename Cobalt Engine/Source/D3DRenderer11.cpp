@@ -7,6 +7,8 @@
 
 #include "D3DRenderer11.h"
 
+#include "EngineStd.h"
+
 D3DRenderer11::D3DRenderer11()
 {
 	m_pLineDrawer = nullptr;

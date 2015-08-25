@@ -13,7 +13,8 @@
 #include <unordered_map>
 
 #include "interfaces.h"
-#include "ResourceHandle.h"
+
+class ResHandle;
 
 /**
 	Caches resources (as ResHandle's) that are currently loaded into memory in an LRU fashion. 
@@ -63,7 +64,7 @@ protected:
 	shared_ptr<ResHandle> Find(Resource* r);
 
 	/// Push the handle to the front of the LRU list marking it as most recently used
-	const void* Update(shared_ptr<ResHandle> handle);
+	void Update(shared_ptr<ResHandle> handle);
 
 	/// Load a resource from disk into the resource cache
 	shared_ptr<ResHandle> Load(Resource* r);

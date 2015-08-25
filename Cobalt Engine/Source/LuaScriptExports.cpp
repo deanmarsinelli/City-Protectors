@@ -19,6 +19,7 @@
 #include <set>
 #include <tinyxml.h>
 
+#include "EngineStd.h"
 #include "EventManager.h"
 #include "Events.h"
 #include "GameObject.h"
@@ -26,7 +27,9 @@
 #include "Logger.h"
 #include "LuaScriptEvent.h"
 #include "LuaStateManager.h"
+#include "MathUtils.h"
 #include "Matrix.h"
+#include "Resource.h"
 #include "ResourceCache.h"
 #include "Vector.h"
 
@@ -64,7 +67,7 @@ public:
 	{
 		// make sure its actually a lua function
 		CB_ASSERT(m_ScriptCallbackFunction.IsFunction()); 
-		shared_ptr<LuaScriptEvent> pScriptEvent(std::static_pointer_cast<LuaScriptEvent>(pEventPtr));
+		shared_ptr<LuaScriptEvent> pScriptEvent = static_pointer_cast<LuaScriptEvent>(pEventPtr);
 		LuaPlus::LuaFunction<void> Callback = m_ScriptCallbackFunction;
 		Callback(pScriptEvent->GetEventData());
 	}
@@ -225,7 +228,7 @@ int LuaInternalScriptExports::CreateGameObject(const char* objectArchetype, LuaP
 	// fire the new object created event
 	if (pObject)
 	{
-		shared_ptr<Event_NewGameObject> pNewObjectEvent(CB_NEW Event_NewGameObject(pObject->GetId));
+		shared_ptr<Event_NewGameObject> pNewObjectEvent(CB_NEW Event_NewGameObject(pObject->GetId()));
 		IEventManager::Get()->QueueEvent(pNewObjectEvent);
 		return pObject->GetId();
 	}

@@ -7,10 +7,11 @@
 
 #pragma once
 
-#include <d3dx9math.h>
+#include <d3dx9.h>
 
-#include "Quaternion.h"
-#include "Vector.h"
+class Quaternion;
+class Vec3;
+class Vec4;
 
 /**
 	Represents a 4x4 matrix.

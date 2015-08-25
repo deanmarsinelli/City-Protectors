@@ -6,6 +6,7 @@
 */
 
 #include "GameObjectFactory.h"
+
 #include "Component.h"
 
 GameObjectFactory::GameObjectFactory()
@@ -16,6 +17,7 @@ GameObjectFactory::GameObjectFactory()
 StrongGameObjectPtr GameObjectFactory::CreateGameObject(const char* objectResource)
 {
 	// TODO: finish this p162
+	return StrongGameObjectPtr();
 }
 
 StrongComponentPtr GameObjectFactory::CreateComponent(TiXmlElement* pData)

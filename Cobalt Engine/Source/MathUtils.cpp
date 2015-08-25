@@ -5,7 +5,9 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "Math.h"
+#include "MathUtils.h"
+
+#include "Vector.h"
 
 bool PointInPoly(const Point& test, const Poly& polygon)
 {
@@ -47,4 +49,24 @@ bool PointInPoly(const Point& test, const Poly& polygon)
 	}
 
 	return inside;
+}
+
+float WrapPi(float angle)
+{
+	// TODO
+	return 0.0f;
+}
+
+Vec3 GetVectorFromYRotatation(float angleRadians)
+{
+	// TODO
+
+	return Vec3();
+}
+
+float GetYRotationFromVector(const Vec3& lookAt)
+{
+	// TODO
+
+	return 0;
 }

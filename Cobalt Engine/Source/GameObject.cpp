@@ -6,7 +6,9 @@
 */
 
 #include <string>
+
 #include "GameObject.h"
+
 #include "Component.h"
 #include "Logger.h"
 #include "StringUtil.h"

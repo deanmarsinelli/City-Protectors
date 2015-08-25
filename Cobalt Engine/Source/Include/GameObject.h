@@ -33,33 +33,25 @@ public:
 	void Destroy();
 	void Update(const float deltaTime);
 
-	/**
-		Return the id of the game object
-	*/
+	/// Return the id of the game object
 	GameObjectId GetId() const 
 	{ 
 		return m_Id; 
 	}
 
-	/**
-		Return the type of the game object
-	*/
+	/// Return the type of the game object
 	GameObjectType GetType() const 
 	{ 
 		return m_Type; 
 	}
 
-	/**
-		Return a read only pointer to the map of components
-	*/
+	///	Return a read only pointer to the map of components
 	const Components* GetComponents()
 	{
 		return &m_Components;
 	}
 
-	/**
-		Return a weak pointer to a particular component by id
-	*/
+	/// Return a weak pointer to a particular component by id
 	template <typename ComponentType>
 	weak_ptr<ComponentType> GetComponent(ComponentId id)
 	{
@@ -70,19 +62,17 @@ public:
 			// if it exists, get the component part
 			StrongComponentPtr pBase(it->second);
 			// cast it down to the derived class and return a weak ptr
-			shared_ptr<ComponentType> pDerived(std::static_pointer_cast<ComponentType>(pBase));
+			shared_ptr<ComponentType> pDerived = static_pointer_cast<ComponentType>(pBase);
 			weak_ptr<ComponentType> pWeakDerived(pDerived);
 			return pWeakDerived;
 		}
 		else
 		{
-			return nullptr;
+			return weak_ptr<ComponentType>();
 		}
 	}
 	
-	/**
-		Return a weak pointer to a particular component by name
-	*/
+	/// Return a weak pointer to a particular component by name
 	template <typename ComponentType>
 	weak_ptr<ComponentType> GetComponent(const char* name)
 	{
@@ -93,20 +83,18 @@ public:
 			// if it exists, get the component part
 			StrongComponentPtr pBase(it->second);
 			// cast it down to the derived class and return a weak ptr
-			shared_ptr<ComponentType> pDerived(static_pointer_cast<ComponentType>(pBase));
+			shared_ptr<ComponentType> pDerived = static_pointer_cast<ComponentType>(pBase);
 			weak_ptr<ComponentType> pWeakDerived(pDerived);
 			return pWeakDerived;
 		}
 		else
 		{
-			return nullptr;
+			return weak_ptr<ComponentType>();
 		}
 	}
 
 private:
-	/**
-		Add a component to the Game Object. This should only be called by the Game Object Factory
-	*/
+	/// Add a component to the Game Object. This should only be called by the Game Object Factory
 	void AddComponent(StrongComponentPtr pComponent);
 
 public:

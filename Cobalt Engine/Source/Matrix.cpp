@@ -7,6 +7,9 @@
 
 #include "Matrix.h"
 
+#include "Quaternion.h"
+#include "Vector.h"
+
 const double kThreshold = 0.001;
 
 const Mat4x4 Mat4x4::Identity(D3DXMATRIX(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f));
@@ -79,17 +82,17 @@ Vec3 Mat4x4::GetYawPitchRoll() const
 {
 	float yaw, pitch, roll;
 
-	pitch = asin(-_32);
-
-	double test = cos(pitch);
+	pitch = std::asin(-_32);
+	
+	double test = std::cos(pitch);
 	if (test > kThreshold)
 	{
-		roll = atan2(_12, _22);
-		yaw = atan2(_31, _33);
+		roll = std::atan2(_12, _22);
+		yaw = std::atan2(_31, _33);
 	}
 	else
 	{
-		roll = atan2(-_21, _11);
+		roll = std::atan2(-_21, _11);
 		yaw = 0.0f;
 	}
 

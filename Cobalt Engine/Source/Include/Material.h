@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include <d3d9types.h>
+#include <d3d9.h>
 
-#include "EngineStd.h"
+#include "interfaces.h"
 
 /**
 	Represents how a object (or surface) reflects light. Typically the diffuse

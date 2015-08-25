@@ -8,10 +8,14 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "Initialization.h"
-#include <ShlObj.h>
 #include <direct.h>
+#include <ShlObj.h>
 #include <tchar.h>
+
+#include "Initialization.h"
+
+#include "EngineStd.h"
+#include "types.h"
 
 /*
 	IsOnlyInstance - WINDOWS SPECIFIC
@@ -147,4 +151,19 @@ const TCHAR* GetSaveGameDirectory(HWND hWnd, const TCHAR* gameAppDirectory)
 	_tcscat_s(saveGameDirectory, L"\\");
 
 	return saveGameDirectory;
+}
+
+GameOptions::GameOptions()
+{
+
+}
+
+GameOptions::~GameOptions()
+{
+	CB_SAFE_DELETE(m_pDoc);
+}
+
+void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
+{
+
 }

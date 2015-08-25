@@ -5,14 +5,15 @@
 	by Mike McShaffry and David Graham.
 */
 
-#include "ResourceCache.h"
-
 #include <algorithm>
 #include <cctype>
+
+#include "ResourceCache.h"
 
 #include "DefaultResourceLoader.h"
 #include "EngineStd.h"
 #include "Logger.h"
+#include "ResourceHandle.h"
 #include "StringUtil.h"
 
 ResCache::ResCache(const unsigned int sizeInMb, IResourceFile* resourceFile)
@@ -129,7 +130,7 @@ shared_ptr<ResHandle> ResCache::Find(Resource* r)
 	return it->second;
 }
 
-const void* ResCache::Update(shared_ptr<ResHandle> handle)
+void ResCache::Update(shared_ptr<ResHandle> handle)
 {
 	// move the handle to the front of the LRU list
 	m_LRU.remove(handle);
@@ -176,7 +177,7 @@ shared_ptr<ResHandle> ResCache::Load(Resource* r)
 	// load the resource from disk into the memory buffer
 	if (rawBuffer == nullptr || m_File->GetRawResource(*r, rawBuffer) == 0)
 	{
-		CB_LOG("Out of Memory");
+		CB_LOG("Resource Cache", "Out of Memory");
 		return nullptr;
 	}
 
@@ -198,7 +199,7 @@ shared_ptr<ResHandle> ResCache::Load(Resource* r)
 		buffer = Allocate(size);
 		if (buffer == nullptr)
 		{
-			CB_LOG("Out of Memory");
+			CB_LOG("Resource Cache", "Out of Memory");
 			return nullptr;
 		}
 		handle = shared_ptr<ResHandle>(CB_NEW ResHandle(*r, buffer, size, this));
@@ -212,7 +213,7 @@ shared_ptr<ResHandle> ResCache::Load(Resource* r)
 
 		if (!success)
 		{
-			CB_LOG("Coule not load resource");
+			CB_LOG("Resource Cache", "Coule not load resource");
 			return nullptr;
 		}
 	}

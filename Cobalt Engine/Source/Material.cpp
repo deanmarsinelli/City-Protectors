@@ -7,6 +7,8 @@
 
 #include "Material.h"
 
+#include "EngineStd.h"
+
 Material::Material()
 {
 	// zero out memory and set the starting color to white

@@ -34,7 +34,7 @@
 #pragma once
 
 #include <functional>
-#include <string>
+#include <stdio.h>
 #include <unordered_map>
 
 // Maps a path to a zip content id
@@ -81,6 +81,7 @@ public:
 
 	/// Map of names to indices in the object
 	ZipContentsMap m_ZipContentsMap;
+
 private:
 	/// Struct representing the Dir Header at the end of a zip file
 	struct TZipDirHeader;

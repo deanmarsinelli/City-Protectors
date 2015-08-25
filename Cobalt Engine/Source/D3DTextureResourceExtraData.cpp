@@ -52,12 +52,12 @@ std::string D3DTextureResourceExtraData11::ToString()
 	return "D3DTextureResourceExtraData11";
 }
 
-const ID3D11ShaderResourceView** D3DTextureResourceExtraData11::GetTexture()
+ID3D11ShaderResourceView** D3DTextureResourceExtraData11::GetTexture()
 {
 	return &m_pTexture;
 }
 
-const ID3D11SamplerState** D3DTextureResourceExtraData11::GetSampler()
+ID3D11SamplerState** D3DTextureResourceExtraData11::GetSampler()
 {
 	return &m_pSamplerLinear;
 }

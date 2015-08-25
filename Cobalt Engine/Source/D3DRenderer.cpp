@@ -7,6 +7,8 @@
 
 #include "D3DRenderer.h"
 
+#include "EngineStd.h"
+
 // initialize static variables
 CDXUTDialogResourceManager D3DRenderer::g_DialogResourceManager;
 CDXUTTextHelper *D3DRenderer::g_pTextHelper = nullptr;

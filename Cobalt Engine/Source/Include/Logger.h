@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string>
 
-#define CB_ASSERT(x) assert(x)
+#define CB_ASSERT(x)
 
 #define CB_LOG(tag, str) \
 	do \

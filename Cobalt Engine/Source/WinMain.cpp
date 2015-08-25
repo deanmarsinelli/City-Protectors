@@ -6,8 +6,9 @@
 
 #include <DXUT.h>
 #include <Windows.h>
-#include "WindowsApp.h"
+
 #include "Logger.h"
+#include "WindowsApp.h"
 
 #pragma comment(lib, "shell32.lib")
 #pragma comment(lib, "advapi32.lib")
@@ -67,7 +68,7 @@ int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	DXUTSetCursorSettings(true, true);
 
 	// Init the application
-	if (!g_pApp->InitInstance(hInstance, cmdLine, 0, g_pApp->m_Options.m_ScreenSize.x, g_pApp->m_Options.m_ScreenSize.y));
+	if (!g_pApp->InitInstance(hInstance, cmdLine, 0, g_pApp->m_Options.m_ScreenSize.x, g_pApp->m_Options.m_ScreenSize.y))
 	{
 		// TODO release memory and show an error message
 		return false;

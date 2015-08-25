@@ -7,7 +7,7 @@
 
 #include "MovementController.h"
 
-#include "SceneNode.h"
+#include "Vector.h"
 
 MovementController::MovementController(shared_ptr<SceneNode> object, float initialYaw, float initialPitch, bool rotateWhenLButtonDown) :
 m_Object(object)
@@ -66,13 +66,13 @@ void MovementController::OnUpdate(float deltaTime)
 	// TODO
 }
 
-bool MovementController::OnKeyDown(BYTE keycode)
+bool MovementController::OnKeyDown(const BYTE keycode)
 {
 	m_Key[keycode] = true;
 	return true;
 }
 
-bool MovementController::OnKeyUp(BYTE keycode)
+bool MovementController::OnKeyUp(const BYTE keycode)
 {
 	m_Key[keycode] = false;
 	return true;

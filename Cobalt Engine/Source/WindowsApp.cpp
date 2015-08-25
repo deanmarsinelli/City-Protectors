@@ -5,14 +5,17 @@
 	by Mike McShaffry and David Graham
 */
 
+#include <DXUT.h>
+
 #include "WindowsApp.h"
 
-#include <SDKmisc.h>
-
+#include "BaseGameLogic.h"
+#include "EngineStd.h"
 #include "EventManager.h"
 #include "Events.h"
 #include "D3DRenderer.h"
 #include "Logger.h"
+#include "MessageBox.h"
 
 // global pointer for the engine to the application instance
 // this will get set in the constructor of the WindowsApp
@@ -242,7 +245,7 @@ LRESULT WindowsApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
 
 			m_QuitRequested = true;
 
-			if (MessageBox::Ask(QUESTION_QUIT_GAME) == IDNO)
+			if (CBMessageBox::Ask(QUESTION_QUIT_GAME) == IDNO)
 			{
 				m_QuitRequested = false;
 
@@ -285,12 +288,12 @@ LRESULT WindowsApp::OnClose()
 
 LRESULT WindowsApp::OnAltEnter()
 {
-
+	return 0;
 }
 
 LRESULT WindowsApp::OnNcCreate(LPCREATESTRUCT cs)
 {
-
+	return 0;
 }
 
 void WindowsApp::AbortGame()
@@ -332,11 +335,12 @@ bool WindowsApp::LoadStrings(std::string language)
 	}*/
 
 	// TODO: finish this function
+	return true;
 }
 
 std::wstring WindowsApp::GetString(std::wstring sID)
 {
-
+	return std::wstring();
 }
 
 UINT WindowsApp::MapCharToKeycode(const char hotkey)
@@ -356,7 +360,7 @@ UINT WindowsApp::MapCharToKeycode(const char hotkey)
 
 bool WindowsApp::HasModalDialog()
 {
-	return m_HasModalDialog;
+	return m_HasModalDialog != 0;
 }
 
 void WindowsApp::ForceModalExit()

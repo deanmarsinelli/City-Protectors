@@ -6,13 +6,11 @@
 	Original Author: Javier Arevalo
 */
 
-#include "ZipFile.h"
-
 #include <algorithm>
 #include <cctype>
-#include <stdio.h>
-#include <string.h>
 #include <zlib.h>
+
+#include "ZipFile.h"
 
 #include "EngineStd.h"
 #include "Logger.h"

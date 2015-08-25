@@ -6,6 +6,7 @@
 */
 
 #include "Process.h"
+
 #include "Logger.h"
 
 Process::Process()
