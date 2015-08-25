@@ -22,6 +22,8 @@ class D3DRenderer : public IRenderer
 public:
 	/// Recreates anything that might have been lost while the game is running (because of system sleep, etc). Also used for initialization
 	virtual HRESULT OnRestore();
+
+	/// Shutdown the renderer
 	virtual void Shutdown();
 
 public:

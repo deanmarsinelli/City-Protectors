@@ -196,6 +196,7 @@
     <ClCompile Include="ResourceHandle.cpp" />
     <ClCompile Include="ResourceZipFile.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
+    <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="SoundProcess.cpp" />
     <ClCompile Include="SoundResourceExtraData.cpp" />
     <ClCompile Include="StringUtil.cpp" />
