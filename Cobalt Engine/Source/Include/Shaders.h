@@ -58,10 +58,10 @@ struct ConstantBuffer_Lighting
 class Hlsl_VertexShader
 {
 public:
-	/// Default constructor
+	/// Default constructor sets all members to NULL
 	Hlsl_VertexShader();
 
-	/// Default destructor
+	/// Default destructor releases all resources
 	~Hlsl_VertexShader();
 
 	/// Recreate any lost resources or initialize the class
@@ -94,6 +94,44 @@ protected:
 };
 
 
+/**
+	Helper class for getting data to our default pixel shader.
+*/
+class Hlsl_PixelShader
+{
+public:
+	/// Default constructor sets all members to NULL
+	Hlsl_PixelShader();
+
+	/// Default destructor releases all resources
+	~Hlsl_PixelShader();
+
+	/// Recreate any lost resources or initialize the class
+	HRESULT OnRestore(Scene* pScene);
+
+	/// Send scene data to the shader to be rendered, called once per frame
+	HRESULT SetupRender(Scene* pScene, SceneNode* pNode);
+
+	/// Set the texture to be used from the resource cache
+	HRESULT SetTexture(const std::string& textureName);
+
+protected:
+	/// Send the texture and sampler data to the video card
+	HRESULT SetTexture(ID3D11ShaderResourceView** pDiffuseRV, ID3D11SamplerState** ppSamplers);
+
+protected:
+	/// Pointer to the compiled pixel shader
+	ID3D11PixelShader* m_pPixelShader;
+
+	/// Buffer for sending PS material data to the material cbuffer
+	ID3D11Buffer* m_pcbPSMaterial;
+
+	std::string m_TexureResource;
+};
+
+/**
+	Shader used for line drawing
+*/
 class LineDraw_Hlsl_Shader
 {
 public:

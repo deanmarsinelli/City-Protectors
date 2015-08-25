@@ -9,6 +9,7 @@
 
 #include "D3D11Vertex.h"
 #include "D3DRenderer11.h"
+#include "D3DTextureResourceExtraData.h"
 #include "EngineStd.h"
 #include "Resource.h"
 #include "ResourceCache.h"
@@ -180,3 +181,121 @@ void Hlsl_VertexShader::EnableLights(bool enableLights)
 //====================================================
 //	Pixel Shader helper methods
 //====================================================
+Hlsl_PixelShader::Hlsl_PixelShader()
+{
+	m_pPixelShader = nullptr;
+	m_pcbPSMaterial = nullptr;
+}
+
+Hlsl_PixelShader::~Hlsl_PixelShader()
+{
+	CB_COM_RELEASE(m_pPixelShader);
+	CB_COM_RELEASE(m_pcbPSMaterial);
+}
+
+HRESULT Hlsl_PixelShader::OnRestore(Scene* pScene)
+{
+	HRESULT hr = S_OK;
+
+	CB_COM_RELEASE(m_pPixelShader);
+	CB_COM_RELEASE(m_pcbPSMaterial);
+
+	shared_ptr<D3DRenderer11> d3dRenderer11 = static_pointer_cast<D3DRenderer11>(pScene->GetRenderer());
+
+	// set up pixel shader and related constant buffers (cbuffers)
+	// compile the vertex shader using the lowest possible profile
+	ID3DBlob* pPixelShaderBuffer = nullptr;
+
+	// load the data from the resource cache
+	std::string hlslFileName = "Main_PS.hlsl";
+	Resource resource(hlslFileName.c_str());
+	shared_ptr<ResHandle> pResourceHandle = g_pApp->m_ResCache->GetHandle(&resource);
+	
+	// compile the pixel shader
+	if (FAILED(d3dRenderer11->CompileShader(pResourceHandle->Buffer(), pResourceHandle->Size(), hlslFileName.c_str(), "Main_PS", "ps_4_0_level_9_1", &pPixelShaderBuffer)))
+	{
+		CB_COM_RELEASE(pPixelShaderBuffer);
+		return hr;
+	}
+
+	if (SUCCEEDED(DXUTGetD3D11Device()->CreatePixelShader(pPixelShaderBuffer->GetBufferPointer(), pPixelShaderBuffer->GetBufferSize(), nullptr, &m_pPixelShader)))
+	{
+		DXUT_SetDebugName(m_pPixelShader, "Main_PS");
+
+		// set up the constant buffers
+		D3D11_BUFFER_DESC desc;
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		desc.MiscFlags = 0;
+
+		desc.ByteWidth = sizeof(ConstantBuffer_Material);
+		hr = DXUTGetD3D11Device()->CreateBuffer(&desc, nullptr, &m_pcbPSMaterial);
+		DXUT_SetDebugName(m_pcbPSMaterial, "ConstantBuffer_Material");
+	}
+
+	CB_COM_RELEASE(pPixelShaderBuffer);
+
+	return hr;
+}
+
+HRESULT Hlsl_PixelShader::SetupRender(Scene* pScene, SceneNode* pNode)
+{
+	HRESULT hr = S_OK;
+
+	DXUTGetD3D11DeviceContext()->PSSetShader(m_pPixelShader, nullptr, 0);
+
+	// use the mapped resource to fill the d3d material buffer
+	D3D11_MAPPED_SUBRESOURCE MappedResource;
+	V(DXUTGetD3D11DeviceContext()->Map(m_pcbPSMaterial, 0, D3D11_MAP_WRITE_DISCARD, 0, &MappedResource));
+	ConstantBuffer_Material* pMaterial = (ConstantBuffer_Material*)MappedResource.pData;
+
+	// set the diffuse color of the object
+	Color color = pNode->Get()->GetMaterial().GetDiffuse();
+	pMaterial->m_DiffuseObjectColor = Vec4(color.r, color.g, color.b, color.a);
+	if (m_TexureResource.length() > 0)
+	{
+		pMaterial->m_HasTexture = true;
+	}
+	else
+	{
+		pMaterial->m_HasTexture = false;
+	}
+	DXUTGetD3D11DeviceContext()->Unmap(m_pcbPSMaterial, 0);
+
+
+	// send the data to the graphics card
+	DXUTGetD3D11DeviceContext()->PSSetConstantBuffers(0, 1, &m_pcbPSMaterial);
+
+	// set up the texture
+	SetTexture(m_TexureResource);
+
+	return S_OK;
+}
+
+HRESULT Hlsl_PixelShader::SetTexture(const std::string& textureName)
+{
+	m_TexureResource = textureName;
+	if (m_TexureResource.length() > 0)
+	{
+		// get a handle to the texture from the cache
+		Resource resource(m_TexureResource);
+		shared_ptr<ResHandle> texture = g_pApp->m_ResCache->GetHandle(&resource);
+		if (texture)
+		{
+			// get the extra data from the texture and pass it along
+			shared_ptr<D3DTextureResourceExtraData11> extra = static_pointer_cast<D3DTextureResourceExtraData11>(texture->GetExtra());
+			SetTexture(extra->GetTexture(), extra->GetSampler());
+		}
+	}
+
+	return S_OK;
+}
+
+HRESULT Hlsl_PixelShader::SetTexture(ID3D11ShaderResourceView** pDiffuseRV, ID3D11SamplerState** ppSamplers)
+{
+	// set the shader data for the texture and sampler
+	DXUTGetD3D11DeviceContext()->PSSetShaderResources(0, 1, pDiffuseRV);
+	DXUTGetD3D11DeviceContext()->PSSetSamplers(0, 1, ppSamplers);
+	return S_OK;
+}
