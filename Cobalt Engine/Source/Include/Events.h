@@ -1,6 +1,9 @@
 /*
 	Events.h
 
+	This file contains common events that the engine
+	supports by default.
+
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham
 */
@@ -57,6 +60,7 @@ private:
 	GameViewId m_ViewId;
 };
 
+
 /**
 	This event is sent when a game object is destroyed.
 */
@@ -92,4 +96,31 @@ public:
 private:
 	/// The id of the object being destroyeds
 	GameObjectId m_Id;
+};
+
+
+/**
+	This event is sent when an object is moved.
+*/
+class Event_MoveGameObject : public BaseEvent
+{
+
+};
+
+
+/**
+	This event is sent when a game object is actually created.
+*/
+class Event_NewRenderComponent : public BaseEvent
+{
+
+};
+
+
+/**
+	This event is sent when a render component is changed.
+*/
+class Event_ModifiedRenderComponent : public BaseEvent
+{
+
 };

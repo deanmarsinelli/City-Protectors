@@ -238,6 +238,7 @@ public:
 	/// Called when the device is lost
 	virtual HRESULT OnLostDevice(Scene* pScene) = 0;
 
+	/// Find the intersection of a ray with a polygon on a scene node
 	virtual HRESULT Pick(Scene* pScene, RayCast* pRayCast) = 0;
 
 };
