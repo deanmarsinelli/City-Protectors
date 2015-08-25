@@ -68,9 +68,6 @@
     <ClInclude Include="Include\Shaders.h">
       <Filter>Graphics\Direct 3D</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scene.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Include\HumanView.h">
       <Filter>User Interface</Filter>
     </ClInclude>
@@ -173,9 +170,6 @@
     <ClInclude Include="Include\PhysicsComponent.h">
       <Filter>Game Objects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Include\SceneNode.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MathUtils.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -183,6 +177,18 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Include\SceneNodeProperties.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SceneNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DSceneNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="AlphaSceneNode.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
@@ -324,6 +330,12 @@
       <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
     <ClCompile Include="SceneNodeProperties.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNode.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DSceneNode.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
