@@ -67,12 +67,12 @@ void Material::SetAlpha(const float alpha)
 	m_D3DMaterial.Diffuse.a = alpha;
 }
 
-bool Material::HasAlpha()
+bool Material::HasAlpha() const
 {
 	return GetAlpha() != fOPAQUE;
 }
 
-float Material::GetAlpha()
+float Material::GetAlpha() const
 {
 	return m_D3DMaterial.Diffuse.a;
 }

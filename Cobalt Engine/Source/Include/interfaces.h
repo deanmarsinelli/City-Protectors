@@ -147,6 +147,18 @@ typedef D3DXCOLOR Color;
 class Mat4x4;
 class Vec3;
 class LightNode;
+
+/// Describes which pass a scene node is rendered in
+enum RenderPass
+{
+	RenderPass_0,
+	RenderPass_Static = RenderPass_0,
+	RenderPass_Actor,
+	RenderPass_Sky,
+	RenderPass_NotRendered, // things that are not rendered, like editor triggers
+	RenderPass_Last // not used - a counter for for-loops
+};
+
 typedef std::list<shared_ptr<LightNode>> Lights;
 
 /**
@@ -176,6 +188,58 @@ public:
 	virtual shared_ptr<IRenderState> PrepareAlphaPass() = 0;
 	virtual shared_ptr<IRenderState> PrepareSkyBoxPass() = 0;
 	virtual void DrawLine(const Vec3& from, const Vec3& to, const Color& color) = 0;
+};
+
+class Scene;
+class SceneNodeProperties;
+class RayCast;
+/**
+	The interface for all nodes in a scene graph. These nodes are the basis of the 3d world.
+*/
+class ISceneNode
+{
+public:
+	/// Virtual destructor
+	virtual ~ISceneNode() { }
+
+	/// Return the properties of the scene node
+	virtual const SceneNodeProperties* Get() const = 0;
+
+	/// Calculate the inverse transform matrix (world space to object space)
+	virtual void SetTransform(const Mat4x4* toWorld, const Mat4x4* fromWorld = nullptr) = 0;
+
+	/// Update method called once per frame
+	virtual HRESULT OnUpdate(Scene* pScene, float deltaTime) = 0;
+
+	/// Restore when the device is lost
+	virtual HRESULT OnRestore(Scene* pScene) = 0;
+
+	/// Set up the node for rendering
+	virtual HRESULT PreRender(Scene* pScene) = 0;
+
+	/// Return whether or not the node is visible
+	virtual bool IsVisible(Scene* pScene) const = 0;
+
+	/// Render an object
+	virtual HRESULT Render(Scene* pScene) = 0;
+
+	/// Render all children objects (used for animation)
+	virtual HRESULT RenderChildren(Scene* pScene) = 0;
+
+	/// Perform any post render actions
+	virtual HRESULT PostRender(Scene* pScene) = 0;
+
+	/// Add a child node
+	virtual bool AddChild(shared_ptr<ISceneNode> child) = 0;
+
+	/// Remove a child node
+	virtual bool RemoveChild(GameObjectId id) = 0;
+
+	/// Called when the device is lost
+	virtual HRESULT OnLostDevice(Scene* pScene) = 0;
+
+	virtual HRESULT Pick(Scene* pScene, RayCast* pRayCast) = 0;
+
 };
 
 //====================================================

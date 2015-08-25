@@ -182,6 +182,9 @@
     <ClInclude Include="Include\CameraNoda.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Include\SceneNodeProperties.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -320,6 +323,9 @@
     <ClCompile Include="Shaders.cpp">
       <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
+    <ClCompile Include="SceneNodeProperties.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
@@ -378,6 +384,9 @@
     </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{e04a17d6-36b3-415e-aa88-f9a7887043b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{4f160d42-aa1b-4bbf-b033-699504e8fbce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

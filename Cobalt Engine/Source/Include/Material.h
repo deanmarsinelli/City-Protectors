@@ -49,10 +49,10 @@ public:
 	void SetAlpha(const float alpha);
 
 	/// Return whether or not there is transparency in the diffuse component
-	bool HasAlpha();
+	bool HasAlpha() const;
 
 	/// Return the alpha value of the diffuse component
-	float GetAlpha();
+	float GetAlpha() const;
 
 	/// Set material properties if using a D3D9 device
 	void D3DUse9();

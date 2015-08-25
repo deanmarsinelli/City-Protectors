@@ -144,6 +144,7 @@
     <ClInclude Include="Include\ResourceZipFile.h" />
     <ClInclude Include="Include\Scene.h" />
     <ClInclude Include="Include\SceneNode.h" />
+    <ClInclude Include="Include\SceneNodeProperties.h" />
     <ClInclude Include="Include\ScriptComponent.h" />
     <ClInclude Include="Include\Shaders.h" />
     <ClInclude Include="Include\SoundProcess.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="ResourceHandle.cpp" />
     <ClCompile Include="ResourceZipFile.cpp" />
+    <ClCompile Include="SceneNodeProperties.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="SoundProcess.cpp" />
