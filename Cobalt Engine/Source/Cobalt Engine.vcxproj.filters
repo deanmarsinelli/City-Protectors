@@ -226,6 +226,12 @@
     <ClInclude Include="Include\SkyNode.h">
       <Filter>Graphics\Scene\Sky</Filter>
     </ClInclude>
+    <ClInclude Include="Include\D3DSkyNode9.h">
+      <Filter>Graphics\Scene\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DSkyNode11.h">
+      <Filter>Graphics\Scene\Sky</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -401,6 +407,12 @@
       <Filter>Resource Cache</Filter>
     </ClCompile>
     <ClCompile Include="SkyNode.cpp">
+      <Filter>Graphics\Scene\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DSkyNode9.cpp">
+      <Filter>Graphics\Scene\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DSkyNode11.cpp">
       <Filter>Graphics\Scene\Sky</Filter>
     </ClCompile>
   </ItemGroup>
