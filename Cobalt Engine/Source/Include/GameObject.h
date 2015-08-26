@@ -25,31 +25,35 @@ class GameObject
 	typedef std::string GameObjectType;
 
 public:
+	/// Constructor taking in an object id
 	explicit GameObject(GameObjectId id);
+
+	/// Default destructor
 	~GameObject();
 
+	/// Initialize an object from xml data
 	bool Init(TiXmlElement* pData);
+
+	/// Post initialize calls postinit on all components
 	void PostInit();
+
+	/// Destroy a game object
 	void Destroy();
+
+	/// Update method -- called once per frame
 	void Update(const float deltaTime);
 
 	/// Return the id of the game object
-	GameObjectId GetId() const 
-	{ 
-		return m_Id; 
-	}
+	GameObjectId GetId() const;
 
 	/// Return the type of the game object
-	GameObjectType GetType() const 
-	{ 
-		return m_Type; 
-	}
+	GameObjectType GetType() const;
 
 	///	Return a read only pointer to the map of components
-	const Components* GetComponents()
-	{
-		return &m_Components;
-	}
+	const Components* GetComponents();
+
+	/// Save the object to xml
+	std::string ToXML();
 
 	/// Return a weak pointer to a particular component by id
 	template <typename ComponentType>

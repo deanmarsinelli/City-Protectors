@@ -12,27 +12,36 @@
 #include <unordered_map>
 
 #include "interfaces.h"
-
-/// A map that maps strings (component names stored in xml files) to functions that create components
-typedef std::unordered_map<std::string, std::function<Component*()>> ComponentCreatorMap;
+#include "Matrix.h"
+#include "templates.h"
 
 /**
-	TODO: documentation
+	This class is used to create game objects by using xml data to 
+	attach components to them.
 */
 class GameObjectFactory
 {
 public:
+	/// Default constructor
 	GameObjectFactory();
-	StrongGameObjectPtr CreateGameObject(const char* objectResource);
+
+	/// Create a game object from a resource
+	StrongGameObjectPtr CreateGameObject(const char* objectResource, TiXmlElement* overrides, const Mat4x4* pInitialTransform, const GameObjectId serversObjectId);
+
+	/// Modify a game object's components
+	void ModifyGameObject(StrongGameObjectPtr pObject, TiXmlElement* overrides);
 
 protected:
+	/// Create a component from xml data
 	virtual StrongComponentPtr CreateComponent(TiXmlElement* pData);
 
 private:
+	/// Returns the next object id
 	GameObjectId GetNextGameObjectId();
 
 protected:
-	ComponentCreatorMap m_componentFactory;
+	/// Factory to create components
+	GenericObjectFactory<Component, ComponentId> m_ComponentFactory;
 
 private:
 	/// Id of the last object created

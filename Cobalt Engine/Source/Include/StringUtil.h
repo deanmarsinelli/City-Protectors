@@ -38,8 +38,37 @@ extern std::string ToStr(float num);
 /// Splits a string by the delimeter into a vector of strings.
 void Split(const std::string& str, StringVec& vec, char delimiter);
 
+
+
+/**
+	A hashed string. This object retains the intial string in addition to 
+	the hashed value for easy referece.
+*/
 class HashedString
 {
 public:
-	static void* hash_name(char const* pStr);
+	/// Constructor taking a string
+	explicit HashedString(const char* pIdentString);
+
+	/// Return the hashed value of the string
+	unsigned long GetHashValue() const;
+
+	/// Return the original string
+	const std::string& GetStr() const;
+
+	/// Hash a string and return the hash
+	static void* Hash_Name(char const* pIdentStr);
+
+	/// Less than comparison function
+	bool operator<(const HashedString& rhs) const;
+
+	/// Is equal to comparison function
+	bool operator==(const HashedString& rhs) const;
+
+private:
+	/// Hashed value of a string. Stored as void* so it shows up in hex in the debugger
+	void* m_Ident;
+
+	/// The original string to be hashed
+	std::string m_IdentStr;
 };

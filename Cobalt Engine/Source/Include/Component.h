@@ -26,32 +26,45 @@ class Component
 	friend class GameObjectFactory;
 
 public:
+	/// Default destructor releases the parent pointer
 	virtual ~Component() 
 	{
 		m_pOwner.reset();
 	}
 
-	/// These methods are meant to be overridden
+	/// Initialize a component from xml data
 	virtual bool Init(TiXmlElement* pData) = 0;
+
+	/// Handle any logic after initialization
 	virtual void PostInit() {}
+
+	/// Update method called once per frame
 	virtual void Update(const float deltaTime) {}
+
+	/// Update a component when it is changed (the object is modified)
 	virtual void OnChanged() {}
 
-	// for the editor
+	/// Generate xml from the component
 	virtual TiXmlElement* GenerateXml() = 0;
 
+	/// Return the id of the component
 	virtual ComponentId GetId() const
 	{
 		return GetIdFromName(GetName());
 	}
+
+	/// Return the name of the component
 	virtual const char* GetName() const = 0;
+
+	/// Return a component id given the name
 	static ComponentId GetIdFromName(const char* name)
 	{
-		void* rawId = HashedString::hash_name(name);
+		void* rawId = HashedString::Hash_Name(name);
 		return reinterpret_cast<ComponentId>(rawId);
 	}
 
 private:
+	/// Set the owner game object of the component
 	void SetOwner(StrongGameObjectPtr pOwner)
 	{
 		m_pOwner = pOwner;
