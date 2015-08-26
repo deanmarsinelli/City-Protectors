@@ -286,7 +286,7 @@ class IResourceExtraData
 {
 public:
 	/// Returns a string describing the extra data
-	virtual std::string ToString() = 0;
+	virtual std::string ToStr() = 0;
 };
 
 /**

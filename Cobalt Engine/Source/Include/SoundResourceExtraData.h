@@ -44,7 +44,7 @@ public:
 	virtual ~SoundResourceExtraData() { }
 
 	/// Return the string describing this extra data
-	virtual std::string ToString();
+	virtual std::string ToStr();
 
 	/// Return the type of sound resource
 	SoundType GetSoundType() const;

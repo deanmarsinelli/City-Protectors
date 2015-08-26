@@ -13,7 +13,7 @@ m_Initialized(false),
 m_LengthMilliseconds(0)
 { }
 
-std::string SoundResourceExtraData::ToString()
+std::string SoundResourceExtraData::ToStr()
 {
 	return "SoundResourceExtraData";
 }

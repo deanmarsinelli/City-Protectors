@@ -220,6 +220,9 @@
     <ClInclude Include="Include\D3DRendererAlphaPass9.h">
       <Filter>Graphics\Direct 3D</Filter>
     </ClInclude>
+    <ClInclude Include="Include\XmlResource.h">
+      <Filter>Resource Cache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -390,6 +393,9 @@
     </ClCompile>
     <ClCompile Include="D3DRenderer9.cpp">
       <Filter>Graphics\Direct 3D</Filter>
+    </ClCompile>
+    <ClCompile Include="XmlResource.cpp">
+      <Filter>Resource Cache</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

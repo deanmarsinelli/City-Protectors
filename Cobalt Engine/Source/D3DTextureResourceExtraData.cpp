@@ -22,7 +22,7 @@ D3DTextureResourceExtraData9::~D3DTextureResourceExtraData9()
 	CB_COM_RELEASE(m_pTexture);
 }
 
-std::string D3DTextureResourceExtraData9::ToString()
+std::string D3DTextureResourceExtraData9::ToStr()
 {
 	return "D3DTextureResourceExtraData9";
 }
@@ -47,7 +47,7 @@ D3DTextureResourceExtraData11::~D3DTextureResourceExtraData11()
 	CB_COM_RELEASE(m_pSamplerLinear);
 }
 
-std::string D3DTextureResourceExtraData11::ToString()
+std::string D3DTextureResourceExtraData11::ToStr()
 {
 	return "D3DTextureResourceExtraData11";
 }

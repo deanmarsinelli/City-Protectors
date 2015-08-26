@@ -29,7 +29,7 @@ public:
 	virtual ~D3DTextureResourceExtraData9();
 
 	/// Returns a string describing the extra this extra data
-	virtual std::string ToString();
+	virtual std::string ToStr();
 
 	/// Return a pointer to the texture object
 	const LPDIRECT3DTEXTURE9 GetTexture();
@@ -56,7 +56,7 @@ public:
 	virtual ~D3DTextureResourceExtraData11();
 
 	/// Returns a string describing the extra this extra data
-	virtual std::string ToString();
+	virtual std::string ToStr();
 
 	/// Return a pointer to the shader resource view that holds the texture
 	ID3D11ShaderResourceView** GetTexture();

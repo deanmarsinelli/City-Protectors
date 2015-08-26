@@ -27,3 +27,9 @@ public:
 	/// Name of the resource -- all lowercase
 	std::string m_Name;
 };
+
+
+// Resource loader creation functions
+extern shared_ptr<IResourceLoader> CreateDDSResourceLoader();
+extern shared_ptr<IResourceLoader> CreateJPGResourceLoader();
+extern shared_ptr<IResourceLoader> CreateXmlResourceLoader();

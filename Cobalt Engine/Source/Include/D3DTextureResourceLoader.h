@@ -32,9 +32,3 @@ public:
 	/// Load the resource into a resource handle
 	virtual bool LoadResource(char* rawBuffer, unsigned int rawSize, shared_ptr<ResHandle> handle);
 };
-
-/// Return a resource loader for loading DDS textures
-extern shared_ptr<IResourceLoader> CreateDDSResourceLoader();
-
-/// Return a resource loader for loading a texture from a JPG
-extern shared_ptr<IResourceLoader> CreateJPGResourceLoader();

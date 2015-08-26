@@ -168,6 +168,7 @@
     <ClInclude Include="Include\Vector.h" />
     <ClInclude Include="Include\WaveResourceLoader.h" />
     <ClInclude Include="Include\WindowsApp.h" />
+    <ClInclude Include="Include\XmlResource.h" />
     <ClInclude Include="Include\ZipFile.h" />
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +228,7 @@
     <ClCompile Include="WaveResourceLoader.cpp" />
     <ClCompile Include="WindowsApp.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="XmlResource.cpp" />
     <ClCompile Include="ZipFile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
