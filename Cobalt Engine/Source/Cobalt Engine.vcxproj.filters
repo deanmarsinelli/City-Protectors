@@ -232,6 +232,9 @@
     <ClInclude Include="Include\D3DSkyNode11.h">
       <Filter>Graphics\Scene\Sky</Filter>
     </ClInclude>
+    <ClInclude Include="Include\D3DMesh.h">
+      <Filter>Graphics\Direct 3D\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -414,6 +417,9 @@
     </ClCompile>
     <ClCompile Include="D3DSkyNode11.cpp">
       <Filter>Graphics\Scene\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DMesh.cpp">
+      <Filter>Graphics\Direct 3D\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

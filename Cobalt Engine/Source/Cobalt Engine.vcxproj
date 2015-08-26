@@ -101,6 +101,7 @@
     <ClInclude Include="Include\CameraNoda.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
+    <ClInclude Include="Include\D3DMesh.h" />
     <ClInclude Include="Include\D3DRenderer9.h" />
     <ClInclude Include="Include\D3DRendererAlphaPass11.h" />
     <ClInclude Include="Include\D3DRendererAlphaPass9.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="CameraNode.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="D3DLineDrawer11.cpp" />
+    <ClCompile Include="D3DMesh.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="D3DRenderer11.cpp" />
     <ClCompile Include="D3DRenderer9.cpp" />
