@@ -100,6 +100,7 @@
     <ClInclude Include="Include\BaseEvent.h" />
     <ClInclude Include="Include\CameraNoda.h" />
     <ClInclude Include="Include\Console.h" />
+    <ClInclude Include="Include\D3DShaderMeshNode11.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
     <ClInclude Include="Include\D3DMesh.h" />
     <ClInclude Include="Include\D3DRenderer9.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="D3DRenderer11.cpp" />
     <ClCompile Include="D3DRenderer9.cpp" />
     <ClCompile Include="D3DSceneNode.cpp" />
+    <ClCompile Include="D3DShaderMeshNode11.cpp" />
     <ClCompile Include="D3DSkyNode11.cpp" />
     <ClCompile Include="D3DSkyNode9.cpp" />
     <ClCompile Include="D3DTextureResourceExtraData.cpp" />

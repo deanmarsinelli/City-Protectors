@@ -235,6 +235,9 @@
     <ClInclude Include="Include\D3DMesh.h">
       <Filter>Graphics\Direct 3D\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="Include\D3DShaderMeshNode11.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -420,6 +423,9 @@
     </ClCompile>
     <ClCompile Include="D3DMesh.cpp">
       <Filter>Graphics\Direct 3D\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DShaderMeshNode11.cpp">
+      <Filter>Graphics\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
