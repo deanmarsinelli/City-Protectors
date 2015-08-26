@@ -197,6 +197,12 @@
     <ClInclude Include="Include\LightNode.h">
       <Filter>Graphics\Lighting</Filter>
     </ClInclude>
+    <ClInclude Include="Include\RenderComponent.h">
+      <Filter>Game Objects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\RootNode.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -352,6 +358,15 @@
     </ClCompile>
     <ClCompile Include="LightNode.cpp">
       <Filter>Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraNode.cpp">
+      <Filter>Graphics\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Game Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RootNode.cpp">
+      <Filter>Graphics\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

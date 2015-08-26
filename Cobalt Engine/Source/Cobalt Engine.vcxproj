@@ -142,10 +142,12 @@
     <ClInclude Include="Include\ProcessManager.h" />
     <ClInclude Include="Include\Quaternion.h" />
     <ClInclude Include="Include\Random.h" />
+    <ClInclude Include="Include\RenderComponent.h" />
     <ClInclude Include="Include\Resource.h" />
     <ClInclude Include="Include\ResourceCache.h" />
     <ClInclude Include="Include\ResourceHandle.h" />
     <ClInclude Include="Include\ResourceZipFile.h" />
+    <ClInclude Include="Include\RootNode.h" />
     <ClInclude Include="Include\Scene.h" />
     <ClInclude Include="Include\SceneNode.h" />
     <ClInclude Include="Include\SceneNodeProperties.h" />
@@ -166,6 +168,7 @@
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioBuffer.cpp" />
+    <ClCompile Include="CameraNode.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="D3DLineDrawer11.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
@@ -200,9 +203,11 @@
     <ClCompile Include="ProcessManager.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="ResourceHandle.cpp" />
     <ClCompile Include="ResourceZipFile.cpp" />
+    <ClCompile Include="RootNode.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="SceneNodeProperties.cpp" />

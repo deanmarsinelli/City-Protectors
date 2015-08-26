@@ -10,7 +10,7 @@
 #include "interfaces.h"
 #include "Shaders.h"
 
-class ConstantBuffer_Lighting;
+struct ConstantBuffer_Lighting;
 class SceneNode;
 class Vec4;
 

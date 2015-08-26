@@ -51,7 +51,7 @@ public:
 
 	void PopMatrix();
 
-	const Mat4x4& GetTopMatrix();
+	Mat4x4 GetTopMatrix();
 
 	LightManager* GetLightManager();
 

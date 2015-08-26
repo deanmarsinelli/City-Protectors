@@ -68,6 +68,30 @@ std::string ToStr(int num, int base)
 	return std::string(str);
 }
 
+std::string ToStr(unsigned int num, int base)
+{
+	char str[MAX_DIGITS_IN_INT];
+	memset(str, 0, MAX_DIGITS_IN_INT);
+	_ultoa_s((unsigned long)num, str, MAX_DIGITS_IN_INT, base);
+	return std::string(str);
+}
+
+std::string ToStr(unsigned long num, int base)
+{
+	char str[MAX_DIGITS_IN_INT];
+	memset(str, 0, MAX_DIGITS_IN_INT);
+	_ultoa_s((unsigned long)num, str, MAX_DIGITS_IN_INT, base);
+	return std::string(str);
+}
+
+std::string ToStr(float num)
+{
+	char str[64];
+	memset(str, 0, 64);
+	_sprintf_p(str, 65, "%f", num);
+	return std::string(str);
+}
+
 void Split(const std::string& str, StringVec& vec, char delimiter)
 {
 	vec.clear();

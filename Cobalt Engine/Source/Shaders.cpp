@@ -11,6 +11,7 @@
 #include "D3DRenderer11.h"
 #include "D3DTextureResourceExtraData.h"
 #include "EngineStd.h"
+#include "LightManager.h"
 #include "Resource.h"
 #include "ResourceCache.h"
 #include "ResourceHandle.h"

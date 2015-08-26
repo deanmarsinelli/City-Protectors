@@ -26,6 +26,15 @@ extern HRESULT AnsiToWideCch(WCHAR* dest, const CHAR* src, int charCount);
 /// Convert an integer to string
 extern std::string ToStr(int num, int base = 10);
 
+/// Convert an unsigned int to a string
+extern std::string ToStr(unsigned int num, int base = 10);
+
+/// Convert an unsigned long to a string
+extern std::string ToStr(unsigned long num, int base = 10);
+
+/// Convert a float to a string
+extern std::string ToStr(float num);
+
 /// Splits a string by the delimeter into a vector of strings.
 void Split(const std::string& str, StringVec& vec, char delimiter);
 

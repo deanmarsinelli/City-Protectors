@@ -8,12 +8,16 @@
 #include "Events.h"
 
 #include "EngineStd.h"
+#include "Logger.h"
 
 //====================================================
 //	Static Event GUID's
 //====================================================
 const EventType Event_NewGameObject::sk_EventType(0xd020af46);
 const EventType Event_DestroyGameObject::sk_EventType(0xd3b6f10e);
+const EventType Event_MoveGameObject::sk_EventType(0x1a81ed5);
+const EventType Event_NewRenderComponent::sk_EventType(0xfb30a10c);
+const EventType Event_ModifiedRenderComponent::sk_EventType(0xf5ef297b);
 
 
 //====================================================
@@ -67,6 +71,7 @@ const char* Event_NewGameObject::GetName() const
 	return "Event_NewGameObject";
 }
 
+
 //====================================================
 //	Event_DestroyGameObject
 //====================================================
@@ -102,4 +107,162 @@ IEventPtr Event_DestroyGameObject::Copy() const
 const char* Event_DestroyGameObject::GetName() const
 {
 	return "Event_DestroyGameObject";
+}
+
+
+//====================================================
+//	Event_MoveGameObject
+//====================================================
+Event_MoveGameObject::Event_MoveGameObject()
+{
+	m_ObjectId = INVALID_GAMEOBJECT_ID;
+}
+
+Event_MoveGameObject::Event_MoveGameObject(GameObjectId id, const Mat4x4& matrix)
+{
+	m_ObjectId = id;
+	m_Matrix = matrix;
+}
+
+const GameObjectId Event_MoveGameObject::GetId() const
+{
+	return m_ObjectId;
+}
+
+const Mat4x4& Event_MoveGameObject::GetMatrix() const
+{
+	return m_Matrix;
+}
+
+const EventType& Event_MoveGameObject::GetEventType() const
+{
+	return sk_EventType;
+}
+
+void Event_MoveGameObject::Serialize(std::ostream& out) const
+{
+	out << m_ObjectId << " ";
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			out << m_Matrix.m[i][j] << " ";
+		}
+	}
+}
+
+void Event_MoveGameObject::Deserialize(std::istream& in)
+{
+	in >> m_ObjectId;
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			in >> m_Matrix.m[i][j];
+		}
+	}
+}
+
+IEventPtr Event_MoveGameObject::Copy() const
+{
+	return IEventPtr(CB_NEW Event_MoveGameObject(m_ObjectId, m_Matrix));
+}
+
+const char* Event_MoveGameObject::GetName() const
+{
+	return "Event_MoveGameObject";
+}
+
+
+//====================================================
+//	Event_NewRenderComponent
+//====================================================
+Event_NewRenderComponent::Event_NewRenderComponent()
+{
+	m_ObjectId = INVALID_GAMEOBJECT_ID;
+}
+
+Event_NewRenderComponent::Event_NewRenderComponent(GameObjectId id, shared_ptr<SceneNode> pSceneNode)
+{
+	m_ObjectId = id;
+	m_pSceneNode = pSceneNode;
+}
+
+const GameObjectId Event_NewRenderComponent::GetId() const
+{
+	return m_ObjectId;
+}
+
+shared_ptr<SceneNode> Event_NewRenderComponent::GetSceneNode() const
+{
+	return m_pSceneNode;
+}
+
+const EventType& Event_NewRenderComponent::GetEventType() const
+{
+	return sk_EventType;
+}
+
+void Event_NewRenderComponent::Serialize(std::ostream& out) const
+{
+	CB_ERROR(GetName() + std::string(" should not be serialized!"));
+}
+
+void Event_NewRenderComponent::Deserialize(std::istream& in)
+{
+	CB_ERROR(GetName() + std::string(" should not be deserialized!"));
+}
+
+IEventPtr Event_NewRenderComponent::Copy() const
+{
+	return IEventPtr(CB_NEW Event_NewRenderComponent(m_ObjectId, m_pSceneNode));
+}
+
+const char* Event_NewRenderComponent::GetName() const
+{
+	return "Event_NewRenderComponent";
+}
+
+
+//====================================================
+//	Event_ModifiedRenderComponent
+//====================================================
+Event_ModifiedRenderComponent::Event_ModifiedRenderComponent()
+{
+	m_ObjectId = INVALID_GAMEOBJECT_ID;
+}
+
+Event_ModifiedRenderComponent::Event_ModifiedRenderComponent(GameObjectId id)
+{
+	m_ObjectId = id;
+}
+
+const GameObjectId Event_ModifiedRenderComponent::GetId() const
+{
+	return m_ObjectId;
+}
+
+const EventType& Event_ModifiedRenderComponent::GetEventType() const
+{
+	return sk_EventType;
+}
+
+void Event_ModifiedRenderComponent::Serialize(std::ostream& out) const
+{
+	out << m_ObjectId;
+}
+
+void Event_ModifiedRenderComponent::Deserialize(std::istream& in)
+{
+	in >> m_ObjectId;
+}
+
+IEventPtr Event_ModifiedRenderComponent::Copy() const
+{
+	return IEventPtr(CB_NEW Event_ModifiedRenderComponent(m_ObjectId));
+}
+
+const char* Event_ModifiedRenderComponent::GetName() const
+{
+	return "Event_ModifiedRenderComponent";
 }

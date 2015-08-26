@@ -11,6 +11,8 @@
 
 #pragma once
 
+#include <tinyxml.h>
+
 #include "interfaces.h"
 #include "StringUtil.h"
 
@@ -33,7 +35,10 @@ public:
 	virtual bool Init(TiXmlElement* pData) = 0;
 	virtual void PostInit() {}
 	virtual void Update(const float deltaTime) {}
-	virtual void OnChange() {}
+	virtual void OnChanged() {}
+
+	// for the editor
+	virtual TiXmlElement* GenerateXml() = 0;
 
 	virtual ComponentId GetId() const
 	{

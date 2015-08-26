@@ -50,7 +50,7 @@ public:
 	virtual HRESULT OnRestore(Scene* pScene);
 
 	/// Update method called once per frame
-	virtual HRESULT OnUpdate(Scene* pScene, const float deltaTime);
+	virtual HRESULT OnUpdate(Scene* pScene, float deltaTime);
 
 	/// The d3d9 light
 	D3DLIGHT9 m_d3dLight9;
@@ -72,5 +72,5 @@ public:
 	virtual HRESULT OnRestore();
 
 	/// Update method called once per frame
-	virtual HRESULT OnUpdate(Scene* pScene, const float deltaTime);
+	virtual HRESULT OnUpdate(Scene* pScene, float deltaTime);
 };

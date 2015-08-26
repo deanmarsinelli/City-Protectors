@@ -50,7 +50,7 @@ HRESULT Scene::OnRender()
 	{
 		m_Camera->SetViewTransform(this);
 
-		m_LightManger->CalcLighting(this);
+		m_LightManager->CalcLighting(this);
 
 		if (m_Root->PreRender(this) == S_OK)
 		{
@@ -123,7 +123,7 @@ bool Scene::AddChild(GameObjectId id, shared_ptr<ISceneNode> child)
 
 bool Scene::RemoveChild(GameObjectId id)
 {
-	if (id == INVALID_GAME_OBJECT_ID)
+	if (id == INVALID_GAMEOBJECT_ID)
 		return false;
 
 	shared_ptr<ISceneNode> child = FindObject(id);
@@ -222,7 +222,7 @@ void Scene::PopMatrix()
 	m_Renderer->SetWorldTransform(&mat);
 }
 
-const Mat4x4& Scene::GetTopMatrix()
+Mat4x4 Scene::GetTopMatrix()
 {
 	return static_cast<const Mat4x4>(*m_MatrixStack->GetTop());
 }

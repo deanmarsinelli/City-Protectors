@@ -6,6 +6,8 @@
 */
 
 #include "LightNode.h"
+#include "RenderComponent.h"
+#include "Vector.h"
 
 LightNode::LightNode(const GameObjectId objectId, WeakBaseRenderComponentPtr renderComponent, const LightProperties& properties, const Mat4x4* mat) :
 SceneNode(objectId, renderComponent, RenderPass::RenderPass_NotRendered, mat)
@@ -26,6 +28,8 @@ HRESULT D3DLightNode9::OnRestore(Scene* pScene)
 	m_d3dLight9.Attenuation2 = m_LightProperties.m_Attenuation[0];
 	m_d3dLight9.Theta = m_LightProperties.m_Theta;
 	m_d3dLight9.Phi = m_LightProperties.m_Phi;
+
+	return S_OK;
 }
 
 HRESULT D3DLightNode9::OnUpdate(Scene* pScene, const float deltaTime)

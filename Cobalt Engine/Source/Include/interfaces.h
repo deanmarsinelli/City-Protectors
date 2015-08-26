@@ -153,7 +153,7 @@ enum RenderPass
 {
 	RenderPass_0,
 	RenderPass_Static = RenderPass_0,
-	RenderPass_Actor,
+	RenderPass_Object,
 	RenderPass_Sky,
 	RenderPass_NotRendered, // things that are not rendered, like editor triggers
 	RenderPass_Last // not used - a counter for for-loops

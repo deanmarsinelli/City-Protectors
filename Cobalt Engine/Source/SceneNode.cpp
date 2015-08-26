@@ -6,11 +6,12 @@
 */
 
 #include "AlphaSceneNode.h"
-#include "BaseRenderComponent.h"
+#include "RenderComponent.h"
 #include "EngineStd.h"
 #include "Frustrum.h"
 #include "GameObject.h"
 #include "Logger.h"
+#include "Scene.h"
 #include "SceneNode.h"
 #include "templates.h"
 #include "Transform.h"
@@ -89,7 +90,7 @@ const SceneNodeProperties* SceneNode::Get() const
 	return &m_Properties;
 }
 
-void SceneNode::SetTransform(const Mat4x4* toWorld, const Mat4x4* fromWorld = nullptr)
+void SceneNode::SetTransform(const Mat4x4* toWorld, const Mat4x4* fromWorld)
 {
 	m_Properties.m_ToWorld = *toWorld;
 	if (!fromWorld)
