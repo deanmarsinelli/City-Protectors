@@ -240,7 +240,6 @@ public:
 
 	/// Find the intersection of a ray with a polygon on a scene node
 	virtual HRESULT Pick(Scene* pScene, RayCast* pRayCast) = 0;
-
 };
 
 //====================================================

@@ -193,7 +193,7 @@ HRESULT SceneNode::RenderChildren(Scene* pScene)
 					alphaNode->m_pNode = *it;
 					alphaNode->m_Concat = pScene->GetTopMatrix();
 
-					Vec4 worldPos(alphaNode->m_Concat.Getposition());
+					Vec4 worldPos(alphaNode->m_Concat.GetPosition());
 					Mat4x4 fromWorld = pScene->GetCamera()->Get()->FromWorld();
 					Vec4 screenPos = fromWorld.Transform(worldPos);
 

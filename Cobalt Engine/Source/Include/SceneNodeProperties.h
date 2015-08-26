@@ -61,7 +61,7 @@ public:
 	float Radius() const;
 
 	/// Return the material of the node
-	Material GetMaterial();
+	Material GetMaterial() const;
 
 protected:
 	/// Set the alpha of the node's material

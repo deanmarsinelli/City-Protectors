@@ -15,6 +15,8 @@
 #include "ResourceCache.h"
 #include "ResourceHandle.h"
 #include "Scene.h"
+#include "SceneNode.h"
+#include "SceneNodeProperties.h"
 
 //====================================================
 //	Vertex Shader helper methods

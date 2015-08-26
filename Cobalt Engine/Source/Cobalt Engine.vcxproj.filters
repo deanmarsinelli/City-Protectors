@@ -173,23 +173,29 @@
     <ClInclude Include="Include\MathUtils.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Include\CameraNoda.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Include\SceneNodeProperties.h">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scene.h">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Include\SceneNode.h">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Include\D3DSceneNode.h">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Include\AlphaSceneNode.h">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\LightManager.h">
+      <Filter>Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CameraNoda.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\LightNode.h">
+      <Filter>Graphics\Lighting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -330,16 +336,22 @@
       <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
     <ClCompile Include="SceneNodeProperties.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneNode.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
     </ClCompile>
     <ClCompile Include="D3DSceneNode.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Graphics\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="LightNode.cpp">
+      <Filter>Graphics\Lighting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,7 +412,10 @@
     <Filter Include="Physics">
       <UniqueIdentifier>{e04a17d6-36b3-415e-aa88-f9a7887043b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
+    <Filter Include="Graphics\Lighting">
+      <UniqueIdentifier>{c64c9054-ed9d-476c-bf95-9ba13ebc1181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Scene">
       <UniqueIdentifier>{4f160d42-aa1b-4bbf-b033-699504e8fbce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
