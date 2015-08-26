@@ -14,6 +14,7 @@
 #include "RenderComponent.h"
 #include "ScriptComponent.h"
 #include "Transform.h"
+#include "XmlResource.h"
 
 GameObjectFactory::GameObjectFactory()
 {

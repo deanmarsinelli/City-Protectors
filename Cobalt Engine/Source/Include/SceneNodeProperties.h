@@ -74,7 +74,10 @@ protected:
 	/// Name of an object this node is related to
 	std::string m_Name;
 
+	/// Matrix to transform this node from object space to world space
 	Mat4x4 m_ToWorld;
+
+	/// Matrix to transform the node from world space to object space
 	Mat4x4 m_FromWorld;
 
 	/// Radius of a sphere that includes all visible geometry of a node

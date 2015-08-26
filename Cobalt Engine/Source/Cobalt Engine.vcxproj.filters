@@ -223,6 +223,9 @@
     <ClInclude Include="Include\XmlResource.h">
       <Filter>Resource Cache</Filter>
     </ClInclude>
+    <ClInclude Include="Include\SkyNode.h">
+      <Filter>Graphics\Scene\Sky</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -397,6 +400,9 @@
     <ClCompile Include="XmlResource.cpp">
       <Filter>Resource Cache</Filter>
     </ClCompile>
+    <ClCompile Include="SkyNode.cpp">
+      <Filter>Graphics\Scene\Sky</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
@@ -464,6 +470,9 @@
     </Filter>
     <Filter Include="Logic">
       <UniqueIdentifier>{c1ceed2d-2795-45df-8853-9e17669f10e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Scene\Sky">
+      <UniqueIdentifier>{e089bf95-df31-4bcc-98f9-0241bda8561d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

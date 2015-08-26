@@ -136,12 +136,12 @@ const std::string& HashedString::GetStr() const
 
 bool HashedString::operator<(const HashedString& rhs) const
 {
-	return (GetHashValue() < rhs.GetHashValue);
+	return (GetHashValue() < rhs.GetHashValue());
 }
 
 bool HashedString::operator==(const HashedString& rhs) const
 {
-	return (GetHashValue() == rhs.GetHashValue);
+	return (GetHashValue() == rhs.GetHashValue());
 }
 
 void* HashedString::Hash_Name(char const* pIdentStr)

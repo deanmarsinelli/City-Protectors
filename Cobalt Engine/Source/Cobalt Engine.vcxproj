@@ -158,6 +158,7 @@
     <ClInclude Include="Include\SceneNodeProperties.h" />
     <ClInclude Include="Include\ScriptComponent.h" />
     <ClInclude Include="Include\Shaders.h" />
+    <ClInclude Include="Include\SkyNode.h" />
     <ClInclude Include="Include\SoundProcess.h" />
     <ClInclude Include="Include\SoundResourceExtraData.h" />
     <ClInclude Include="Include\StringUtil.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="SceneNodeProperties.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
     <ClCompile Include="Shaders.cpp" />
+    <ClCompile Include="SkyNode.cpp" />
     <ClCompile Include="SoundProcess.cpp" />
     <ClCompile Include="SoundResourceExtraData.cpp" />
     <ClCompile Include="StringUtil.cpp" />
