@@ -5,9 +5,8 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "Quaternion.h"
-
 #include "Matrix.h"
+#include "Quaternion.h"
 #include "Vector.h"
 
 const Quaternion Quaternion::Identity(D3DXQUATERNION(0, 0, 0, 1));

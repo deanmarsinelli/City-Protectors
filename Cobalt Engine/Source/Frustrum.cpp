@@ -5,10 +5,9 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "Frustrum.h"
-
 #include "D3D9Vertex.h"
 #include "EngineStd.h"
+#include "Frustrum.h"
 
 Frustrum::Frustrum()
 {

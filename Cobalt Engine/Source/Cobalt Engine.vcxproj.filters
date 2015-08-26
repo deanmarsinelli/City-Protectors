@@ -19,7 +19,6 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="Include\Logger.h" />
-    <ClInclude Include="Include\BaseGameLogic.h" />
     <ClInclude Include="Include\GameObjectFactory.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
@@ -203,6 +202,24 @@
     <ClInclude Include="Include\RootNode.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Include\BaseGameLogic.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DRendererAlphaPass11.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DRendererSkyBoxPass11.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DRenderer9.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DRendererSkyBoxPass9.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\D3DRendererAlphaPass9.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -368,6 +385,12 @@
     <ClCompile Include="RootNode.cpp">
       <Filter>Graphics\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="BaseGameLogic.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DRenderer9.cpp">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
@@ -432,6 +455,9 @@
     </Filter>
     <Filter Include="Graphics\Scene">
       <UniqueIdentifier>{4f160d42-aa1b-4bbf-b033-699504e8fbce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic">
+      <UniqueIdentifier>{c1ceed2d-2795-45df-8853-9e17669f10e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

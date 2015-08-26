@@ -6,7 +6,6 @@
 */
 
 #include "Matrix.h"
-
 #include "Quaternion.h"
 #include "Vector.h"
 

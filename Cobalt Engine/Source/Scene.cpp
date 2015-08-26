@@ -9,6 +9,7 @@
 
 #include "EngineStd.h"
 #include "Events.h"
+#include "LightNode.h"
 #include "LightManager.h"
 #include "Logger.h"
 #include "RootNode.h"
@@ -165,7 +166,7 @@ void Scene::ModifiedRenderComponentDelegate(IEventPtr pEvent)
 		return;
 	}
 
-	if (g_pApp->GetGameLogic()->GetState()->BGS_LoadingGameEnvironment)
+	if (g_pApp->GetGameLogic()->GetState() == BaseGameState::LoadingGameEnvironment)
 	{
 		return;
 	}

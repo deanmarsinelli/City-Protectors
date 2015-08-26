@@ -101,6 +101,11 @@
     <ClInclude Include="Include\CameraNoda.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
+    <ClInclude Include="Include\D3DRenderer9.h" />
+    <ClInclude Include="Include\D3DRendererAlphaPass11.h" />
+    <ClInclude Include="Include\D3DRendererAlphaPass9.h" />
+    <ClInclude Include="Include\D3DRendererSkyBoxPass11.h" />
+    <ClInclude Include="Include\D3DRendererSkyBoxPass9.h" />
     <ClInclude Include="Include\D3DSceneNode.h" />
     <ClInclude Include="Include\D3D9Vertex.h" />
     <ClInclude Include="Include\D3DLineDrawer11.h" />
@@ -168,11 +173,13 @@
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioBuffer.cpp" />
+    <ClCompile Include="BaseGameLogic.cpp" />
     <ClCompile Include="CameraNode.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="D3DLineDrawer11.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="D3DRenderer11.cpp" />
+    <ClCompile Include="D3DRenderer9.cpp" />
     <ClCompile Include="D3DSceneNode.cpp" />
     <ClCompile Include="D3DTextureResourceExtraData.cpp" />
     <ClCompile Include="D3DTextureResourceLoader.cpp" />

@@ -8,7 +8,6 @@
 #pragma once
 
 #include "Plane.h"
-
 #include "Vector.h"
 
 void Plane::Init(const Vec3& p0, const Vec3& p1, const Vec3& p2)

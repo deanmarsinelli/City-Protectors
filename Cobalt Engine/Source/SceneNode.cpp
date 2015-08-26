@@ -6,11 +6,12 @@
 */
 
 #include "AlphaSceneNode.h"
-#include "RenderComponent.h"
+#include "BaseGameLogic.h"
 #include "EngineStd.h"
 #include "Frustrum.h"
 #include "GameObject.h"
 #include "Logger.h"
+#include "RenderComponent.h"
 #include "Scene.h"
 #include "SceneNode.h"
 #include "templates.h"
@@ -72,7 +73,7 @@ const Vec3 SceneNode::GetWorldPosition() const
 
 Vec3 SceneNode::GetDirection() const
 {
-	m_Properties.m_ToWorld.GetDirection();
+	return m_Properties.m_ToWorld.GetDirection();
 }
 
 void SceneNode::SetRadius(const float radius)

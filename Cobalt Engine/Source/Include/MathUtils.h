@@ -20,3 +20,10 @@ extern bool PointInPoly(const Point& test, const Poly& polygon);
 float WrapPi(float angle);
 Vec3 GetVectorFromYRotation(float angleRadians);
 float GetYRotationFromVector(const Vec3& lookAt);
+
+
+class CBRandom
+{
+public:
+	void Randomize();
+};

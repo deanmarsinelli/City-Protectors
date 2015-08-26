@@ -10,10 +10,11 @@
 
 #include <concurrent_queue.h>
 #include <d3dx9.h>
+#include <FastDelegate.h>
 #include <list>
 #include <memory>
+#include <tinyxml.h>
 #include <Windows.h>
-#include <FastDelegate.h>
 
 using std::shared_ptr;
 using std::weak_ptr;
@@ -548,12 +549,52 @@ public:
 	virtual void ResumeAllSounds() = 0;
 };
 
+
 //====================================================
 //	Physics Interfaces
 //====================================================
 class IGamePhysics
 {
 public:
+	/// Apply a directional force to a game object
 	virtual void ApplyForce(const Vec3& dir, float newtons, GameObjectId id) = 0;
+	
+	/// Apply torque to a game object
 	virtual void ApplyTorque(const Vec3& dir, float newtons, GameObjectId id) = 0;
+};
+
+
+//====================================================
+//	Logic Interfaces
+//====================================================
+class IGameLogic
+{
+public:
+	/// Return a weak pointer to a game object
+	virtual WeakGameObjectPtr GetGameObject(const GameObjectId id) = 0;
+	
+	/// Create a game object
+	virtual StrongGameObjectPtr CreateGameObject(const std::string& objectResource, TiXmlElement* overrides, 
+		const Mat4x4* initialTransform = nullptr, const GameObjectId serversObjectId = INVALID_GAMEOBJECT_ID) = 0;
+	
+	/// Destroy a game object
+	virtual void DestroyGameObject(const GameObjectId id) = 0;
+	
+	/// Load a game from a resource
+	virtual bool LoadGame(const char* levelResource) = 0;
+	
+	
+	virtual void SetProxy() = 0;
+	
+	/// Update the game logic -- called once per frame
+	virtual void OnUpdate(float time, float deltaTime) = 0;
+	
+	/// Change the state of the game logic
+	virtual void ChangeState(enum BaseGameState newState) = 0;
+
+	/// Move a game object
+	virtual void MoveGameObject(const GameObjectId id, const Mat4x4& mat) = 0;
+	
+	/// Return a pointer to the game physics
+	virtual shared_ptr<IGamePhysics> GetGamePhysics() = 0;
 };

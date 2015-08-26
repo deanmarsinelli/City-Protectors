@@ -18,6 +18,8 @@ const EventType Event_DestroyGameObject::sk_EventType(0xd3b6f10e);
 const EventType Event_MoveGameObject::sk_EventType(0x1a81ed5);
 const EventType Event_NewRenderComponent::sk_EventType(0xfb30a10c);
 const EventType Event_ModifiedRenderComponent::sk_EventType(0xf5ef297b);
+const EventType Event_RequestNewGameObject::sk_EventType(0xe32a1a9a);
+const EventType Event_RequestDestroyGameObject::sk_EventType(0xdc8c485d);
 
 
 //====================================================
@@ -265,4 +267,159 @@ IEventPtr Event_ModifiedRenderComponent::Copy() const
 const char* Event_ModifiedRenderComponent::GetName() const
 {
 	return "Event_ModifiedRenderComponent";
+}
+
+
+//====================================================
+//	Event_RequestDestroyGameObject
+//====================================================
+Event_RequestNewGameObject::Event_RequestNewGameObject()
+{
+	m_ObjectResource = "";
+	m_HasInitialTransform = false;
+	m_InitialTransform = Mat4x4::Identity;
+	m_ServerObjectId = -1;
+	m_ViewId = CB_INVALID_GAMEVIEW_ID;
+}
+
+Event_RequestNewGameObject::Event_RequestNewGameObject(const std::string& objectResource, const Mat4x4* initialTransform, const GameObjectId serverObjectId, const GameViewId viewId)
+{
+	m_ObjectResource = objectResource;
+	if (initialTransform)
+	{
+		m_HasInitialTransform = true;
+		m_InitialTransform = *initialTransform;
+	}
+	else
+	{
+		m_HasInitialTransform = false;
+	}
+
+	m_ServerObjectId = serverObjectId;
+	m_ViewId = viewId;
+}
+
+const std::string& Event_RequestNewGameObject::GetObjectResource() const
+{
+	return m_ObjectResource;
+}
+
+const GameViewId Event_RequestNewGameObject::GetViewId() const
+{
+	return m_ViewId;
+}
+
+const Mat4x4* Event_RequestNewGameObject::GetInitialTransform() const
+{
+	return (m_HasInitialTransform) ? &m_InitialTransform : nullptr;
+}
+
+const GameObjectId Event_RequestNewGameObject::GetServerObjectId() const
+{
+	return m_ServerObjectId;
+}
+
+const EventType& Event_RequestNewGameObject::GetEventType() const
+{
+	return sk_EventType;
+}
+
+void Event_RequestNewGameObject::Serialize(std::ostream& out) const
+{
+	out << m_ObjectResource << " ";
+	out << m_HasInitialTransform << " ";
+	if (m_HasInitialTransform)
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			for (int j = 0; j < 4; ++j)
+			{
+				out << m_InitialTransform.m[i][j] << " ";
+			}
+		}
+	}
+	out << m_ServerObjectId << " ";
+	out << m_ViewId << " ";
+}
+
+void Event_RequestNewGameObject::Deserialize(std::istream& in)
+{
+	in >> m_ObjectResource;
+	in >> m_HasInitialTransform;
+	if (m_HasInitialTransform)
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			for (int j = 0; j < 4; ++j)
+			{
+				in >> m_InitialTransform.m[i][j];
+			}
+		}
+	}
+	in >> m_ServerObjectId;
+	in >> m_ViewId;
+}
+
+IEventPtr Event_RequestNewGameObject::Copy() const
+{
+	return IEventPtr(CB_NEW Event_RequestNewGameObject(m_ObjectResource, (m_HasInitialTransform) ? &m_InitialTransform : nullptr, m_ServerObjectId, m_ViewId));
+}
+
+const char* Event_RequestNewGameObject::GetName() const
+{
+	return "Event_RequestNewGameObject";
+}
+
+
+//====================================================
+//	Event_RequestDestroyGameObject
+//====================================================
+Event_RequestDestroyGameObject::Event_RequestDestroyGameObject()
+{
+	m_ObjectId = INVALID_GAMEOBJECT_ID;
+}
+
+Event_RequestDestroyGameObject::Event_RequestDestroyGameObject(GameObjectId id)
+{
+	m_ObjectId = id;
+}
+
+const GameObjectId Event_RequestDestroyGameObject::GetId() const
+{
+	return m_ObjectId;
+}
+
+const EventType& Event_RequestDestroyGameObject::GetEventType() const
+{
+	return sk_EventType;
+}
+
+void Event_RequestDestroyGameObject::Serialize(std::ostream& out) const
+{
+	out << m_ObjectId;
+}
+
+void Event_RequestDestroyGameObject::Deserialize(std::istream& in)
+{
+	in >> m_ObjectId;
+}
+
+IEventPtr Event_RequestDestroyGameObject::Copy() const
+{
+	return IEventPtr(CB_NEW Event_RequestDestroyGameObject(m_ObjectId));
+}
+
+const char* Event_RequestDestroyGameObject::GetName() const
+{
+	return "Event_RequestDestroyGameObject";
+}
+
+bool Event_RequestDestroyGameObject::BuildEventFromSCript()
+{
+	if (m_Event.IsInteger())
+	{
+		m_ObjectId = m_Event.GetInteger();
+		return true;
+	}
+	return false;
 }

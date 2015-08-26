@@ -13,6 +13,7 @@
 #include "BaseEvent.h"
 #include "GameObject.h"
 #include "HumanView.h"
+#include "LuaScriptEvent.h"
 
 /**
 	This event is sent when a game object is created.
@@ -232,3 +233,109 @@ private:
 	/// The game object for this event
 	GameObjectId m_ObjectId;
 };
+
+
+/**
+	This event is sent by a server asking client proxy logics to create
+	new objects from their resources. It can be sent via script or code.
+*/
+class Event_RequestNewGameObject : public BaseEvent
+{
+public:
+	/// Default constructor
+	Event_RequestNewGameObject();
+
+	/// Constructor filling out the event
+	Event_RequestNewGameObject(const std::string& objectResource, const Mat4x4* initialTransform = nullptr,
+		const GameObjectId serverObjectId = INVALID_GAMEOBJECT_ID, const GameViewId viewId = CB_INVALID_GAMEVIEW_ID);
+
+	/// Return a string of the object resource
+	const std::string& GetObjectResource() const;
+
+	/// Return the id of the view
+	const GameViewId GetViewId() const;
+
+	// Return the initial transform of the object
+	const Mat4x4* GetInitialTransform() const;
+
+	// Get the server game object id
+	const GameObjectId GetServerObjectId() const;
+
+	// IEvent interface
+	/// Return the event type
+	virtual const EventType& GetEventType() const;
+
+	/// Serialize the event to an output stream
+	virtual void Serialize(std::ostream& out) const;
+
+	/// Deserialize the event from an input stream
+	virtual void Deserialize(std::istream& in);
+
+	/// Return a copy of the event
+	virtual IEventPtr Copy() const;
+
+	/// Return the name of the event
+	virtual const char* GetName() const;
+
+public:
+	/// The event type
+	static const EventType sk_EventType;
+
+private:
+	std::string m_ObjectResource;
+	bool m_HasInitialTransform;
+	Mat4x4 m_InitialTransform;
+	GameObjectId m_ServerObjectId;
+	GameViewId m_ViewId;
+};
+
+
+/**
+	This event is sent by any system requesting that the game logic destroy a game object.
+*/
+class Event_RequestDestroyGameObject : public LuaScriptEvent
+{
+public:
+	/// Default constructor
+	Event_RequestDestroyGameObject();
+
+	/// Constructor taking in the id of the object to be destroyed
+	Event_RequestDestroyGameObject(GameObjectId id);
+
+	/// Return the id of the object being modified
+	const GameObjectId GetId() const;
+
+	// IEvent interface
+	/// Return the event type
+	virtual const EventType& GetEventType() const;
+
+	/// Serialize the event to an output stream
+	virtual void Serialize(std::ostream& out) const;
+
+	/// Deserialize the event from an input stream
+	virtual void Deserialize(std::istream& in);
+
+	/// Return a copy of the event
+	virtual IEventPtr Copy() const;
+
+	/// Return the name of the event
+	virtual const char* GetName() const;
+
+	/// Build the event from lua script
+	virtual bool BuildEventFromSCript();
+
+	/// Export this event so it can be called by script
+	EXPORT_FOR_SCRIPT_EVENT(Event_RequestDestroyGameObject);
+
+public:
+	/// The event type
+	static const EventType sk_EventType;
+
+private:
+	/// The game object for this event
+	GameObjectId m_ObjectId;
+};
+
+
+/// Register script events from the engine
+extern void RegisterEngineScriptEvents();
