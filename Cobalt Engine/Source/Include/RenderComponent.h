@@ -56,23 +56,82 @@ protected:
 	Color m_Color;
 };
 
+
+/**
+	Represents a render component built from a mesh.
+*/
+class MeshRenderComponent : public BaseRenderComponent
+{
+public:
+	virtual const char* GetName() const;
+
+protected:
+	/// Factory method to create appropriate scene node
+	virtual shared_ptr<SceneNode> CreateSceneNode() override;
+
+	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
+
+public:
+	/// Name of the component
+	static const char* g_Name;
+};
+
+
 /**
 	Render component for lights.
 */
 class LightRenderComponent : public BaseRenderComponent
 {
 public:
-	LightRenderComponent();
+	/// Default Constructor
+	LightRenderComponent() { }
+
+	/// Return the name of the component
 	virtual const char* GetName() const;
 
 protected:
 	virtual bool DelegateInit(TiXmlElement* pData) override;
+
+	/// Factory method to create appropriate scene node
 	virtual shared_ptr<SceneNode> CreateSceneNode() override;
 
 	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
+
 public:
+	/// Name of the component
 	static const char* g_Name;
 	
 private:
+	/// Properties of a light component
 	LightProperties m_Properties;
+};
+
+
+/**
+	Render component for sky objects.
+*/
+class SkyRenderComponent : public BaseRenderComponent
+{
+public:
+	/// Default constructor
+	SkyRenderComponent() { }
+
+	/// Return the name of the component
+	virtual const char* GetName() const;
+
+protected:
+	virtual bool DelegateInit(TiXmlElement* pData) override;
+
+	/// Factory method to create appropriate scene node
+	virtual shared_ptr<SceneNode> CreateSceneNode() override;
+
+	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
+
+public:
+	// Name of the component
+	static const char* g_Name;
+
+private:
+	/// Name of the texture resource for the sky
+	std::string m_TextureResource;
 };

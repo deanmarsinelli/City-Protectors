@@ -5,9 +5,13 @@
 	by Mike McShaffry and David Graham
 */
 
+#include "D3DSkyNode9.h"
+#include "D3DSkyNode11.h"
 #include "EngineStd.h"
 #include "Events.h"
+#include "Logger.h"
 #include "RenderComponent.h"
+#include "SkyNode.h"
 #include "StringUtil.h"
 
 //====================================================
@@ -97,4 +101,160 @@ shared_ptr<SceneNode> BaseRenderComponent::GetSceneNode()
 		m_pSceneNode = CreateSceneNode();
 
 	return m_pSceneNode;
+}
+
+
+//====================================================
+//	MeshRenderComponent definitions
+//====================================================
+const char* MeshRenderComponent::GetName() const
+{
+	return g_Name;
+}
+
+shared_ptr<SceneNode> MeshRenderComponent::CreateSceneNode()
+{
+	return shared_ptr<SceneNode>();
+}
+
+void MeshRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
+{
+	CB_ERROR("MeshRenderComponent::GenerateSubclassXml() not implemented");
+}
+
+
+//====================================================
+//	LightRenderComponent definitions
+//====================================================
+const char* LightRenderComponent::GetName() const
+{
+	return g_Name;
+}
+
+bool LightRenderComponent::DelegateInit(TiXmlElement* pData)
+{
+	TiXmlElement* pLight = pData->FirstChildElement("Light");
+
+	TiXmlElement* pAttenuationNode = nullptr;
+	pAttenuationNode = pLight->FirstChildElement("Attenuation");
+	if (pAttenuationNode)
+	{
+		double temp;
+		pAttenuationNode->Attribute("const", &temp);
+		m_Properties.m_Attenuation[0] = (float)temp;
+
+		pAttenuationNode->Attribute("linear", &temp);
+		m_Properties.m_Attenuation[1] = (float)temp;
+
+		pAttenuationNode->Attribute("exp", &temp);
+		m_Properties.m_Attenuation[2] = (float)temp;
+	}
+
+	TiXmlElement* pShapeNode = nullptr;
+	pShapeNode = pLight->FirstChildElement("Shape");
+	if (pShapeNode)
+	{
+		double temp;
+		pShapeNode->Attribute("range", &temp);
+		m_Properties.m_Range = (float)temp;
+
+		pShapeNode->Attribute("falloff", &temp);
+		m_Properties.m_Falloff = (float)temp;
+
+		pShapeNode->Attribute("theta", &temp);
+		m_Properties.m_Theta = (float)temp;
+
+		pShapeNode->Attribute("phi", &temp);
+		m_Properties.m_Phi = (float)temp;
+	}
+
+	return true;
+}
+
+shared_ptr<SceneNode> LightRenderComponent::CreateSceneNode()
+{
+	WeakBaseRenderComponentPtr weakThis(this);
+	switch (WindowsApp::GetRendererImpl())
+	{
+	case WindowsApp::Renderer::Renderer_D3D11:
+		return shared_ptr<SceneNode>(CB_NEW D3DLightNode11(m_pOwner->GetId(), weakThis, m_Properties, &m_pOwner->transform.GetTransform()));
+	
+	case WindowsApp::Renderer::Renderer_D3D9:
+		return shared_ptr<SceneNode>(CB_NEW D3DLightNode9(m_pOwner->GetId(), weakThis, m_Properties, &m_pOwner->transform.GetTransform()));
+
+	default:
+		CB_ASSERT(0 && "Uknown render implementation in LightRenderComponent");
+	}
+
+	return shared_ptr<SceneNode>();
+}
+
+void LightRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
+{
+	TiXmlElement* pSceneNode = CB_NEW TiXmlElement("Light");
+
+	// attenuation
+	TiXmlElement* pAttenuation = CB_NEW TiXmlElement("Attenuation");
+	pAttenuation->SetAttribute("const", ToStr(m_Properties.m_Attenuation[0]).c_str());
+	pAttenuation->SetAttribute("linear", ToStr(m_Properties.m_Attenuation[1]).c_str());
+	pAttenuation->SetAttribute("exp", ToStr(m_Properties.m_Attenuation[2]).c_str());
+	pSceneNode->LinkEndChild(pAttenuation);
+
+	// shape
+	TiXmlElement* pShape = CB_NEW TiXmlElement("Shape");
+	pAttenuation->SetAttribute("range", ToStr(m_Properties.m_Range).c_str());
+	pAttenuation->SetAttribute("falloff", ToStr(m_Properties.m_Falloff).c_str());
+	pAttenuation->SetAttribute("theta", ToStr(m_Properties.m_Theta).c_str());
+	pAttenuation->SetAttribute("phi", ToStr(m_Properties.m_Phi).c_str());
+	pSceneNode->LinkEndChild(pAttenuation);
+
+	pBaseElement->LinkEndChild(pSceneNode);
+}
+
+
+//====================================================
+//	SkyRenderComponent definitions
+//====================================================
+const char* SkyRenderComponent::GetName() const
+{
+	return g_Name;
+}
+
+bool SkyRenderComponent::DelegateInit(TiXmlElement* pData)
+{
+	TiXmlElement* pTexture = pData->FirstChildElement("Texture");
+	if (pTexture)
+	{
+		m_TextureResource = pTexture->FirstChild()->Value();
+	}
+
+	return true;
+}
+
+shared_ptr<SceneNode> SkyRenderComponent::CreateSceneNode()
+{
+	shared_ptr<SkyNode> sky;
+	if (WindowsApp::GetRendererImpl() == WindowsApp::Renderer::Renderer_D3D11)
+	{
+		sky = shared_ptr<SkyNode>(CB_NEW D3DSkyNode11(m_TextureResource.c_str()));
+	}
+	else if (WindowsApp::GetRendererImpl() == WindowsApp::Renderer::Renderer_D3D9)
+	{
+		sky = shared_ptr<SkyNode>(CB_NEW D3DSkyNode9(m_TextureResource.c_str()));
+	}
+	else
+	{
+		CB_ERROR("Unknown renderer implementation in SkyRenderComponent::CreateSceneNode");
+	}
+
+	return sky;
+}
+
+void SkyRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
+{
+	TiXmlElement* pTextureNode = CB_NEW TiXmlElement("Texture");
+	TiXmlText* pTextureText = CB_NEW TiXmlText(m_TextureResource.c_str());
+	pTextureNode->LinkEndChild(pTextureText);
+	
+	pBaseElement->LinkEndChild(pTextureNode);
 }
