@@ -43,6 +43,24 @@ struct MaterialData
 
 
 /**
+	Helper function to convert a Vec3 to a btVector3
+*/
+static btVector3 Vec3_to_btVector3(const Vec3& vec3)
+{
+	return btVector3(vec3.x, vec3.y, vec3.z);
+}
+
+
+/**
+	Helper function to convert a btVector3 to a Vec3.
+*/
+static Vec3 btVector3_to_Vec3(const btVector3& btvec)
+{
+	return Vec3(btvec.x(), btvec.y(), btvec.z());
+}
+
+
+/**
 	Helper function to convert a Mat4x4 to a btTransform.
 */
 static btTransform Mat4x4_to_btTransform(const Mat4x4& mat)
@@ -195,12 +213,12 @@ private:
 
 private:
 	// objects used by Bullet SDK
-	shared_ptr<btDynamicsWorld>			m_DynamicsWorld;
-	shared_ptr<btBroadphaseInterface>	m_Broadphase;
-	shared_ptr<btCollisionDispatcher>	m_Dispatcher;
-	shared_ptr<btConstraintSolver>		m_Solver;
-	shared_ptr<btDefaultCollisionConfiguration> m_CollisionConfiguration;
-	// shared_ptr<BulletDebugDrawer> m_DebugDrawer;
+	unique_ptr<btDynamicsWorld>			m_DynamicsWorld;
+	unique_ptr<btBroadphaseInterface>	m_Broadphase;
+	unique_ptr<btCollisionDispatcher>	m_Dispatcher;
+	unique_ptr<btConstraintSolver>		m_Solver;
+	unique_ptr<btDefaultCollisionConfiguration> m_CollisionConfiguration;
+	// unique_ptr<BulletDebugDrawer> m_DebugDrawer;
 
 	// tables read from the XML
 	DensityTable m_DensityTable;
@@ -248,22 +266,22 @@ bool BulletPhysics::Initialize()
 	LoadXml();
 
 	// this object controls bullet SDK's internal memory management during collision pass
-	m_CollisionConfiguration = shared_ptr<btDefaultCollisionConfiguration>(CB_NEW btDefaultCollisionConfiguration);
+	m_CollisionConfiguration.reset(CB_NEW btDefaultCollisionConfiguration);
 
 	// this manages how bullet detects precise collisions between pairs of objects
-	m_Dispatcher = shared_ptr<btCollisionDispatcher>(CB_NEW btCollisionDispatcher(m_CollisionConfiguration.get()));
+	m_Dispatcher.reset(CB_NEW btCollisionDispatcher(m_CollisionConfiguration.get()));
 
 	// used to quickly detect collisions between object, imprecisely. 
 	// if a collision passes this phase it will be passed to the dispatcher
-	m_Broadphase = shared_ptr<btDbvtBroadphase>(CB_NEW btDbvtBroadphase);
+	m_Broadphase.reset(CB_NEW btDbvtBroadphase);
 
-	m_Solver = shared_ptr<btSequentialImpulseConstraintSolver>(CB_NEW btSequentialImpulseConstraintSolver);
+	m_Solver.reset(CB_NEW btSequentialImpulseConstraintSolver);
 
 	// this is the main interface point for the physics world
-	m_DynamicsWorld = shared_ptr<btDiscreteDynamicsWorld>(CB_NEW btDiscreteDynamicsWorld(
-		m_Dispatcher.get(), m_Broadphase.get(), m_Solver.get(), m_CollisionConfiguration.get()));
+	m_DynamicsWorld.reset(CB_NEW btDiscreteDynamicsWorld(m_Dispatcher.get(), 
+		m_Broadphase.get(), m_Solver.get(), m_CollisionConfiguration.get()));
 
-	// m_DebugDrawer = shared_ptr<BulletDebugDrawer>(CB_NEW DebugDrawer);
+	// m_DebugDrawer.reset(CB_NEW DebugDrawer);
 	// m_DebugDrawer->ReadOptions();
 
 	if (!m_CollisionConfiguration || !m_Dispatcher || !m_Broadphase || !m_Solver
@@ -319,8 +337,189 @@ void BulletPhysics::OnUpdate(float deltaTime)
 	m_DynamicsWorld->stepSimulation(deltaTime, 4);
 }
 
+
+void BulletPhysics::AddSphere(float radius, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial)
+{
+	StrongGameObjectPtr pStrongObject = MakeStrongPtr(pGameObject);
+	if (!pStrongObject)
+	{
+		CB_ERROR("Must attach a game object to the sphere");
+		return;
+	}
+
+	// create a sphere collider
+	btSphereShape* sphereShape = new btSphereShape(radius);
+
+	// calculate mass using specific gravity (density)
+	float specificGravity = LookupSpecificGravity(densityStr);
+	const float volume = (4.0f / 3.0f) * CB_PI * radius * radius * radius;
+	const btScalar mass = volume * specificGravity;
+
+	AddShape(pStrongObject, sphereShape, mass, physicsMaterial);
+}
+
+
+void BulletPhysics::AddBox(const Vec3& dimensions, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial)
+{
+	StrongGameObjectPtr pStrongObject = MakeStrongPtr(pGameObject);
+	if (!pStrongObject)
+	{
+		CB_ERROR("Must attach a game object to the box");
+		return;
+	}
+
+	// create box collider
+	btBoxShape* boxShape = new btBoxShape(Vec3_to_btVector3(dimensions));
+
+	// calculate mass using specific gravity (density)
+	float specificGravity = LookupSpecificGravity(densityStr);
+	const float volume = dimensions.x * dimensions.y * dimensions.z;
+	const btScalar mass = volume * specificGravity;
+
+	AddShape(pStrongObject, boxShape, mass, physicsMaterial);
+}
+
+
+void BulletPhysics::AddPointCloud(Vec3* verts, int numPoints, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial)
+{
+	// used to create a convex mesh shape
+	StrongGameObjectPtr pStrongObject = MakeStrongPtr(pGameObject);
+	if (!pStrongObject)
+	{
+		CB_ERROR("Must attach a game object to the point cloud");
+		return;
+	}
+
+	btConvexHullShape* shape = new btConvexHullShape();
+	
+	// add points to the shape one at a time
+	for (int i = 0; i < numPoints; i++)
+	{
+		shape->addPoint(Vec3_to_btVector3(verts[i]));
+	}
+
+	// approximate mass using bounding box
+	btVector3 aabbMin(0, 0, 0), aabbMax(0, 0, 0);
+	shape->getAabb(btTransform::getIdentity(), aabbMin, aabbMax);
+
+	const btVector3 aabbExtents = aabbMax - aabbMin;
+	float specificGravity = LookupSpecificGravity(densityStr);
+	const float volume = aabbExtents.x() * aabbExtents.y() * aabbExtents.z();
+	const btScalar mass = volume * specificGravity;
+
+	AddShape(pStrongObject, shape, mass, physicsMaterial);
+}
+
+
+void BulletPhysics::RemoveGameObject(GameObjectId id)
+{
+	// remove an object from the physics sim
+	btRigidBody* body = FindBulletRigidBody(id);
+	if (body)
+	{
+		RemoveCollisionObject(body);
+		m_ObjectIdToRigidBody.erase(id);
+		m_RigidBodyToObjectId.erase(body);
+	}
+}
+
+
+void BulletPhysics::RenderDiagnostics()
+{
+	m_DynamicsWorld->debugDrawWorld();
+}
+
+
+void BulletPhysics::CreateTrigger(WeakGameObjectPtr pGameObject, const Vec3& position, const float dim)
+{
+	StrongGameObjectPtr pStrongObject = MakeStrongPtr(pGameObject);
+	if (!pStrongObject)
+	{
+		CB_ERROR("Must attach a game object to the trigger");
+		return;
+	}
+
+	// create the collision body
+	btBoxShape* boxShape = new btBoxShape(Vec3_to_btVector3(Vec3(dim, dim, dim)));
+
+	// 0 mass, this trigger is not moveable
+	const btScalar mass = 0;
+
+	// set the initial position of the trigger from the object
+	Mat4x4 triggerTransform = Mat4x4::Identity;
+	triggerTransform.SetPosition(position);
+	ObjectMotionState* motionState = CB_NEW ObjectMotionState(triggerTransform);
+
+	// create the rigid body
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, motionState, boxShape, btVector3(0, 0, 0));
+	btRigidBody* body = new btRigidBody(rbInfo);
+
+	// add the body to the world
+	m_DynamicsWorld->addRigidBody(body);
+
+	// mark the body as a trigger so it does not physically collide with object
+	body->setCollisionFlags(body->getCollisionFlags() | btRigidBody::CF_NO_CONTACT_RESPONSE);
+	
+	// update the maps
+	m_ObjectIdToRigidBody[pStrongObject->GetId()] = body;
+	m_RigidBodyToObjectId[body] = pStrongObject->GetId();
+}
+
+
+void BulletPhysics::ApplyForce(const Vec3& dir, float newtons, GameObjectId id)
+{
+	btRigidBody* body = FindBulletRigidBody(id);
+	if (body)
+	{
+		body->setActivationState(DISABLE_DEACTIVATION);
+		btVector3 force(dir.x * newtons, dir.y * newtons, dir.z * newtons);
+
+		body->applyCentralImpulse(force);
+	}
+}
+
+
+void BulletPhysics::ApplyTorque(const Vec3& dir, float newtons, GameObjectId id)
+{
+	btRigidBody* body = FindBulletRigidBody(id);
+	if (body)
+	{
+		body->setActivationState(DISABLE_DEACTIVATION);
+		btVector3 torque(dir.x * newtons, dir.y * newtons, dir.z * newtons);
+
+		body->applyTorqueImpulse(torque);
+	}
+}
+
+
+bool BulletPhysics::KinematicMove(const Mat4x4& mat, GameObjectId id)
+{
+	// forces a physics object to a new location
+	btRigidBody* body = FindBulletRigidBody(id);
+	if (body)
+	{
+		body->setActivationState(DISABLE_DEACTIVATION);
+		body->setWorldTransform(Mat4x4_to_btTransform(mat));
+		return true;
+	}
+
+	return false;
+}
+
+
 // C function to create the physics world
 IGamePhysics* CreateGamePhysics()
 {
+	unique_ptr<IGamePhysics> gamePhysics;
+	gamePhysics.reset(CB_NEW BulletPhysics);
 
+	if (gamePhysics.get() && !gamePhysics->Initialize())
+	{
+		// failed to init
+		CB_ERROR("Failed to initialize physics");
+		gamePhysics.reset();
+	}
+
+	// return the raw pointer to the game physics
+	return gamePhysics.release();
 }

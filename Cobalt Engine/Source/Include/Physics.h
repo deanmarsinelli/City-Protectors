@@ -7,5 +7,5 @@
 
 #include "interfaces.h"
 
-/// Create the physics world
+/// Create the physics world and return a pointer to it
 extern IGamePhysics* CreateGamePhysics();

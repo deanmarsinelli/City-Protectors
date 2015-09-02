@@ -16,6 +16,7 @@
 #include <tinyxml.h>
 #include <Windows.h>
 
+using std::unique_ptr;
 using std::shared_ptr;
 using std::weak_ptr;
 using std::static_pointer_cast;
