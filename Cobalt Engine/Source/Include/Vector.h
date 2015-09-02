@@ -76,6 +76,29 @@ public:
 	float Dot(const Vec4& vec) { return D3DXVec4Dot(this, &vec); }
 };
 
+
+/// Calculate the velocity of an object given 2 points and time
+inline Vec3 CalcVelocity(const Vec3& p0, const Vec3& p1, float time)
+{
+	return (p1 - p0) / time;
+}
+
+
+/// Calculate the acceleration of an object given 2 velocities and time
+inline Vec3 CalcAcceleration(const Vec3& v0, const Vec3& v1, float time)
+{
+	return (v1 - v0) / time;
+}
+
+
+/// Update position and velocity vectors given a known acceleration and time
+inline Vec3 HandleAccel(Vec3& pos, Vec3& vel, Vec3& accel, float time)
+{
+	vel += accel * time;
+	pos += vel * time;
+}
+
+
 /// A 2D Vector with x and y coordinates
 typedef D3DXVECTOR2 Vec2;
 

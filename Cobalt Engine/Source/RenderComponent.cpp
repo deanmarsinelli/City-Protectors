@@ -119,7 +119,7 @@ shared_ptr<SceneNode> MeshRenderComponent::CreateSceneNode()
 
 void MeshRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
 {
-	CB_ERROR("MeshRenderComponent::GenerateSubclassXml() not implemented");
+	CB_ERROR("MeshRenderComponent::CreateInheritedXmlElements() not implemented");
 }
 
 
