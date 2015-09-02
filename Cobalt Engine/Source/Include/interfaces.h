@@ -553,20 +553,68 @@ public:
 //====================================================
 //	Physics Interfaces
 //====================================================
+/**
+	Interface for a generic physics API.
+*/
 class IGamePhysics
 {
 public:
+	/// Initialize the physics world
+	virtual bool Initialize() = 0;
+
+	/// Update visible geometry based on physical location
+	virtual void SyncVisibleScene() = 0;
+
+	/// Step the physics world
+	virtual void OnUpdate(float deltaTime) = 0;
+
+	/// Add a sphere to the physics world
+	virtual void AddSphere(float radius, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial) = 0;
+
+	/// Add box to the physics world
+	virtual void AddBox(const Vec3& dimensions, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial) = 0;
+	
+	/// Add a point cloud to the physics world
+	virtual void AddPointCloud(Vec3* verts, int numPoints, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial) = 0;
+
+	/// Remove a game object from the the physics world
+	virtual void RemoveGameObject(GameObjectId id) = 0;
+
+	/// Draw debugging info for the physics world
+	virtual void RenderDiagnostics() = 0;
+
+	/// Add a trigger object to the physics world
+	virtual void CreateTrigger(WeakGameObjectPtr pGameObject, const Vec3& position, const float dim) = 0;
+
 	/// Apply a directional force to a game object
 	virtual void ApplyForce(const Vec3& dir, float newtons, GameObjectId id) = 0;
 	
 	/// Apply torque to a game object
 	virtual void ApplyTorque(const Vec3& dir, float newtons, GameObjectId id) = 0;
+
+	// TODO
+	virtual void RotateY(GameObjectId id, float angleRadians, float time = 0);
+	virtual float GetOrientationY(GameObjectId id) = 0;
+	virtual void StopGameObject(GameObjectId id) = 0;
+	virtual Vec3 GetVelocity(GameObjectId id) = 0;
+	virtual void SetVelocity(GameObjectId id, const Vec3& vel) = 0;
+	virtual Vec3 GetAngularVelocity(GameObjectId id) = 0;
+	virtual void SetAngularVelocity(GameObjectId id, const Vec3& vel) = 0;
+	virtual void Translate(GameObjectId id, const Vec3& vec) = 0;
+	virtual void SetTransform(const GameObjectId id, const Mat4x4& mat) = 0;
+	virtual Mat4x4 GetTransform(const GameObjectId id) = 0;
+
+	/// Virtual destructor
+	virtual ~IGamePhysics() { };
 };
 
 
 //====================================================
 //	Logic Interfaces
 //====================================================
+/**
+	Interface for the logic layer of a game.
+*/
 class IGameLogic
 {
 public:

@@ -92,7 +92,7 @@ inline Vec3 CalcAcceleration(const Vec3& v0, const Vec3& v1, float time)
 
 
 /// Update position and velocity vectors given a known acceleration and time
-inline Vec3 HandleAccel(Vec3& pos, Vec3& vel, Vec3& accel, float time)
+inline Vec3 HandleAccel(Vec3& pos, Vec3& vel, const Vec3& accel, float time)
 {
 	vel += accel * time;
 	pos += vel * time;
