@@ -37,13 +37,13 @@ public:
 	/// Return the x, y, z position values
 	Vec3 GetPosition() const;
 
-	/// Return the forward direction
+	/// Return the forward vector for the matrix
 	Vec3 GetDirection() const;
 
-	/// Return the up direction
+	/// Return the up vector for the matrix
 	Vec3 GetUp() const;
 
-	/// Return the "right" direction 
+	/// Return the "right" vector for the matrix 
 	Vec3 GetRight() const;
 
 	/// Return the yaw, pitch and roll values

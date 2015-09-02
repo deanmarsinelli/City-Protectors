@@ -57,6 +57,7 @@ Vec3 Mat4x4::GetDirection() const
 {
 	Mat4x4 justRot = *this;
 	justRot.SetPosition(Vec3(0.0f, 0.0f, 0.0f));
+	// transform the positive z vector by the current matrix
 	Vec3 forward = justRot.Transform(g_Forward);
 	return forward;
 }
