@@ -507,6 +507,131 @@ bool BulletPhysics::KinematicMove(const Mat4x4& mat, GameObjectId id)
 }
 
 
+void BulletPhysics::RotateY(GameObjectId id, float angleRadians, float time)
+{
+	btRigidBody* pRigidBody = FindBulletRigidBody(id);
+	CB_ASSERT(pRigidBody);
+
+	btTransform angleTransform;
+	angleTransform.setIdentity();
+	// rotate about y axis
+	angleTransform.getBasis().setEulerYPR(0, angleRadians, 0);
+
+	// multiply the transforms
+	pRigidBody->setCenterOfMassTransform(pRigidBody->getCenterOfMassTransform() * angleTransform);
+}
+
+
+float BulletPhysics::GetOrientationY(GameObjectId id)
+{
+	btRigidBody* pRigidBody = FindBulletRigidBody(id);
+	CB_ASSERT(pRigidBody);
+
+	const btTransform& objectTramsform = pRigidBody->getCenterOfMassTransform();
+	btMatrix3x3 objectRotationMatrix(objectTramsform.getBasis());
+
+	btVector3 startingVec(0, 0, 1);
+	btVector3 endingVec = objectRotationMatrix * startingVec;
+	endingVec.setY(0); // we only want the XZ plane
+
+	const float endingVecLength = endingVec.length();
+	if (endingVecLength < 0.001)
+	{
+		return 0;
+	}
+	else
+	{
+		btVector3 cross = startingVec.cross(endingVec);
+		float sign = cross.getY() > 0 ? 1.0f : -1.0f;
+		return (acosf(startingVec.dot(endingVec) / endingVecLength) * sign);
+	}
+
+	// fail case
+	return FLT_MAX;
+}
+
+
+void BulletPhysics::StopGameObject(GameObjectId id)
+{
+	// set the velocity of the object to 0
+	SetVelocity(id, Vec3(0.0f, 0.0f, 0.0f));
+}
+
+
+Vec3 BulletPhysics::GetVelocity(GameObjectId id)
+{
+	btRigidBody* pRigidBody = FindBulletRigidBody(id);
+	CB_ASSERT(pRigidBody);
+	if (!pRigidBody)
+		return Vec3();
+
+	btVector3 btVelocity = pRigidBody->getLinearVelocity();
+	return btVector3_to_Vec3(btVelocity);
+}
+
+
+void BulletPhysics::SetVelocity(GameObjectId id, const Vec3& vel)
+{
+	btRigidBody* pRigidBody = FindBulletRigidBody(id);
+	CB_ASSERT(pRigidBody);
+	if (!pRigidBody)
+		return;
+
+	btVector3 btVelocity = Vec3_to_btVector3(vel);
+	pRigidBody->setLinearVelocity(btVelocity);
+}
+
+
+Vec3 BulletPhysics::GetAngularVelocity(GameObjectId id)
+{
+	btRigidBody* pRigidBody = FindBulletRigidBody(id);
+	CB_ASSERT(pRigidBody);
+	if (!pRigidBody)
+		return Vec3();
+
+	btVector3 btVelocity = pRigidBody->getAngularVelocity();
+	return btVector3_to_Vec3(btVelocity);
+}
+
+
+void BulletPhysics::SetAngularVelocity(GameObjectId id, const Vec3& vel)
+{
+	btRigidBody* pRigidBody = FindBulletRigidBody(id);
+	CB_ASSERT(pRigidBody);
+	if (!pRigidBody)
+		return;
+
+	btVector3 btVelocity = Vec3_to_btVector3(vel);
+	pRigidBody->setAngularVelocity(btVelocity);
+}
+
+
+void BulletPhysics::Translate(GameObjectId id, const Vec3& vec)
+{
+	btRigidBody* pRigidBody = FindBulletRigidBody(id);
+	CB_ASSERT(pRigidBody);
+	btVector3 btVec = Vec3_to_btVector3(vec);
+	pRigidBody->translate(btVec);
+}
+
+
+void BulletPhysics::SetTransform(const GameObjectId id, const Mat4x4& mat)
+{
+	// force the object into a position
+	KinematicMove(mat, id);
+}
+
+
+Mat4x4 BulletPhysics::GetTransform(const GameObjectId id)
+{
+	btRigidBody* pRigidBody = FindBulletRigidBody(id);
+	CB_ASSERT(pRigidBody);
+
+	const btTransform& objectTransform = pRigidBody->getCenterOfMassTransform();
+	return btTransform_to_Mat4x4(objectTransform);
+}
+
+
 // C function to create the physics world
 IGamePhysics* CreateGamePhysics()
 {
