@@ -436,6 +436,9 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEvents.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
