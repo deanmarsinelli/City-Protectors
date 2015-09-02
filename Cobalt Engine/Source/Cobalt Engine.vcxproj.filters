@@ -238,6 +238,12 @@
     <ClInclude Include="Include\D3DShaderMeshNode11.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Physics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\PhysicsEvents.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -426,6 +432,9 @@
     </ClCompile>
     <ClCompile Include="D3DShaderMeshNode11.cpp">
       <Filter>Graphics\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

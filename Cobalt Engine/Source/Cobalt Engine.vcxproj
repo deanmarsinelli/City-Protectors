@@ -61,7 +61,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus; $(ProjectDir)\3rdParty\bullet-2.79\src;</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -82,7 +82,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus;$(ProjectDir)\3rdParty\bullet-2.79\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus; $(ProjectDir)\3rdParty\bullet-2.79\src;$(ProjectDir)\3rdParty\bullet-2.79\src;</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
@@ -145,7 +145,9 @@
     <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\MessageBox.h" />
     <ClInclude Include="Include\MovementController.h" />
+    <ClInclude Include="Include\Physics.h" />
     <ClInclude Include="Include\PhysicsComponent.h" />
+    <ClInclude Include="Include\PhysicsEvents.h" />
     <ClInclude Include="Include\Plane.h" />
     <ClInclude Include="Include\Process.h" />
     <ClInclude Include="Include\ProcessManager.h" />
@@ -215,6 +217,7 @@
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MessageBox.cpp" />
     <ClCompile Include="MovementController.cpp" />
+    <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="ProcessManager.cpp" />

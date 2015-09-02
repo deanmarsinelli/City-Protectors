@@ -592,8 +592,11 @@ public:
 	/// Apply torque to a game object
 	virtual void ApplyTorque(const Vec3& dir, float newtons, GameObjectId id) = 0;
 
+	/// Move an object with kinematics (not forces)
+	virtual bool KinematicMove(const Mat4x4& mat, GameObjectId id) = 0;
+
 	// TODO
-	virtual void RotateY(GameObjectId id, float angleRadians, float time = 0);
+	virtual void RotateY(GameObjectId id, float angleRadians, float time) = 0;
 	virtual float GetOrientationY(GameObjectId id) = 0;
 	virtual void StopGameObject(GameObjectId id) = 0;
 	virtual Vec3 GetVelocity(GameObjectId id) = 0;
