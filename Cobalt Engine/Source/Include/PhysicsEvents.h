@@ -208,6 +208,7 @@ private:
 */
 class Event_PhysSeparation : public BaseEvent
 {
+public:
 	Event_PhysSeparation()
 	{
 		m_ObjectA = INVALID_GAMEOBJECT_ID;

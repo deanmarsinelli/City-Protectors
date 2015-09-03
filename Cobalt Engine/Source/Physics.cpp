@@ -5,6 +5,7 @@
 	by Mike McShaffry and David Graham
 */
 
+#include <algorithm>
 #include <btBulletDynamicsCommon.h>
 #include <btBulletCollisionCommon.h>
 #include <memory>
@@ -20,6 +21,7 @@
 #include "Matrix.h"
 #include "Physics.h"
 #include "PhysicsEvents.h"
+#include "XmlResource.h"
 
 /**
 	Physics material properties.
@@ -201,7 +203,7 @@ private:
 
 	// helpers for sending events relating to collision pairs
 	void SendCollisionPairAddEvent(const btPersistentManifold* manifold, const btRigidBody* body0, const btRigidBody* body1);
-	void SendCollisionPairRemovedEvent(const btRigidBody* body0, const btRigidBody* body1);
+	void SendCollisionPairRemoveEvent(const btRigidBody* body0, const btRigidBody* body1);
 
 	// add a shape to the physics world
 	void AddShape(StrongGameObjectPtr pGameObject, btCollisionShape* shape, float mass, const std::string& physicsMaterial);
@@ -629,6 +631,338 @@ Mat4x4 BulletPhysics::GetTransform(const GameObjectId id)
 
 	const btTransform& objectTransform = pRigidBody->getCenterOfMassTransform();
 	return btTransform_to_Mat4x4(objectTransform);
+}
+
+
+void BulletPhysics::LoadXml()
+{
+	// load physics config file
+	TiXmlElement* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement("config\\Physics.xml");
+	CB_ASSERT(pRoot);
+
+	// load materials
+	TiXmlElement* pParentNode = pRoot->FirstChildElement("PhysicsMaterials");
+	CB_ASSERT(pParentNode);
+	for (TiXmlElement* pNode = pParentNode->FirstChildElement(); pNode; pNode = pNode->NextSiblingElement())
+	{
+		double restitution = 0.0;
+		double friction = 0.0;
+		pNode->Attribute("restitution", &restitution);
+		pNode->Attribute("friction", &friction);
+		m_MaterialTable.insert(std::make_pair(pNode->Value(), MaterialData((float)restitution, (float)friction)));
+	}
+
+	// load densities
+	pParentNode = pRoot->FirstChildElement("DensityTable");
+	CB_ASSERT(pParentNode);
+	for (TiXmlElement* pNode = pParentNode->FirstChildElement(); pNode; pNode = pNode->NextSiblingElement())
+	{
+		m_DensityTable.insert(std::make_pair(pNode->Value(), (float)atof(pNode->FirstChild()->Value())));
+	}
+}
+
+
+float BulletPhysics::LookupSpecificGravity(const std::string& densityStr)
+{
+	// return the density of an object
+	float density = 0;
+	auto it = m_DensityTable.find(densityStr);
+	if (it != m_DensityTable.end())
+	{
+		density = it->second;
+	}
+	else
+	{
+		CB_ERROR("Could not find density");
+	}
+
+	return density;
+}
+
+
+MaterialData BulletPhysics::LookupMaterialData(const std::string& materialStr)
+{
+	// return material data
+	auto it = m_MaterialTable.find(materialStr);
+	if (it != m_MaterialTable.end())
+	{
+		return it->second;
+	}
+	else
+	{
+		return MaterialData(0.0f, 0.0f);
+	}
+}
+
+
+btRigidBody* BulletPhysics::FindBulletRigidBody(GameObjectId id) const
+{
+	// find a rigid body given an object's id
+	auto it = m_ObjectIdToRigidBody.find(id);
+	if (it != m_ObjectIdToRigidBody.end())
+	{
+		return it->second;
+	}
+
+	return nullptr;
+}
+
+
+GameObjectId BulletPhysics::FindObjectId(const btRigidBody* body) const
+{
+	// return a game object id given a rigid body
+	auto it = m_RigidBodyToObjectId.find(body);
+	if (it != m_RigidBodyToObjectId.end())
+	{
+		return it->second;
+	}
+
+	return GameObjectId();
+}
+
+
+void BulletPhysics::SendCollisionPairAddEvent(const btPersistentManifold* manifold, const btRigidBody* body0, const btRigidBody* body1)
+{
+	// send an event for 2 bodies colliding
+	if (body0->getUserPointer() || body1->getUserPointer())
+	{
+		// only triggers have non NULL user pointers, so this is a trigger collision
+		const btRigidBody* triggerBody;
+		const btRigidBody* otherBody;
+
+		if (body0->getUserPointer())
+		{
+			// body0 is the trigger
+			triggerBody = body0;
+			otherBody = body1;
+		}
+		else
+		{
+			// body1 is the trigger
+			otherBody = body0;
+			triggerBody = body1;
+		}
+		
+		// send trigger event
+		const int triggerId = *static_cast<int*>(triggerBody->getUserPointer());
+		shared_ptr<Event_PhysTriggerEnter> pEvent(CB_NEW Event_PhysTriggerEnter(triggerId, FindObjectId(otherBody)));
+		IEventManager::Get()->QueueEvent(pEvent);
+	}
+	else
+	{
+		// two non-trigger bodies
+		const GameObjectId id0 = FindObjectId(body0);
+		const GameObjectId id1 = FindObjectId(body1);
+
+		if (id0 == INVALID_GAMEOBJECT_ID || id1 == INVALID_GAMEOBJECT_ID)
+		{
+			// something collided with a non game object, ignore it
+			return;
+		}
+
+		// send collision began event
+		Vec3List collisionPoints;
+		Vec3 sumNormalForce;
+		Vec3 sumFrictionForce;
+		for (int i = 0; i < manifold->getNumContacts(); i++)
+		{
+			const btManifoldPoint& point = manifold->getContactPoint(i);
+
+			collisionPoints.push_back(btVector3_to_Vec3(point.getPositionWorldOnB()));
+			sumNormalForce += btVector3_to_Vec3(point.m_combinedRestitution * point.m_normalWorldOnB);
+			sumFrictionForce += btVector3_to_Vec3(point.m_combinedFriction * point.m_lateralFrictionDir1);
+		}
+
+		// send game event
+		shared_ptr<Event_PhysCollision> pEvent(CB_NEW Event_PhysCollision(id0, id1, sumNormalForce, sumFrictionForce, collisionPoints));
+		IEventManager::Get()->QueueEvent(pEvent);
+	}
+}
+
+
+void BulletPhysics::SendCollisionPairRemoveEvent(const btRigidBody* body0, const btRigidBody* body1)
+{
+	// send an event for 2 bodies colliding
+	if (body0->getUserPointer() || body1->getUserPointer())
+	{
+		// only triggers have non NULL user pointers, so this is a trigger collision
+		const btRigidBody* triggerBody;
+		const btRigidBody* otherBody;
+
+		if (body0->getUserPointer())
+		{
+			// body0 is the trigger
+			triggerBody = body0;
+			otherBody = body1;
+		}
+		else
+		{
+			// body1 is the trigger
+			otherBody = body0;
+			triggerBody = body1;
+		}
+
+		// send trigger event
+		const int triggerId = *static_cast<int*>(triggerBody->getUserPointer());
+		shared_ptr<Event_PhysTriggerLeave> pEvent(CB_NEW Event_PhysTriggerLeave(triggerId, FindObjectId(otherBody)));
+		IEventManager::Get()->QueueEvent(pEvent);
+	}
+	else
+	{
+		// two non-trigger bodies
+		const GameObjectId id0 = FindObjectId(body0);
+		const GameObjectId id1 = FindObjectId(body1);
+
+		if (id0 == INVALID_GAMEOBJECT_ID || id1 == INVALID_GAMEOBJECT_ID)
+		{
+			// something collided with a non game object, ignore it
+			return;
+		}
+
+		// send the game event
+		shared_ptr<Event_PhysSeparation> pEvent(CB_NEW Event_PhysSeparation(id0, id1));
+		IEventManager::Get()->QueueEvent(pEvent);
+	}
+}
+
+
+void BulletPhysics::AddShape(StrongGameObjectPtr pGameObject, btCollisionShape* shape, float mass, const std::string& physicsMaterial)
+{
+	CB_ASSERT(pGameObject);
+
+	// make sure this object is only added once
+	GameObjectId id = pGameObject->GetId();
+	CB_ASSERT(m_ObjectIdToRigidBody.find(id) == m_ObjectIdToRigidBody.end() && "GameObjects can only have one physics body");
+
+	// look up material
+	MaterialData material(LookupMaterialData(physicsMaterial));
+
+	// local inertia defines how the objects mass is distributed
+	btVector3 localInertia(0.0f, 0.0f, 0.0f);
+	if (mass > 0.0f)
+	{
+		shape->calculateLocalInertia(mass, localInertia);
+	}
+
+	// get the objects transform
+	Mat4x4 transform = pGameObject->transform.GetTransform();
+
+	ObjectMotionState* motionState = CB_NEW ObjectMotionState(transform);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, motionState, shape, localInertia);
+
+	// set up material properties
+	rbInfo.m_restitution = material.m_Restitution;
+	rbInfo.m_friction = material.m_Friction;
+
+	// add body to physics world
+	btRigidBody* body = new btRigidBody(rbInfo);
+	m_DynamicsWorld->addRigidBody(body);
+
+	// update the maps
+	m_ObjectIdToRigidBody[id] = body;
+	m_RigidBodyToObjectId[body] = id;
+}
+
+
+void BulletPhysics::RemoveCollisionObject(btCollisionObject* obj)
+{
+	// remove a collision object from the physics world
+	m_DynamicsWorld->removeCollisionObject(obj);
+
+	// remove the pointer from the collision contacts list
+	for (auto it = m_PreviousTickCollisionPairs.begin(); it != m_PreviousTickCollisionPairs.end(); )
+	{
+		// step the iterator by 1
+		auto next = it;
+		++next;
+
+		// remove the object from any currently happening collision
+		if (it->first == obj || it->second == obj)
+		{
+			SendCollisionPairRemoveEvent(it->first, it->second);
+			m_PreviousTickCollisionPairs.erase(it);
+		}
+
+		it = next;
+	}
+
+	// if the object was a rigid body
+	if (btRigidBody* body = btRigidBody::upcast(obj))
+	{
+		// delete the components of the body
+		delete body->getMotionState();
+		delete body->getCollisionShape();
+		delete body->getUserPointer();
+
+		for (int i = body->getNumConstraintRefs() - 1; i >= 0; i--)
+		{
+			btTypedConstraint* constraint = body->getConstraintRef(i);
+			m_DynamicsWorld->removeConstraint(constraint);
+			delete constraint;
+		}
+	}
+
+	delete obj;
+}
+
+
+void BulletPhysics::BulletInternalTickCallback(btDynamicsWorld* world, btScalar timeStep)
+{
+	// called after bullet sdk performs its internal step
+
+	CB_ASSERT(world);
+	CB_ASSERT(world->getWorldUserInfo());
+
+	BulletPhysics* bulletPhysics = static_cast<BulletPhysics*>(world->getWorldUserInfo());
+	CollisionPairs currentTickCollisionPairs;
+
+	// look at all existing collisions
+	btDispatcher* dispatcher = world->getDispatcher();
+	const int numManifolds = dispatcher->getNumManifolds();
+	for (int i = 0; i < numManifolds; i++)
+	{
+		// get the manifold which is the data corresponding to a contact point between two colliders
+		const btPersistentManifold* manifold = dispatcher->getManifoldByIndexInternal(i);
+		CB_ASSERT(manifold);
+
+		// get the colliding bodies
+		const btRigidBody* body0 = static_cast<const btRigidBody *>(manifold->getBody0());
+		const btRigidBody* body1 = static_cast<const btRigidBody *>(manifold->getBody1());
+
+		// swap them if need be
+		const bool swapped = body0 > body1;
+		const btRigidBody* sortedBody0 = swapped ? body1 : body0;
+		const btRigidBody* sortedBody1 = swapped ? body0 : body1;
+
+		// insert the collision pair into the set
+		const CollisionPair pair = std::make_pair(sortedBody0, sortedBody1);
+		currentTickCollisionPairs.insert(pair);
+		
+		// if this is a new contact, send an event
+		if (bulletPhysics->m_PreviousTickCollisionPairs.find(pair) == bulletPhysics->m_PreviousTickCollisionPairs.end())
+		{
+			bulletPhysics->SendCollisionPairAddEvent(manifold, body0, body1);
+		}
+	}
+
+	CollisionPairs removedCollisionPairs;
+
+	// use set difference to see which collisions existed last tick but are no longer colliding
+	std::set_difference(bulletPhysics->m_PreviousTickCollisionPairs.begin(), bulletPhysics->m_PreviousTickCollisionPairs.end(),
+		currentTickCollisionPairs.begin(), currentTickCollisionPairs.end(),
+		std::inserter(removedCollisionPairs, removedCollisionPairs.begin()));
+
+	// send collision exit events
+	for (auto it = removedCollisionPairs.begin(); it != removedCollisionPairs.end(); ++it)
+	{
+		const btRigidBody* body0 = it->first;
+		const btRigidBody* body1 = it->second;
+
+		bulletPhysics->SendCollisionPairRemoveEvent(body0, body1);
+	}
+
+	// update the collision pairs
+	bulletPhysics->m_PreviousTickCollisionPairs = currentTickCollisionPairs;
 }
 
 
