@@ -244,6 +244,9 @@
     <ClInclude Include="Include\PhysicsEvents.h">
       <Filter>Events</Filter>
     </ClInclude>
+    <ClInclude Include="Include\PhysicsDebugDrawer.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -438,6 +441,9 @@
     </ClCompile>
     <ClCompile Include="PhysicsEvents.cpp">
       <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsDebugDrawer.cpp">
+      <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

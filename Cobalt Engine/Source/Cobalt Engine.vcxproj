@@ -147,6 +147,7 @@
     <ClInclude Include="Include\MovementController.h" />
     <ClInclude Include="Include\Physics.h" />
     <ClInclude Include="Include\PhysicsComponent.h" />
+    <ClInclude Include="Include\PhysicsDebugDrawer.h" />
     <ClInclude Include="Include\PhysicsEvents.h" />
     <ClInclude Include="Include\Plane.h" />
     <ClInclude Include="Include\Process.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="MessageBox.cpp" />
     <ClCompile Include="MovementController.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="PhysicsDebugDrawer.cpp" />
     <ClCompile Include="PhysicsEvents.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Process.cpp" />

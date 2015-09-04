@@ -20,6 +20,7 @@
 #include "Logger.h"
 #include "Matrix.h"
 #include "Physics.h"
+#include "PhysicsDebugDrawer.h"
 #include "PhysicsEvents.h"
 #include "XmlResource.h"
 
@@ -220,7 +221,7 @@ private:
 	unique_ptr<btCollisionDispatcher>	m_Dispatcher;
 	unique_ptr<btConstraintSolver>		m_Solver;
 	unique_ptr<btDefaultCollisionConfiguration> m_CollisionConfiguration;
-	// unique_ptr<BulletDebugDrawer> m_DebugDrawer;
+	unique_ptr<BulletDebugDrawer> m_DebugDrawer;
 
 	// tables read from the XML
 	DensityTable m_DensityTable;
@@ -283,8 +284,8 @@ bool BulletPhysics::Initialize()
 	m_DynamicsWorld.reset(CB_NEW btDiscreteDynamicsWorld(m_Dispatcher.get(), 
 		m_Broadphase.get(), m_Solver.get(), m_CollisionConfiguration.get()));
 
-	// m_DebugDrawer.reset(CB_NEW DebugDrawer);
-	// m_DebugDrawer->ReadOptions();
+	m_DebugDrawer.reset(CB_NEW BulletDebugDrawer);
+	m_DebugDrawer->SetOptions(btIDebugDraw::DebugDrawModes::DBG_MAX_DEBUG_DRAW_MODE);
 
 	if (!m_CollisionConfiguration || !m_Dispatcher || !m_Broadphase || !m_Solver
 		|| !m_DynamicsWorld /*|| !m_DebugDrawer*/)
@@ -293,7 +294,7 @@ bool BulletPhysics::Initialize()
 		return false;
 	}
 
-	//m_DynamicsWorld->setDebugDrawer(m_DebugDrawer);
+	m_DynamicsWorld->setDebugDrawer(m_DebugDrawer.get());
 
 	// set internal tick callback to our own method
 	m_DynamicsWorld->setInternalTickCallback(BulletPhysics::BulletInternalTickCallback);

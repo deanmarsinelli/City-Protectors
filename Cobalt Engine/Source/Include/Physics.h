@@ -5,6 +5,8 @@
 	by Mike McShaffry and David Graham
 */
 
+#pragma once
+
 #include "interfaces.h"
 
 /// Create the physics world and return a pointer to it
