@@ -77,9 +77,6 @@ public:
 	virtual const char* GetName() const override { return PhysicsComponent::g_Name; }
 
 protected:
-	/// Create a shape in the physics world
-	void CreateShape();
-
 	/// Build a rigid body from xml data
 	void BuildRigidBodyTransform(TiXmlElement* pTransformElement);
 

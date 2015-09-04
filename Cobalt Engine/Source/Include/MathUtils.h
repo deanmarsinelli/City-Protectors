@@ -9,7 +9,11 @@
 
 #include <vector>
 
+#include "EngineStd.h"
 #include "types.h"
+
+#define RADIANS_TO_DEGREES(x) ((x) * 180.0f / CB_PI)
+#define DEGREES_TO_RADIANS(x) ((x) * CB_PI / 180.0f)
 
 class Vec3;
 typedef std::vector<Point> Poly;

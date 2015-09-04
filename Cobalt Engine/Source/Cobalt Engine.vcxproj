@@ -219,6 +219,7 @@
     <ClCompile Include="MessageBox.cpp" />
     <ClCompile Include="MovementController.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PhysicsDebugDrawer.cpp" />
     <ClCompile Include="PhysicsEvents.cpp" />
     <ClCompile Include="Plane.cpp" />

@@ -445,6 +445,9 @@
     <ClCompile Include="PhysicsDebugDrawer.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Game Objects\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
