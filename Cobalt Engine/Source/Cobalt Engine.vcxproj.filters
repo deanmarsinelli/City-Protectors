@@ -247,6 +247,9 @@
     <ClInclude Include="Include\PhysicsDebugDrawer.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Include\LevelManager.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -447,6 +450,9 @@
     </ClCompile>
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Game Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
