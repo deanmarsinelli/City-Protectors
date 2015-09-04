@@ -7,7 +7,7 @@
 
 #include <DXUT.h>
 
-#include "CameraNoda.h"
+#include "CameraNode.h"
 #include "Scene.h"
 
 CameraNode::CameraNode(const Mat4x4* mat, const Frustrum& frustrum) :

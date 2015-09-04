@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <DXUT.h>
 #include <SDKmesh.h>
 
 #include "interfaces.h"

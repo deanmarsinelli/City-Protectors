@@ -190,9 +190,6 @@
     <ClInclude Include="Include\LightManager.h">
       <Filter>Graphics\Lighting</Filter>
     </ClInclude>
-    <ClInclude Include="Include\CameraNoda.h">
-      <Filter>Graphics\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Include\LightNode.h">
       <Filter>Graphics\Lighting</Filter>
     </ClInclude>
@@ -249,6 +246,12 @@
     </ClInclude>
     <ClInclude Include="Include\LevelManager.h">
       <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Raycast.h">
+      <Filter>Graphics\Direct 3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CameraNode.h">
+      <Filter>Graphics\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -453,6 +456,9 @@
     </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Raycast.cpp">
+      <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

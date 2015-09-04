@@ -98,7 +98,7 @@
     <ClInclude Include="Include\Audio.h" />
     <ClInclude Include="Include\AudioBuffer.h" />
     <ClInclude Include="Include\BaseEvent.h" />
-    <ClInclude Include="Include\CameraNoda.h" />
+    <ClInclude Include="Include\CameraNode.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\D3DShaderMeshNode11.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
@@ -155,6 +155,7 @@
     <ClInclude Include="Include\ProcessManager.h" />
     <ClInclude Include="Include\Quaternion.h" />
     <ClInclude Include="Include\Random.h" />
+    <ClInclude Include="Include\Raycast.h" />
     <ClInclude Include="Include\RenderComponent.h" />
     <ClInclude Include="Include\Resource.h" />
     <ClInclude Include="Include\ResourceCache.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="ProcessManager.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="ResourceHandle.cpp" />

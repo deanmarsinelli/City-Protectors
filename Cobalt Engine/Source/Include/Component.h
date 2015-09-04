@@ -39,7 +39,7 @@ public:
 	virtual void PostInit() {}
 
 	/// Update method called once per frame
-	virtual void Update(const float deltaTime) {}
+	virtual void Update(float deltaTime) {}
 
 	/// Update a component when it is changed (the object is modified)
 	virtual void OnChanged() {}

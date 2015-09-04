@@ -53,6 +53,9 @@ public:
 	/// Preload resources matching the pattern into the cache
 	int PreLoad(const std::string& pattern, std::function<void(int, bool&)> progressCallback);
 
+	/// Return a vector of resource names in the resource file that match the pattern
+	std::vector<std::string> Match(const std::string& pattern);
+
 	/// Flush the cache removing everything from memory
 	void Flush();
 

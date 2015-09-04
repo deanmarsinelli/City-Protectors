@@ -103,6 +103,31 @@ int ResCache::PreLoad(const std::string& pattern, std::function<void(int, bool&)
 	return loaded;
 }
 
+std::vector<std::string> ResCache::Match(const std::string& pattern)
+{
+	std::vector<std::string> matchedNames;
+
+	if (m_File == nullptr)
+	{
+		return matchedNames;
+	}
+
+	// iterate the resources in the file and add the file names that match the pattern
+	int numFiles = m_File->GetNumResources();
+	for (int i = 0; i < numFiles; i++)
+	{
+		std::string name = m_File->GetResourceName(i);
+		// transform the name of the file to lowercase
+		std::transform(name.begin(), name.end(), name.begin(), (int(*)(int)) std::tolower);
+		if (WildcardMatch(pattern.c_str(), name.c_str()))
+		{
+			matchedNames.push_back(name);
+		}
+	}
+
+	return matchedNames;
+}
+
 void ResCache::Flush()
 {
 	// empty the cache

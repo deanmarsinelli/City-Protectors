@@ -140,7 +140,7 @@ WeakGameObjectPtr BaseGameLogic::GetGameObject(const GameObjectId id)
 }
 
 StrongGameObjectPtr BaseGameLogic::CreateGameObject(const std::string& objectResource, TiXmlElement* overrides,
-const Mat4x4* initialTransform = nullptr, const GameObjectId serversObjectId = INVALID_GAMEOBJECT_ID)
+const Mat4x4* initialTransform = nullptr, const GameObjectId serversObjectId)
 {
 	CB_ASSERT(m_pObjectFactory);
 
@@ -269,7 +269,7 @@ void BaseGameLogic::OnUpdate(float time, float deltaTime)
 		if (m_pPhysics && !m_Proxy)
 		{
 			m_pPhysics->OnUpdate(deltaTime);
-			m_pPhysics->SyncVisisbleScene();
+			m_pPhysics->SyncVisibleScene();
 		}
 		break;
 

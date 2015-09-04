@@ -98,6 +98,14 @@ inline Vec3 HandleAccel(Vec3& pos, Vec3& vel, const Vec3& accel, float time)
 	pos += vel * time;
 }
 
+/// Convert barycentric coordinates to world coordinates
+extern Vec3 BarycentricToVec3(const Vec3& v0, const Vec3& v1, const Vec3& v2, float u, float v);
+
+
+/// Calculates if a ray intersects a triangle and returns the interpolated texture coordinates
+extern bool IntersectTriangle(const Vec3& rayOrigin, const Vec3& rayDir, const Vec3& v0,
+	const Vec3& v1, const Vec3& v2, FLOAT* t, FLOAT* u, FLOAT* v);
+
 
 /// A 2D Vector with x and y coordinates
 typedef D3DXVECTOR2 Vec2;
