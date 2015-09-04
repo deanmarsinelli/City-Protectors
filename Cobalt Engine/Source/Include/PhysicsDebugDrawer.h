@@ -26,6 +26,8 @@ public:
 
 	void SetOptions(int options);
 
+	// TODO add turning this on through the console
+
 private:
 	DebugDrawModes m_DebugModes;
 };
