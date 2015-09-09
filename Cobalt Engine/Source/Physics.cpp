@@ -119,6 +119,7 @@ static Mat4x4 btTransform_to_Mat4x4(const btTransform& trans)
 	return returnMatrix;
 }
 
+
 /**
 	Used to send position and orientation changes from the physics
 	world back to the game (rendering). This assumes the objects
@@ -142,6 +143,45 @@ struct ObjectMotionState : public btMotionState
 	}
 
 	Mat4x4 m_WorldToPositionTransform;
+};
+
+
+/**
+	Physics implementation that does nothing. This is used if physics is disabled
+	like in a proxy client that uses server side physics.
+*/
+class NullPhysics : public IGamePhysics
+{
+public:
+	NullPhysics() { }
+	virtual ~NullPhysics() { }
+
+	virtual bool Initialize()  { }
+	virtual void SyncVisibleScene()  { }
+	virtual void OnUpdate(float deltaTime)  { }
+
+	virtual void AddSphere(float radius, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial) { }
+	virtual void AddBox(const Vec3& dimensions, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial) { }
+	virtual void AddPointCloud(Vec3* verts, int numPoints, WeakGameObjectPtr pGameObject, const std::string& densityStr, const std::string& physicsMaterial) { }
+	virtual void RemoveGameObject(GameObjectId id) { }
+
+	virtual void RenderDiagnostics() { }
+
+	virtual void CreateTrigger(WeakGameObjectPtr pGameObject, const Vec3& position, const float dim) { }
+	virtual void ApplyForce(const Vec3& dir, float newtons, GameObjectId id) { }
+	virtual void ApplyTorque(const Vec3& dir, float newtons, GameObjectId id) { }
+	virtual bool KinematicMove(const Mat4x4& mat, GameObjectId id) { }
+
+	virtual void RotateY(GameObjectId id, float angleRadians, float time) { }
+	virtual float GetOrientationY(GameObjectId id) { }
+	virtual void StopGameObject(GameObjectId id) { }
+	virtual Vec3 GetVelocity(GameObjectId id) { }
+	virtual void SetVelocity(GameObjectId id, const Vec3& vel) { }
+	virtual Vec3 GetAngularVelocity(GameObjectId id) { }
+	virtual void SetAngularVelocity(GameObjectId id, const Vec3& vel) { }
+	virtual void Translate(GameObjectId id, const Vec3& vec) { }
+	virtual void SetTransform(const GameObjectId id, const Mat4x4& mat) { }
+	virtual Mat4x4 GetTransform(const GameObjectId id) { }
 };
 
 
@@ -981,5 +1021,20 @@ IGamePhysics* CreateGamePhysics()
 	}
 
 	// return the raw pointer to the game physics
+	return gamePhysics.release();
+}
+
+// C function to create a null physics world
+IGamePhysics* CreateNullPhysics()
+{
+	unique_ptr<IGamePhysics> gamePhysics;
+	gamePhysics.reset(CB_NEW NullPhysics);
+	if (gamePhysics.get() && !gamePhysics->Initialize())
+	{
+		// failed to init
+		CB_ERROR("Failed to initialize physics");
+		gamePhysics.reset();
+	}
+
 	return gamePhysics.release();
 }

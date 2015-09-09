@@ -5,7 +5,7 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "CameraNoda.h"
+#include "CameraNode.h"
 #include "D3D9Vertex.h"
 #include "D3DSkyNode9.h"
 #include "D3DTextureResourceExtraData.h"

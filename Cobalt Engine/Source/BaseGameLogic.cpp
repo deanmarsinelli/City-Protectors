@@ -14,6 +14,7 @@
 #include "GameObjectFactory.h"
 #include "LevelManager.h"
 #include "Logger.h"
+#include "Physics.h"
 #include "ProcessManager.h"
 #include "ResourceCache.h"
 #include "StringUtil.h"
@@ -140,7 +141,7 @@ WeakGameObjectPtr BaseGameLogic::GetGameObject(const GameObjectId id)
 }
 
 StrongGameObjectPtr BaseGameLogic::CreateGameObject(const std::string& objectResource, TiXmlElement* overrides,
-const Mat4x4* initialTransform = nullptr, const GameObjectId serversObjectId)
+const Mat4x4* initialTransform , const GameObjectId serversObjectId)
 {
 	CB_ASSERT(m_pObjectFactory);
 

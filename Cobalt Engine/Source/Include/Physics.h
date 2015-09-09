@@ -11,3 +11,6 @@
 
 /// Create the physics world and return a pointer to it
 extern IGamePhysics* CreateGamePhysics();
+
+/// Create a NULL physics world for proxy game clients
+extern IGamePhysics* CreateNullPhysics();

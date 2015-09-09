@@ -10,7 +10,7 @@
 #include <unordered_map>
 
 #include "AlphaSceneNode.h"
-#include "CameraNoda.h"
+#include "CameraNode.h"
 #include "interfaces.h"
 
 class LightManager;

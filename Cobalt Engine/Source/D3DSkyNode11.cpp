@@ -5,7 +5,7 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "CameraNoda.h"
+#include "CameraNode.h"
 #include "D3D11Vertex.h"
 #include "D3DSkyNode11.h"
 #include "EngineStd.h"

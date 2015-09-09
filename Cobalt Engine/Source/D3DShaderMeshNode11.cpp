@@ -7,6 +7,7 @@
 
 #include "D3DMesh.h"
 #include "D3DShaderMeshNode11.h"
+#include "Raycast.h"
 #include "Resource.h"
 #include "ResourceCache.h"
 #include "ResourceHandle.h"

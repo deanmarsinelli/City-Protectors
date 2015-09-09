@@ -9,7 +9,7 @@
 
 #include "Audio.h"
 #include "DirectSoundAudio.h"
-#include "CameraNoda.h"
+#include "CameraNode.h"
 #include "EngineStd.h"
 #include "Frustrum.h"
 #include "Logger.h"

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "CameraNoda.h"
+#include "CameraNode.h"
 #include "SceneNode.h"
 
 /**

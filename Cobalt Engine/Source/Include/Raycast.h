@@ -137,5 +137,5 @@ void InitIntersection(Intersection& intersection, DWORD faceIndex, FLOAT dist, F
 	Vec3 objectLoc = BarycentricToVec3(v0->position, v1->position, v2->position, intersection.m_Bary1, intersection.m_Bary2);
 	intersection.m_ObjectLoc = objectLoc;
 	intersection.m_WorldLoc = matWorld.Transform(objectLoc);
-	intersection.m_ObjectId = objectLoc;
+	intersection.m_ObjectId = objectId;
 }
