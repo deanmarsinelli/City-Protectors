@@ -253,14 +253,17 @@
     <ClInclude Include="Include\CameraNode.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Include\PathingNode.h">
-      <Filter>AI</Filter>
+    <ClInclude Include="Include\AStar.h">
+      <Filter>AI\Pathing</Filter>
     </ClInclude>
     <ClInclude Include="Include\PathingArc.h">
-      <Filter>AI</Filter>
+      <Filter>AI\Pathing</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\PathingNode.h">
+      <Filter>AI\Pathing</Filter>
     </ClInclude>
     <ClInclude Include="Include\PathPlan.h">
-      <Filter>AI</Filter>
+      <Filter>AI\Pathing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -469,14 +472,17 @@
     <ClCompile Include="Raycast.cpp">
       <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
-    <ClCompile Include="PathingNode.cpp">
-      <Filter>AI</Filter>
-    </ClCompile>
     <ClCompile Include="PathingArc.cpp">
-      <Filter>AI</Filter>
+      <Filter>AI\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="PathingNode.cpp">
+      <Filter>AI\Pathing</Filter>
     </ClCompile>
     <ClCompile Include="PathPlan.cpp">
-      <Filter>AI</Filter>
+      <Filter>AI\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="AStar.cpp">
+      <Filter>AI\Pathing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -551,6 +557,9 @@
     </Filter>
     <Filter Include="AI">
       <UniqueIdentifier>{142e6181-4fe8-45f7-9ce5-cc3ebc493bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Pathing">
+      <UniqueIdentifier>{3e1fcf34-ad6c-4b0b-b023-092e74eda069}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
