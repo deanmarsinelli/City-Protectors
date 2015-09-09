@@ -8,6 +8,11 @@
 #include "Logger.h"
 #include "PathPlan.h"
 
+
+//====================================================
+//	PathPlan definitions
+//====================================================
+
 PathPlan::PathPlan()
 { 
 	// set the index to the first node
@@ -66,4 +71,90 @@ void PathPlan::AddNode(PathingNode* pNode)
 {
 	CB_ASSERT(pNode);
 	m_Path.push_front(pNode);
+}
+
+
+//====================================================
+//	PathPlanNode definitions
+//====================================================
+PathPlanNode::PathPlanNode(PathingNode* pNode, PathPlanNode* pPrevNode, PathingNode* pGoalNode)
+{
+	CB_ASSERT(pNode);
+
+	m_pPathingNode = pNode;
+	m_pPrev = pPrevNode;
+	m_pGoalNode = pGoalNode;
+	m_Closed = false;
+	UpdateHeuristics();
+}
+
+PathPlanNode* PathPlanNode::GetPrev() const
+{
+	return m_pPrev;
+}
+
+PathingNode* PathPlanNode::GetPathingNode() const
+{
+	return m_pPathingNode;
+}
+
+bool PathPlanNode::IsClosed() const
+{
+	return m_Closed;
+}
+
+float PathPlanNode::GetGoal() const
+{
+	return m_Goal;
+}
+
+float PathPlanNode::GetHeuristic() const
+{
+	return m_Heuristic;
+}
+
+float PathPlanNode::GetFitness() const
+{
+	return m_Fitness;
+}
+
+void PathPlanNode::UpdatePrevNode(PathPlanNode* pPrev)
+{
+	CB_ASSERT(pPrev);
+	m_pPrev = pPrev;
+	UpdateHeuristics();
+}
+
+void PathPlanNode::SetClosed(bool toClose)
+{
+	m_Closed = toClose;
+}
+
+bool PathPlanNode::IsBetterChoiceThan(PathPlanNode* pNode)
+{
+	// return whether this node has a better fitness than the other node
+	return (m_Fitness < pNode->GetFitness());
+}
+
+void PathPlanNode::UpdateHeuristics()
+{
+	// calculate goal: cost up to this node (g)
+	if (m_pPrev)
+	{
+		// goal = prevGoal + cost from prev to this node
+		m_Goal = m_pPrev->GetGoal() + m_pPathingNode->GetCostFromNode(m_pPrev->GetPathingNode());
+	}
+	else
+	{
+		m_Goal = 0.0f;
+	}
+
+	// calculate heuristic: estimation from this node to goal node (f)
+	// this is an estimation so we'll use the world distance since it is
+	// guaranteed to be less than the pathing distance
+	Vec3 diff = m_pPathingNode->GetPos() - m_pGoalNode->GetPos();
+	m_Heuristic = diff.Length();
+
+	// calculate fitness: total cost from start to finished (f)
+	m_Fitness = m_Goal + m_Heuristic;
 }

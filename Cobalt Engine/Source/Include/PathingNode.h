@@ -39,7 +39,8 @@ public:
 	/// Get adjacent nodes to this node by passing a list of node ptrs by reference
 	void GetNeighbors(PathingNodeList& neighbors);
 
-	/// Return the estimated cost of travelling from a node to this node
+	/// Return the cost of travelling from a node to this node
+	/// This is the arc weight * actual distance between the nodes
 	float GetCostFromNode(PathingNode* pFromNode);
 
 private:

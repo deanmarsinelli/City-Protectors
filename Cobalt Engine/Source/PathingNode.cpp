@@ -51,6 +51,7 @@ float PathingNode::GetCostFromNode(PathingNode* pFromNode)
 	// get the vector between the two nodes
 	Vec3 diff = m_Pos - pFromNode->GetPos();
 	
+	// return the arc weight * actual distance between nodes
 	return pArc->GetWeight() * diff.Length();
 }
 
