@@ -148,6 +148,7 @@
     <ClInclude Include="Include\MovementController.h" />
     <ClInclude Include="Include\PathingArc.h" />
     <ClInclude Include="Include\PathingNode.h" />
+    <ClInclude Include="Include\PathPlan.h" />
     <ClInclude Include="Include\Physics.h" />
     <ClInclude Include="Include\PhysicsComponent.h" />
     <ClInclude Include="Include\PhysicsDebugDrawer.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="MovementController.cpp" />
     <ClCompile Include="PathingArc.cpp" />
     <ClCompile Include="PathingNode.cpp" />
+    <ClCompile Include="PathPlan.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PhysicsDebugDrawer.cpp" />

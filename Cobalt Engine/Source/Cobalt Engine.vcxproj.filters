@@ -259,6 +259,9 @@
     <ClInclude Include="Include\PathingArc.h">
       <Filter>AI</Filter>
     </ClInclude>
+    <ClInclude Include="Include\PathPlan.h">
+      <Filter>AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -470,6 +473,9 @@
       <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="PathingArc.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PathPlan.cpp">
       <Filter>AI</Filter>
     </ClCompile>
   </ItemGroup>
