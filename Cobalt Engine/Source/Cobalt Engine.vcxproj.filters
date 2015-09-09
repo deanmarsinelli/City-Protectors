@@ -253,6 +253,12 @@
     <ClInclude Include="Include\CameraNode.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Include\PathingNode.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\PathingArc.h">
+      <Filter>AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -460,6 +466,12 @@
     <ClCompile Include="Raycast.cpp">
       <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
+    <ClCompile Include="PathingNode.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PathingArc.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
@@ -530,6 +542,9 @@
     </Filter>
     <Filter Include="Graphics\Scene\Sky">
       <UniqueIdentifier>{e089bf95-df31-4bcc-98f9-0241bda8561d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{142e6181-4fe8-45f7-9ce5-cc3ebc493bd0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
