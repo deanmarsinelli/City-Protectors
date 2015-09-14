@@ -9,6 +9,7 @@
 #include "EngineStd.h"
 #include "Logger.h"
 
+const char* BinaryPacket::g_Type = "BinaryPacket";
 
 BinaryPacket::BinaryPacket(const char* data, u_long size)
 {
