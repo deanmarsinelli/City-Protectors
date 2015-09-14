@@ -274,6 +274,9 @@
     <ClInclude Include="Include\NetSocket.h">
       <Filter>Networking</Filter>
     </ClInclude>
+    <ClInclude Include="Include\NetListenSocket.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -500,6 +503,9 @@
       <Filter>Networking</Filter>
     </ClCompile>
     <ClCompile Include="NetSocket.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="NetListenSocket.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
   </ItemGroup>

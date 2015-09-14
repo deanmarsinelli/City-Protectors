@@ -15,3 +15,5 @@
 #define CB_ERROR(str)
 
 #define CB_WARNING(str)
+
+#define EXIT_ASSERT CB_ASSERT(0)

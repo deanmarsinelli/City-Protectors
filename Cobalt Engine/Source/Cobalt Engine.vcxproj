@@ -187,6 +187,7 @@
     <ClInclude Include="Include\WindowsApp.h" />
     <ClInclude Include="Include\XmlResource.h" />
     <ClInclude Include="Include\ZipFile.h" />
+    <ClInclude Include="Include\NetListenSocket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AStar.cpp" />
@@ -230,6 +231,7 @@
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MessageBox.cpp" />
     <ClCompile Include="MovementController.cpp" />
+    <ClCompile Include="NetListenSocket.cpp" />
     <ClCompile Include="NetSocket.cpp" />
     <ClCompile Include="PathingArc.cpp" />
     <ClCompile Include="PathingNode.cpp" />
