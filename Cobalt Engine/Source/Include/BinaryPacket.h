@@ -8,9 +8,9 @@
 #include "interfaces.h"
 
 /**
-	Implementation of a network packet that stores binary data. 
-	The packet can be constructed all at once or with calls to MemCpy. 
-	The size of the data is stored in the first 4 bytes of data.
+	Implementation of a network packet that stores binary data. The packet can 
+	be constructed all at once or with calls to MemCpy. The size of the data is 
+	stored in the first 4 bytes of data in network order.
 */
 class BinaryPacket : public IPacket
 {
