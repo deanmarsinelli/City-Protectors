@@ -9,6 +9,8 @@
 #include "EngineStd.h"
 #include "Logger.h"
 
+#pragma comment(lib, "Ws2_32")
+
 const char* BinaryPacket::g_Type = "BinaryPacket";
 
 BinaryPacket::BinaryPacket(const char* data, u_long size)

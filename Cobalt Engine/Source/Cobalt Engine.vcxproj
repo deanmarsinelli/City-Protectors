@@ -177,6 +177,7 @@
     <ClInclude Include="Include\SoundResourceExtraData.h" />
     <ClInclude Include="Include\StringUtil.h" />
     <ClInclude Include="Include\templates.h" />
+    <ClInclude Include="Include\TextPacket.h" />
     <ClInclude Include="Include\Transform.h" />
     <ClInclude Include="Include\types.h" />
     <ClInclude Include="Include\UserInterface.h" />
@@ -255,6 +256,7 @@
     <ClCompile Include="SoundProcess.cpp" />
     <ClCompile Include="SoundResourceExtraData.cpp" />
     <ClCompile Include="StringUtil.cpp" />
+    <ClCompile Include="TextPacket.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WaveResourceLoader.cpp" />
     <ClCompile Include="WindowsApp.cpp" />
