@@ -265,6 +265,9 @@
     <ClInclude Include="Include\PathPlan.h">
       <Filter>AI\Pathing</Filter>
     </ClInclude>
+    <ClInclude Include="Include\BinaryPacket.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -483,6 +486,9 @@
     </ClCompile>
     <ClCompile Include="AStar.cpp">
       <Filter>AI\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryPacket.cpp">
+      <Filter>Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
