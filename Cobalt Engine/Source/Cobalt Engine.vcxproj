@@ -148,6 +148,7 @@
     <ClInclude Include="Include\MemoryPool.h" />
     <ClInclude Include="Include\MessageBox.h" />
     <ClInclude Include="Include\MovementController.h" />
+    <ClInclude Include="Include\NetSocket.h" />
     <ClInclude Include="Include\PathingArc.h" />
     <ClInclude Include="Include\PathingNode.h" />
     <ClInclude Include="Include\PathPlan.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MessageBox.cpp" />
     <ClCompile Include="MovementController.cpp" />
+    <ClCompile Include="NetSocket.cpp" />
     <ClCompile Include="PathingArc.cpp" />
     <ClCompile Include="PathingNode.cpp" />
     <ClCompile Include="PathPlan.cpp" />
