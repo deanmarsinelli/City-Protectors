@@ -561,5 +561,8 @@
     <Filter Include="AI\Pathing">
       <UniqueIdentifier>{3e1fcf34-ad6c-4b0b-b023-092e74eda069}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Networking">
+      <UniqueIdentifier>{84508a91-936d-4d47-9171-37e99bded409}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

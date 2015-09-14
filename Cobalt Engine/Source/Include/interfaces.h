@@ -650,3 +650,28 @@ public:
 	/// Return a pointer to the game physics
 	virtual shared_ptr<IGamePhysics> GetGamePhysics() = 0;
 };
+
+
+//====================================================
+//	Network Interfaces
+//====================================================
+/**
+	This defines the public API for a packet object. Data
+	in these packets is either about to be sent or has just
+	been received from the network.
+*/
+class IPacket
+{
+public:
+	/// Virtual empty destructor
+	virtual ~IPacket() { }
+	
+	/// Return the type of packet
+	virtual const char* GetType() const = 0;
+
+	/// Return the data stored in the packet
+	virtual const char* GetData() const = 0;
+
+	/// Return the size of the packet
+	virtual u_long GetSize() const = 0;
+};
