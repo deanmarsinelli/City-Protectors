@@ -5,8 +5,10 @@
 	by Mike McShaffry and David Graham
 */
 
+#pragma once
+
 #include <list>
-#include <WinSock2.h>
+#include <winsock.h>
 
 #include "interfaces.h"
 

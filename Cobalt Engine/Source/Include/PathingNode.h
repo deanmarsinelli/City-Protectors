@@ -14,6 +14,7 @@
 const float PATHING_DEFAULT_NODE_TOLERANCE = 5.0f;
 
 class PathingArc;
+class PathingNode;
 typedef std::list<PathingArc*> PathingArcList;
 typedef std::list<PathingNode*> PathingNodeList;
 

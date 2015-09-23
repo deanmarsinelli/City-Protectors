@@ -37,7 +37,7 @@ void NetListenSocket::Init(int portNum)
 	ZeroMemory(&sa, sizeof(sa));
 	// set up the socket to listen on a port using the local ip
 	sa.sin_family = AF_INET;
-	sa.sin_addr.s_addr = ADDR_ANY;
+	sa.sin_addr.s_addr = INADDR_ANY;
 	sa.sin_port = htons(portNum);
 
 	// bind socket to a listen port

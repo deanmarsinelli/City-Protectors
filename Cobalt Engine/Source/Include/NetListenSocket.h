@@ -5,6 +5,8 @@
 	by Mike McShaffry and David Graham
 */
 
+#pragma once
+
 #include "NetSocket.h"
 
 /*

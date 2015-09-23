@@ -156,7 +156,7 @@ public:
 	NullPhysics() { }
 	virtual ~NullPhysics() { }
 
-	virtual bool Initialize()  { }
+	virtual bool Initialize()  { return true; }
 	virtual void SyncVisibleScene()  { }
 	virtual void OnUpdate(float deltaTime)  { }
 
@@ -170,18 +170,18 @@ public:
 	virtual void CreateTrigger(WeakGameObjectPtr pGameObject, const Vec3& position, const float dim) { }
 	virtual void ApplyForce(const Vec3& dir, float newtons, GameObjectId id) { }
 	virtual void ApplyTorque(const Vec3& dir, float newtons, GameObjectId id) { }
-	virtual bool KinematicMove(const Mat4x4& mat, GameObjectId id) { }
+	virtual bool KinematicMove(const Mat4x4& mat, GameObjectId id) { return true; }
 
 	virtual void RotateY(GameObjectId id, float angleRadians, float time) { }
-	virtual float GetOrientationY(GameObjectId id) { }
+	virtual float GetOrientationY(GameObjectId id) { return 0.0f; }
 	virtual void StopGameObject(GameObjectId id) { }
-	virtual Vec3 GetVelocity(GameObjectId id) { }
+	virtual Vec3 GetVelocity(GameObjectId id) { return Vec3(); }
 	virtual void SetVelocity(GameObjectId id, const Vec3& vel) { }
-	virtual Vec3 GetAngularVelocity(GameObjectId id) { }
+	virtual Vec3 GetAngularVelocity(GameObjectId id) { return Vec3(); }
 	virtual void SetAngularVelocity(GameObjectId id, const Vec3& vel) { }
 	virtual void Translate(GameObjectId id, const Vec3& vec) { }
 	virtual void SetTransform(const GameObjectId id, const Mat4x4& mat) { }
-	virtual Mat4x4 GetTransform(const GameObjectId id) { }
+	virtual Mat4x4 GetTransform(const GameObjectId id) { return Mat4x4::Identity; }
 };
 
 

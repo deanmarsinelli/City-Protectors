@@ -48,7 +48,7 @@ bool PathPlan::CheckForNextNode(const Vec3& pos)
 
 	// if the length of the vector is less than the nodes tollerance,
 	// then the position is "within" the node, and we increment the index
-	if (diff.Length() <= (*m_Index)->GetTollerance())
+	if (diff.Length() <= (*m_Index)->GetTolerance())
 	{
 		++m_Index;
 		return true;

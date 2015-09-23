@@ -194,7 +194,7 @@ void BaseGameLogic::ModifyGameObject(const GameObjectId id, TiXmlElement* overri
 	auto findIt = m_Objects.find(id);
 	if (findIt != m_Objects.end())
 	{
-		m_pObjectFactory->ModifyObject(findIt->second, overrides);
+		m_pObjectFactory->ModifyGameObject(findIt->second, overrides);
 	}
 }
 
