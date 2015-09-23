@@ -277,6 +277,9 @@
     <ClInclude Include="Include\NetListenSocket.h">
       <Filter>Networking</Filter>
     </ClInclude>
+    <ClInclude Include="Include\PathingGraph.h">
+      <Filter>AI\Pathing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -507,6 +510,9 @@
     </ClCompile>
     <ClCompile Include="NetListenSocket.cpp">
       <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="PathingGraph.cpp">
+      <Filter>AI\Pathing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

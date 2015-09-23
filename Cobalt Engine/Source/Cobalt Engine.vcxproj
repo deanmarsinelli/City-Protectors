@@ -150,6 +150,7 @@
     <ClInclude Include="Include\MovementController.h" />
     <ClInclude Include="Include\NetSocket.h" />
     <ClInclude Include="Include\PathingArc.h" />
+    <ClInclude Include="Include\PathingGraph.h" />
     <ClInclude Include="Include\PathingNode.h" />
     <ClInclude Include="Include\PathPlan.h" />
     <ClInclude Include="Include\Physics.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="NetListenSocket.cpp" />
     <ClCompile Include="NetSocket.cpp" />
     <ClCompile Include="PathingArc.cpp" />
+    <ClCompile Include="PathingGraph.cpp" />
     <ClCompile Include="PathingNode.cpp" />
     <ClCompile Include="PathPlan.cpp" />
     <ClCompile Include="Physics.cpp" />

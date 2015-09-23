@@ -29,5 +29,6 @@ float GetYRotationFromVector(const Vec3& lookAt);
 class CBRandom
 {
 public:
+	void Random();
 	void Randomize();
 };
