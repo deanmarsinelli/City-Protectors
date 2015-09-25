@@ -53,6 +53,9 @@ public:
 	/// Find a path between two nodes
 	PathPlan* FindPath(PathingNode* pStartNode, PathingNode* pEndNode);
 
+	/// Debug function
+	void BuildTestGraph();
+
 private:
 	/// Link two nodes together with an arc
 	void LinkNodes(PathingNode* pNodeA, PathingNode* pNodeB);
@@ -64,3 +67,6 @@ private:
 	/// List of all arcs between nodes in the graph
 	PathingArcList m_Arcs;
 };
+
+/// Global C function to create an init a pathing graph
+PathingGraph* CreatePathingGraph();

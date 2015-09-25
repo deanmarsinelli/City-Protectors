@@ -8,6 +8,7 @@
 #include "AStar.h"
 #include "BaseGameLogic.h"
 #include "EngineStd.h"
+#include "Logger.h"
 #include "PathingGraph.h"
 
 PathingGraph::~PathingGraph()
@@ -133,4 +134,75 @@ PathPlan* PathingGraph::FindPath(PathingNode* pStartNode, PathingNode* pEndNode)
 	AStar aStar;
 
 	return aStar(pStartNode, pEndNode);
+}
+
+void PathingGraph::BuildTestGraph()
+{
+	if (!m_Nodes.empty())
+	{
+		DestroyGraph();
+	}
+
+	m_Nodes.reserve(81);
+
+	int index = 0;
+	for (float x = -45.0f; x < 45.0f; x += 10.0f)
+	{
+		for (float z = -45.0f; z < 45.0f; z += 10.0f)
+		{
+			// add new node
+			PathingNode* pNode = new PathingNode(Vec3(x, 0, z));
+			m_Nodes.push_back(pNode);
+
+			// link it to the previous node
+			int tempNode = index - 1;
+			if (tempNode >= 0)
+			{
+				LinkNodes(m_Nodes[tempNode], pNode);
+			}
+
+			// link it to the node above it
+			tempNode = index - 9;
+			if (tempNode >= 0)
+			{
+				LinkNodes(m_Nodes[tempNode], pNode);
+			}
+
+			index++;
+		}
+	}
+
+
+}
+
+void PathingGraph::LinkNodes(PathingNode* pNodeA, PathingNode* pNodeB)
+{
+	CB_ASSERT(pNodeA);
+	CB_ASSERT(pNodeB);
+
+	// create an arc to link the nodes
+	PathingArc* pArc = CB_NEW PathingArc;
+	pArc->LinkNodes(pNodeA, pNodeB);
+	pNodeA->AddArc(pArc);
+	pNodeB->AddArc(pArc);
+
+	m_Arcs.push_back(pArc);
+
+	// add the nodes to the graph if they dont exist there already
+	/*if (std::find(m_Nodes.begin(), m_Nodes.end(), pNodeA) == m_Nodes.end())
+	{
+		m_Nodes.push_back(pNodeA);
+	}
+	if (std::find(m_Nodes.begin(), m_Nodes.end(), pNodeB) == m_Nodes.end())
+	{
+		m_Nodes.push_back(pNodeB);
+	}*/
+}
+
+
+PathingGraph* CreatePathingGraph()
+{
+	PathingGraph* pPathingGraph = CB_NEW PathingGraph;
+	
+	return pPathingGraph;
 }
