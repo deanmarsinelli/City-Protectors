@@ -88,3 +88,78 @@ private:
 	/// Id of the socket
 	int m_SocketId;
 };
+
+/**
+	This event is sent whenever a new client attaches to a server.
+*/
+class Event_RemoteClient : public BaseEvent
+{
+public:
+	/// Default constructor
+	Event_RemoteClient()
+	{
+		m_SocketId = 0;
+		m_IpAddress = 0;
+	}
+
+	/// Event with the object id and socket id
+	explicit Event_RemoteClient(const int socketId, const int ipAddress) :
+		m_SocketId(socketId), m_IpAddress(ipAddress)
+	{ }
+
+	/// Return the id of the socket
+	int GetSocketId() const
+	{
+		return m_SocketId;
+	}
+
+	/// Return the ip address of the remote connection
+	int GetIpAddress() const
+	{
+		return m_IpAddress;
+	}
+
+	// IEvent interface
+	/// Return the event type
+	virtual const EventType& GetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	/// Serialize the event to an output stream
+	virtual void Serialize(std::ostream& out) const
+	{
+		out << m_SocketId << " ";
+		out << m_IpAddress;
+	}
+
+	/// Deserialize the event from an input stream
+	virtual void Deserialize(std::istream& in)
+	{
+		in >> m_SocketId;
+		in >> m_IpAddress;
+	}
+
+	/// Return a copy of the event
+	virtual IEventPtr Copy() const
+	{
+		return IEventPtr(CB_NEW Event_RemoteClient(m_SocketId, m_IpAddress));
+	}
+
+	/// Return the name of the event
+	virtual const char* GetName() const
+	{
+		return "Event_RemoteClient";
+	}
+
+public:
+	/// The event type
+	static const EventType sk_EventType;
+
+private:
+	/// The id of the socket connection
+	int m_SocketId;
+
+	/// The ip of the the remote client
+	int m_IpAddress;
+};
