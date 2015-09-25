@@ -280,6 +280,9 @@
     <ClInclude Include="Include\PathingGraph.h">
       <Filter>AI\Pathing</Filter>
     </ClInclude>
+    <ClInclude Include="Include\BaseSocketManager.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -513,6 +516,9 @@
     </ClCompile>
     <ClCompile Include="PathingGraph.cpp">
       <Filter>AI\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSocketManager.cpp">
+      <Filter>Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
