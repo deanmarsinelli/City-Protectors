@@ -292,6 +292,9 @@
     <ClInclude Include="Include\NetworkEvents.h">
       <Filter>Events</Filter>
     </ClInclude>
+    <ClInclude Include="Include\GameServerListenSocket.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -537,6 +540,9 @@
     </ClCompile>
     <ClCompile Include="NetworkEvents.cpp">
       <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="GameServerListenSocket.cpp">
+      <Filter>Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

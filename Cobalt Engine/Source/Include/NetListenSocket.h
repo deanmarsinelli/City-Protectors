@@ -9,7 +9,7 @@
 
 #include "NetSocket.h"
 
-/*
+/**
 	Implementation of a listen socket. This socket can listen for
 	client connections on a specific port and accept them.
 */

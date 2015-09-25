@@ -133,6 +133,7 @@
     <ClInclude Include="Include\GameObject.h" />
     <ClInclude Include="Include\GameObjectFactory.h" />
     <ClInclude Include="Include\AStar.h" />
+    <ClInclude Include="Include\GameServerListenSocket.h" />
     <ClInclude Include="Include\LevelManager.h" />
     <ClInclude Include="Include\LightManager.h" />
     <ClInclude Include="Include\LightNode.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="Frustrum.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="GameServerListenSocket.cpp" />
     <ClCompile Include="HumanView.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="LevelManager.cpp" />
