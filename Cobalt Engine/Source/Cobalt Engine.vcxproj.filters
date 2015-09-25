@@ -283,6 +283,15 @@
     <ClInclude Include="Include\BaseSocketManager.h">
       <Filter>Networking</Filter>
     </ClInclude>
+    <ClInclude Include="Include\ClientSocketManager.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\RemoteEventSocket.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\NetworkEvents.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -519,6 +528,15 @@
     </ClCompile>
     <ClCompile Include="BaseSocketManager.cpp">
       <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSocketManager.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteEventSocket.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkEvents.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -75,4 +75,4 @@ extern GenericObjectFactory<IEvent, EventType> g_EventFactory;
 
 // Register an event in the factory with the GUID as its key
 #define REGISTER_EVENT(eventClass) g_EventFactory.Register<eventClass>(eventClass::sk_EventType)
-#define CREATE_EVENT(eventType) g_eventFactory.Create(eventType)
+#define CREATE_EVENT(eventType) g_EventFactory.Create(eventType)

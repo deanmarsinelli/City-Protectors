@@ -8,6 +8,8 @@
 	by Mike McShaffry and David Graham
 */
 
+#pragma once
+
 #include "BaseEvent.h"
 #include "EngineStd.h"
 #include "LuaScriptEvent.h"

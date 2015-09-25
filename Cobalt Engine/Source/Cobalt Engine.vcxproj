@@ -101,6 +101,7 @@
     <ClInclude Include="Include\BaseSocketManager.h" />
     <ClInclude Include="Include\BinaryPacket.h" />
     <ClInclude Include="Include\CameraNode.h" />
+    <ClInclude Include="Include\ClientSocketManager.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\D3DShaderMeshNode11.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Include\MessageBox.h" />
     <ClInclude Include="Include\MovementController.h" />
     <ClInclude Include="Include\NetSocket.h" />
+    <ClInclude Include="Include\NetworkEvents.h" />
     <ClInclude Include="Include\PathingArc.h" />
     <ClInclude Include="Include\PathingGraph.h" />
     <ClInclude Include="Include\PathingNode.h" />
@@ -164,6 +166,7 @@
     <ClInclude Include="Include\Quaternion.h" />
     <ClInclude Include="Include\Random.h" />
     <ClInclude Include="Include\Raycast.h" />
+    <ClInclude Include="Include\RemoteEventSocket.h" />
     <ClInclude Include="Include\RenderComponent.h" />
     <ClInclude Include="Include\Resource.h" />
     <ClInclude Include="Include\ResourceCache.h" />
@@ -199,6 +202,7 @@
     <ClCompile Include="BaseSocketManager.cpp" />
     <ClCompile Include="BinaryPacket.cpp" />
     <ClCompile Include="CameraNode.cpp" />
+    <ClCompile Include="ClientSocketManager.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="D3DLineDrawer11.cpp" />
     <ClCompile Include="D3DMesh.cpp" />
@@ -236,6 +240,7 @@
     <ClCompile Include="MovementController.cpp" />
     <ClCompile Include="NetListenSocket.cpp" />
     <ClCompile Include="NetSocket.cpp" />
+    <ClCompile Include="NetworkEvents.cpp" />
     <ClCompile Include="PathingArc.cpp" />
     <ClCompile Include="PathingGraph.cpp" />
     <ClCompile Include="PathingNode.cpp" />
@@ -250,6 +255,7 @@
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Raycast.cpp" />
+    <ClCompile Include="RemoteEventSocket.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="ResourceHandle.cpp" />

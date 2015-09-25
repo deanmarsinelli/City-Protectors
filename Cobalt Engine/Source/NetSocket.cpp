@@ -5,6 +5,7 @@
 	by Mike McShaffry and David Graham
 */
 
+#include "BaseSocketManager.h"
 #include "BinaryPacket.h"
 #include "EngineStd.h"
 #include "Logger.h"
