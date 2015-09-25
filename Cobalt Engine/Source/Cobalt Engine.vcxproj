@@ -152,6 +152,7 @@
     <ClInclude Include="Include\MessageBox.h" />
     <ClInclude Include="Include\MovementController.h" />
     <ClInclude Include="Include\NetSocket.h" />
+    <ClInclude Include="Include\NetworkEventForwarder.h" />
     <ClInclude Include="Include\NetworkEvents.h" />
     <ClInclude Include="Include\PathingArc.h" />
     <ClInclude Include="Include\PathingGraph.h" />
@@ -242,6 +243,7 @@
     <ClCompile Include="MovementController.cpp" />
     <ClCompile Include="NetListenSocket.cpp" />
     <ClCompile Include="NetSocket.cpp" />
+    <ClCompile Include="NetworkEventForwarder.cpp" />
     <ClCompile Include="NetworkEvents.cpp" />
     <ClCompile Include="PathingArc.cpp" />
     <ClCompile Include="PathingGraph.cpp" />
