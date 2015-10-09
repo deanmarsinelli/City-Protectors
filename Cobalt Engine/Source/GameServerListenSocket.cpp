@@ -27,6 +27,7 @@ void GameServerListenSocket::HandleInput()
 
 	if (new_sock != INVALID_SOCKET)
 	{
+		// create a remote event socket and add it to the global socket manager
 		RemoteEventSocket* sock = CB_NEW RemoteEventSocket(new_sock, ipAddr);
 		int sockId = g_pSocketManager->AddSocket(sock);
 		int ipAddress = g_pSocketManager->GetIpAddress(sockId);

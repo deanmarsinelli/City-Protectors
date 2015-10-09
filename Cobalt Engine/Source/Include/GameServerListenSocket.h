@@ -9,6 +9,14 @@
 
 #include "NetListenSocket.h"
 
+/**
+	This class extends the listen socket class and is meant to be 
+	a game server listen socket. It will overload the HandleInput() 
+	method to create new clients encapsulated by RemoteEventSocket
+	objects. It will send game events generated on the server to a 
+	remote client and the client will receive them thinking they were
+	generated locally.
+*/
 class GameServerListenSocket : public NetListenSocket
 {
 public:

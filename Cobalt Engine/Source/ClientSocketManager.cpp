@@ -17,19 +17,23 @@ ClientSocketManager::ClientSocketManager(const std::string& hostName, unsigned i
 
 bool ClientSocketManager::Connect()
 {
+	// intialize the base class
 	if (!BaseSocketManager::Init())
 	{
 		return false;
 	}
 
+	// create a single socket to handle event passing
 	RemoteEventSocket* pSocket = CB_NEW RemoteEventSocket;
 
+	// connect this socket to a remote server
 	if (!pSocket->Connect(GetHostByName(m_HostName), m_Port))
 	{
 		CB_SAFE_DELETE(pSocket);
 		return false;
 	}
 
+	// add this socket to the manager (list and map)
 	AddSocket(pSocket);
 	return true;
 }

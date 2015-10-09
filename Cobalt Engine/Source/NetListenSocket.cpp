@@ -66,17 +66,17 @@ void NetListenSocket::Init(int portNum)
 SOCKET NetListenSocket::AcceptConnection(unsigned int *pAddr)
 {
 	SOCKET new_sock;
-	
 	sockaddr_in sock;
 	int size = sizeof(sock);
 
 	// accept the incoming connection 
+	// accept() returns a handle for the socket on which the actual connection is made
 	if ((new_sock = accept(m_Sock, (sockaddr*)&sock, &size)) == INVALID_SOCKET)
 	{
 		return INVALID_SOCKET;
 	}
 
-	// grab the ip of the incoming connection and place it into the sockaddr struct
+	// grab the ip of the incoming connection client and place it into the sockaddr struct
 	if (getpeername(new_sock, (sockaddr*)&sock, &size) == SOCKET_ERROR)
 	{
 		closesocket(new_sock);
@@ -86,7 +86,6 @@ SOCKET NetListenSocket::AcceptConnection(unsigned int *pAddr)
 	// fill out the address of the connection
 	*pAddr = ntohl(sock.sin_addr.s_addr);
 
-	// return a handle to the socket that is the actual connection,
-	// from MSDN - The connection is actually made with the socket that is returned by accept.
+	// return a handle to the socket that is the actual connection
 	return new_sock;
 }

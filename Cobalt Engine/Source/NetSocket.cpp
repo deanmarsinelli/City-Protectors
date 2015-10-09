@@ -114,6 +114,8 @@ int NetSocket::HasOutput()
 
 void NetSocket::HandleOutput()
 {
+	// send all the packets queued to be sent through the socket
+
 	int fSent = 0;
 	do
 	{
@@ -160,6 +162,8 @@ void NetSocket::HandleOutput()
 
 void NetSocket::HandleInput()
 {
+	// read in data from the socket and compose it into discrete packets that the game can read
+
 	bool packetReceived = false;
 	u_long packetSize = 0;
 

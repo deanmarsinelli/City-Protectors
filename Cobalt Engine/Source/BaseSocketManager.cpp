@@ -42,7 +42,7 @@ void BaseSocketManager::DoSelect(int pauseMicroSecs, bool handleInput)
 	FD_ZERO(&out_set);
 	FD_ZERO(&exc_set);
 
-	// set everything up for the select
+	// set everything up for the select, add sockets to the inp_set and out_set
 	for (auto it = m_SockList.begin(); it != m_SockList.end(); ++it)
 	{
 		NetSocket* pSock = *it;
@@ -71,7 +71,7 @@ void BaseSocketManager::DoSelect(int pauseMicroSecs, bool handleInput)
 
 	int selRet = 0;
 
-	// do the select
+	// select will poll the sockets for input and output
 	selRet = select(maxdesc + 1, &inp_set, &out_set, &exc_set, &tv);
 	if (selRet = SOCKET_ERROR)
 	{
@@ -127,12 +127,15 @@ void BaseSocketManager::DoSelect(int pauseMicroSecs, bool handleInput)
 		{
 			switch (pSock->m_DeleteFlag)
 			{
+			// id a sockets delete flag is set to 1, remove it entirely from the manager and destroy the netsocket object
 			case 1:
 				g_pSocketManager->RemoveSocket(pSock);
 				it = m_SockList.begin();
 				break;
 
 			case 3:
+				// if the delete flag is set to 2, the socket handle is shut down but the netsocket object stays around for
+				// potential reconnections. this allows unsent packets to be stored and sent when a client reconnects
 				pSock->m_DeleteFlag = 2;
 				if (pSock->m_Sock != INVALID_SOCKET)
 				{
@@ -283,12 +286,14 @@ bool BaseSocketManager::IsInternal(unsigned int ip)
 
 bool BaseSocketManager::Send(int sockId, shared_ptr<IPacket> packet)
 {
+	// find the specific socket by its id
 	NetSocket* sock = FindSocket(sockId);
 	if (!sock)
 	{
 		return false;
 	}
 
+	// send the packet to the socket
 	sock->Send(packet);
 	return true;
 }
@@ -305,6 +310,8 @@ void BaseSocketManager::AddToInbound(int rc)
 
 NetSocket* BaseSocketManager::FindSocket(int socketId)
 {
+	// iterate the map of sockets and return a handle
+	// to the correct socket given by the id
 	auto it = m_SockMap.find(socketId);
 	if (it != m_SockMap.end())
 	{

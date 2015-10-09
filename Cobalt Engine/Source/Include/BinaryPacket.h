@@ -11,16 +11,16 @@
 
 /**
 	Implementation of a network packet that stores binary data. The packet can 
-	be constructed all at once or with calls to MemCpy. The size of the data is 
-	stored in the first 4 bytes of data in network order.
+	be constructed all at once or with calls to MemCpy. The size of the buffer is 
+	stored in the first 4 bytes of data in network order (size header + data).
 */
 class BinaryPacket : public IPacket
 {
 public:
-	/// Construct a packet all at once with data
+	/// Construct a packet all at once with data and size of the buffer
 	BinaryPacket(const char* data, u_long size);
 
-	/// Construct a packet with a given size
+	/// Construct a packet with a given buffer size
 	BinaryPacket(u_long size);
 
 	/// Virtual destructor frees the packet data
@@ -36,7 +36,7 @@ public:
 	/// Return the data stored in the packet
 	virtual const char* GetData() const;
 
-	/// Return the size of the packet
+	/// Return the size of the data stored in the packet
 	virtual u_long GetSize() const;
 
 public:

@@ -17,11 +17,12 @@ BinaryPacket::BinaryPacket(const char* data, u_long size)
 {
 	// construct a packet all at once
 
+	// m_Data will hold the buffer (size) and a size header (sizeof(u_long))
 	m_Data = CB_NEW char[size + sizeof(u_long)];
 	CB_ASSERT(m_Data);
 
 
-	// set the size of the data into the first 4 bytes (in network order)
+	// set the size of the buffer (size header + data) into the first 4 bytes (in network order)
 	// from MSDN - The htonl function converts a u_long from host 
 	// to TCP/IP network byte order (which is big-endian).
 	*(u_long*)m_Data = htonl(size + sizeof(u_long));
@@ -34,10 +35,11 @@ BinaryPacket::BinaryPacket(u_long size)
 {
 	// construct an empty packet
 
+	// m_Data will hold the buffer (size) and a size header (sizeof(u_long))
 	m_Data = CB_NEW char[size + sizeof(u_long)];
 	CB_ASSERT(m_Data);
 
-	// set the size of the data into the first 4 bytes (in network order)
+	// set the size of the buffer (size header + data) into the first 4 bytes (in network order)
 	*(u_long*)m_Data = htonl(size + sizeof(u_long));
 }
 
@@ -66,7 +68,7 @@ const char* BinaryPacket::GetData() const
 
 u_long BinaryPacket::GetSize() const
 {
-	// return the size of the data, stored in the first 4 bytes
+	// return the size of the buffer, stored in the first 4 bytes
 	// it must be converted from network order to host order
 
 	// from MSDN - ntohl function converts a u_long from TCP/IP network order 
