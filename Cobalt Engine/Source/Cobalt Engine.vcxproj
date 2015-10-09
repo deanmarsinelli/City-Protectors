@@ -154,6 +154,7 @@
     <ClInclude Include="Include\NetSocket.h" />
     <ClInclude Include="Include\NetworkEventForwarder.h" />
     <ClInclude Include="Include\NetworkEvents.h" />
+    <ClInclude Include="Include\NetworkGameView.h" />
     <ClInclude Include="Include\PathingArc.h" />
     <ClInclude Include="Include\PathingGraph.h" />
     <ClInclude Include="Include\PathingNode.h" />
@@ -245,6 +246,7 @@
     <ClCompile Include="NetSocket.cpp" />
     <ClCompile Include="NetworkEventForwarder.cpp" />
     <ClCompile Include="NetworkEvents.cpp" />
+    <ClCompile Include="NetworkGameView.cpp" />
     <ClCompile Include="PathingArc.cpp" />
     <ClCompile Include="PathingGraph.cpp" />
     <ClCompile Include="PathingNode.cpp" />

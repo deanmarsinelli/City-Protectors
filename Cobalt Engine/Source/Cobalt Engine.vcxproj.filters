@@ -298,6 +298,9 @@
     <ClInclude Include="Include\NetworkEventForwarder.h">
       <Filter>Networking</Filter>
     </ClInclude>
+    <ClInclude Include="Include\NetworkGameView.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -548,6 +551,9 @@
       <Filter>Networking</Filter>
     </ClCompile>
     <ClCompile Include="NetworkEventForwarder.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkGameView.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
   </ItemGroup>
