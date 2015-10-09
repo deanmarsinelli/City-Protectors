@@ -16,6 +16,8 @@
 #include <tinyxml.h>
 #include <Windows.h>
 
+#include "concurrent_queue.h"
+
 using std::unique_ptr;
 using std::shared_ptr;
 using std::weak_ptr;
@@ -391,7 +393,7 @@ public:
 
 // create a typedef for an event listener function aka delegate
 typedef fastdelegate::FastDelegate1<IEventPtr> EventListenerDelegate;
-typedef Concurrency::concurrent_queue<IEventPtr> ThreadSafeEventQueue;
+typedef concurrent_queue<IEventPtr> ThreadSafeEventQueue;
 
 /**
 	Interface for an event manager. This object will maintain a list of registered events 

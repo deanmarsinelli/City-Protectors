@@ -102,6 +102,7 @@
     <ClInclude Include="Include\BinaryPacket.h" />
     <ClInclude Include="Include\CameraNode.h" />
     <ClInclude Include="Include\ClientSocketManager.h" />
+    <ClInclude Include="Include\concurrent_queue.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\CriticalSection.h" />
     <ClInclude Include="Include\D3DShaderMeshNode11.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Include\Quaternion.h" />
     <ClInclude Include="Include\Random.h" />
     <ClInclude Include="Include\Raycast.h" />
+    <ClInclude Include="Include\RealTimeProcess.h" />
     <ClInclude Include="Include\RemoteEventSocket.h" />
     <ClInclude Include="Include\RenderComponent.h" />
     <ClInclude Include="Include\Resource.h" />
@@ -262,6 +264,7 @@
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Raycast.cpp" />
+    <ClCompile Include="RealTimeProcess.cpp" />
     <ClCompile Include="RemoteEventSocket.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="ResourceCache.cpp" />

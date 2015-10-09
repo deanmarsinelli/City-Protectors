@@ -304,6 +304,12 @@
     <ClInclude Include="Include\CriticalSection.h">
       <Filter>MultiThreading</Filter>
     </ClInclude>
+    <ClInclude Include="Include\RealTimeProcess.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\concurrent_queue.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -558,6 +564,9 @@
     </ClCompile>
     <ClCompile Include="NetworkGameView.cpp">
       <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="RealTimeProcess.cpp">
+      <Filter>MultiThreading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
