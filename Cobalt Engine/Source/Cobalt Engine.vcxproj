@@ -103,6 +103,7 @@
     <ClInclude Include="Include\CameraNode.h" />
     <ClInclude Include="Include\ClientSocketManager.h" />
     <ClInclude Include="Include\Console.h" />
+    <ClInclude Include="Include\CriticalSection.h" />
     <ClInclude Include="Include\D3DShaderMeshNode11.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
     <ClInclude Include="Include\D3DMesh.h" />

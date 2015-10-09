@@ -301,6 +301,9 @@
     <ClInclude Include="Include\NetworkGameView.h">
       <Filter>Networking</Filter>
     </ClInclude>
+    <ClInclude Include="Include\CriticalSection.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -635,6 +638,9 @@
     </Filter>
     <Filter Include="Networking">
       <UniqueIdentifier>{84508a91-936d-4d47-9171-37e99bded409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MultiThreading">
+      <UniqueIdentifier>{3f142866-aba7-4b7d-8cf4-d70a3ea602a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
