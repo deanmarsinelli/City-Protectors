@@ -20,6 +20,7 @@ const EventType Event_NewRenderComponent::sk_EventType(0xfb30a10c);
 const EventType Event_ModifiedRenderComponent::sk_EventType(0xf5ef297b);
 const EventType Event_RequestNewGameObject::sk_EventType(0xe32a1a9a);
 const EventType Event_RequestDestroyGameObject::sk_EventType(0xdc8c485d);
+const EventType Event_EnvironmentLoaded::sk_EventType(0x8f28edab);
 
 
 //====================================================

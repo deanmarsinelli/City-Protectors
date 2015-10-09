@@ -26,6 +26,7 @@ public:
 protected:
 	//virtual BaseGameLogic* CreateGameAndView();
 	virtual void RegisterGameEvents();
-	virtual void CreateNetworkEventForwarder();
+	virtual void 
+		();
 	virtual void DestroyNetworkEventForwarder();
 };

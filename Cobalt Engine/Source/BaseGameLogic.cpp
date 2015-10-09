@@ -9,16 +9,22 @@
 #include <tinyxml.h>
 
 #include "BaseGameLogic.h"
+#include "BaseSocketManager.h"
 #include "EngineStd.h"
 #include "Events.h"
 #include "GameObjectFactory.h"
+#include "GameServerListenSocket.h"
 #include "LevelManager.h"
 #include "Logger.h"
+#include "NetworkEvents.h"
+#include "PathingGraph.h"
 #include "Physics.h"
 #include "ProcessManager.h"
+#include "Resource.h"
 #include "ResourceCache.h"
 #include "StringUtil.h"
 #include "templates.h"
+#include "XmlResource.h"
 
 BaseGameLogic::BaseGameLogic()
 {
@@ -109,7 +115,7 @@ shared_ptr<PathingGraph> BaseGameLogic::GetPathingGraph()
 	return m_pPathingGraph;
 }
 
-CBRandom& BaseGameLogic::GetRNG()
+RandomGenerator& BaseGameLogic::GetRNG()
 {
 	return m_Random;
 }
@@ -211,7 +217,93 @@ std::string BaseGameLogic::GetGameObjectXml(const GameObjectId id)
 
 bool BaseGameLogic::LoadGame(const char* levelResource)
 {
-	// TODO
+	// get the root xml node
+	TiXmlElement* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(levelResource);
+	if (!pRoot)
+	{
+		CB_ERROR("Failed to find level resource file: " + std::string(levelResource));
+		return false;
+	}
+
+	// pre and post load scripts
+	const char* preLoadScript = nullptr;
+	const char* postLoadScript = nullptr;
+
+	// parse the pre and post load script attributes
+	TiXmlElement* pScriptElement = pRoot->FirstChildElement("Script");
+	if (pScriptElement)
+	{
+		preLoadScript = pScriptElement->Attribute("preLoad");
+		postLoadScript = pScriptElement->Attribute("postLoad");
+	}
+
+	// if there is a pre load script, load it
+	if (preLoadScript)
+	{
+		Resource resource(preLoadScript);
+		// this will load it into cache
+		shared_ptr<ResHandle> pResourceHandle = g_pApp->m_ResCache->GetHandle(&resource);
+	}
+
+	// load all initial game objects
+	TiXmlElement* pObjectsNode = pRoot->FirstChildElement("StaticObjects");
+	if (pObjectsNode)
+	{
+		for (TiXmlElement* pNode = pObjectsNode->FirstChildElement(); pNode; pNode = pNode->NextSiblingElement())
+		{
+			const char* objectResource = pNode->Attribute("resource");
+
+			// create a game object using the resource attribute data
+			StrongGameObjectPtr pObject = CreateGameObject(objectResource, pNode);
+			if (pObject)
+			{
+				// dispatch an event letting the game know a new object has been created
+				shared_ptr<Event_NewGameObject> pEvent(CB_NEW Event_NewGameObject(pObject->GetId()));
+				IEventManager::Get()->QueueEvent(pEvent);
+			}
+		}
+	}
+
+	// initialize all human views
+	for (auto it = m_GameViews.begin(); it != m_GameViews.end(); ++it)
+	{
+		shared_ptr<IGameView> pView = *it;
+		if (pView->GetType() == GameView_Human)
+		{
+			shared_ptr<HumanView> pHumanView = static_pointer_cast<HumanView, IGameView>(pView);
+			pHumanView->LoadGame(pRoot);
+		}
+	}
+
+	// call the delegate load function
+	if (!LoadGameDelegate(pRoot))
+	{
+		return false;
+	}
+
+	// if there is a post load script, load it
+	if (postLoadScript)
+	{
+		Resource resource(postLoadScript);
+		// this will load it into cache
+		shared_ptr<ResHandle> pResourceHandle = g_pApp->m_ResCache->GetHandle(&resource);
+	}
+
+	// trigger the environment loaded game event to spawn players and ai
+	if (m_Proxy)
+	{
+		// if this is a proxy client, notify the server
+		shared_ptr<Event_RemoteEnvironmentLoaded> pEvent(CB_NEW Event_RemoteEnvironmentLoaded());
+		IEventManager::Get()->TriggerEvent(pEvent);
+	}
+	else
+	{
+		// if this is the local host or a single player game
+		shared_ptr<Event_EnvironmentLoaded> pEvent(CB_NEW Event_EnvironmentLoaded());
+		IEventManager::Get()->TriggerEvent(pEvent);
+	}
+
+	return true;
 }
 
 const LevelManager* BaseGameLogic::GetLevelManager()
@@ -325,7 +417,7 @@ void BaseGameLogic::ChangeState(enum BaseGameState newState)
 				return;
 			}
 			pServer->AddSocket(new GameServerListenSocket(g_pApp->m_Options.m_ListenPort));
-			g_pApp->m_pBaseSocketManger = pServer;
+			g_pApp->m_pBaseSocketManager = pServer;
 		}
 	}
 	else if (newState == BaseGameState::LoadingGameEnvironment)

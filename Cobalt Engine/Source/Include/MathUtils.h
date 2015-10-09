@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "EngineStd.h"
+#include "Random.h"
 #include "types.h"
 
 #define RADIANS_TO_DEGREES(x) ((x) * 180.0f / CB_PI)
@@ -21,14 +22,8 @@ typedef std::vector<Point> Poly;
 /// Determine if a point exists inside a polygon. Algorithm from Graphics Gems
 extern bool PointInPoly(const Point& test, const Poly& polygon);
 
-float WrapPi(float angle);
+float WrapPi(float wrapMe);
+float Wrap2Pi(float wrapMe);
 Vec3 GetVectorFromYRotation(float angleRadians);
 float GetYRotationFromVector(const Vec3& lookAt);
 
-
-class CBRandom
-{
-public:
-	void Random();
-	void Randomize();
-};

@@ -12,7 +12,10 @@
 #include <string>
 #include <unordered_map>
 
+#include "BaseSocketManager.h"
+#include "EventManager.h"
 #include "Initialization.h"
+#include "NetworkEventForwarder.h"
 #include "types.h"
 
 class BaseGameLogic;
@@ -70,6 +73,9 @@ public:
 
 	/// Create the intial game logic and view
 	virtual BaseGameLogic* CreateGameAndView() = 0;
+
+	/// Load a game
+	virtual bool LoadGame();
 
 	/// Abort the game
 	void AbortGame();
@@ -154,6 +160,9 @@ public:
 	/// Release D3D11 resources created in OnD3D11CreateDevice
 	static void CALLBACK OnD3D11DestroyDevice(void* pUserContext);
 	
+	/// Attach this application layer as a client to a server
+	bool AttachAsClient();
+
 protected:
 	/// Register game events (should be overridden)
 	virtual void RegisterGameEvents() { }
@@ -174,6 +183,12 @@ public:
 	/// Pointer to the game logic layer
 	BaseGameLogic* m_pGame;
 
+	/// Socket manager for the application layer
+	BaseSocketManager* m_pBaseSocketManager;
+
+	/// Network event forwarder to send outgoing events over network
+	NetworkEventForwarder* m_pNetworkEventForwarder;
+
 	/// Options currently loaded for the game
 	GameOptions m_Options;
 
@@ -182,6 +197,9 @@ public:
 
 	/// Pointer to the resource cache for the game
 	class ResCache* m_ResCache;
+
+	/// Event manager for the game
+	EventManager* m_pEventManager;
 
 protected:
 	/// Instance handle to the application

@@ -163,3 +163,37 @@ private:
 	/// The ip of the the remote client
 	int m_IpAddress;
 };
+
+/**
+	This event is sent when a client has loaded its environment. This
+	event should go from client to server.
+*/
+class Event_RemoteEnvironmentLoaded : public BaseEvent
+{
+public:
+	/// Default constructor
+	Event_RemoteEnvironmentLoaded() { }
+
+	// IEvent interface
+	/// Return the event type
+	virtual const EventType& GetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	/// Return a copy of the event
+	virtual IEventPtr Copy() const
+	{
+		return IEventPtr(CB_NEW Event_RemoteEnvironmentLoaded());
+	}
+
+	/// Return the name of the event
+	virtual const char* GetName() const
+	{
+		return "Event_RemoteEnvironmentLoaded";
+	}
+
+public:
+	/// The event type
+	static const EventType sk_EventType;
+};

@@ -10,12 +10,15 @@
 #include "WindowsApp.h"
 
 #include "BaseGameLogic.h"
+#include "ClientSocketManager.h"
 #include "EngineStd.h"
 #include "EventManager.h"
 #include "Events.h"
 #include "D3DRenderer.h"
 #include "Logger.h"
 #include "MessageBox.h"
+#include "NetworkEvents.h"
+#include "PhysicsEvents.h"
 
 // global pointer for the engine to the application instance
 // this will get set in the constructor of the WindowsApp
@@ -29,7 +32,6 @@ WindowsApp* g_pApp = nullptr;
 //====================================================
 WindowsApp::WindowsApp()
 {
-	// TODO finish this
 	g_pApp = this;
 	m_pGame = nullptr;
 
@@ -40,7 +42,17 @@ WindowsApp::WindowsApp()
 	m_IsRunning = false;
 	m_IsEditorRunning = false;
 	
-	m_HasModalDialog = false;
+	m_HasModalDialog = 0;
+
+	m_pEventManager = nullptr;
+	m_ResCache = nullptr;
+
+	m_pNetworkEventForwarder = nullptr;
+	m_pBaseSocketManager = nullptr;
+
+	m_QuitRequested = false;
+	m_Quitting = false;
+
 }
 
 HWND WindowsApp::GetHwnd()
@@ -294,6 +306,11 @@ LRESULT WindowsApp::OnAltEnter()
 LRESULT WindowsApp::OnNcCreate(LPCREATESTRUCT cs)
 {
 	return 0;
+}
+
+bool WindowsApp::LoadGame()
+{
+	return m_pGame->LoadGame(m_Options.m_Level.c_str());
 }
 
 void WindowsApp::AbortGame()
@@ -668,11 +685,56 @@ void CALLBACK WindowsApp::OnD3D11DestroyDevice(void* pUserContext)
 	g_pApp->m_Renderer = nullptr;
 }
 
+bool WindowsApp::AttachAsClient()
+{
+	ClientSocketManager* pClient = CB_NEW ClientSocketManager(g_pApp->m_Options.m_GameHost, g_pApp->m_Options.m_ListenPort);
+
+	// connect to a remote server
+	if (!pClient->Connect())
+	{
+		return false;
+	}
+
+	g_pApp->m_pBaseSocketManager = pClient;
+	CreateNetworkEventForwarder();
+
+	return true;
+}
+
 
 //====================================================
 //	WindowsApp
 //	Protected method definitions
 //====================================================
+void WindowsApp::CreateNetworkEventForwarder()
+{
+	if (m_pNetworkEventForwarder != nullptr)
+	{
+		CB_ERROR("Overwriting the network event forwarder");
+		CB_SAFE_DELETE(m_pNetworkEventForwarder);
+	}
+
+	m_pNetworkEventForwarder = CB_NEW NetworkEventForwarder(0);
+
+	// set up network event forwarding for certain events
+	IEventManager* pEventManger = IEventManager::Get();
+	pEventManger->AddListener(fastdelegate::MakeDelegate(m_pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_RequestNewGameObject::sk_EventType);
+	pEventManger->AddListener(fastdelegate::MakeDelegate(m_pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_EnvironmentLoaded::sk_EventType);
+	pEventManger->AddListener(fastdelegate::MakeDelegate(m_pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_PhysCollision::sk_EventType);
+}
+
+void WindowsApp::DestroyNetworkEventForwarder()
+{
+	if (m_pNetworkEventForwarder)
+	{
+		IEventManager* pEventManger = IEventManager::Get();
+		pEventManger->RemoveListener(fastdelegate::MakeDelegate(m_pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_RequestNewGameObject::sk_EventType);
+		pEventManger->RemoveListener(fastdelegate::MakeDelegate(m_pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_EnvironmentLoaded::sk_EventType);
+		pEventManger->RemoveListener(fastdelegate::MakeDelegate(m_pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_PhysCollision::sk_EventType);
+		CB_SAFE_DELETE(m_pNetworkEventForwarder);
+	}
+}
+
 int WindowsApp::PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
 {
 	int currentTime = timeGetTime();
@@ -732,6 +794,57 @@ int WindowsApp::PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
 	return 0;
 }
 
+void WindowsApp::FlashWhileMinimized()
+{
+	// Flash the application on the taskbar
+	// until it's restored.
+	if (!GetHwnd())
+	return;
+
+	// Blink the application if we are minimized,
+	// waiting until we are no longer minimized
+	if (IsIconic(GetHwnd()))
+	{
+		// Make sure the app is up when creating a new screen
+		// this should be the case most of the time, but when
+		// we close the app down, minimized, and a confirmation
+		// dialog appears, we need to restore
+		DWORD now = timeGetTime();
+		DWORD then = now;
+		MSG msg;
+
+		FlashWindow(GetHwnd(), true);
+
+		while (true)
+		{
+			if (PeekMessage(&msg, NULL, 0, 0, 0))
+			{
+				if (msg.message != WM_SYSCOMMAND || msg.wParam != SC_CLOSE)
+				{
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
+				}
+
+				// Are we done?
+				if (!IsIconic(GetHwnd()))
+				{
+					FlashWindow(GetHwnd(), false);
+					break;
+				}
+			}
+			else
+			{
+				now = timeGetTime();
+				DWORD timeSpan = now > then ? (now - then) : (then - now);
+				if (timeSpan > 1000)
+				{
+					then = now;
+					FlashWindow(GetHwnd(), true);
+				}
+			}
+		}
+	}
+}
 
 //====================================================
 //	WindowsApp

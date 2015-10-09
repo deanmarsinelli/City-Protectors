@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <queue>
+
 #include "CriticalSection.h"
 
 // concurrent_queue was grabbed from 

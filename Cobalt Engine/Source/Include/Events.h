@@ -337,5 +337,39 @@ private:
 };
 
 
+/**
+	This event is sent when a new game is started.
+*/
+class Event_EnvironmentLoaded : public BaseEvent
+{
+public:
+	/// Default constructor
+	Event_EnvironmentLoaded() { }
+
+	// IEvent interface
+	/// Return the event type
+	virtual const EventType& GetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	/// Return a copy of the event
+	virtual IEventPtr Copy() const
+	{
+		return IEventPtr(CB_NEW Event_EnvironmentLoaded());
+	}
+
+	/// Return the name of the event
+	virtual const char* GetName() const
+	{
+		return "Event_EnvironmentLoaded";
+	}
+
+public:
+	/// The event type
+	static const EventType sk_EventType;
+};
+
+
 /// Register script events from the engine
 extern void RegisterEngineScriptEvents();

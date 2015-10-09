@@ -568,6 +568,9 @@
     <ClCompile Include="RealTimeProcess.cpp">
       <Filter>MultiThreading</Filter>
     </ClCompile>
+    <ClCompile Include="D3D9Vertex.cpp">
+      <Filter>Graphics\Direct 3D\Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">

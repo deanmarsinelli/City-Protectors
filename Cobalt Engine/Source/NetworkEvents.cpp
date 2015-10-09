@@ -9,3 +9,4 @@
 
 const EventType Event_NetworkPlayerObjectAssignment::sk_EventType(0x166cd5dd);
 const EventType	Event_RemoteClient::sk_EventType(0xbbea8e87);
+const EventType Event_RemoteEnvironmentLoaded::sk_EventType(0xbfe34390);

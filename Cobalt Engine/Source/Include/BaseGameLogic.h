@@ -13,6 +13,7 @@
 #include "interfaces.h"
 #include "MathUtils.h"
 #include "Process.h"
+#include "Random.h"
 
 typedef std::unordered_map<GameObjectId, StrongGameObjectPtr> GameObjectMap;
 
@@ -67,7 +68,7 @@ public:
 	shared_ptr<PathingGraph> GetPathingGraph();
 
 	/// Return the random number generator
-	CBRandom& GetRNG();
+	RandomGenerator& GetRNG();
 
 	/// Attach a view to the game logic
 	virtual void AddView(shared_ptr<IGameView> pView, GameObjectId id = INVALID_GAMEOBJECT_ID);
@@ -148,7 +149,7 @@ protected:
 	ProcessManager* m_pProcessManager;
 
 	/// Random number generator
-	CBRandom m_Random;
+	RandomGenerator m_Random;
 
 	/// Map of game objects in this logic
 	GameObjectMap m_Objects;
