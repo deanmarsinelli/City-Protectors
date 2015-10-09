@@ -42,6 +42,7 @@ void RemoteEventSocket::HandleInput()
 			int type;
 			in >> type;
 
+			// determine the type of event
 			switch (type)
 			{
 			case NetMsg_Event:
@@ -72,6 +73,7 @@ void RemoteEventSocket::HandleInput()
 
 void RemoteEventSocket::CreateEvent(std::istream& in)
 {
+	// create an event and dispatch it to the event manager
 	EventType eventType;
 	in >> eventType;
 

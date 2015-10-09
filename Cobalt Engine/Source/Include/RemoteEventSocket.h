@@ -9,6 +9,10 @@
 
 #include "NetSocket.h"
 
+/**
+	This class is used to convert network socket data into events that
+	can be sent to the local game event system.
+*/
 class RemoteEventSocket : public NetSocket
 {
 public:

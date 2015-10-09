@@ -9,6 +9,11 @@
 
 #include "interfaces.h"
 
+/**
+	This class is used to forward events down a network connection. It 
+	stores a socket id which will be used to determine which socket
+	to send the data to.
+*/
 class NetworkEventForwarder
 {
 public:

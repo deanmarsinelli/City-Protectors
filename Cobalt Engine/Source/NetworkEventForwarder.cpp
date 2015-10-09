@@ -20,9 +20,13 @@ NetworkEventForwarder::NetworkEventForwarder(int socketId)
 
 void NetworkEventForwarder::ForwardEvent(IEventPtr pEvent)
 {
+	// this method serializes an event into a stream represented by
+	// event message id-- event itself -- event type, and sends the 
+	// stream to a specific socket
+
 	std::ostrstream out;
 
-	// serialze the event into binary
+	// serialze the event into an output stream
 	out << static_cast<int>(RemoteEventSocket::NetMsg_Event) << " ";
 	out << pEvent->GetEventType() << " ";
 	pEvent->Serialize(out);
