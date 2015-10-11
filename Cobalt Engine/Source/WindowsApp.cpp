@@ -19,6 +19,8 @@
 #include "MessageBox.h"
 #include "NetworkEvents.h"
 #include "PhysicsEvents.h"
+#include "StringUtil.h"
+#include "XmlResource.h"
 
 // global pointer for the engine to the application instance
 // this will get set in the constructor of the WindowsApp
@@ -340,25 +342,58 @@ BaseGameLogic* WindowsApp::GetGameLogic() const
 
 bool WindowsApp::LoadStrings(std::string language)
 {
+	// get the correct xml file
 	std::string languageFile = "Strings\\";
 	languageFile += language;
 	languageFile += ".xml";
 
-	/*TiXmlElement* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(languageFile.c_str());
+	// load the file from resource cache
+	TiXmlElement* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(languageFile.c_str());
 	if (!pRoot)
 	{
-	//CB_ERROR("String file is missing");
-	return false;
-	}*/
+		CB_ERROR("String file is missing");
+		return false;
+	}
 
-	// TODO: finish this function
+	// loop through each element and load the string/id pairs
+	for (auto pElem = pRoot->FirstChildElement(); pElem; pElem = pElem->NextSiblingElement())
+	{
+		const char* pKey = pElem->Attribute("id");
+		const char* pValue = pElem->Attribute("value");
+		const char* pHotkey = pElem->Attribute("hotkey");
+
+		if (pKey && pValue)
+		{
+			wchar_t wideKey[64];
+			wchar_t wideText[1024];
+			
+			// convert to wide characters
+			AnsiToWideCch(wideKey, pKey, 64);
+			AnsiToWideCch(wideText, pValue, 1024);
+
+			// insert into the string map
+			m_TextResource[std::wstring(wideKey)] = std::wstring(wideText);
+
+			if (pHotkey)
+			{
+				m_HotKeys[std::wstring(wideKey)] = MapCharToKeycode(*pHotkey);
+			}
+		}
+	}
+
 	return true;
 }
 
 std::wstring WindowsApp::GetString(std::wstring sID)
 {
-	// TODO
-	return std::wstring();
+	// return the localized string from the string cache
+	auto localizedString = m_TextResource.find(sID);
+	if (localizedString == m_TextResource.end())
+	{
+		CB_ASSERT(0 && "String not found");
+		return L"";
+	}
+	return localizedString->second;
 }
 
 UINT WindowsApp::MapCharToKeycode(const char hotkey)
