@@ -357,6 +357,7 @@ bool WindowsApp::LoadStrings(std::string language)
 
 std::wstring WindowsApp::GetString(std::wstring sID)
 {
+	// TODO
 	return std::wstring();
 }
 

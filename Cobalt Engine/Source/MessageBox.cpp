@@ -21,8 +21,45 @@ void CALLBACK CBMessageBox::OnGUIEvent(UINT nEvent, int nControlID, CDXUTControl
 
 int CBMessageBox::Ask(MessageBox_Questions question)
 {
-	// TODO
-	return 0;
+	std::wstring msg;
+	std::wstring title;
+	int buttonFlags;
+	int defaultAnswer = IDOK;
+
+	// set up the message box
+	switch (question)
+	{
+	case QUESTION_WHERES_THE_CD:
+		msg = g_pApp->GetString(L"IDS_QUESTION_WHERES_THE_CD");
+		title = g_pApp->GetString(L"IDS_ALERT");
+		buttonFlags = MB_RETRYCANCEL | MB_ICONEXCLAMATION;
+		defaultAnswer = IDCANCEL;
+		break;
+
+	case QUESTION_QUIT_GAME:
+		msg = g_pApp->GetString(L"IDS_QUESTION_QUIT_GAME");
+		title = g_pApp->GetString(L"IDS_QUESTION");
+		buttonFlags = MB_YESNO | MB_ICONQUESTION;
+		defaultAnswer = IDNO;
+		break;
+
+	default:
+		CB_ASSERT(0 && L"Undefined Question in Game::Ask");
+		return IDCANCEL;
+	}
+
+	if (g_pApp && g_pApp->IsRunning())
+	{
+		// show a modal message box with an active cursor
+		ShowCursor(true);
+		shared_ptr<CBMessageBox> pMessageBox(new CBMessageBox(msg, title, buttonFlags));
+		int result = g_pApp->Modal(pMessageBox, defaultAnswer);
+		ShowCursor(false);
+		return result;
+	}
+
+	// use the default windows message box if necessary
+	return MessageBox(g_pApp ? g_pApp->GetHwnd() : NULL, msg.c_str(), title.c_str(), buttonFlags);
 }
 
 // method definitions
