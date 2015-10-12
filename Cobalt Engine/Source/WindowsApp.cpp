@@ -116,7 +116,24 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 		CB_NEW DevelopmentResourceZipFile(L"Assets.zip", DevelopmentResourceZipFile::Editor) :
 		CB_NEW ResourceZipFile(L"Assets.zip");
 
-	// TODO
+	m_ResCache = CB_NEW ResCache(50, zipFile);
+	if (!m_ResCache->Init())
+	{
+		CB_ERROR("Failed to initialize resource cache. Check paths");
+		return false;
+	}
+	extern shared_ptr<IResourceLoader> CreateWAVResourceLoader();
+	extern shared_ptr<IResourceLoader> CreateDDSResourceLoader();
+	extern shared_ptr<IResourceLoader> CreateJPGResourceLoader();
+	extern shared_ptr<IResourceLoader> CreateXmlResourceLoader();
+	extern shared_ptr<IResourceLoader> CreateSdkMeshResourceLoader();
+	extern shared_ptr<IResourceLoader> CreateScriptResourceLoader(); // TODO
+	m_ResCache->RegisterLoader(CreateWAVResourceLoader());
+	m_ResCache->RegisterLoader(CreateDDSResourceLoader());
+	m_ResCache->RegisterLoader(CreateJPGResourceLoader());
+	m_ResCache->RegisterLoader(CreateXmlResourceLoader());
+	m_ResCache->RegisterLoader(CreateSdkMeshResourceLoader());
+	m_ResCache->RegisterLoader(CreateScriptResourceLoader());
 
 
 	// DirectX initialization

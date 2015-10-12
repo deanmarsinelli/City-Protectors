@@ -142,6 +142,7 @@
     <ClInclude Include="Include\LuaScriptEvent.h" />
     <ClInclude Include="Include\LuaScriptExports.h" />
     <ClInclude Include="Include\LuaScriptProcess.h" />
+    <ClInclude Include="Include\LuaScriptResource.h" />
     <ClInclude Include="Include\LuaStateManager.h" />
     <ClInclude Include="Include\HumanView.h" />
     <ClInclude Include="Include\Initialization.h" />
@@ -239,6 +240,7 @@
     <ClCompile Include="LuaScriptEvent.cpp" />
     <ClCompile Include="LuaScriptExports.cpp" />
     <ClCompile Include="LuaScriptProcess.cpp" />
+    <ClCompile Include="LuaScriptResource.cpp" />
     <ClCompile Include="LuaStateManager.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MathUtils.cpp" />

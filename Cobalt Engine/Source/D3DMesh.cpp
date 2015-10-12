@@ -11,6 +11,11 @@
 #include "ResourceHandle.h"
 #include "WindowsApp.h"
 
+shared_ptr<IResourceLoader> CreateSdkMeshResourceLoader()
+{
+	return shared_ptr<IResourceLoader>(CB_NEW SdkMeshResourceLoader());
+}
+
 bool SdkMeshResourceLoader::LoadResource(char* rawBuffer, unsigned int rawSize, shared_ptr<ResHandle> handle)
 {
 	WindowsApp::Renderer renderer = WindowsApp::GetRendererImpl();

@@ -310,6 +310,9 @@
     <ClInclude Include="Include\concurrent_queue.h">
       <Filter>MultiThreading</Filter>
     </ClInclude>
+    <ClInclude Include="Include\LuaScriptResource.h">
+      <Filter>Scripting\Lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -570,6 +573,9 @@
     </ClCompile>
     <ClCompile Include="D3D9Vertex.cpp">
       <Filter>Graphics\Direct 3D\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaScriptResource.cpp">
+      <Filter>Scripting\Lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
