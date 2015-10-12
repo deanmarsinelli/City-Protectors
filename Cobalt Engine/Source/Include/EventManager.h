@@ -35,25 +35,25 @@ public:
 	virtual ~EventManager();
 
 	/// Registers a delegate function that will get called when the event type is triggered -- returns true if successful
-	virtual bool AddListener(const EventListenerDelegate& eventDelegate, const EventType& type) = 0;
+	virtual bool AddListener(const EventListenerDelegate& eventDelegate, const EventType& type);
 
 	/// Remove a delegate/event type pairing -- returns false if the pairing is not found
-	virtual bool RemoveListener(const EventListenerDelegate& eventDelegate, const EventType& type) = 0;
+	virtual bool RemoveListener(const EventListenerDelegate& eventDelegate, const EventType& type);
 
 	/// Fire this event now and immediately call all delegate functions listening for this event
-	virtual bool TriggerEvent(const IEventPtr& pEvent) const = 0;
+	virtual bool TriggerEvent(const IEventPtr& pEvent) const;
 
 	/// Queue the event and fire it on the next update if there is enough time
-	virtual bool QueueEvent(const IEventPtr& pEvent) = 0;
+	virtual bool QueueEvent(const IEventPtr& pEvent);
 
 	/// [thread safe] Queue the event and fire it on the next update if there is enough time
-	virtual bool ThreadSafeQueueEvent(const IEventPtr& pEvent) = 0;
+	virtual bool ThreadSafeQueueEvent(const IEventPtr& pEvent);
 
 	/// Find the next instance of the event type and remove it from the processing queue -- if allOfType is true all events of this type will be removed
-	virtual bool AbortEvent(const EventType& type, bool allOfType = false) = 0;
+	virtual bool AbortEvent(const EventType& type, bool allOfType = false);
 
 	/// Process events from the queue and optionally limit the processing time
-	virtual bool Update(unsigned long maxMillis = kINFINITE) = 0;
+	virtual bool Update(unsigned long maxMillis = kINFINITE);
 
 private:
 	/// Map from event types to lists of listeners for that type

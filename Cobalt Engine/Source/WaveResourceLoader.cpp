@@ -8,11 +8,15 @@
 #include <dsound.h>
 #include <mmsystem.h>
 
-#include "WaveResourceLoader.h"
-
 #include "EngineStd.h"
 #include "Logger.h"
 #include "SoundResourceExtraData.h"
+#include "WaveResourceLoader.h"
+
+shared_ptr<IResourceLoader> CreateWAVResourceLoader()
+{
+	return shared_ptr<IResourceLoader>(CB_NEW WaveResourceLoader());
+}
 
 std::string WaveResourceLoader::GetPattern()
 {

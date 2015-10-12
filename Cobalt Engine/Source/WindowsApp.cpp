@@ -16,10 +16,14 @@
 #include "Events.h"
 #include "D3DRenderer.h"
 #include "Logger.h"
+#include "LuaScriptExports.h"
+#include "LuaScriptProcess.h"
 #include "MessageBox.h"
 #include "NetworkEvents.h"
 #include "PhysicsEvents.h"
+#include "Resource.h"
 #include "ResourceZipFile.h"
+#include "ScriptComponent.h"
 #include "StringUtil.h"
 #include "XmlResource.h"
 
@@ -28,6 +32,9 @@
 // class, but will point to a derived instance that is
 // global and instantiated before the application begins
 WindowsApp* g_pApp = nullptr;
+
+// pre-init lua script
+const char* SCRIPT_PREINIT_FILE = "Scripts\\PreInit.lua";
 
 //====================================================
 //	WindowsApp
@@ -122,19 +129,51 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 		CB_ERROR("Failed to initialize resource cache. Check paths");
 		return false;
 	}
+	// register resource loaders
 	extern shared_ptr<IResourceLoader> CreateWAVResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateDDSResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateJPGResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateXmlResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateSdkMeshResourceLoader();
-	extern shared_ptr<IResourceLoader> CreateScriptResourceLoader(); // TODO
+	extern shared_ptr<IResourceLoader> CreateLuaScriptResourceLoader();
 	m_ResCache->RegisterLoader(CreateWAVResourceLoader());
 	m_ResCache->RegisterLoader(CreateDDSResourceLoader());
 	m_ResCache->RegisterLoader(CreateJPGResourceLoader());
 	m_ResCache->RegisterLoader(CreateXmlResourceLoader());
 	m_ResCache->RegisterLoader(CreateSdkMeshResourceLoader());
-	m_ResCache->RegisterLoader(CreateScriptResourceLoader());
+	m_ResCache->RegisterLoader(CreateLuaScriptResourceLoader());
 
+	if (!LoadStrings("English"))
+	{
+		CB_ERROR("Failed to load strings");
+		return false;
+	}
+
+	// create the lua state manager and run the initial script
+	if (!LuaStateManager::Create())
+	{
+		CB_ERROR("Failed to initialize Lua");
+		return false;
+	}
+	// this is scoped so it will load into the cache then destroy the local resource
+	{
+		Resource res(SCRIPT_PREINIT_FILE);
+		shared_ptr<ResHandle> pResourceHandle = m_ResCache->GetHandle(&res);
+	}
+	// register functions exported to lua FROM C++
+	LuaScriptExports::Register();
+	LuaScriptProcess::RegisterScriptClass();
+	LuaScriptComponent::RegisterScriptFunctions();
+
+
+	// create event manager
+	m_pEventManager = CB_NEW EventManager("Event Manager", true);
+	if (!m_pEventManager)
+	{
+		CB_ERROR("Failed to create event manager");
+		return false;
+	}
+	
 
 	// DirectX initialization
 	DXUTInit(true, true, lpCmdLine, true);
@@ -149,12 +188,13 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 
 	if (!GetHwnd())
 	{
-		// error
+		CB_ERROR("Failed to get HWND");
 		return false;
 	}
 	SetWindowText(GetHwnd(), GetGameTitle());
 
-	// TODO: save game directory
+	// initialize directory to store save game files
+	// TODO
 
 	m_ScreenSize = Point(screenWidth, screenHeight);
 	// create the d3d device
