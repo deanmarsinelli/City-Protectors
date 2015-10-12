@@ -19,6 +19,7 @@
 #include "MessageBox.h"
 #include "NetworkEvents.h"
 #include "PhysicsEvents.h"
+#include "ResourceZipFile.h"
 #include "StringUtil.h"
 #include "XmlResource.h"
 
@@ -76,7 +77,7 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 #endif
 
 	// turn off mouse cursor
-	SetCursor(nullptr);
+	SetCursor(NULL);
 
 	// check for system resources
 	bool resourceCheck = false;
@@ -97,7 +98,7 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 		DWORD thisCPU = ReadCPUSpeed();
 		if (thisCPU < minCpuSpeed)
 		{
-			// _ERROR("GetCPUSpeed reports CPU is too slow for this game.");
+			CB_ERROR("GetCPUSpeed reports CPU is too slow for this game.");
 			return false;
 		}
 
@@ -111,9 +112,11 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 	RegisterGameEvents();
 
 	// initialize resource cache
+	IResourceFile* zipFile = (m_IsEditorRunning || m_Options.m_UseDevelopmentDirectories) ?
+		CB_NEW DevelopmentResourceZipFile(L"Assets.zip", DevelopmentResourceZipFile::Editor) :
+		CB_NEW ResourceZipFile(L"Assets.zip");
 
-
-
+	// TODO
 
 
 	// DirectX initialization
@@ -888,6 +891,7 @@ void WindowsApp::FlashWhileMinimized()
 //====================================================
 void WindowsApp::RegisterEngineEvents()
 {
+	// TODO
 	REGISTER_EVENT(Event_NewGameObject);
 	REGISTER_EVENT(Event_DestroyGameObject);
 }

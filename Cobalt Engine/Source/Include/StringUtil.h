@@ -35,6 +35,12 @@ extern std::string ToStr(unsigned long num, int base = 10);
 /// Convert a float to a string
 extern std::string ToStr(float num);
 
+/// Convert a wide string to a standard string
+extern std::string ws2s(const std::wstring& s);
+
+/// Convert a standard string to a wide string
+extern std::wstring s2ws(const std::string& s);
+
 /// Splits a string by the delimeter into a vector of strings.
 void Split(const std::string& str, StringVec& vec, char delimiter);
 
