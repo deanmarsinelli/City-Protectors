@@ -8,11 +8,15 @@
 #include "HumanView.h"
 
 #include "Audio.h"
-#include "DirectSoundAudio.h"
 #include "CameraNode.h"
+#include "DirectSoundAudio.h"
 #include "EngineStd.h"
+#include "EventManager.h"
+#include "Events.h"
 #include "Frustrum.h"
 #include "Logger.h"
+#include "ResourceCache.h"
+#include "SoundProcess.h"
 
 const GameViewId CB_INVALID_GAMEVIEW_ID = 0xffffffff;
 
@@ -320,14 +324,20 @@ void HumanView::SetCameraOffset(const Vec4& offset)
 	}
 }
 
-void HumanView::PlaySoundDelegate(IEventPtr pEventData)
+void HumanView::PlaySoundDelegate(IEventPtr pEvent)
 {
-	// TODO
+	shared_ptr<Event_PlaySound> pCastEvent = static_pointer_cast<Event_PlaySound>(pEvent);
+
+	// get the sound resource from the event and play the sound
+	Resource resource(pCastEvent->GetResource().c_str());
+	shared_ptr<ResHandle> handle = static_pointer_cast<ResHandle>(g_pApp->m_ResCache->GetHandle(&resource));
+	shared_ptr<SoundProcess> sound(CB_NEW SoundProcess(handle, 100, false));
+	m_pProcessManager->AttachProcess(sound);
 }
 
-void HumanView::GameStateDelegate(IEventPtr pEventData)
+void HumanView::GameStateDelegate(IEventPtr pEvent)
 {
-	// TODO
+	// FUTURE
 }
 
 Console& HumanView::GetConsole()
@@ -344,10 +354,14 @@ bool HumanView::LoadGameDelegate(TiXmlElement* pLevelData)
 
 void HumanView::RegisterAllDelegates()
 {
-	// TODO
+	// so far add the sound delegate only
+	IEventManager* pEventManager = IEventManager::Get();
+	pEventManager->AddListener(fastdelegate::MakeDelegate(this, &HumanView::PlaySoundDelegate), Event_PlaySound::sk_EventType);
 }
 
 void HumanView::RemoveAllDelegates()
 {
-	// TODO
+	// so far remove only the sound delegate
+	IEventManager* pEventManager = IEventManager::Get();
+	pEventManager->RemoveListener(fastdelegate::MakeDelegate(this, &HumanView::PlaySoundDelegate), Event_PlaySound::sk_EventType);
 }

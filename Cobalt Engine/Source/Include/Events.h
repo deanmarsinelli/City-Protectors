@@ -371,5 +371,79 @@ public:
 };
 
 
+/**
+	This event is sent by any system wishing for a HumanView to play a sound.
+*/
+class Event_PlaySound : public LuaScriptEvent
+{
+public:
+	/// Default constructor
+	Event_PlaySound() { }
+
+	/// Constructor with a sound resource
+	Event_PlaySound(const std::string& soundResource) :
+		m_SoundResource(soundResource)
+	{ }
+
+	// IEvent interface
+	/// Return the event type
+	virtual const EventType& GetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	/// Return a copy of the event
+	virtual IEventPtr Copy() const
+	{
+		return IEventPtr(CB_NEW Event_PlaySound());
+	}
+
+	/// Serialize the event
+	virtual void Serialize(std::ostream& out) const
+	{
+		out << m_SoundResource;
+	}
+
+	/// Deserialize the event
+	virtual void Deserialize(std::istream& in)
+	{
+		in >> m_SoundResource;
+	}
+
+	/// Return the sound resource
+	const std::string& GetResource() const
+	{
+		return m_SoundResource;
+	}
+
+	/// Return the name of the event
+	virtual const char* GetName() const
+	{
+		return "Event_PlaySound";
+	}
+
+	/// Build a C++ event from script
+	virtual bool BuildEventFromScript()
+	{
+		if (m_Event.IsString())
+		{
+			m_SoundResource = m_Event.GetString();
+			return true;
+		}
+
+		return false;
+	}
+
+	EXPORT_FOR_SCRIPT_EVENT(Event_PlaySound);
+
+public:
+	/// Type of the event
+	static const EventType sk_EventType;
+
+private:
+	/// The name of the sound resource that is being played
+	std::string m_SoundResource;
+};
+
 /// Register script events from the engine
 extern void RegisterEngineScriptEvents();

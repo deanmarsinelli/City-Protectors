@@ -82,8 +82,9 @@ public:
 	/// Set a camera offset -- useful for third person camera
 	virtual void SetCameraOffset(const Vec4& offset);
 
-	void PlaySoundDelegate(IEventPtr pEventData);
-	void GameStateDelegate(IEventPtr pEventData);
+	/// Delegate function for when a sound is to be played
+	void PlaySoundDelegate(IEventPtr pEvent);
+	void GameStateDelegate(IEventPtr pEvent);
 
 	/// Return a reference to the console
 	Console& GetConsole();
@@ -95,7 +96,10 @@ protected:
 	virtual bool LoadGameDelegate(TiXmlElement* pLevelData);
 
 private:
+	/// Register human view callbacks with the event manager
 	void RegisterAllDelegates();
+
+	/// Remove human view callbacks with the event manager
 	void RemoveAllDelegates();
 
 public:
