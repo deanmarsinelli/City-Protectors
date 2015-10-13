@@ -24,7 +24,8 @@ public:
 	virtual int	 getDebugMode() const override;
 	virtual void drawLine(const btVector3& from, const btVector3& to, const btVector3& color) override;
 
-	void SetOptions(int options);
+	/// Read PlayerOptions.xml to turn on physics debug draw options
+	void ReadOptions();
 
 	// TODO add turning this on through the console
 
