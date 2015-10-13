@@ -11,6 +11,8 @@
 
 #include "BaseGameLogic.h"
 #include "ClientSocketManager.h"
+#include "D3DRenderer9.h"
+#include "D3DRenderer11.h"
 #include "EngineStd.h"
 #include "EventManager.h"
 #include "Events.h"
@@ -194,13 +196,15 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 	SetWindowText(GetHwnd(), GetGameTitle());
 
 	// initialize directory to store save game files
-	// TODO
+	wcscpy_s(m_SaveGameDirectory, GetSaveGameDirectory(GetHwnd(), GetGameAppDirectory()));
 
 	m_ScreenSize = Point(screenWidth, screenHeight);
+
 	// create the d3d device
-	DXUTCreateDevice(D3D_FEATURE_LEVEL_9_3, true, screenWidth, screenHeight);
-	
-	/*if (GetRendererImpl() == Renderer_D3D9)
+	//DXUTCreateDevice(D3D_FEATURE_LEVEL_9_3, true, screenWidth, screenHeight);
+	DXUTCreateDevice(D3D_FEATURE_LEVEL_10_1, true, screenWidth, screenHeight);
+
+	if (GetRendererImpl() == Renderer_D3D9)
 	{
 		m_Renderer = std::shared_ptr<IRenderer>(new D3DRenderer9());
 	}
@@ -210,12 +214,22 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 	}
 	m_Renderer->SetBackgroundColor(255, 20, 20, 200);
 	m_Renderer->OnRestore();
-	*/
 	 
+	// create the game logic
 	m_pGame = CreateGameAndView();
 	if (!m_pGame)
 		return false;
 	
+	// preload resources
+	m_ResCache->PreLoad("*.dds", nullptr);
+	m_ResCache->PreLoad("*.jpg", nullptr);
+	m_ResCache->PreLoad("*.wav", nullptr);
+	if (GetRendererImpl() == WindowsApp::Renderer_D3D11)
+	{
+		m_ResCache->PreLoad("*.sdkmesh", nullptr);
+	}
+
+	m_IsRunning = true;
 
 	return true;
 }
@@ -948,7 +962,10 @@ void WindowsApp::FlashWhileMinimized()
 //====================================================
 void WindowsApp::RegisterEngineEvents()
 {
-	// TODO
+	REGISTER_EVENT(Event_EnvironmentLoaded);
 	REGISTER_EVENT(Event_NewGameObject);
+	REGISTER_EVENT(Event_MoveGameObject);
+	REGISTER_EVENT(Event_RequestNewGameObject);
+	REGISTER_EVENT(Event_NetworkPlayerObjectAssignment);
 	REGISTER_EVENT(Event_DestroyGameObject);
 }

@@ -22,6 +22,7 @@ class BaseGameLogic;
 class IRenderer;
 class IScreenElement;
 class HumanView;
+class ResCache;
 
 /**
 	Application Layer interface for a Windows Game.
@@ -192,11 +193,14 @@ public:
 	/// Options currently loaded for the game
 	GameOptions m_Options;
 
+	/// The directory to store game saved data in
+	TCHAR m_SaveGameDirectory[MAX_PATH];
+
 	/// Pointer to the renderer
 	std::shared_ptr<IRenderer> m_Renderer;
 
 	/// Pointer to the resource cache for the game
-	class ResCache* m_ResCache;
+	ResCache* m_ResCache;
 
 	/// Event manager for the game
 	EventManager* m_pEventManager;

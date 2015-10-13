@@ -27,7 +27,6 @@ extern bool CheckStorage(const DWORDLONG diskSpaceNeeded);
 extern bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
 extern DWORD ReadCPUSpeed();
 extern const TCHAR* GetSaveGameDirectory(HWND hWnd, const TCHAR* gameAppDirectory);
-extern bool CheckForJoystick(HWND hWnd);
 
 /**
 	Options to initialize the game.
@@ -37,6 +36,7 @@ struct GameOptions
 	GameOptions();
 	~GameOptions();
 
+	/// read xml file and fill in game options
 	void Init(const char* xmlFilePath, LPWSTR lpCmdLine);
 
 	// level option

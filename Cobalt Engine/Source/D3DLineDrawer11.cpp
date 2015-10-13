@@ -8,9 +8,8 @@
 #include <DXUT.h>
 #include <memory>
 
-#include "D3DLineDrawer11.h"
-
 #include "D3D11Vertex.h"
+#include "D3DLineDrawer11.h"
 #include "EngineStd.h"
 #include "HumanView.h"
 #include "Scene.h"
