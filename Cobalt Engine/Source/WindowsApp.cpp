@@ -365,11 +365,20 @@ LRESULT WindowsApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
 
 LRESULT WindowsApp::OnClose()
 {
+	// release resources in reverse order
+
 	CB_SAFE_DELETE(m_pGame);
 	DestroyWindow(GetHwnd());
 	DestroyNetworkEventForwarder();
 
-	// TODO: finish this function
+	CB_SAFE_DELETE(m_pBaseSocketManager);
+	CB_SAFE_DELETE(m_pEventManager);
+
+	LuaScriptComponent::UnregisterScriptFunctions();
+	LuaScriptExports::Unregister();
+	LuaStateManager::Destroy();
+
+	CB_SAFE_DELETE(m_ResCache);
 
 	return 0;
 }
