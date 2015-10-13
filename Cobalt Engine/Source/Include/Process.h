@@ -90,7 +90,7 @@ protected:
 	}
 
 	/// Update method must be overriden in derived class and is called every frame
-	virtual void OnUpdate(const float deltaTime) = 0;
+	virtual void OnUpdate(float deltaTime) = 0;
 
 	/// Called if a process ends with sucess
 	virtual void OnSuccess() { }

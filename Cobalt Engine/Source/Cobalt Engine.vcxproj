@@ -97,6 +97,7 @@
     <ClInclude Include="Include\AlphaSceneNode.h" />
     <ClInclude Include="Include\Audio.h" />
     <ClInclude Include="Include\AudioBuffer.h" />
+    <ClInclude Include="Include\AudioComponent.h" />
     <ClInclude Include="Include\BaseEvent.h" />
     <ClInclude Include="Include\BaseSocketManager.h" />
     <ClInclude Include="Include\BinaryPacket.h" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Include\EngineStd.h" />
     <ClInclude Include="Include\EventManager.h" />
     <ClInclude Include="Include\Events.h" />
+    <ClInclude Include="Include\FadeProcess.h" />
     <ClInclude Include="Include\Frustrum.h" />
     <ClInclude Include="Include\GameObject.h" />
     <ClInclude Include="Include\GameObjectFactory.h" />
@@ -205,6 +207,7 @@
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioBuffer.cpp" />
+    <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="BaseGameLogic.cpp" />
     <ClCompile Include="BaseSocketManager.cpp" />
     <ClCompile Include="BinaryPacket.cpp" />
@@ -228,6 +231,7 @@
     <ClCompile Include="EngineStd.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Events.cpp" />
+    <ClCompile Include="FadeProcess.cpp" />
     <ClCompile Include="Frustrum.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />

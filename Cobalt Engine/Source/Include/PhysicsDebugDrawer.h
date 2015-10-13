@@ -27,7 +27,7 @@ public:
 	/// Read PlayerOptions.xml to turn on physics debug draw options
 	void ReadOptions();
 
-	// TODO add turning this on through the console
+	// FUTURE add turning this on through the console
 
 private:
 	DebugDrawModes m_DebugModes;

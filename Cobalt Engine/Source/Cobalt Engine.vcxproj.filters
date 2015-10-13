@@ -313,6 +313,12 @@
     <ClInclude Include="Include\LuaScriptResource.h">
       <Filter>Scripting\Lua</Filter>
     </ClInclude>
+    <ClInclude Include="Include\AudioComponent.h">
+      <Filter>Game Objects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\FadeProcess.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -576,6 +582,12 @@
     </ClCompile>
     <ClCompile Include="LuaScriptResource.cpp">
       <Filter>Scripting\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
+      <Filter>Game Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeProcess.cpp">
+      <Filter>Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

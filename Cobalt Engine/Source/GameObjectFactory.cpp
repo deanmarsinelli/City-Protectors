@@ -20,10 +20,14 @@ GameObjectFactory::GameObjectFactory()
 {
 	m_lastObjectId = INVALID_GAMEOBJECT_ID;
 
-	//TODO
+	//TODO all components
 	// Register all the component creation functions
+	m_ComponentFactory.Register<MeshRenderComponent>(Component::GetIdFromName(MeshRenderComponent::g_Name));
 	m_ComponentFactory.Register<PhysicsComponent>(Component::GetIdFromName(PhysicsComponent::g_Name));
 	m_ComponentFactory.Register<LuaScriptComponent>(Component::GetIdFromName(LuaScriptComponent::g_Name));
+	m_ComponentFactory.Register<LightRenderComponent>(Component::GetIdFromName(LightRenderComponent::g_Name));
+	m_ComponentFactory.Register<SkyRenderComponent>(Component::GetIdFromName(SkyRenderComponent::g_Name));
+
 }
 
 StrongGameObjectPtr GameObjectFactory::CreateGameObject(const char* objectResource, TiXmlElement* overrides, const Mat4x4* pInitialTransform, const GameObjectId serversObjectId)

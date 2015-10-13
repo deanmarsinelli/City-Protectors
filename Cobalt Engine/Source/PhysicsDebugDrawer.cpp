@@ -25,7 +25,7 @@ void BulletDebugDrawer::reportErrorWarning(const char* warningString)
 
 void BulletDebugDrawer::draw3dText(const btVector3& location, const char* textString)
 {
-	// TODO -- no implementation yet
+	// FUTURE -- no implementation yet
 }
 
 void BulletDebugDrawer::setDebugMode(int debugMode)

@@ -153,5 +153,5 @@ void SoundProcess::OnUpdate(const float deltaTime)
 
 void SoundProcess::InitializeVolume()
 {
-	// TODO: volume based on game options
+	// FUTURE: volume based on game options
 }
