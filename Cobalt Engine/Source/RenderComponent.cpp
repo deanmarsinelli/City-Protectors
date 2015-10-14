@@ -258,3 +258,64 @@ void SkyRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
 	
 	pBaseElement->LinkEndChild(pTextureNode);
 }
+
+
+//====================================================
+//	GridRenderComponent definitions
+//====================================================
+GridRenderComponent::GridRenderComponent()
+{
+	m_TextureResource = "";
+	m_Squares = 0;
+}
+
+bool GridRenderComponent::DelegateInit(TiXmlElement* pData)
+{
+	// init the component
+	TiXmlElement* pTexture = pData->FirstChildElement("Texture");
+	if (pTexture)
+	{
+		m_TextureResource = pTexture->FirstChild()->Value();
+	}
+
+	TiXmlElement* pDivision = pData->FirstChildElement("Division");
+	if (pDivision)
+	{
+		m_Squares = atoi(pDivision->FirstChild()->Value());
+	}
+
+	return true;
+}
+
+shared_ptr<SceneNode> GridRenderComponent::CreateSceneNode()
+{
+	Transform transform = m_pOwner->transform;
+	
+	switch (WindowsApp::GetRendererImpl())
+	{
+	case WindowsApp::Renderer_D3D9:
+		return shared_ptr<SceneNode>(CB_NEW D3DGrid9(m_pOwner->GetId(), weakThis, &(pTransformComponent->GetTransform())));
+
+	case WindowsApp::Renderer_D3D11:
+		return shared_ptr<SceneNode>(CB_NEW D3DGrid11(m_pOwner->GetId(), weakThis, &(pTransformComponent->GetTransform())));
+
+	default:
+		CB_ERROR("Unknown Renderer Implementation in GridRenderComponent");
+	}
+	
+
+	return shared_ptr<SceneNode>();
+}
+
+void GridRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
+{
+	TiXmlElement* pTextureNode = CB_NEW TiXmlElement("Texture");
+	TiXmlText* pTextureText = CB_NEW TiXmlText(m_TextureResource.c_str());
+	pTextureNode->LinkEndChild(pTextureText);
+	pBaseElement->LinkEndChild(pTextureNode);
+
+	TiXmlElement* pDivisionNode = CB_NEW TiXmlElement("Division");
+	TiXmlText* pDivisionText = CB_NEW TiXmlText(ToStr(m_Squares).c_str());
+	pDivisionNode->LinkEndChild(pDivisionText);
+	pBaseElement->LinkEndChild(pDivisionNode);
+}

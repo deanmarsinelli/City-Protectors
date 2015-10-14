@@ -69,6 +69,7 @@ protected:
 	/// Factory method to create appropriate scene node
 	virtual shared_ptr<SceneNode> CreateSceneNode() override;
 
+	/// Editor method
 	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
 
 public:
@@ -95,6 +96,7 @@ protected:
 	/// Factory method to create appropriate scene node
 	virtual shared_ptr<SceneNode> CreateSceneNode() override;
 
+	/// Editor method
 	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
 
 public:
@@ -125,6 +127,7 @@ protected:
 	/// Factory method to create appropriate scene node
 	virtual shared_ptr<SceneNode> CreateSceneNode() override;
 
+	/// Editor method
 	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
 
 public:
@@ -134,4 +137,46 @@ public:
 private:
 	/// Name of the texture resource for the sky
 	std::string m_TextureResource;
+};
+
+
+//====================================================
+//	Some built in default render components
+//====================================================
+
+/**
+	A grid representing the world
+*/
+class GridRenderComponent : public BaseRenderComponent
+{
+public:
+	/// Default constructor
+	GridRenderComponent();
+
+	/// Return the name of the component
+	virtual const char *GetName() const { return g_Name; }
+	
+	/// Return the name of the texture resource
+	const char* GetTextureResource() { return m_TextureResource.c_str(); }
+
+	const int GetDivision() { return m_Squares; }
+
+protected:
+	virtual bool DelegateInit(TiXmlElement* pData) override;
+
+	/// Factory method to create appropriate scene node
+	virtual shared_ptr<SceneNode> CreateSceneNode() override;
+
+	/// Editor method
+	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
+
+public:
+	/// Name of the component
+	static const char* g_Name;
+
+private:
+	/// Name of the texture resource for the grid
+	std::string m_TextureResource;
+
+	int m_Squares;
 };
