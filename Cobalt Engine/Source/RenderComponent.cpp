@@ -5,6 +5,8 @@
 	by Mike McShaffry and David Graham
 */
 
+#include "D3DGrid9.h"
+#include "D3DGrid11.h"
 #include "D3DSkyNode9.h"
 #include "D3DSkyNode11.h"
 #include "EngineStd.h"
@@ -13,6 +15,7 @@
 #include "RenderComponent.h"
 #include "SkyNode.h"
 #include "StringUtil.h"
+#include "Transform.h"
 
 //====================================================
 //	BaseRenderComponent definitions
@@ -289,15 +292,17 @@ bool GridRenderComponent::DelegateInit(TiXmlElement* pData)
 
 shared_ptr<SceneNode> GridRenderComponent::CreateSceneNode()
 {
-	Transform transform = m_pOwner->transform;
-	
+	Transform* transform = &(m_pOwner->transform);
+
+	WeakBaseRenderComponentPtr weakThis(this);
+
 	switch (WindowsApp::GetRendererImpl())
 	{
 	case WindowsApp::Renderer_D3D9:
-		return shared_ptr<SceneNode>(CB_NEW D3DGrid9(m_pOwner->GetId(), weakThis, &(pTransformComponent->GetTransform())));
+		return shared_ptr<SceneNode>(CB_NEW D3DGrid9(m_pOwner->GetId(), weakThis, &(transform->GetTransform())));
 
 	case WindowsApp::Renderer_D3D11:
-		return shared_ptr<SceneNode>(CB_NEW D3DGrid11(m_pOwner->GetId(), weakThis, &(pTransformComponent->GetTransform())));
+		return shared_ptr<SceneNode>(CB_NEW D3DGrid11(m_pOwner->GetId(), weakThis, &(transform->GetTransform())));
 
 	default:
 		CB_ERROR("Unknown Renderer Implementation in GridRenderComponent");
