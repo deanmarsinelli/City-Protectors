@@ -106,6 +106,7 @@
     <ClInclude Include="Include\concurrent_queue.h" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\CriticalSection.h" />
+    <ClInclude Include="Include\D3DGrid9.h" />
     <ClInclude Include="Include\D3DShaderMeshNode11.h" />
     <ClInclude Include="Include\D3D11Vertex.h" />
     <ClInclude Include="Include\D3DMesh.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="ClientSocketManager.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="D3D9Vertex.cpp" />
+    <ClCompile Include="D3DGrid9.cpp" />
     <ClCompile Include="D3DLineDrawer11.cpp" />
     <ClCompile Include="D3DMesh.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />

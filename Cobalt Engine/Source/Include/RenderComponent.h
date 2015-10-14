@@ -145,7 +145,7 @@ private:
 //====================================================
 
 /**
-	A grid representing the world
+	A grid representing the world.
 */
 class GridRenderComponent : public BaseRenderComponent
 {
