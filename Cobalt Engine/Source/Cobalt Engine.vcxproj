@@ -288,6 +288,7 @@
     <ClCompile Include="SoundResourceExtraData.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="TextPacket.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WaveResourceLoader.cpp" />
     <ClCompile Include="WindowsApp.cpp" />

@@ -73,6 +73,13 @@ StrongGameObjectPtr GameObjectFactory::CreateGameObject(const char* objectResour
 		}
 	}
 
+	// initialize transform
+	if (!pObject->transform.Init(pRoot->FirstChildElement("Transform")))
+	{
+		CB_ERROR("Failed to initialize transform");
+		return StrongGameObjectPtr();
+	}
+
 	if (overrides)
 	{
 		ModifyGameObject(pObject, overrides);

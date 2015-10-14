@@ -589,6 +589,9 @@
     <ClCompile Include="FadeProcess.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">
