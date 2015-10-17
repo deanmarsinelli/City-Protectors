@@ -154,7 +154,7 @@ public:
 	GridRenderComponent();
 
 	/// Return the name of the component
-	virtual const char *GetName() const { return g_Name; }
+	virtual const char* GetName() const { return g_Name; }
 	
 	/// Return the name of the texture resource
 	const char* GetTextureResource() { return m_TextureResource.c_str(); }
@@ -179,4 +179,33 @@ private:
 	std::string m_TextureResource;
 
 	int m_Squares;
+};
+
+
+/**
+	Component that represents a sphere.
+*/
+class SphereRenderComponent : public BaseRenderComponent
+{
+public:
+	SphereRenderComponent();
+
+	virtual const char* GetName() const { return g_Name; }
+
+protected:
+	virtual bool DelegateInit(TiXmlElement* pData) override;
+
+	/// Factory method to create appropriate scene node
+	virtual shared_ptr<SceneNode> CreateSceneNode() override;
+
+	/// Editor method
+	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
+
+public:
+	static const char* g_Name;
+
+private:
+	unsigned int m_Segments;
+
+	float m_Radius;
 };

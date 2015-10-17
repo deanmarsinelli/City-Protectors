@@ -324,3 +324,66 @@ void GridRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
 	pDivisionNode->LinkEndChild(pDivisionText);
 	pBaseElement->LinkEndChild(pDivisionNode);
 }
+
+
+//====================================================
+//	SphereRenderComponent definitions
+//====================================================
+SphereRenderComponent::SphereRenderComponent()
+{
+	m_Segments = 50;
+}
+
+bool SphereRenderComponent::DelegateInit(TiXmlElement* pData)
+{
+	TiXmlElement* pMesh = pData->FirstChildElement("Sphere");
+	int segments = 50;
+	double radius = 1.0;
+
+	pMesh->Attribute("radius", &radius);
+	pMesh->Attribute("segments", &segments);
+	m_Radius = (float)radius;
+	m_Segments = (unsigned int)segments;
+
+	return true;
+}
+
+shared_ptr<SceneNode> SphereRenderComponent::CreateSceneNode()
+{
+	// get the transform component
+	// TODO fix transform to return a reference to the transform
+	Transform* transform = &(m_pOwner->transform);
+
+	WeakBaseRenderComponentPtr weakThis(this);
+	if (WindowsApp::GetRendererImpl() == WindowsApp::Renderer_D3D9)
+	{
+		// create the sphere Mesh
+		ID3DXMesh* pSphereMesh;
+
+		D3DXCreateSphere(DXUTGetD3D9Device(), m_Radius, m_Segments, m_Segments, &pSphereMesh, NULL);
+
+		shared_ptr<SceneNode> sphere(CB_NEW D3DShaderMeshNode9(m_pOwner->GetId(), weakThis, pSphereMesh, "Effects\\GameCode4.fx", RenderPass_Object, &transform->GetTransform()));
+
+		SAFE_RELEASE(pSphereMesh);
+		return sphere;
+	}
+	else if (WindowsApp::GetRendererImpl() == WindowsApp::Renderer_D3D11)
+	{
+		shared_ptr<SceneNode> sphere(CB_NEW D3DShaderMeshNode11(m_pOwner->GetId(), weakThis, "art\\sphere.sdkmesh", RenderPass_Object, &transform->GetTransform()));
+		return sphere;
+	}
+	else
+	{
+		CB_ASSERT(0 && "Unknown Renderer Implementation in SphereRenderComponent::VCreateSceneNode");
+		return shared_ptr<SceneNode>(NULL);
+	}
+}
+
+void SphereRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
+{
+	TiXmlElement* pMesh = CB_NEW TiXmlElement("Sphere");
+	pMesh->SetAttribute("radius", ToStr(m_Radius).c_str());
+	pMesh->SetAttribute("segments", ToStr(m_Segments).c_str());
+
+	pBaseElement->LinkEndChild(pMesh);
+}
