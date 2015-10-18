@@ -17,6 +17,13 @@
 #include "StringUtil.h"
 #include "Transform.h"
 
+const char* MeshRenderComponent::g_Name = "MeshRenderComponent";
+const char* SphereRenderComponent::g_Name = "SphereRenderComponent";
+const char* TeapotRenderComponent::g_Name = "TeapotRenderComponent";
+const char* GridRenderComponent::g_Name = "GridRenderComponent";
+const char* LightRenderComponent::g_Name = "LightRenderComponent";
+const char* SkyRenderComponent::g_Name = "SkyRenderComponent";
+
 //====================================================
 //	BaseRenderComponent definitions
 //====================================================
@@ -350,7 +357,7 @@ bool SphereRenderComponent::DelegateInit(TiXmlElement* pData)
 
 shared_ptr<SceneNode> SphereRenderComponent::CreateSceneNode()
 {
-	// get the transform component
+	// get the transform
 	// TODO fix transform to return a reference to the transform
 	Transform* transform = &(m_pOwner->transform);
 
@@ -386,4 +393,43 @@ void SphereRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElemen
 	pMesh->SetAttribute("segments", ToStr(m_Segments).c_str());
 
 	pBaseElement->LinkEndChild(pMesh);
+}
+
+
+//====================================================
+//	TeapotRenderComponent definitions
+//====================================================
+shared_ptr<SceneNode> TeapotRenderComponent::CreateSceneNode()
+{
+	// get the transform 
+	Transform* transform = &(m_pOwner->transform);
+
+	WeakBaseRenderComponentPtr weakThis(this);
+
+	switch (WindowsApp::GetRendererImpl())
+	{
+	case WindowsApp::Renderer_D3D9:
+		return shared_ptr<SceneNode>(CB_NEW D3DTeapotMeshNode9(m_pOwner->GetId(), weakThis, "Effects\\GameCode4.fx", RenderPass_Object, &transform->GetTransform()));
+
+	case WindowsApp::Renderer_D3D11:
+	{
+		Mat4x4 rot90;
+		rot90.BuildRotationY(-CB_PI / 2.0f);
+		shared_ptr<SceneNode> parent(CB_NEW SceneNode(m_pOwner->GetId(), weakThis, RenderPass_Object, &transform->GetTransform()));
+		shared_ptr<SceneNode> teapot(CB_NEW D3DTeapotMeshNode11(INVALID_GAMEOBJECT_ID, weakThis, RenderPass_Object, &rot90));
+		parent->AddChild(teapot);
+		return parent;
+	}
+
+	default:
+		CB_ERROR("Unknown Renderer Implementation in TeapotRenderComponent");
+	}
+	
+
+	return shared_ptr<SceneNode>();
+}
+
+void TeapotRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElement)
+{
+	// FUTURE
 }

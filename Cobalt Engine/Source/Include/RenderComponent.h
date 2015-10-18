@@ -209,3 +209,25 @@ private:
 
 	float m_Radius;
 };
+
+
+/**
+	Component that represents a teapot. Direct3D can automatically generate
+	a 3d teapot mesh, so including it here as a default component.
+*/
+class TeapotRenderComponent : public BaseRenderComponent
+{
+public:
+	/// Return the name of the component
+	virtual const char* GetName() const { return g_Name; }
+
+protected:
+	/// Factory method to create appropriate scene node
+	virtual shared_ptr<SceneNode> CreateSceneNode() override;
+
+	/// Editor method
+	virtual void CreateInheritedXmlElements(TiXmlElement* pBaseElement);
+
+public:
+	static const char* g_Name;
+};
