@@ -7,16 +7,17 @@
 
 #pragma once
 
+#include <D3D11.h>
 #include <SDKmesh.h>
 
-#include "SceneNode.h"
+#include "D3DSceneNode.h"
 #include "Shaders.h"
 
 /**
 	This class is used for rendering a node with a 3d mesh
 	using D3D11 shaders.
 */
-class D3DShaderMeshNode11 : public SceneNode
+class D3DShaderMeshNode11 : public D3DSceneNode11
 {
 public:
 	D3DShaderMeshNode11(const GameObjectId objectId, WeakBaseRenderComponentPtr renderComponent,

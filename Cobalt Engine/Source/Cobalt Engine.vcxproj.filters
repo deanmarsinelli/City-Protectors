@@ -325,6 +325,9 @@
     <ClInclude Include="Include\D3DGrid11.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Include\D3DShaderMeshNode9.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -602,6 +605,9 @@
       <Filter>Graphics\Scene</Filter>
     </ClCompile>
     <ClCompile Include="D3DGrid11.cpp">
+      <Filter>Graphics\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DShaderMeshNode9.cpp">
       <Filter>Graphics\Scene</Filter>
     </ClCompile>
   </ItemGroup>

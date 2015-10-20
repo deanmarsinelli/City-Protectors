@@ -121,6 +121,7 @@
     <ClInclude Include="Include\D3DLineDrawer11.h" />
     <ClInclude Include="Include\D3DRenderer.h" />
     <ClInclude Include="Include\D3DRenderer11.h" />
+    <ClInclude Include="Include\D3DShaderMeshNode9.h" />
     <ClInclude Include="Include\D3DSkyNode11.h" />
     <ClInclude Include="Include\D3DSkyNode9.h" />
     <ClInclude Include="Include\D3DTextureResourceExtraData.h" />
@@ -226,6 +227,7 @@
     <ClCompile Include="D3DRenderer9.cpp" />
     <ClCompile Include="D3DSceneNode.cpp" />
     <ClCompile Include="D3DShaderMeshNode11.cpp" />
+    <ClCompile Include="D3DShaderMeshNode9.cpp" />
     <ClCompile Include="D3DSkyNode11.cpp" />
     <ClCompile Include="D3DSkyNode9.cpp" />
     <ClCompile Include="D3DTextureResourceExtraData.cpp" />
