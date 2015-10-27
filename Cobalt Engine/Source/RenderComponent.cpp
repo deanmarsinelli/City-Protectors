@@ -360,7 +360,6 @@ bool SphereRenderComponent::DelegateInit(TiXmlElement* pData)
 shared_ptr<SceneNode> SphereRenderComponent::CreateSceneNode()
 {
 	// get the transform
-	// TODO fix transform to return a reference to the transform
 	Transform* transform = &(m_pOwner->transform);
 
 	WeakBaseRenderComponentPtr weakThis(this);

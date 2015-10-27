@@ -67,7 +67,6 @@ HRESULT D3DSkyNode11::OnRestore(Scene* pScene)
 	skyVerts[1].Pos = Vec3(-dim, dim, dim);
 	skyVerts[1].Uv = Vec2(0.0f, 0.0f);
 
-
 	skyVerts[2].Pos = Vec3(dim, -dim, dim);
 	skyVerts[2].Uv = Vec2(1.0f, 1.0f);
 

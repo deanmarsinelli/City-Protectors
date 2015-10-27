@@ -21,7 +21,6 @@ GameObjectFactory::GameObjectFactory()
 {
 	m_lastObjectId = INVALID_GAMEOBJECT_ID;
 
-	//TODO all components
 	// Register all the component creation functions
 	m_ComponentFactory.Register<AudioComponent>(AudioComponent::GetIdFromName(AudioComponent::g_Name));
 

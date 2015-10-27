@@ -34,8 +34,13 @@ public:
 	const Mat4x4* GetFromWorld();
 
 protected:
+	/// Transform matrix from world space to object space
 	Mat4x4 m_MatFromWorld;
+
+	/// Transform matrix to world space from object space
 	Mat4x4 m_MatToWorld;
+
+	/// Matrix holding position in world space
 	Mat4x4 m_MatPosition;
 
 	/// Last position of the mouse

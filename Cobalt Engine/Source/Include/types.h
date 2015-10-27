@@ -28,6 +28,9 @@ public:
 	/// Copy constructor taking a point pointer
 	Point(const Point* pNewPoint) { x = pNewPoint->x; y = pNewPoint->y; }
 
+	/// Copy constructor for a windows POINT struct
+	Point(const POINT& newPoint) { x = newPoint.x; y = newPoint.y; }
+
 	// overloaded operators
 	/// Assignment operator using a point reference
 	Point& operator=(const Point& newPoint) { x = newPoint.x; y = newPoint.y; return *this; }
