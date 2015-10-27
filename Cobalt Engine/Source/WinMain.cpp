@@ -29,7 +29,8 @@ int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-	// TODO: Initialize logging system
+	// Initialize logging system
+	Logger::Init("logging.xml");
 
 	// Initialize User Options
 	g_pApp->m_Options.Init("UserOptions.xml", cmdLine);
@@ -78,7 +79,8 @@ int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	DXUTMainLoop();
 	DXUTShutdown();
 
-	// TODO destroy logger
+	// destroy logger
+	Logger::Destroy();
 
 	return g_pApp->GetExitCode();
 }
