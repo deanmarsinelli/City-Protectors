@@ -190,6 +190,7 @@ class SphereRenderComponent : public BaseRenderComponent
 public:
 	SphereRenderComponent();
 
+	/// Return the name of the component
 	virtual const char* GetName() const { return g_Name; }
 
 protected:

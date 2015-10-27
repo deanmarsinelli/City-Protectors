@@ -7,6 +7,7 @@
 
 #include "D3DGrid9.h"
 #include "D3DGrid11.h"
+#include "D3DShaderMeshNode9.h"
 #include "D3DShaderMeshNode11.h"
 #include "D3DSkyNode9.h"
 #include "D3DSkyNode11.h"

@@ -5,6 +5,7 @@
 	by Mike McShaffry and David Graham
 */
 
+#include "AudioComponent.h"
 #include "Component.h"
 #include "EngineStd.h"
 #include "GameObject.h"
@@ -22,12 +23,19 @@ GameObjectFactory::GameObjectFactory()
 
 	//TODO all components
 	// Register all the component creation functions
-	m_ComponentFactory.Register<MeshRenderComponent>(Component::GetIdFromName(MeshRenderComponent::g_Name));
-	m_ComponentFactory.Register<PhysicsComponent>(Component::GetIdFromName(PhysicsComponent::g_Name));
-	m_ComponentFactory.Register<LuaScriptComponent>(Component::GetIdFromName(LuaScriptComponent::g_Name));
-	m_ComponentFactory.Register<LightRenderComponent>(Component::GetIdFromName(LightRenderComponent::g_Name));
-	m_ComponentFactory.Register<SkyRenderComponent>(Component::GetIdFromName(SkyRenderComponent::g_Name));
+	m_ComponentFactory.Register<AudioComponent>(AudioComponent::GetIdFromName(AudioComponent::g_Name));
 
+	m_ComponentFactory.Register<MeshRenderComponent>(MeshRenderComponent::GetIdFromName(MeshRenderComponent::g_Name));
+	m_ComponentFactory.Register<SphereRenderComponent>(SphereRenderComponent::GetIdFromName(SphereRenderComponent::g_Name));
+	m_ComponentFactory.Register<TeapotRenderComponent>(TeapotRenderComponent::GetIdFromName(TeapotRenderComponent::g_Name));
+
+	m_ComponentFactory.Register<PhysicsComponent>(PhysicsComponent::GetIdFromName(PhysicsComponent::g_Name));
+
+	m_ComponentFactory.Register<LuaScriptComponent>(LuaScriptComponent::GetIdFromName(LuaScriptComponent::g_Name));
+
+	m_ComponentFactory.Register<LightRenderComponent>(LightRenderComponent::GetIdFromName(LightRenderComponent::g_Name));
+	m_ComponentFactory.Register<SkyRenderComponent>(SkyRenderComponent::GetIdFromName(SkyRenderComponent::g_Name));
+	m_ComponentFactory.Register<GridRenderComponent>(GridRenderComponent::GetIdFromName(GridRenderComponent::g_Name));
 }
 
 StrongGameObjectPtr GameObjectFactory::CreateGameObject(const char* objectResource, TiXmlElement* overrides, const Mat4x4* pInitialTransform, const GameObjectId serversObjectId)
