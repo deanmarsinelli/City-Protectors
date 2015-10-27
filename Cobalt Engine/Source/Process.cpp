@@ -55,7 +55,7 @@ void Process::UnPause()
 	}
 	else
 	{
-		CB_WARNING("Attempting to unpase a process that is not paused")
+		CB_WARNING("Attempting to unpase a process that is not paused");
 	}
 }
 

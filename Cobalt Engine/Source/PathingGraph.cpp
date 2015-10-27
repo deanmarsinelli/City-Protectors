@@ -84,7 +84,7 @@ PathingNode* PathingGraph::FindRandomNode()
 	if (node <= numNodes / 2)
 	{
 		auto it = m_Nodes.begin();
-		for (int i = 0; i < node; i++)
+		for (int i = 0; i < (int)node; i++)
 		{
 			++it;
 		}
@@ -94,7 +94,7 @@ PathingNode* PathingGraph::FindRandomNode()
 	else
 	{
 		auto it = m_Nodes.end();
-		for (int i = numNodes; i >= node; i--)
+		for (int i = numNodes; i >= (int)node; i--)
 		{
 			--it;
 		}

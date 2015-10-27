@@ -10,9 +10,9 @@
 #include <string>
 
 #include "interfaces.h"
+#include "ZipFile.h"
 
 class Resource;
-class ZipFile;
 
 /**
 	Implements the IResourceFile interface and manages a single ZipFile object

@@ -10,10 +10,9 @@
 #include <cctype>
 #include <zlib.h>
 
-#include "ZipFile.h"
-
 #include "EngineStd.h"
 #include "Logger.h"
+#include "ZipFile.h"
 
 typedef unsigned long dword;
 typedef unsigned short word;

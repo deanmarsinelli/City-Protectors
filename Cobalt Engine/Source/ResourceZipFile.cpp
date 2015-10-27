@@ -10,7 +10,6 @@
 #include "EngineStd.h"
 #include "Resource.h"
 #include "StringUtil.h"
-#include "ZipFile.h"
 
 ResourceZipFile::ResourceZipFile(const std::wstring& resFileName) :
 m_pZipFile(nullptr),

@@ -218,7 +218,7 @@ void AStar::ReinsertNode(PathPlanNode* pNode)
 
 PathPlan* AStar::RebuildPath(PathPlanNode* pGoalNode)
 {
-	CB_ASSERT(pNode);
+	CB_ASSERT(pGoalNode);
 
 	PathPlan* pPlan = CB_NEW PathPlan;
 

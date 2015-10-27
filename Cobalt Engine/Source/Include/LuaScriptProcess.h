@@ -26,7 +26,7 @@ protected:
 	virtual void OnInit();
 
 	/// Update method must be overriden in derived class and is called every frame
-	virtual void OnUpdate(const float deltaTime);
+	virtual void OnUpdate(float deltaTime);
 
 	/// Called if a process ends with sucess
 	virtual void OnSuccess();

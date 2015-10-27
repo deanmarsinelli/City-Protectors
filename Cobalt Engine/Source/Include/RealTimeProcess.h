@@ -34,7 +34,7 @@ protected:
 	virtual void OnInit();
 
 	/// Update method (does nothing since this runs asynchronously)
-	virtual void OnUpdate(const float deltaTime) { }
+	virtual void OnUpdate(float deltaTime) { }
 
 	/// This is the procedure that will run on a separate thread and is
 	/// implementation specific for each real time process. It is called

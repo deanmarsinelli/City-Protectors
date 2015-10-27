@@ -252,7 +252,7 @@ void LogManager::OuputFinalBufferToLogs(const std::string& finalBuffer, unsigned
 	}
 
 	// debugger output window
-	if (flags & LOGFLAG_WRITE_TO_DEBUGGER > 0)
+	if ((flags & LOGFLAG_WRITE_TO_DEBUGGER) > 0)
 	{
 		::OutputDebugStringA(finalBuffer.c_str());
 	}

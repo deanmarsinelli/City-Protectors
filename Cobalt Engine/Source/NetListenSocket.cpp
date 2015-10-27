@@ -31,7 +31,7 @@ void NetListenSocket::Init(int portNum)
 		perror("NetListenSocket::Init: setsockopt");
 		closesocket(m_Sock);
 		m_Sock = INVALID_SOCKET;
-		CB_ASSERT("NetListenSocket error: Init failed to set options")
+		CB_ASSERT("NetListenSocket error: Init failed to set options");
 	}
 
 	ZeroMemory(&sa, sizeof(sa));
@@ -46,7 +46,7 @@ void NetListenSocket::Init(int portNum)
 		perror("NetListenSocket::Init: bind");
 		closesocket(m_Sock);
 		m_Sock = INVALID_SOCKET;
-		CB_ASSERT("NetListenSocket error: Init failed bind to port")
+		CB_ASSERT("NetListenSocket error: Init failed bind to port");
 	}
 
 	// set the socket to non-blocking
@@ -57,7 +57,7 @@ void NetListenSocket::Init(int portNum)
 	{
 		closesocket(m_Sock);
 		m_Sock = INVALID_SOCKET;
-		CB_ASSERT("NetListenSocket error: Init failed to listen")
+		CB_ASSERT("NetListenSocket error: Init failed to listen");
 	}
 
 	port = portNum;

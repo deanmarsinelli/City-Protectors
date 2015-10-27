@@ -325,7 +325,7 @@ bool BulletPhysics::Initialize()
 		m_Broadphase.get(), m_Solver.get(), m_CollisionConfiguration.get()));
 
 	m_DebugDrawer.reset(CB_NEW BulletDebugDrawer);
-	m_DebugDrawer->SetOptions(btIDebugDraw::DebugDrawModes::DBG_MAX_DEBUG_DRAW_MODE);
+	m_DebugDrawer->ReadOptions();
 
 	if (!m_CollisionConfiguration || !m_Dispatcher || !m_Broadphase || !m_Solver
 		|| !m_DynamicsWorld /*|| !m_DebugDrawer*/)
