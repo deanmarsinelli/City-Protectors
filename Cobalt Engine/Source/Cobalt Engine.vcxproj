@@ -247,6 +247,7 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="LightNode.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="LuaScriptEvent.cpp" />
     <ClCompile Include="LuaScriptExports.cpp" />
     <ClCompile Include="LuaScriptProcess.cpp" />
