@@ -101,6 +101,7 @@
     <ClInclude Include="GameEvents.h" />
     <ClInclude Include="MainMenuUI.h" />
     <ClInclude Include="MainMenuView.h" />
+    <ClInclude Include="ProtectorController.h" />
     <ClInclude Include="StandardHUD.h" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +111,7 @@
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="MainMenuUI.cpp" />
     <ClCompile Include="MainMenuView.cpp" />
+    <ClCompile Include="ProtectorController.cpp" />
     <ClCompile Include="StandardHUD.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
