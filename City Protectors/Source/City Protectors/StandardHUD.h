@@ -24,7 +24,10 @@ public:
 	virtual ~StandardHUD();
 
 	// IScreenElement interface implementation
+	/// Called when the device is restored
 	virtual HRESULT OnRestore() override;
+
+	/// Render a frame
 	virtual HRESULT OnRender(float time, float deltaTime) override;
 
 	/// Return 1 since this is in the front of the screen
@@ -33,8 +36,10 @@ public:
 	/// Disable setting the Z order
 	virtual void SetZOrder(const int zOrder) override { }
 
+	/// Handle messages from the OS
 	virtual LRESULT CALLBACK OnMsgProc(AppMsg msg) override;
 
+	/// Callback for DXUT GUI events
 	static void CALLBACK OnGuiEvent(UINT nEvents, int nControlID, CDXUTControl* pControl, void* pUserContext);
 
 protected:
