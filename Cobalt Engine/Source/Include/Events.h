@@ -28,7 +28,7 @@ public:
 	explicit Event_NewGameObject(GameObjectId objectId, GameViewId viewId = CB_INVALID_GAMEVIEW_ID);
 
 	/// Return the id of the object that was created
-	const GameObjectId GetGameObjectId() const;
+	const GameObjectId GetObjectId() const;
 
 	/// Return the id of the view
 	const GameViewId GetViewId() const;

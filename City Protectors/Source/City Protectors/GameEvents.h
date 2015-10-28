@@ -8,6 +8,8 @@
 	Game specific events - these keep client/server in sync
 */
 
+#pragma once
+
 #include <EngineStd.h>
 #include <Logger.h>
 #include <LuaScriptEvent.h>
@@ -580,3 +582,7 @@ public:
 private:
 	GameObjectId m_Id;
 };
+
+
+/// Register all of the game's script events
+void RegisterGameScriptEvents();

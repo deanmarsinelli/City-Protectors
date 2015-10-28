@@ -33,7 +33,7 @@ public:
 	{ }
 
 	/// Return the id of the object
-	const GameObjectId GetGameObjectId() const
+	const GameObjectId GetObjectId() const
 	{
 		return m_ObjectId;
 	}
@@ -90,7 +90,7 @@ private:
 };
 
 /**
-	This event is sent whenever a new client attaches to a server.
+	This event is sent whenever a new client attaches to a game logic acting as a server.
 */
 class Event_RemoteClient : public BaseEvent
 {

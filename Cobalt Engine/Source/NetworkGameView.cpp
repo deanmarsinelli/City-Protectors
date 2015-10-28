@@ -30,7 +30,7 @@ void NetworkGameView::NewGameObjectDelegate(IEventPtr pEvent)
 {
 	// get a pointer to the game object
 	shared_ptr<Event_NewGameObject> pCastEvent = static_pointer_cast<Event_NewGameObject>(pEvent);
-	GameObjectId objectId = pCastEvent->GetGameObjectId();
+	GameObjectId objectId = pCastEvent->GetObjectId();
 	StrongGameObjectPtr pObject = MakeStrongPtr(g_pApp->m_pGame->GetGameObject(objectId));
 
 	if (pObject && pObject->GetType() == "Teapot")

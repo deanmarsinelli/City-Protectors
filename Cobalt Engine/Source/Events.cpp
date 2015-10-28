@@ -40,7 +40,7 @@ m_ObjectId(objectId),
 m_ViewId(viewId)
 { }
 
-const GameObjectId Event_NewGameObject::GetGameObjectId() const
+const GameObjectId Event_NewGameObject::GetObjectId() const
 {
 	return m_ObjectId;
 }

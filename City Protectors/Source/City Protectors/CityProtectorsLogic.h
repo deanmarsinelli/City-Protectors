@@ -28,23 +28,29 @@ public:
 	void RemoteClientDelegate(IEventPtr pEvent);
 	void NetworkPlayerObjectAssignmentDelegate(IEventPtr pEvent);
 	void EnvironmentLoadedDelegate(IEventPtr pEvent);
-	void ThrustDelegate(IEventPtr pEvent);
-	void SteerDelegate(IEventPtr pEvent);
 	void StartThrustDelegate(IEventPtr pEvent);
 	void EndThrustDelegate(IEventPtr pEvent);
 	void StartSteerDelegate(IEventPtr pEvent);
 	void EndSteerDelegate(IEventPtr pEvent);
 
 protected:
-	// delegate for loading a game
+	// Delegate for loading a game
 	virtual bool LoadGameDelegate(TiXmlElement* pLevelData);
 
 private:
+	/// Register all event listener callbacks to the global event manager
 	void RegisterAllDelegates();
+
+	/// Remove all event listeners
 	void RemoveAllDelegates();
+
+	/// Create a new network event forwarder and listen for certain events
 	void CreateNetworkEventForwarder(const int socketId);
+
+	/// Remove all network event forwarders
 	void DestroyAllNetworkEventForwarders();
 
 protected:
+	/// List of network event forwarders - handles sending events to remote clients
 	std::list<NetworkEventForwarder*> m_NetworkEventForwarders;
 };
