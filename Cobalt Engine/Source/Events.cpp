@@ -21,7 +21,9 @@ const EventType Event_ModifiedRenderComponent::sk_EventType(0xf5ef297b);
 const EventType Event_RequestNewGameObject::sk_EventType(0xe32a1a9a);
 const EventType Event_RequestDestroyGameObject::sk_EventType(0xdc8c485d);
 const EventType Event_EnvironmentLoaded::sk_EventType(0x8f28edab);
+const EventType Event_RequestStartGame::sk_EventType(0xc46b8535);
 const EventType Event_PlaySound::sk_EventType(0x366cce8e);
+
 
 //====================================================
 //	Event_NewGameObject

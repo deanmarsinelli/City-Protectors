@@ -23,6 +23,9 @@ extern bool WildcardMatch(const char *pat, const char *str);
 /// Convert an ascii string to unicode string
 extern HRESULT AnsiToWideCch(WCHAR* dest, const CHAR* src, int charCount);
 
+/// Convert a unicode string to an ascii string
+extern HRESULT WideToAnsiCch(CHAR* dest, const WCHAR* src, int charCount);
+
 /// Convert an integer to string
 extern std::string ToStr(int num, int base = 10);
 

@@ -59,6 +59,20 @@ HRESULT AnsiToWideCch(WCHAR* wstrDestination, const CHAR* strSource, int cchDest
 	return S_OK;
 }
 
+HRESULT WideToAnsiCch(CHAR* strDestination, const WCHAR* wstrSource, int cchDestChar)
+{
+	if (strDestination == NULL || wstrSource == NULL || cchDestChar < 1)
+		return E_INVALIDARG;
+
+	int nResult = WideCharToMultiByte(CP_ACP, 0, wstrSource, -1, strDestination,
+		cchDestChar * sizeof(CHAR), NULL, NULL);
+	strDestination[cchDestChar - 1] = 0;
+
+	if (nResult == 0)
+		return E_FAIL;
+	return S_OK;
+}
+
 std::string ToStr(int num, int base)
 {
 	// turn an int into a std::string

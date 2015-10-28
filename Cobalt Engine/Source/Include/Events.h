@@ -372,6 +372,41 @@ public:
 
 
 /**
+	This event is sent by the authoritative game logic to all views so they will load a game level.
+*/
+class Event_RequestStartGame : public BaseEvent
+{
+public:
+	/// Default constructor
+	Event_RequestStartGame() { }
+
+	// IEvent interface
+	/// Return the event type
+	virtual const EventType& GetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	/// Return a copy of the event
+	virtual IEventPtr Copy() const
+	{
+		return IEventPtr(CB_NEW Event_RequestStartGame());
+	}
+
+	/// Return the name of the event
+	virtual const char* GetName() const
+	{
+		return "Event_RequestStartGame";
+	}
+
+public:
+	/// The event type
+	static const EventType sk_EventType;
+public:
+	static const EventType sk_EventType;
+};
+
+/**
 	This event is sent by any system wishing for a HumanView to play a sound.
 */
 class Event_PlaySound : public LuaScriptEvent
