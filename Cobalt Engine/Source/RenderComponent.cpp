@@ -11,6 +11,7 @@
 #include "D3DShaderMeshNode11.h"
 #include "D3DSkyNode9.h"
 #include "D3DSkyNode11.h"
+#include "D3DTeapotMeshNode.h"
 #include "EngineStd.h"
 #include "Events.h"
 #include "Logger.h"
@@ -41,13 +42,15 @@ bool BaseRenderComponent::Init(TiXmlElement* pData)
 void BaseRenderComponent::PostInit()
 {
 	shared_ptr<SceneNode> pSceneNode(GetSceneNode());
-	shared_ptr<Event_NewRenderComponent> pEvent(CB_NEW Event_NewRenderComponent);
+	// fire event that a new render component has been created
+	shared_ptr<Event_NewRenderComponent> pEvent(CB_NEW Event_NewRenderComponent(m_pOwner->GetId(), pSceneNode));
 	IEventManager::Get()->TriggerEvent(pEvent);
 }
 
 void BaseRenderComponent::OnChanged()
 {
-	shared_ptr<Event_ModifiedRenderComponent> pEvent(CB_NEW Event_ModifiedRenderComponent);
+	// fire event that a render component has been modified
+	shared_ptr<Event_ModifiedRenderComponent> pEvent(CB_NEW Event_ModifiedRenderComponent(m_pOwner->GetId()));
 	IEventManager::Get()->TriggerEvent(pEvent);
 }
 

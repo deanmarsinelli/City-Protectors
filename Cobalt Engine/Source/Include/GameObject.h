@@ -41,7 +41,7 @@ public:
 	void Destroy();
 
 	/// Update method -- called once per frame
-	void Update(const float deltaTime);
+	void Update(float deltaTime);
 
 	/// Return the id of the game object
 	GameObjectId GetId() const;

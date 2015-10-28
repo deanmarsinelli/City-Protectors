@@ -71,7 +71,7 @@ int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	// Init the application
 	if (!g_pApp->InitInstance(hInstance, cmdLine, 0, g_pApp->m_Options.m_ScreenSize.x, g_pApp->m_Options.m_ScreenSize.y))
 	{
-		// TODO release memory and show an error message
+		// FUTURE release memory and show an error message
 		return false;
 	}
 

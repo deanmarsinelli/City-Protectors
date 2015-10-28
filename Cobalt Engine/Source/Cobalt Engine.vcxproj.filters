@@ -328,6 +328,9 @@
     <ClInclude Include="Include\D3DShaderMeshNode9.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Include\D3DTeapotMeshNode.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -611,6 +614,9 @@
       <Filter>Graphics\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="D3DTeapotMeshNode.cpp">
+      <Filter>Graphics\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utilities">

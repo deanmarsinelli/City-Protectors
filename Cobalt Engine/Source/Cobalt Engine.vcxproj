@@ -124,6 +124,7 @@
     <ClInclude Include="Include\D3DShaderMeshNode9.h" />
     <ClInclude Include="Include\D3DSkyNode11.h" />
     <ClInclude Include="Include\D3DSkyNode9.h" />
+    <ClInclude Include="Include\D3DTeapotMeshNode.h" />
     <ClInclude Include="Include\D3DTextureResourceExtraData.h" />
     <ClInclude Include="Include\D3DTextureResourceLoader.h" />
     <ClInclude Include="Include\DefaultResourceLoader.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="D3DShaderMeshNode9.cpp" />
     <ClCompile Include="D3DSkyNode11.cpp" />
     <ClCompile Include="D3DSkyNode9.cpp" />
+    <ClCompile Include="D3DTeapotMeshNode.cpp" />
     <ClCompile Include="D3DTextureResourceExtraData.cpp" />
     <ClCompile Include="D3DTextureResourceLoader.cpp" />
     <ClCompile Include="DirectSoundAudio.cpp" />
