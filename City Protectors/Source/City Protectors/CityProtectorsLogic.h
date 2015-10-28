@@ -18,13 +18,10 @@ public:
 	CityProtectorsLogic();
 	virtual ~CityProtectorsLogic();
 
-	virtual void SetProxy();
-	virtual void MoveObject(const GameObjectId, const Mat4x4& mat);
-
 	// overrides
+	virtual void MoveGameObject(const GameObjectId id, const Mat4x4& mat) override;
 	virtual void ChangeState(BaseGameState newState) override;
 	virtual void AddView(shared_ptr<IGameView> pView, GameObjectId objectId = INVALID_GAMEOBJECT_ID) override;
-	virtual shared_ptr<IGamePhysics> GetGamePhysics() override;
 	
 	// event delegates
 	void RequestStartGameDelegate(IEventPtr pEvent);
