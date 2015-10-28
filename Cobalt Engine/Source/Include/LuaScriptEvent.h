@@ -58,6 +58,7 @@ private:
 	bool m_EventIsValid;
 };
 
+// Macros for exporting events to script
 #define REGISTER_SCRIPT_EVENT(eventClass, eventType) \
 	LuaScriptEvent::RegisterEventTypeWithScript(#eventClass, eventType); \
 	LuaScriptEvent::AddCreationFunction(eventType, &eventClass::CreateEventForScript)

@@ -62,7 +62,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Cobalt Engine\Source\Include;$(DXSDK_DIR)\Include;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\DXUT\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\tinyxml\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\FastDelegate;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Cobalt Engine\Source\Include;$(DXSDK_DIR)\Include;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\DXUT\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\tinyxml\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\FastDelegate;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\luaplus51-all\Src\LuaPlus;</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -82,7 +82,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Cobalt Engine\Source\Include;$(DXSDK_DIR)\Include;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\DXUT\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\tinyxml\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\FastDelegate;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Cobalt Engine\Source\Include;$(DXSDK_DIR)\Include;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\DXUT\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\tinyxml\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Inc;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\FastDelegate;$(SolutionDir)..\..\Cobalt Engine\Source\3rdParty\luaplus51-all\Src\LuaPlus;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -98,6 +98,7 @@
     <ClInclude Include="CityProtectors.h" />
     <ClInclude Include="CityProtectorsHumanView.h" />
     <ClInclude Include="CityProtectorsLogic.h" />
+    <ClInclude Include="GameEvents.h" />
     <ClInclude Include="MainMenuUI.h" />
     <ClInclude Include="MainMenuView.h" />
     <ClInclude Include="StandardHUD.h" />

@@ -9,6 +9,7 @@
 
 #include "EngineStd.h"
 #include "Logger.h"
+#include "PhysicsEvents.h"
 
 //====================================================
 //	Static Event GUID's
@@ -425,4 +426,13 @@ bool Event_RequestDestroyGameObject::BuildEventFromSCript()
 		return true;
 	}
 	return false;
+}
+
+
+// register the script events
+void RegisterEngineScriptEvents()
+{
+	REGISTER_SCRIPT_EVENT(Event_RequestDestroyGameObject, Event_RequestDestroyGameObject::sk_EventType);
+	REGISTER_SCRIPT_EVENT(Event_PhysCollision, Event_PhysCollision::sk_EventType);
+	REGISTER_SCRIPT_EVENT(Event_PlaySound, Event_PlaySound::sk_EventType);
 }
