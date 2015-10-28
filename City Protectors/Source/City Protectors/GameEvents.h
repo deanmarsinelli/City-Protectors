@@ -150,3 +150,67 @@ public:
 private:
 	std::string m_GameplayUIString;
 };
+
+
+/**
+	This event is sent a game object becomes controlled by the player.
+*/
+class Event_SetControlledObject : public LuaScriptEvent
+{
+	Event_SetControlledObject()
+	{ }
+
+	Event_SetControlledObject(GameObjectId id) :
+		m_Id(id)
+	{ }
+
+	virtual const EventType& GetEventType() const override
+	{
+		return sk_EventType;
+	}
+
+	virtual void Serialize(std::ostream& out) const override
+	{
+		out << m_Id;
+	}
+
+	virtual void Deserialize(std::istream& in) override
+	{
+		in >> m_Id;
+	}
+
+	virtual IEventPtr Copy() const override
+	{
+		return IEventPtr(CB_NEW Event_SetControlledObject(m_Id));
+	}
+
+	virtual const char* GetName() const override
+	{
+		return "Event_SetControlledObject";
+	}
+
+	/// Allow this event to be fired from script and received by C++
+	virtual bool BuildEventFromScript() override
+	{
+		if (m_Event.IsInteger())
+		{
+			m_Id = m_Event.GetInteger();
+			return true;
+		}
+
+		return false;
+	}
+
+	const GameObjectId& GetObjectId() const
+	{
+		return m_Id;
+	}
+
+	EXPORT_FOR_SCRIPT_EVENT(Event_SetControlledObject);
+
+public:
+	static const EventType sk_EventType;
+
+private:
+	GameObjectId m_Id;
+};

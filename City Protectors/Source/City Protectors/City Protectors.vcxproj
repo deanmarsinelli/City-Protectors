@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CityProtectors.cpp" />
+    <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="MainMenuUI.cpp" />
     <ClCompile Include="MainMenuView.cpp" />
     <ClCompile Include="StandardHUD.cpp" />
