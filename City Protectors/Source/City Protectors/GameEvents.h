@@ -461,6 +461,7 @@ private:
 */
 class Event_GameplayUIUpdate : public LuaScriptEvent
 {
+public:
 	Event_GameplayUIUpdate()
 	{ }
 
@@ -525,6 +526,7 @@ private:
 */
 class Event_SetControlledObject : public LuaScriptEvent
 {
+public:
 	Event_SetControlledObject()
 	{ }
 

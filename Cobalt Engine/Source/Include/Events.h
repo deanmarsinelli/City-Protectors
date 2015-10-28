@@ -13,7 +13,53 @@
 #include "BaseEvent.h"
 #include "GameObject.h"
 #include "HumanView.h"
+#include "Logger.h"
 #include "LuaScriptEvent.h"
+
+/**
+	This event is sent by the game logic each game tick.
+*/
+class Event_UpdateTick : public BaseEvent
+{
+public:
+	/// Constructor taking in a frame time
+	explicit Event_UpdateTick(const float deltaTime) :
+		m_DeltaTime(deltaTime)
+	{ }
+
+	// IEvent interface
+	/// Return the event type
+	virtual const EventType& GetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	/// Return a copy of the event
+	virtual IEventPtr Copy() const
+	{
+		return IEventPtr(CB_NEW Event_UpdateTick(m_DeltaTime));
+	}
+
+	/// Serialize the event
+	virtual void Serialize(std::ostream& out) const
+	{
+		CB_ERROR("Do not serialize update ticks");
+	}
+
+	/// Return the name of the event
+	virtual const char* GetName() const
+	{
+		return "Event_UpdateTick";
+	}
+
+public:
+	/// Type of the event
+	static const EventType sk_EventType;
+private:
+	/// Delta time for this frame
+	float m_DeltaTime;
+};
+
 
 /**
 	This event is sent when a game object is created.

@@ -363,6 +363,8 @@ void CityProtectorsLogic::DestroyAllNetworkEventForwarders()
 	{
 		NetworkEventForwarder* pNetworkEventForwarder = (*it);
 		IEventManager* pGlobalEventManager = IEventManager::Get();
+
+		// remove these event listeners
 		pGlobalEventManager->RemoveListener(fastdelegate::MakeDelegate(pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_PhysCollision::sk_EventType);
 		pGlobalEventManager->RemoveListener(fastdelegate::MakeDelegate(pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_DestroyGameObject::sk_EventType);
 		pGlobalEventManager->RemoveListener(fastdelegate::MakeDelegate(pNetworkEventForwarder, &NetworkEventForwarder::ForwardEvent), Event_FireWeapon::sk_EventType);

@@ -14,6 +14,7 @@
 //====================================================
 //	Static Event GUID's
 //====================================================
+const EventType Event_UpdateTick::sk_EventType(0x53ff78f4);
 const EventType Event_NewGameObject::sk_EventType(0xd020af46);
 const EventType Event_DestroyGameObject::sk_EventType(0xd3b6f10e);
 const EventType Event_MoveGameObject::sk_EventType(0x1a81ed5);

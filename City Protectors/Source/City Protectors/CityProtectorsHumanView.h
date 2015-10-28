@@ -11,6 +11,7 @@
 #include <MovementController.h>
 #include <SceneNode.h>
 
+#include "ProtectorController.h"
 #include "StandardHUD.h"
 
 /**
@@ -44,8 +45,8 @@ protected:
 
 	std::wstring m_GameplayText;
 
-	shared_ptr<TeapotController> m_pTeapotController;
+	shared_ptr<ProtectorController> m_pProtectorController;
 	shared_ptr<MovementController> m_pFreeCameraController;
-	shared_ptr<SceneNode> m_pTeapot;
+	shared_ptr<SceneNode> m_pProtector;
 	shared_ptr<StandardHUD> m_StandardHUD;
 };
