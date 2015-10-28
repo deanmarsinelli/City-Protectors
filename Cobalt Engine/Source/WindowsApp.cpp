@@ -972,9 +972,22 @@ void WindowsApp::FlashWhileMinimized()
 void WindowsApp::RegisterEngineEvents()
 {
 	REGISTER_EVENT(Event_EnvironmentLoaded);
+	REGISTER_EVENT(Event_RequestStartGame);
+	REGISTER_EVENT(Event_PlaySound);
+
+	// game objects
 	REGISTER_EVENT(Event_NewGameObject);
+	REGISTER_EVENT(Event_DestroyGameObject);
 	REGISTER_EVENT(Event_MoveGameObject);
 	REGISTER_EVENT(Event_RequestNewGameObject);
+	REGISTER_EVENT(Event_RequestDestroyGameObject);
+
+	// render components
+	REGISTER_EVENT(Event_NewRenderComponent);
+	REGISTER_EVENT(Event_ModifiedRenderComponent);
+
+	// network events
 	REGISTER_EVENT(Event_NetworkPlayerObjectAssignment);
-	REGISTER_EVENT(Event_DestroyGameObject);
+	REGISTER_EVENT(Event_RemoteClient);
+	REGISTER_EVENT(Event_RemoteEnvironmentLoaded);
 }
