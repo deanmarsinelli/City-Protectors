@@ -94,10 +94,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="CityProtectors.h" />
+    <ClInclude Include="CityProtectorsLogic.h" />
+    <ClInclude Include="MainMenuUI.h" />
+    <ClInclude Include="MainMenuView.h" />
+    <ClInclude Include="StandardHUD.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="CityProtectors.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
