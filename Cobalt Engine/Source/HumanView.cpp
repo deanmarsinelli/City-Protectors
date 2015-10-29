@@ -147,7 +147,7 @@ HRESULT HumanView::OnLostDevice()
 	return S_OK;
 }
 
-GameViewType HumanViewGetType()
+GameViewType HumanView::GetType()
 {
 	return GameViewType::GameView_Human;
 }

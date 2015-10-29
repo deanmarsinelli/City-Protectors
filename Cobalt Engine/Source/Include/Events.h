@@ -55,6 +55,7 @@ public:
 public:
 	/// Type of the event
 	static const EventType sk_EventType;
+
 private:
 	/// Delta time for this frame
 	float m_DeltaTime;
@@ -448,9 +449,8 @@ public:
 public:
 	/// The event type
 	static const EventType sk_EventType;
-public:
-	static const EventType sk_EventType;
 };
+
 
 /**
 	This event is sent by any system wishing for a HumanView to play a sound.
@@ -525,6 +525,7 @@ private:
 	/// The name of the sound resource that is being played
 	std::string m_SoundResource;
 };
+
 
 /// Register script events from the engine
 extern void RegisterEngineScriptEvents();

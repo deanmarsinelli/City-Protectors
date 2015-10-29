@@ -103,7 +103,7 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 		for (auto it = m_GameViews.begin(); it != m_GameViews.end(); ++it)
 		{
 			shared_ptr<IGameView> pView = (*it);
-			if (pView->GetType == GameView_Human)
+			if (pView->GetType() == GameView_Human)
 			{
 				// create the game object and send an event
 				StrongGameObjectPtr pObject = CreateGameObject("objects\\player_teapot.xml", nullptr);

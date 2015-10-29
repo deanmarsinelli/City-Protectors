@@ -43,6 +43,12 @@ void LuaStateManager::Destroy()
 	CB_SAFE_DELETE(pSingleton);
 }
 
+LuaStateManager* LuaStateManager::Get()
+{
+	CB_ASSERT(pSingleton); 
+	return pSingleton;
+}
+
 LuaStateManager::LuaStateManager()
 {
 	m_pLuaState = nullptr;

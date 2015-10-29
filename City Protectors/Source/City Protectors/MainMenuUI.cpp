@@ -72,7 +72,7 @@ MainMenuUI::MainMenuUI()
 	// add levels to the UI
 	m_SampleUI.AddStatic(CID_LEVEL_LABEL, L"Level", iX, iY, width, height);
 	m_SampleUI.AddListBox(CID_LEVEL_LISTBOX, iX2, iY, width, lineHeight * 5);
-	std::vector<Level> levels = g_pApp->GetGameLogic()->GetLevelManager()->GetLevels;
+	std::vector<Level> levels = g_pApp->GetGameLogic()->GetLevelManager()->GetLevels();
 	m_Levels.reserve(levels.size());
 	int count = 0;
 	for (auto it = levels.begin(); it != levels.end(); ++it, ++count)

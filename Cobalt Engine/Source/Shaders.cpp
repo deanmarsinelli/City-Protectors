@@ -5,19 +5,27 @@
 	by Mike McShaffry and David Graham
 */
 
-#include "Shaders.h"
+#include <d3dx11effect.h>
 
 #include "D3D11Vertex.h"
 #include "D3DRenderer11.h"
 #include "D3DTextureResourceExtraData.h"
 #include "EngineStd.h"
 #include "LightManager.h"
+#include "Logger.h"
 #include "Resource.h"
 #include "ResourceCache.h"
 #include "ResourceHandle.h"
 #include "Scene.h"
 #include "SceneNode.h"
 #include "SceneNodeProperties.h"
+#include "Shaders.h"
+
+#ifdef _DEBUG
+	#pragma comment(lib, "Effects11d.lib")
+#else
+	#pragma comment(lib, "Effects11.lib")
+#endif
 
 //====================================================
 //	Vertex Shader helper methods
@@ -300,5 +308,208 @@ HRESULT Hlsl_PixelShader::SetTexture(ID3D11ShaderResourceView** pDiffuseRV, ID3D
 	// set the shader data for the texture and sampler
 	DXUTGetD3D11DeviceContext()->PSSetShaderResources(0, 1, pDiffuseRV);
 	DXUTGetD3D11DeviceContext()->PSSetSamplers(0, 1, ppSamplers);
+	return S_OK;
+}
+
+
+//================================
+// LineDraw_Hlsl_Shader
+//================================
+struct LineDrawerChangePerFrameBuffer
+{
+	/// World -> View -> Projection matrix to go from object space to screen space
+	Mat4x4 m_WorldViewProjection;
+
+	/// Diffuse color vector
+	Vec4 m_DiffuseColor;
+};
+
+LineDraw_Hlsl_Shader::LineDraw_Hlsl_Shader()
+{
+	m_pEffect = nullptr;
+	m_pVertexLayout11 = nullptr;
+	m_pcbChangePerFrame = nullptr;
+	m_pcbRenderTargetSize = nullptr;
+	m_pcbDiffuseColor = nullptr;
+}
+
+LineDraw_Hlsl_Shader::~LineDraw_Hlsl_Shader()
+{
+	CB_COM_RELEASE(m_pVertexLayout11);
+	CB_COM_RELEASE(m_pcbChangePerFrame);
+	CB_COM_RELEASE(m_pcbRenderTargetSize);
+	CB_COM_RELEASE(m_pcbDiffuseColor);
+	CB_COM_RELEASE(m_pEffect);
+}
+
+HRESULT LineDraw_Hlsl_Shader::OnRestore(Scene* pScene)
+{
+	HRESULT hr = S_OK;
+
+	CB_COM_RELEASE(m_pEffect);
+	CB_COM_RELEASE(m_pcbDiffuseColor);
+	CB_COM_RELEASE(m_pVertexLayout11);
+	CB_COM_RELEASE(m_pcbChangePerFrame);
+	CB_COM_RELEASE(m_pcbRenderTargetSize);
+
+	shared_ptr<D3DRenderer11> d3dRenderer11 = static_pointer_cast<D3DRenderer11>(pScene->GetRenderer());
+
+	// set up vertex shader and constant buffers
+	
+	// compile the shader using the lowest profile for broadest feature level support
+	std::string hlslFileName = "Effects\\LineDraw.hlsl";
+	Resource resource(hlslFileName.c_str());
+	// load the hsls file from the zip file
+	shared_ptr<ResHandle> pResourceHandle = g_pApp->m_ResCache->GetHandle(&resource);
+
+	// Compile effect from HLSL file into binary Blob in memory
+	// The code in this function was found here - http://asawicki.info/news_1371_effects_in_directx_11.html
+	ID3D10Blob *effectBlob = 0, *errorsBlob = 0;
+	hr = D3DX11CompileFromMemory(
+		pResourceHandle->Buffer(),			// srcData
+		pResourceHandle->Size(),			// srcLen
+		0, 0, 0, 0,							// fileName, pDefines, pInclude, functionName
+		"fx_5_0", 0, 0, 0,					// profile, flags1, flags2, pump
+		&effectBlob, &errorsBlob, 0);			// shader, errorMsg, pResult
+	assert(SUCCEEDED(hr) && effectBlob);
+	if (errorsBlob) errorsBlob->Release();
+
+	// create D3DX11 effect from compiled binary memory block
+	if (FAILED(D3DX11CreateEffectFromMemory(
+		effectBlob->GetBufferPointer(),
+		effectBlob->GetBufferSize(),
+		0,
+		DXUTGetD3D11Device(),
+		&m_pEffect)))
+	{
+		return hr;
+	}
+
+	// release the effect blob
+	effectBlob->Release();
+
+	m_EffectTechnique = m_pEffect->GetTechniqueByIndex(0);
+	CB_ASSERT(m_EffectTechnique && m_EffectTechnique->IsValid());
+
+	m_EffectPass = m_EffectTechnique->GetPassByIndex(0);
+	CB_ASSERT(m_EffectPass && m_EffectPass->IsValid());
+
+	// vertex shader description
+	D3DX11_PASS_SHADER_DESC effectVsDesc;
+	m_EffectPass->GetVertexShaderDesc(&effectVsDesc);
+	D3DX11_EFFECT_SHADER_DESC effectVsDesc2;
+	effectVsDesc.pShaderVariable->GetShaderDesc(effectVsDesc.ShaderIndex, &effectVsDesc2);
+
+	// get a pointer to the code in the effect
+	const void *vsCodePtr = effectVsDesc2.pBytecode;
+	unsigned vsCodeLen = effectVsDesc2.BytecodeLength;
+
+	// set up the vertex layout
+	if (SUCCEEDED(DXUTGetD3D11Device()->CreateInputLayout(
+		D3D11VertexLayout_Position,
+		ARRAYSIZE(D3D11VertexLayout_Position),
+		vsCodePtr,
+		vsCodeLen,
+		&m_pVertexLayout11)))
+	{
+		DXUT_SetDebugName(m_pVertexLayout11, "Primary");
+	
+		// set up constant buffers (cbuffers)
+		D3D11_BUFFER_DESC desc;
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		desc.CPUAccessFlags = D3D10_CPU_ACCESS_WRITE;
+		desc.MiscFlags = 0;
+	
+		desc.ByteWidth = sizeof(Vec4);
+		V_RETURN(DXUTGetD3D11Device()->CreateBuffer(&desc, NULL, &m_pcbRenderTargetSize));
+		DXUT_SetDebugName(m_pcbRenderTargetSize, "Vec4_RenderTargetSize");
+
+		desc.ByteWidth = sizeof(Mat4x4);
+		V_RETURN(DXUTGetD3D11Device()->CreateBuffer(&desc, NULL, &m_pcbChangePerFrame));
+		DXUT_SetDebugName(m_pcbChangePerFrame, "LineDrawerChangePerFrameBuffer");
+
+		desc.ByteWidth = sizeof(Vec4);
+		V_RETURN(DXUTGetD3D11Device()->CreateBuffer(&desc, NULL, &m_pcbDiffuseColor));
+		DXUT_SetDebugName(m_pcbDiffuseColor, "DiffuseColor");
+	}
+
+	return S_OK;
+}
+
+HRESULT LineDraw_Hlsl_Shader::SetupRender(Scene* pScene)
+{
+	HRESULT hr = S_OK;
+
+	// apply the effect and set the vertex layout
+	m_EffectPass->Apply(0, DXUTGetD3D11DeviceContext());
+	DXUTGetD3D11DeviceContext()->IASetInputLayout(m_pVertexLayout11);
+
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+
+	// set render target size to the shader
+	V(DXUTGetD3D11DeviceContext()->Map(m_pcbRenderTargetSize, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	Vec4* pRenderTargetSize = (Vec4*)mappedResource.pData;
+	pRenderTargetSize->x = (FLOAT)DXUTGetWindowWidth();
+	pRenderTargetSize->y = (FLOAT)DXUTGetWindowHeight();
+	pRenderTargetSize->z = 0.0f;
+	pRenderTargetSize->w = 0.0f;
+	DXUTGetD3D11DeviceContext()->Unmap(m_pcbRenderTargetSize, 0);
+
+	// pass in the transform matrices
+	V(DXUTGetD3D11DeviceContext()->Map(m_pcbChangePerFrame, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	LineDrawerChangePerFrameBuffer* pChangePerFrame = (LineDrawerChangePerFrameBuffer*)mappedResource.pData;
+	// get the world view projection matrix from the camera
+	Mat4x4 mWorldViewProjection = pScene->GetCamera()->GetWorldViewProjection(pScene);
+	// transpose this matrix and store it in the the custom struct which points to the shader
+	D3DXMatrixTranspose(&pChangePerFrame->m_WorldViewProjection, &mWorldViewProjection);
+	DXUTGetD3D11DeviceContext()->Unmap(m_pcbChangePerFrame, 0);
+
+	// get pointers to the constant buffers (cbuffers) in the shader
+	ID3DX11EffectConstantBuffer* fxRenderTargetCB = m_pEffect->GetConstantBufferByName("cbRenderTarget")->AsConstantBuffer();
+	ID3DX11EffectConstantBuffer* fxChangePerFrameCB = m_pEffect->GetConstantBufferByName("cbChangePerFrame")->AsConstantBuffer();
+	ID3DX11EffectConstantBuffer* fxDiffuseCB = m_pEffect->GetConstantBufferByName("cbDiffuseColor")->AsConstantBuffer();
+
+	// fill the constant buffers with our data
+	fxRenderTargetCB->SetConstantBuffer(m_pcbRenderTargetSize);
+	fxChangePerFrameCB->SetConstantBuffer(m_pcbChangePerFrame);
+	fxDiffuseCB->SetConstantBuffer(m_pcbDiffuseColor);
+
+	return S_OK;
+}
+
+HRESULT LineDraw_Hlsl_Shader::SetDiffuse(const std::string& textureName, const Color& color)
+{
+	// bind the texture and sampler to the shader
+	m_TextureResource = textureName;
+	if (m_TextureResource.length() > 0)
+	{
+		Resource resource(m_TextureResource);
+		shared_ptr<ResHandle> texture = g_pApp->m_ResCache->GetHandle(&resource);
+
+		if (texture)
+		{
+			shared_ptr<D3DTextureResourceExtraData11> extra = static_pointer_cast<D3DTextureResourceExtraData11>(texture->GetExtra());
+			SetTexture(extra->GetTexture(), extra->GetSampler());
+		}
+	}
+
+	HRESULT hr;
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+
+	// set up diffuse color
+	V(DXUTGetD3D11DeviceContext()->Map(m_pcbDiffuseColor, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	Vec4* pDiffuseColor = (Vec4*)mappedResource.pData;
+	*pDiffuseColor = Vec4(color.r, color.g, color.b, color.a);
+	DXUTGetD3D11DeviceContext()->Unmap(m_pcbDiffuseColor, 0);
+
+	return S_OK;
+}
+
+HRESULT LineDraw_Hlsl_Shader::SetTexture(ID3D11ShaderResourceView* const *ppDiffuseRV, ID3D11SamplerState* const *ppSamplers)
+{
+	DXUTGetD3D11DeviceContext()->PSSetShaderResources(0, 1, ppDiffuseRV);
+	DXUTGetD3D11DeviceContext()->PSSetSamplers(0, 1, ppSamplers);
+
 	return S_OK;
 }

@@ -61,7 +61,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus; $(ProjectDir)\3rdParty\bullet-2.79\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\Effects11\Inc;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus; $(ProjectDir)\3rdParty\bullet-2.79\src;</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -82,9 +82,10 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus; $(ProjectDir)\3rdParty\bullet-2.79\src;$(ProjectDir)\3rdParty\bullet-2.79\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(DXSDK_DIR)\Include;$(ProjectDir)\3rdParty\Effects11\Inc;$(ProjectDir)\3rdParty\DXUT\Inc;$(ProjectDir)\3rdParty\tinyxml\Inc;$(ProjectDir)\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)\3rdParty\FastDelegate;$(ProjectDir)\3rdParty\luaplus51-all\Src\LuaPlus; $(ProjectDir)\3rdParty\bullet-2.79\src;$(ProjectDir)\3rdParty\bullet-2.79\src;</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4005</DisableSpecificWarnings>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -129,14 +129,43 @@ protected:
 	std::string m_TexureResource;
 };
 
+
+struct ID3DX11Effect;
+struct ID3DX11EffectTechnique;
+struct ID3DX11EffectPass;
+
+
 /**
 	Shader used for line drawing
 */
 class LineDraw_Hlsl_Shader
 {
 public:
+	/// Default constructor
+	LineDraw_Hlsl_Shader();
+
+	/// Destructor
+	~LineDraw_Hlsl_Shader();
+
 	HRESULT OnRestore(Scene* pScene);
 	HRESULT SetupRender(Scene* pScene);
 	HRESULT SetDiffuse(const std::string& textureName, const Color& color);
-	HRESULT SetTexture(const ID3D11ShaderResourceView** pDiffuseRV, const ID3D11SamplerState** pSamplers);
+	HRESULT SetTexture(ID3D11ShaderResourceView* const *ppDiffuseRV, ID3D11SamplerState* const *ppSamplers);
+
+protected:
+	/// Defines the layout of the vertices the shader expects (VS_INPUT)
+	ID3D11InputLayout* m_pVertexLayout11;
+
+	/// Buffer for sending render target size to shader cbuffer
+	ID3D11Buffer* m_pcbRenderTargetSize;
+
+	// effect stuff
+	ID3DX11Effect*			m_pEffect;
+	ID3DX11EffectTechnique* m_EffectTechnique;	// no need to release
+	ID3DX11EffectPass*		m_EffectPass;		// no need to release
+
+	ID3D11Buffer* m_pcbChangePerFrame;
+	ID3D11Buffer* m_pcbDiffuseColor;
+
+	std::string m_TextureResource;
 };
