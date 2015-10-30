@@ -246,7 +246,7 @@ bool BaseGameLogic::LoadGame(const char* levelResource)
 	}
 
 	// load all initial game objects
-	TiXmlElement* pObjectsNode = pRoot->FirstChildElement("StaticObjects");
+	TiXmlElement* pObjectsNode = pRoot->FirstChildElement("StaticGameObjects");
 	if (pObjectsNode)
 	{
 		for (TiXmlElement* pNode = pObjectsNode->FirstChildElement(); pNode; pNode = pNode->NextSiblingElement())

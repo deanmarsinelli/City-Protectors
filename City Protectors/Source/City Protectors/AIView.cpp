@@ -5,14 +5,18 @@
 	by Mike McShaffry and David Graham
 */
 
+#include <Logger.h>
+
 #include "AIView.h"
 
-AIView::AIView(shared_ptr<PathingGraph> pPathingGraph)
+AIView::AIView(shared_ptr<PathingGraph> pPathingGraph) :
+IGameView(),
+m_pPathingGraph(pPathingGraph)
 {
-
+	//
 }
 
 AIView::~AIView()
 {
-
+	CB_LOG("AI", "Destroying AIView");
 }

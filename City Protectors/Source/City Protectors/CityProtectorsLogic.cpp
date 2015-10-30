@@ -47,8 +47,8 @@ void CityProtectorsLogic::MoveGameObject(const GameObjectId id, const Mat4x4& ma
 
 		if (transform->GetPosition().y < -25)
 		{
-			shared_ptr<Event_DestroyGameObject> pDestroyActorEvent(CB_NEW Event_DestroyGameObject(id));
-			IEventManager::Get()->QueueEvent(pDestroyActorEvent);
+			shared_ptr<Event_DestroyGameObject> pDestroyObjectEvent(CB_NEW Event_DestroyGameObject(id));
+			IEventManager::Get()->QueueEvent(pDestroyObjectEvent);
 		}
 	}
 }

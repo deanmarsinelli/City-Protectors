@@ -373,7 +373,7 @@ shared_ptr<SceneNode> SphereRenderComponent::CreateSceneNode()
 
 		D3DXCreateSphere(DXUTGetD3D9Device(), m_Radius, m_Segments, m_Segments, &pSphereMesh, NULL);
 
-		shared_ptr<SceneNode> sphere(CB_NEW D3DShaderMeshNode9(m_pOwner->GetId(), weakThis, pSphereMesh, "Effects\\GameCode4.fx", RenderPass_Object, &transform->GetTransform()));
+		shared_ptr<SceneNode> sphere(CB_NEW D3DShaderMeshNode9(m_pOwner->GetId(), weakThis, pSphereMesh, "Effects\\Main.fx", RenderPass_Object, &transform->GetTransform()));
 
 		SAFE_RELEASE(pSphereMesh);
 		return sphere;
@@ -413,7 +413,7 @@ shared_ptr<SceneNode> TeapotRenderComponent::CreateSceneNode()
 	switch (WindowsApp::GetRendererImpl())
 	{
 	case WindowsApp::Renderer_D3D9:
-		return shared_ptr<SceneNode>(CB_NEW D3DTeapotMeshNode9(m_pOwner->GetId(), weakThis, "Effects\\GameCode4.fx", RenderPass_Object, &transform->GetTransform()));
+		return shared_ptr<SceneNode>(CB_NEW D3DTeapotMeshNode9(m_pOwner->GetId(), weakThis, "Effects\\Main.fx", RenderPass_Object, &transform->GetTransform()));
 
 	case WindowsApp::Renderer_D3D11:
 	{

@@ -18,14 +18,14 @@ cbuffer cbObjectColors : register(b0)
 }
 
 // Textures and samplers
-Texture2D g_txDiffuse : register(t0);
+Texture2D g_txDiffuse    : register(t0);
 SamplerState g_samLinear : register(s0);
 
 
 // Input/Output structures
 struct PS_INPUT
 {
-	float4 vDiffuse : COLOR0;
+	float4 vDiffuse	 : COLOR0;
 	float2 vTexcoord : TEXCOORD0;
 };
 

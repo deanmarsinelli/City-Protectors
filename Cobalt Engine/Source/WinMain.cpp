@@ -33,7 +33,7 @@ INT WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	Logger::Init("logging.xml");
 
 	// Initialize User Options
-	g_pApp->m_Options.Init("UserOptions.xml", cmdLine);
+	g_pApp->m_Options.Init("PlayerOptions.xml", cmdLine);
 
 	// Setting up DirectX callbacks
 	DXUTSetCallbackMsgProc(WindowsApp::MsgProc);

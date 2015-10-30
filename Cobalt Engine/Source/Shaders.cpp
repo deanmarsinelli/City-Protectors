@@ -68,7 +68,7 @@ HRESULT Hlsl_VertexShader::OnRestore(Scene* pScene)
 	ID3DBlob* pVertexShaderBuffer = nullptr;
 
 	/// get a handle to the vertex shader from the resource cache
-	std::string hlslFileName = "Main_VS.hlsl";
+	std::string hlslFileName = "Effects\\Main_VS.hlsl";
 	Resource resource(hlslFileName.c_str());
 	shared_ptr<ResHandle> pResourceHandle = g_pApp->m_ResCache->GetHandle(&resource); // this loads it from a zip file
 	if (FAILED(d3dRenderer11->CompileShader(pResourceHandle->Buffer(), pResourceHandle->Size(), 
@@ -218,7 +218,7 @@ HRESULT Hlsl_PixelShader::OnRestore(Scene* pScene)
 	ID3DBlob* pPixelShaderBuffer = nullptr;
 
 	// load the data from the resource cache
-	std::string hlslFileName = "Main_PS.hlsl";
+	std::string hlslFileName = "Effects\\Main_PS.hlsl";
 	Resource resource(hlslFileName.c_str());
 	shared_ptr<ResHandle> pResourceHandle = g_pApp->m_ResCache->GetHandle(&resource);
 	

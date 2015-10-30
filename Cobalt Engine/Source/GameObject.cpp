@@ -79,20 +79,20 @@ std::string GameObject::ToXML()
 	TiXmlDocument outDoc;
 
 	// object 
-	TiXmlElement* pActorElement = CB_NEW TiXmlElement("GameObject");
-	pActorElement->SetAttribute("type", m_Type.c_str());
-	pActorElement->SetAttribute("resource", m_Resource.c_str());
+	TiXmlElement* pObjectElement = CB_NEW TiXmlElement("GameObject");
+	pObjectElement->SetAttribute("type", m_Type.c_str());
+	pObjectElement->SetAttribute("resource", m_Resource.c_str());
 
 	// components
 	for (auto it = m_Components.begin(); it != m_Components.end(); ++it)
 	{
 		StrongComponentPtr pComponent = it->second;
 		TiXmlElement* pComponentElement = pComponent->GenerateXml();
-		pActorElement->LinkEndChild(pComponentElement);
+		pObjectElement->LinkEndChild(pComponentElement);
 	}
 
 	// print the output
-	outDoc.LinkEndChild(pActorElement);
+	outDoc.LinkEndChild(pObjectElement);
 	TiXmlPrinter printer;
 	outDoc.Accept(&printer);
 

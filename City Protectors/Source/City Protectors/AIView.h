@@ -21,13 +21,13 @@ public:
 	virtual ~AIView();
 
 	virtual HRESULT OnRestore() override { return S_OK; }
-	virtual void OnRender(float time, float deltaTime) override {}
+	virtual void OnRender(float time, float deltaTime) override { }
 	virtual HRESULT OnLostDevice() override { return S_OK; }
 	virtual GameViewType GetType() override { return GameView_AI; }
 	virtual GameViewId GetId() const override { return m_ViewId; }
 	virtual void OnAttach(GameViewId viewId, GameObjectId objectId) override { m_ViewId = viewId; m_PlayerObjectId = objectId; }
 	virtual LRESULT CALLBACK OnMsgProc(AppMsg msg) override { return 0; }
-	virtual void OnUpdate(float deltaTime) override {}
+	virtual void OnUpdate(float deltaTime) override { }
 
 	shared_ptr<PathingGraph> GetPathingGraph(void) const { return m_pPathingGraph; }
 

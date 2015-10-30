@@ -84,7 +84,7 @@ VS_OUTPUT Main_VS(VS_INPUT Input)
 	// final color for the vertex
 	Output.vDiffuse.rgb = g_DiffuseObjectColor * vTotalLightDiffuse +
 		g_AmbientObjectColor * g_Ambient;
-	Output.vDiffuse.a = 1.0f;
+	Output.vDiffuse.a = g_DiffuseObjectColor.a;
 
 	return Output;
 }
