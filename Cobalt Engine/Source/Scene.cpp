@@ -28,18 +28,18 @@ Scene::Scene(shared_ptr<IRenderer> renderer)
 
 	IEventManager* pEventMgr = IEventManager::Get();
 	pEventMgr->AddListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), Event_NewRenderComponent::sk_EventType);
-	pEventMgr->AddListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), Event_DestroyGameObject::sk_EventType);
-	pEventMgr->AddListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), Event_MoveGameObject::sk_EventType);
-	pEventMgr->AddListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), Event_ModifiedRenderComponent::sk_EventType);
+	pEventMgr->AddListener(fastdelegate::MakeDelegate(this, &Scene::DestroyObjectDelegate), Event_DestroyGameObject::sk_EventType);
+	pEventMgr->AddListener(fastdelegate::MakeDelegate(this, &Scene::MoveObjectDelegate), Event_MoveGameObject::sk_EventType);
+	pEventMgr->AddListener(fastdelegate::MakeDelegate(this, &Scene::ModifiedRenderComponentDelegate), Event_ModifiedRenderComponent::sk_EventType);
 }
 
 Scene::~Scene()
 {
 	IEventManager* pEventMgr = IEventManager::Get();
 	pEventMgr->RemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), Event_NewRenderComponent::sk_EventType);
-	pEventMgr->RemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), Event_DestroyGameObject::sk_EventType);
-	pEventMgr->RemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), Event_MoveGameObject::sk_EventType);
-	pEventMgr->RemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), Event_ModifiedRenderComponent::sk_EventType);
+	pEventMgr->RemoveListener(fastdelegate::MakeDelegate(this, &Scene::DestroyObjectDelegate), Event_DestroyGameObject::sk_EventType);
+	pEventMgr->RemoveListener(fastdelegate::MakeDelegate(this, &Scene::MoveObjectDelegate), Event_MoveGameObject::sk_EventType);
+	pEventMgr->RemoveListener(fastdelegate::MakeDelegate(this, &Scene::ModifiedRenderComponentDelegate), Event_ModifiedRenderComponent::sk_EventType);
 
 	CB_COM_RELEASE(m_MatrixStack);
 	CB_SAFE_DELETE(m_LightManager);

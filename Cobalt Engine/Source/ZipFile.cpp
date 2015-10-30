@@ -8,7 +8,6 @@
 
 #include <algorithm>
 #include <cctype>
-#include <stdio.h>
 #include <zlib.h>
 
 #include "EngineStd.h"
@@ -108,6 +107,8 @@ bool ZipFile::Init(const std::wstring& resourceFileName)
 
 	// get a pointer to the file
 	_wfopen_s(&m_pFile, resourceFileName.c_str(), L"rb");
+	if (!m_pFile)
+		return false;
 
 	TZipDirHeader dh;
 
