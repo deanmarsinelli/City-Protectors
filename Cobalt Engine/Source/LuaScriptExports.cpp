@@ -84,7 +84,16 @@ private:
 class LuaScriptEventListenerManager
 {
 public:
-	~LuaScriptEventListenerManager();
+	~LuaScriptEventListenerManager()
+	{
+		// delete all event listeners
+		for (auto it = m_Listeners.begin(); it != m_Listeners.end(); ++it)
+		{
+			LuaScriptEventListener* pListener = (*it);
+			delete pListener;
+		}
+		m_Listeners.clear();
+	}
 
 	// add a listener to object to the manager
 	void AddListener(LuaScriptEventListener* pListener)

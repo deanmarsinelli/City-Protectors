@@ -11,12 +11,12 @@
 #include "Logger.h"
 #include "StringUtil.h"
 
-GenericObjectFactory<IEvent, EventType> g_eventFactory;
+GenericObjectFactory<IEvent, EventType> g_EventFactory;
 
 //====================================================
 //	IEventManager definitions
 //====================================================
-static IEventManager* g_pEventMgr = NULL;
+static IEventManager* g_pEventMgr = nullptr;
 
 IEventManager::IEventManager(const char* name, bool setAsGlobal)
 {

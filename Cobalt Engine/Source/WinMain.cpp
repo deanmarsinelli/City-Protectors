@@ -8,7 +8,7 @@
 #include <Windows.h>
 
 #include "Logger.h"
-#include "WindowsApp.h"
+#include "EngineStd.h"
 
 #pragma comment(lib, "shell32.lib")
 #pragma comment(lib, "advapi32.lib")
@@ -21,7 +21,7 @@
 /**
 	WindowsAppMain provides the entry point into the engine.
 */
-int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
+INT WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	LPWSTR cmdLine, int showCmd)
 {
 	// Enable run-time memory check for debug builds.

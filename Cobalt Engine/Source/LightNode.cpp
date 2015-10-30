@@ -32,7 +32,7 @@ HRESULT D3DLightNode9::OnRestore(Scene* pScene)
 	return S_OK;
 }
 
-HRESULT D3DLightNode9::OnUpdate(Scene* pScene, const float deltaTime)
+HRESULT D3DLightNode9::OnUpdate(Scene* pScene, float deltaTime)
 {
 	LightRenderComponent* lightComponent = static_cast<LightRenderComponent*>(m_RenderComponent);
 	m_Properties.GetMaterial().SetDiffuse(lightComponent->GetColor());
@@ -51,7 +51,7 @@ HRESULT D3DLightNode9::OnUpdate(Scene* pScene, const float deltaTime)
 }
 
 
-HRESULT D3DLightNode11::OnUpdate(Scene* pScene, const float deltaTime)
+HRESULT D3DLightNode11::OnUpdate(Scene* pScene, float deltaTime)
 {
 	LightRenderComponent* lightComponent = static_cast<LightRenderComponent*>(m_RenderComponent);
 	m_Properties.GetMaterial().SetDiffuse(lightComponent->GetColor());

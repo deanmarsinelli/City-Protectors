@@ -18,6 +18,8 @@
 #include "ResourceCache.h"
 #include "SoundProcess.h"
 
+#pragma comment(lib, "winmm.lib")
+
 const GameViewId CB_INVALID_GAMEVIEW_ID = 0xffffffff;
 
 const unsigned int SCREEN_REFRESH_RATE(1000 / 60);

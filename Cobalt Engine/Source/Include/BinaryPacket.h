@@ -37,7 +37,7 @@ public:
 	virtual const char* GetData() const;
 
 	/// Return the size of the data stored in the packet
-	virtual u_long GetSize() const;
+	virtual unsigned long GetSize() const;
 
 public:
 	/// Type name for binary packets

@@ -11,6 +11,12 @@
 
 #pragma once
 
+#define WIN32_LEAN_AND_MEAN	
+
+#include <windows.h>
+#include <windowsx.h>
+
+#include <crtdbg.h>
 #include <d3dx9.h>
 #include <FastDelegate.h>
 #include <memory>
@@ -40,12 +46,10 @@ struct AppMsg
 //======================================
 //  Windows Specific
 //======================================
-#ifdef _WIN32
-	#define DIRECTX
-	#include "WindowsApp.h"
-	// declaration for the WindowsAppMain function
-	extern int WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPSTR cmdLine, int showCmd);
-#endif
+#include "WindowsApp.h"
+// declaration for the WindowsAppMain function
+extern INT WINAPI WindowsAppMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int showCmd);
+
 
 #ifdef _XBOX
 // xbox entry function, etc

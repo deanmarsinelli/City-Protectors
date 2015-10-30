@@ -589,9 +589,6 @@
     <ClCompile Include="RealTimeProcess.cpp">
       <Filter>MultiThreading</Filter>
     </ClCompile>
-    <ClCompile Include="D3D9Vertex.cpp">
-      <Filter>Graphics\Direct 3D\Shaders</Filter>
-    </ClCompile>
     <ClCompile Include="LuaScriptResource.cpp">
       <Filter>Scripting\Lua</Filter>
     </ClCompile>
@@ -616,6 +613,9 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="D3DTeapotMeshNode.cpp">
       <Filter>Graphics\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D9Vertex.cpp">
+      <Filter>Graphics\Direct 3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -669,9 +669,6 @@
     </Filter>
     <Filter Include="Graphics\Direct 3D\Resources">
       <UniqueIdentifier>{124c3971-5cc2-4cbc-842e-e69ef6520f53}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Direct 3D\Shaders">
-      <UniqueIdentifier>{4b4add11-65b9-43fa-942c-413209af0957}</UniqueIdentifier>
     </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{e04a17d6-36b3-415e-aa88-f9a7887043b9}</UniqueIdentifier>

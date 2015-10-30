@@ -12,6 +12,8 @@
 #include "NetSocket.h"
 #include "TextPacket.h"
 
+#pragma comment(lib, "Ws2_32")
+
 NetSocket::NetSocket()
 {
 	// client socket constructor

@@ -74,6 +74,31 @@ const GameObject::Components* GameObject::GetComponents()
 	return &m_Components;
 }
 
+std::string GameObject::ToXML()
+{
+	TiXmlDocument outDoc;
+
+	// object 
+	TiXmlElement* pActorElement = CB_NEW TiXmlElement("GameObject");
+	pActorElement->SetAttribute("type", m_Type.c_str());
+	pActorElement->SetAttribute("resource", m_Resource.c_str());
+
+	// components
+	for (auto it = m_Components.begin(); it != m_Components.end(); ++it)
+	{
+		StrongComponentPtr pComponent = it->second;
+		TiXmlElement* pComponentElement = pComponent->GenerateXml();
+		pActorElement->LinkEndChild(pComponentElement);
+	}
+
+	// print the output
+	outDoc.LinkEndChild(pActorElement);
+	TiXmlPrinter printer;
+	outDoc.Accept(&printer);
+
+	return printer.CStr();
+}
+
 void GameObject::AddComponent(StrongComponentPtr pComponent)
 {
 	m_Components.insert(std::make_pair(pComponent->GetId(), pComponent));

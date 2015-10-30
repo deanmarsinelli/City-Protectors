@@ -675,5 +675,5 @@ public:
 	virtual const char* GetData() const = 0;
 
 	/// Return the size of the packet
-	virtual u_long GetSize() const = 0;
+	virtual unsigned long GetSize() const = 0;
 };

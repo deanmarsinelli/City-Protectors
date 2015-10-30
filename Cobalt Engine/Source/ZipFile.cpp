@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <stdio.h>
 #include <zlib.h>
 
 #include "EngineStd.h"

@@ -24,6 +24,10 @@
 #include "PhysicsEvents.h"
 #include "XmlResource.h"
 
+#pragma comment(lib, "BulletCollision_debug.lib")
+#pragma comment(lib, "BulletDynamics_debug.lib")
+#pragma comment(lib, "LinearMath_debug.lib")
+
 /**
 	Physics material properties.
 */

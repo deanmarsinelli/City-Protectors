@@ -69,7 +69,7 @@ public:
 	{}
 
 	/// Called when restoring the device
-	virtual HRESULT OnRestore();
+	virtual HRESULT OnRestore() { return S_OK; }
 
 	/// Update method called once per frame
 	virtual HRESULT OnUpdate(Scene* pScene, float deltaTime);
