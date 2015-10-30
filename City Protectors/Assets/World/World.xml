@@ -1,0 +1,27 @@
+<World>
+  
+    <!-- A list of static gameobjects to load.  Static gameobjects have no game view attached.  This is for stuff like 
+    level geometry.-->
+
+    <StaticGameObjects>
+      <GameObject resource="gameobjects\grid.xml" />
+      <GameObject resource="gameobjects\light.xml" />
+  	  <GameObject resource="gameobjects\afternoon_sky.xml" />
+      <GameObject resource="gameobjects\music.xml" />
+
+
+<!--
+        <GameObject resource="gameobjects\player_spawner.xml" />
+        <GameObject resource="gameobjects\ai_spawner_0.xml" />
+        <GameObject resource="gameobjects\ai_spawner_1.xml" />
+        <GameObject resource="gameobjects\ai_spawner_2.xml" />
+        <GameObject resource="gameobjects\ai_spawner_3.xml" />
+-->
+    </StaticGameObjects>
+
+
+    <!-- The preLoad script is executed as the first operation when the level is loading.  The postLoad script 
+    if executed as the last step in the level loading process. -->
+    <Script preLoad="scripts\LevelInit.lua" postLoad="scripts\LevelPostInit.lua"/>
+
+</World>

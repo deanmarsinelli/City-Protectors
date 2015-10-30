@@ -1,0 +1,7 @@
+<GameObject type="Music" resource="gameobjects\music.xml">
+	<AudioComponent>
+		<Sound>audio\spacegod7-level2.ogg</Sound>
+		<Loop>1</Loop>
+		<FadeIn>5.0</FadeIn>
+	</AudioComponent>	
+</GameObject>

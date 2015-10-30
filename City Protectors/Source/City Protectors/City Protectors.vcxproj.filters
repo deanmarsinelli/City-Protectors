@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="CityProtectors.h" />
+    <ClInclude Include="MainMenuView.h">
+      <Filter>Views</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuUI.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardHUD.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CityProtectorsHumanView.h">
+      <Filter>Views</Filter>
+    </ClInclude>
+    <ClInclude Include="AIView.h">
+      <Filter>Views</Filter>
+    </ClInclude>
+    <ClInclude Include="CityProtectorsLogic.h" />
+    <ClInclude Include="GameEvents.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtectorController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CityProtectors.cpp" />
+    <ClCompile Include="MainMenuUI.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardHUD.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEvents.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="CityProtectorsLogic.cpp" />
+    <ClCompile Include="CityProtectorsHumanView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtectorController.cpp" />
+    <ClCompile Include="AIView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Views">
+      <UniqueIdentifier>{93e1c7f2-9abe-4068-b0c2-1480ed673897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User Interface">
+      <UniqueIdentifier>{6317a315-9622-47e6-8f5f-9b1b601696e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{b7423b8b-ddb7-4cb8-8c7c-b4f03759057c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
