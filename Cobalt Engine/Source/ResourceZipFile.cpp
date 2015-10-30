@@ -26,7 +26,7 @@ bool ResourceZipFile::Open()
 	m_pZipFile = CB_NEW ZipFile;
 	if (m_pZipFile)
 	{
-		return m_pZipFile->Init(m_resFileName);
+		return m_pZipFile->Init(m_resFileName.c_str());
 	}
 	return false;
 }

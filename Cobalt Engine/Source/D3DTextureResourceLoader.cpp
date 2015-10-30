@@ -48,6 +48,7 @@ bool D3DTextureResourceLoader::LoadResource(char* rawBuffer, unsigned int rawSiz
 		{
 			// attach the texture data onto the resource handle
 			handle->SetExtra(shared_ptr<D3DTextureResourceExtraData9>(extra));
+			return true;
 		}
 	}
 	else if (renderer == WindowsApp::Renderer::Renderer_D3D11)

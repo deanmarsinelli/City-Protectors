@@ -51,6 +51,7 @@ struct ZipFile::TZipDirHeader
 	word	nDisk;
 	word	nStartDisk;
 	word	nDirEntries;
+	word	totalDirEntries;
 	dword	dirSize;
 	dword	dirOffset;
 	word	cmntLen;
@@ -214,6 +215,7 @@ std::string ZipFile::GetFileName(int index) const
 	{
 		char pDest[_MAX_PATH];
 		memcpy(pDest, m_ppDir[index]->GetName(), m_ppDir[index]->fnameLen);
+		pDest[m_ppDir[index]->fnameLen] = '\0';
 		fileName = pDest;
 	}
 	return fileName;

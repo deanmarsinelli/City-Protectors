@@ -10,10 +10,10 @@
 bool LevelManager::Initialize(std::vector<std::string>& levels)
 {
 	auto it = levels.begin();
-	while (it != levels.end());
+	while (it != levels.end())
 	{
 		m_Levels.push_back(*it);
-		it++;
+		++it;
 	}
 
 	return true;

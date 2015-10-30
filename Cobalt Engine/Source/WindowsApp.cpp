@@ -202,8 +202,9 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 
 	// create the d3d device
 	//DXUTCreateDevice(D3D_FEATURE_LEVEL_9_3, true, screenWidth, screenHeight);
-	DXUTCreateDevice(D3D_FEATURE_LEVEL_10_1, true, screenWidth, screenHeight);
+	DXUTCreateDevice(D3D_FEATURE_LEVEL_11_0, true, screenWidth, screenHeight);
 
+	// TODO: only returns d3d9
 	if (GetRendererImpl() == Renderer_D3D9)
 	{
 		m_Renderer = std::shared_ptr<IRenderer>(new D3DRenderer9());
