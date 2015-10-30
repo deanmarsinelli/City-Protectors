@@ -14,7 +14,7 @@
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
 #include "ScriptComponent.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 #include "XmlResource.h"
 
 GameObjectFactory::GameObjectFactory()
@@ -22,19 +22,21 @@ GameObjectFactory::GameObjectFactory()
 	m_lastObjectId = INVALID_GAMEOBJECT_ID;
 
 	// Register all the component creation functions
-	m_ComponentFactory.Register<AudioComponent>(AudioComponent::GetIdFromName(AudioComponent::g_Name));
+	m_ComponentFactory.Register<TransformComponent>(Component::GetIdFromName(TransformComponent::g_Name));
 
-	m_ComponentFactory.Register<MeshRenderComponent>(MeshRenderComponent::GetIdFromName(MeshRenderComponent::g_Name));
-	m_ComponentFactory.Register<SphereRenderComponent>(SphereRenderComponent::GetIdFromName(SphereRenderComponent::g_Name));
-	m_ComponentFactory.Register<TeapotRenderComponent>(TeapotRenderComponent::GetIdFromName(TeapotRenderComponent::g_Name));
+	m_ComponentFactory.Register<AudioComponent>(Component::GetIdFromName(AudioComponent::g_Name));
 
-	m_ComponentFactory.Register<PhysicsComponent>(PhysicsComponent::GetIdFromName(PhysicsComponent::g_Name));
+	m_ComponentFactory.Register<MeshRenderComponent>(Component::GetIdFromName(MeshRenderComponent::g_Name));
+	m_ComponentFactory.Register<SphereRenderComponent>(Component::GetIdFromName(SphereRenderComponent::g_Name));
+	m_ComponentFactory.Register<TeapotRenderComponent>(Component::GetIdFromName(TeapotRenderComponent::g_Name));
 
-	m_ComponentFactory.Register<LuaScriptComponent>(LuaScriptComponent::GetIdFromName(LuaScriptComponent::g_Name));
+	m_ComponentFactory.Register<PhysicsComponent>(Component::GetIdFromName(PhysicsComponent::g_Name));
 
-	m_ComponentFactory.Register<LightRenderComponent>(LightRenderComponent::GetIdFromName(LightRenderComponent::g_Name));
-	m_ComponentFactory.Register<SkyRenderComponent>(SkyRenderComponent::GetIdFromName(SkyRenderComponent::g_Name));
-	m_ComponentFactory.Register<GridRenderComponent>(GridRenderComponent::GetIdFromName(GridRenderComponent::g_Name));
+	m_ComponentFactory.Register<LuaScriptComponent>(Component::GetIdFromName(LuaScriptComponent::g_Name));
+
+	m_ComponentFactory.Register<LightRenderComponent>(Component::GetIdFromName(LightRenderComponent::g_Name));
+	m_ComponentFactory.Register<SkyRenderComponent>(Component::GetIdFromName(SkyRenderComponent::g_Name));
+	m_ComponentFactory.Register<GridRenderComponent>(Component::GetIdFromName(GridRenderComponent::g_Name));
 }
 
 StrongGameObjectPtr GameObjectFactory::CreateGameObject(const char* objectResource, TiXmlElement* overrides, const Mat4x4* pInitialTransform, const GameObjectId serversObjectId)
@@ -80,22 +82,16 @@ StrongGameObjectPtr GameObjectFactory::CreateGameObject(const char* objectResour
 		}
 	}
 
-	// initialize transform
-	if (!pObject->transform.Init(pRoot->FirstChildElement("Transform")))
-	{
-		CB_ERROR("Failed to initialize transform");
-		return StrongGameObjectPtr();
-	}
-
 	if (overrides)
 	{
 		ModifyGameObject(pObject, overrides);
 	}
 
 	// set the initial transform of the object
-	if (pInitialTransform)
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(pObject->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pInitialTransform && pTransformComponent)
 	{
-		pObject->transform.SetPosition(pInitialTransform->GetPosition());
+		pTransformComponent->SetPosition(pInitialTransform->GetPosition());
 	}
 
 	// run post-init then return the object

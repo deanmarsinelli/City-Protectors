@@ -11,6 +11,7 @@
 #include "MathUtils.h"
 #include "Matrix.h"
 #include "PhysicsComponent.h"
+#include "TransformComponent.h"
 #include "Vector.h"
 
 // units per second
@@ -142,7 +143,15 @@ void PhysicsComponent::PostInit()
 
 void PhysicsComponent::Update(float deltaTime)
 {
-	Mat4x4 transform = m_pOwner->transform.GetTransform();
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (!pTransformComponent)
+	{
+		CB_ERROR("No transform component");
+		return;
+	}
+
+	// get the direction the object is facing
+	Mat4x4 transform = pTransformComponent->GetTransform();
 
 	// if there is acceleration, move the object
 	if (m_Acceleration != 0)
@@ -214,24 +223,36 @@ void PhysicsComponent::SetVelocity(const Vec3& velocity)
 void PhysicsComponent::RotateY(float angleRadians)
 {
 	// rotate the physics body around the y axis
-	Mat4x4 transform = m_pOwner->transform.GetTransform();
-	Vec3 position = transform.GetPosition();
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
+	{
+		Mat4x4 transform = pTransformComponent->GetTransform();
+		Vec3 position = transform.GetPosition();
 
-	Mat4x4 rotateY;
-	rotateY.BuildRotationY(angleRadians);
-	rotateY.SetPosition(position);
+		Mat4x4 rotateY;
+		rotateY.BuildRotationY(angleRadians);
+		rotateY.SetPosition(position);
 
-	KinematicMove(rotateY);
+		KinematicMove(rotateY);
+	}
+	else
+		CB_ERROR("Can't call RotateY() on an object with no transform");
 }
 
 void PhysicsComponent::SetPosition(float x, float y, float z)
 {
 	// manually set the physics body
-	Mat4x4 transform = m_pOwner->transform.GetTransform();
-	Vec3 position = Vec3(x, y, z);
-	transform.SetPosition(position);
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
+	{
+		Mat4x4 transform = pTransformComponent->GetTransform();
+		Vec3 position = Vec3(x, y, z);
+		transform.SetPosition(position);
 
-	KinematicMove(transform);
+		KinematicMove(transform);
+	}
+	else
+		CB_ERROR("Can't call SetPosition() on an object with no transform");
 }
 
 void PhysicsComponent::Stop()

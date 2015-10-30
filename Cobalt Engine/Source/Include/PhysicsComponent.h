@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Component.h"
+#include "Vector.h"
 
 /**
 	Allows a game object to be controlled by physics, interact with

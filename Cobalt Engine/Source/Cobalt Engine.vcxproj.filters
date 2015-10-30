@@ -22,9 +22,6 @@
     <ClInclude Include="Include\GameObjectFactory.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Transform.h">
-      <Filter>Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Initialization.h">
       <Filter>Main Loop</Filter>
     </ClInclude>
@@ -331,6 +328,9 @@
     <ClInclude Include="Include\D3DTeapotMeshNode.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Include\TransformComponent.h">
+      <Filter>Game Objects\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -598,9 +598,6 @@
     <ClCompile Include="FadeProcess.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="D3DGrid9.cpp">
       <Filter>Graphics\Scene</Filter>
     </ClCompile>
@@ -616,6 +613,9 @@
     </ClCompile>
     <ClCompile Include="D3D9Vertex.cpp">
       <Filter>Graphics\Direct 3D</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Game Objects\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

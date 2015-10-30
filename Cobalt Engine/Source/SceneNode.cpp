@@ -15,7 +15,7 @@
 #include "Scene.h"
 #include "SceneNode.h"
 #include "templates.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 #include "Vector.h"
 
 SceneNode::SceneNode(GameObjectId objectId, WeakBaseRenderComponentPtr renderComponent, RenderPass renderPass, const Mat4x4* to, const Mat4x4* from)
@@ -140,8 +140,11 @@ HRESULT SceneNode::PreRender(Scene* pScene)
 	StrongGameObjectPtr pObject = MakeStrongPtr(g_pApp->GetGameLogic()->GetGameObject(m_Properties.m_ObjectId));
 	if (pObject)
 	{
-		Transform t = pObject->transform;
-		m_Properties.m_ToWorld = t.GetTransform();
+		shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(pObject->GetComponent<TransformComponent>(TransformComponent::g_Name));
+		if (pTransformComponent)
+		{
+			m_Properties.m_ToWorld = pTransformComponent->GetTransform();
+		}
 	}
 
 	pScene->PushAndSetMatrix(m_Properties.m_ToWorld);

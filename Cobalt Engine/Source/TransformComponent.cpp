@@ -1,5 +1,5 @@
 /*
-	Transform.cpp
+	TransformComponent.cpp
 
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham
@@ -8,9 +8,11 @@
 #include "Logger.h"
 #include "MathUtils.h"
 #include "StringUtil.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 
-bool Transform::Init(TiXmlElement* pData)
+const char* TransformComponent::g_Name = "TransformComponent";
+
+bool TransformComponent::Init(TiXmlElement* pData)
 {
 	CB_ASSERT(pData);
 
@@ -56,9 +58,9 @@ bool Transform::Init(TiXmlElement* pData)
 	return true;
 }
 
-TiXmlElement* Transform::GenerateXml()
+TiXmlElement* TransformComponent::GenerateXml()
 {
-	TiXmlElement* pBaseElement = CB_NEW TiXmlElement("Transform");
+	TiXmlElement* pBaseElement = CB_NEW TiXmlElement(GetName());
 
 	// initial transform -> position
 	TiXmlElement* pPosition = CB_NEW TiXmlElement("Position");

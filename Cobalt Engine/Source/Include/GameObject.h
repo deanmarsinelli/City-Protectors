@@ -12,7 +12,6 @@
 #include <unordered_map>
 
 #include "interfaces.h"
-#include "Transform.h"
 
 /**
 	Represents any object that can exist in the game world. This class is not meant
@@ -100,9 +99,6 @@ public:
 private:
 	/// Add a component to the Game Object. This should only be called by the Game Object Factory
 	void AddComponent(StrongComponentPtr pComponent);
-
-public:
-	Transform transform;
 
 private:
 	/// Unique id for the game object

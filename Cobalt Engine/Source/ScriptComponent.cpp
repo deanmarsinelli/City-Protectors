@@ -14,7 +14,7 @@
 #include "MathUtils.h"
 #include "PhysicsComponent.h"
 #include "templates.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 
 // This is the name of the metatable where all the function definitions exported to Lua will live
 static const char* LUA_METATABLE_NAME = "LuaScriptComponentMetaTable";
@@ -206,33 +206,59 @@ LuaPlus::LuaObject LuaScriptComponent::GetPos()
 {
 	// return the objects position to lua
 	LuaPlus::LuaObject ret;
-	Transform transform = m_pOwner->transform;
-	LuaStateManager::Get()->ConvertVec3ToTable(transform.GetPosition(), ret);
+
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
+		LuaStateManager::Get()->ConvertVec3ToTable(pTransformComponent->GetPosition(), ret);
+	else
+		ret.AssignNil(LuaStateManager::Get()->GetLuaState());
+
 	return ret;
 }
 
 void LuaScriptComponent::SetPos(LuaPlus::LuaObject newPos)
 {
 	// set the position of an object in lua
-	Vec3 pos;
-	LuaStateManager::Get()->ConvertTableToVec3(newPos, pos);
-	m_pOwner->transform.SetPosition(pos);
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
+	{
+		Vec3 pos;
+		LuaStateManager::Get()->ConvertTableToVec3(newPos, pos);
+		pTransformComponent->SetPosition(pos);
+	}
+	else
+	{
+		CB_ERROR("Attempting to call SetPos() on an object with no physcial component; ObjectId: " + ToStr(m_pOwner->GetId()));
+	}
 }
 
 LuaPlus::LuaObject LuaScriptComponent::GetLookAt() const
 {
 	// return the look at vector of an object to lua
 	LuaPlus::LuaObject ret;
-	Transform transform = m_pOwner->transform;
-	LuaStateManager::Get()->ConvertVec3ToTable(transform.GetLookAt(), ret);
+
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
+		LuaStateManager::Get()->ConvertVec3ToTable(pTransformComponent->GetLookAt(), ret);
+	else
+		ret.AssignNil(LuaStateManager::Get()->GetLuaState());
+
 	return ret;
 }
 
 float LuaScriptComponent::GetYOrientationRadians() const
 {
 	// return the look at vector of an object to lua
-	Transform transform = m_pOwner->transform;
-	return GetYRotationFromVector(transform.GetLookAt());
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
+	{
+		return (GetYRotationFromVector(pTransformComponent->GetLookAt()));
+	}
+	else
+	{
+		CB_ERROR("Attempting to call GetYOrientationRadians() on object with no physical component");
+		return 0.0f;
+	}
 }
 
 void LuaScriptComponent::RotateY(float angleRadians)

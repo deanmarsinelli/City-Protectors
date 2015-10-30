@@ -1,5 +1,5 @@
 /*
-	Transform.h
+	TransformComponent.h
 
 	Inspired by Game Coding Complete 4th ed.
 	by Mike McShaffry and David Graham
@@ -9,20 +9,20 @@
 
 #include <tinyxml.h>
 
+#include "Component.h"
 #include "Matrix.h"
 #include "Vector.h"
 
 /**
-	A transform is a mandatory pseudo-component that all game objects
-	have. It represents position, rotation, and scale.
+	A transform represents position, rotation, and scale.
 */
-class Transform
+class TransformComponent : public Component
 {
 public:
 	/// Constructor sets the transform to the identity matrix
-	Transform() :
+	TransformComponent() :
 		m_Transform(Mat4x4::Identity)
-	{}
+	{ }
 
 	/// Initialize a transform from xml data
 	bool Init(TiXmlElement* pData);
@@ -41,7 +41,7 @@ public:
 	{
 		m_Transform = transform;
 	}
-	
+
 	/// Return the position vector
 	Vec3 GetPosition() const
 	{
@@ -59,6 +59,16 @@ public:
 	{
 		return m_Transform.GetDirection();
 	}
+
+	/// Return the name of the component
+	virtual const char* GetName() const 
+	{ 
+		return g_Name; 
+	}
+
+public:
+	/// Name of the component
+	static const char* g_Name;
 
 private:
 	/// 4x4 matrix representing position, rotation, and scale

@@ -13,7 +13,7 @@
 #include <Physics.h>
 #include <PhysicsComponent.h>
 #include <PhysicsEvents.h>
-#include <Transform.h>
+#include <TransformComponent.h>
 
 #include "AIView.h"
 #include "CityProtectorsHumanView.h"
@@ -43,9 +43,8 @@ void CityProtectorsLogic::MoveGameObject(const GameObjectId id, const Mat4x4& ma
 	StrongGameObjectPtr pObject = MakeStrongPtr(GetGameObject(id));
 	if (pObject)
 	{
-		Transform* transform = &(pObject->transform);
-
-		if (transform->GetPosition().y < -25)
+		shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(pObject->GetComponent<TransformComponent>(TransformComponent::g_Name));
+		if (pTransformComponent && pTransformComponent->GetPosition().y < -25)
 		{
 			shared_ptr<Event_DestroyGameObject> pDestroyObjectEvent(CB_NEW Event_DestroyGameObject(id));
 			IEventManager::Get()->QueueEvent(pDestroyObjectEvent);

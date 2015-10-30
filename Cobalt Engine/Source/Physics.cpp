@@ -22,6 +22,7 @@
 #include "Physics.h"
 #include "PhysicsDebugDrawer.h"
 #include "PhysicsEvents.h"
+#include "TransformComponent.h"
 #include "XmlResource.h"
 
 #pragma comment(lib, "BulletCollision_debug.lib")
@@ -365,13 +366,17 @@ void BulletPhysics::SyncVisibleScene()
 		StrongGameObjectPtr pGameObject = MakeStrongPtr(g_pApp->m_pGame->GetGameObject(id));
 		if (pGameObject && objMotionState)
 		{
-			// if the objects world position and physics position are different, update
-			if (pGameObject->transform.GetTransform() != objMotionState->m_WorldToPositionTransform)
+			shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(pGameObject->GetComponent<TransformComponent>(TransformComponent::g_Name));
+			if (pTransformComponent)
 			{
-				// sync the transform and dispatch an event that an object has moved
-				pGameObject->transform.SetTransform(objMotionState->m_WorldToPositionTransform);
-				shared_ptr<Event_MoveGameObject> pEvent(CB_NEW Event_MoveGameObject(id, objMotionState->m_WorldToPositionTransform));
-				IEventManager::Get()->QueueEvent(pEvent);
+				// if the objects world position and physics position are different, update
+				if (pTransformComponent->GetTransform() != objMotionState->m_WorldToPositionTransform)
+				{
+					// sync the transform and dispatch an event that an object has moved
+					pTransformComponent->SetTransform(objMotionState->m_WorldToPositionTransform);
+					shared_ptr<Event_MoveGameObject> pEvent(CB_NEW Event_MoveGameObject(id, objMotionState->m_WorldToPositionTransform));
+					IEventManager::Get()->QueueEvent(pEvent);
+				}
 			}
 		}
 	}
@@ -890,7 +895,18 @@ void BulletPhysics::AddShape(StrongGameObjectPtr pGameObject, btCollisionShape* 
 	}
 
 	// get the objects transform
-	Mat4x4 transform = pGameObject->transform.GetTransform();
+	Mat4x4 transform = Mat4x4::Identity;
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(pGameObject->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	CB_ASSERT(pTransformComponent);
+	if (pTransformComponent)
+	{
+		transform = pTransformComponent->GetTransform();
+	}
+	else
+	{
+		// Physics can't work on an object that doesn't have a TransformComponent
+		return;
+	}
 
 	ObjectMotionState* motionState = CB_NEW ObjectMotionState(transform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, motionState, shape, localInertia);

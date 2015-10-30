@@ -18,7 +18,7 @@
 #include "RenderComponent.h"
 #include "SkyNode.h"
 #include "StringUtil.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 
 const char* MeshRenderComponent::g_Name = "MeshRenderComponent";
 const char* SphereRenderComponent::g_Name = "SphereRenderComponent";
@@ -188,19 +188,22 @@ bool LightRenderComponent::DelegateInit(TiXmlElement* pData)
 
 shared_ptr<SceneNode> LightRenderComponent::CreateSceneNode()
 {
-	WeakBaseRenderComponentPtr weakThis(this);
-	switch (WindowsApp::GetRendererImpl())
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
 	{
-	case WindowsApp::Renderer::Renderer_D3D11:
-		return shared_ptr<SceneNode>(CB_NEW D3DLightNode11(m_pOwner->GetId(), weakThis, m_Properties, &m_pOwner->transform.GetTransform()));
-	
-	case WindowsApp::Renderer::Renderer_D3D9:
-		return shared_ptr<SceneNode>(CB_NEW D3DLightNode9(m_pOwner->GetId(), weakThis, m_Properties, &m_pOwner->transform.GetTransform()));
+		WeakBaseRenderComponentPtr weakThis(this);
+		switch (WindowsApp::GetRendererImpl())
+		{
+		case WindowsApp::Renderer::Renderer_D3D11:
+			return shared_ptr<SceneNode>(CB_NEW D3DLightNode11(m_pOwner->GetId(), weakThis, m_Properties, &(pTransformComponent->GetTransform())));
 
-	default:
-		CB_ASSERT(0 && "Uknown render implementation in LightRenderComponent");
+		case WindowsApp::Renderer::Renderer_D3D9:
+			return shared_ptr<SceneNode>(CB_NEW D3DLightNode9(m_pOwner->GetId(), weakThis, m_Properties, &(pTransformComponent->GetTransform())));
+
+		default:
+			CB_ASSERT(0 && "Uknown render implementation in LightRenderComponent");
+		}
 	}
-
 	return shared_ptr<SceneNode>();
 }
 
@@ -304,23 +307,23 @@ bool GridRenderComponent::DelegateInit(TiXmlElement* pData)
 
 shared_ptr<SceneNode> GridRenderComponent::CreateSceneNode()
 {
-	Transform* transform = &(m_pOwner->transform);
-
-	WeakBaseRenderComponentPtr weakThis(this);
-
-	switch (WindowsApp::GetRendererImpl())
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
 	{
-	case WindowsApp::Renderer_D3D9:
-		return shared_ptr<SceneNode>(CB_NEW D3DGrid9(m_pOwner->GetId(), weakThis, &(transform->GetTransform())));
+		WeakBaseRenderComponentPtr weakThis(this);
 
-	case WindowsApp::Renderer_D3D11:
-		return shared_ptr<SceneNode>(CB_NEW D3DGrid11(m_pOwner->GetId(), weakThis, &(transform->GetTransform())));
+		switch (WindowsApp::GetRendererImpl())
+		{
+		case WindowsApp::Renderer_D3D9:
+			return shared_ptr<SceneNode>(CB_NEW D3DGrid9(m_pOwner->GetId(), weakThis, &(pTransformComponent->GetTransform())));
 
-	default:
-		CB_ERROR("Unknown Renderer Implementation in GridRenderComponent");
+		case WindowsApp::Renderer_D3D11:
+			return shared_ptr<SceneNode>(CB_NEW D3DGrid11(m_pOwner->GetId(), weakThis, &(pTransformComponent->GetTransform())));
+
+		default:
+			CB_ERROR("Unknown Renderer Implementation in GridRenderComponent");
+		}
 	}
-	
-
 	return shared_ptr<SceneNode>();
 }
 
@@ -363,7 +366,12 @@ bool SphereRenderComponent::DelegateInit(TiXmlElement* pData)
 shared_ptr<SceneNode> SphereRenderComponent::CreateSceneNode()
 {
 	// get the transform
-	Transform* transform = &(m_pOwner->transform);
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (!pTransformComponent)
+	{
+		// can't render without a transform
+		return shared_ptr<SceneNode>();
+	}
 
 	WeakBaseRenderComponentPtr weakThis(this);
 	if (WindowsApp::GetRendererImpl() == WindowsApp::Renderer_D3D9)
@@ -373,14 +381,14 @@ shared_ptr<SceneNode> SphereRenderComponent::CreateSceneNode()
 
 		D3DXCreateSphere(DXUTGetD3D9Device(), m_Radius, m_Segments, m_Segments, &pSphereMesh, NULL);
 
-		shared_ptr<SceneNode> sphere(CB_NEW D3DShaderMeshNode9(m_pOwner->GetId(), weakThis, pSphereMesh, "Effects\\Main.fx", RenderPass_Object, &transform->GetTransform()));
+		shared_ptr<SceneNode> sphere(CB_NEW D3DShaderMeshNode9(m_pOwner->GetId(), weakThis, pSphereMesh, "Effects\\Main.fx", RenderPass_Object, &pTransformComponent->GetTransform()));
 
 		SAFE_RELEASE(pSphereMesh);
 		return sphere;
 	}
 	else if (WindowsApp::GetRendererImpl() == WindowsApp::Renderer_D3D11)
 	{
-		shared_ptr<SceneNode> sphere(CB_NEW D3DShaderMeshNode11(m_pOwner->GetId(), weakThis, "art\\sphere.sdkmesh", RenderPass_Object, &transform->GetTransform()));
+		shared_ptr<SceneNode> sphere(CB_NEW D3DShaderMeshNode11(m_pOwner->GetId(), weakThis, "art\\sphere.sdkmesh", RenderPass_Object, &pTransformComponent->GetTransform()));
 		return sphere;
 	}
 	else
@@ -406,29 +414,30 @@ void SphereRenderComponent::CreateInheritedXmlElements(TiXmlElement* pBaseElemen
 shared_ptr<SceneNode> TeapotRenderComponent::CreateSceneNode()
 {
 	// get the transform 
-	Transform* transform = &(m_pOwner->transform);
-
-	WeakBaseRenderComponentPtr weakThis(this);
-
-	switch (WindowsApp::GetRendererImpl())
+	shared_ptr<TransformComponent> pTransformComponent = MakeStrongPtr(m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name));
+	if (pTransformComponent)
 	{
-	case WindowsApp::Renderer_D3D9:
-		return shared_ptr<SceneNode>(CB_NEW D3DTeapotMeshNode9(m_pOwner->GetId(), weakThis, "Effects\\Main.fx", RenderPass_Object, &transform->GetTransform()));
+		WeakBaseRenderComponentPtr weakThis(this);
 
-	case WindowsApp::Renderer_D3D11:
-	{
-		Mat4x4 rot90;
-		rot90.BuildRotationY(-CB_PI / 2.0f);
-		shared_ptr<SceneNode> parent(CB_NEW SceneNode(m_pOwner->GetId(), weakThis, RenderPass_Object, &transform->GetTransform()));
-		shared_ptr<SceneNode> teapot(CB_NEW D3DTeapotMeshNode11(INVALID_GAMEOBJECT_ID, weakThis, RenderPass_Object, &rot90));
-		parent->AddChild(teapot);
-		return parent;
-	}
+		switch (WindowsApp::GetRendererImpl())
+		{
+		case WindowsApp::Renderer_D3D9:
+			return shared_ptr<SceneNode>(CB_NEW D3DTeapotMeshNode9(m_pOwner->GetId(), weakThis, "Effects\\Main.fx", RenderPass_Object, &pTransformComponent->GetTransform()));
 
-	default:
-		CB_ERROR("Unknown Renderer Implementation in TeapotRenderComponent");
+		case WindowsApp::Renderer_D3D11:
+		{
+			Mat4x4 rot90;
+			rot90.BuildRotationY(-CB_PI / 2.0f);
+			shared_ptr<SceneNode> parent(CB_NEW SceneNode(m_pOwner->GetId(), weakThis, RenderPass_Object, &pTransformComponent->GetTransform()));
+			shared_ptr<SceneNode> teapot(CB_NEW D3DTeapotMeshNode11(INVALID_GAMEOBJECT_ID, weakThis, RenderPass_Object, &rot90));
+			parent->AddChild(teapot);
+			return parent;
+		}
+
+		default:
+			CB_ERROR("Unknown Renderer Implementation in TeapotRenderComponent");
+		}
 	}
-	
 
 	return shared_ptr<SceneNode>();
 }
