@@ -12,7 +12,7 @@ ProcessManager::~ProcessManager()
 	ClearAllProcesses();
 }
 
-unsigned int ProcessManager::UpdateProcesses(const float deltaTime)
+unsigned int ProcessManager::UpdateProcesses(float deltaTime)
 {
 	unsigned short int successCount = 0;
 	unsigned short int failCount = 0;
@@ -20,7 +20,7 @@ unsigned int ProcessManager::UpdateProcesses(const float deltaTime)
 	auto it = m_ProcessList.begin();
 	while (it != m_ProcessList.end())
 	{
-		StrongProcessPtr pCurrentProcess = *it;
+		StrongProcessPtr pCurrentProcess = (*it);
 		
 		// save an iterator to this process and increment our list iterator
 		auto thisIt = it;
@@ -46,7 +46,7 @@ unsigned int ProcessManager::UpdateProcesses(const float deltaTime)
 			case Process::SUCCEEDED:
 				{
 					pCurrentProcess->OnSuccess();
-					StrongProcessPtr pChild = pChild->RemoveChild();
+					StrongProcessPtr pChild = pCurrentProcess->RemoveChild();
 					if (pChild)
 						AttachProcess(pChild);
 					else

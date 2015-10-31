@@ -331,6 +331,9 @@
     <ClInclude Include="Include\TransformComponent.h">
       <Filter>Game Objects\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Include\OggResourceLoader.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineStd.cpp" />
@@ -616,6 +619,9 @@
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Game Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="OggResourceLoader.cpp">
+      <Filter>Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

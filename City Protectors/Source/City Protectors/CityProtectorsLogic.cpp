@@ -60,6 +60,7 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 	switch (newState)
 	{
 	case BaseGameState::WaitingForPlayers:
+	{
 		// only one local player allowed
 		CB_ASSERT(m_ExpectedPlayers == 1);
 
@@ -68,7 +69,7 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 		{
 			shared_ptr<IGameView> playersView(CB_NEW CityProtectorsHumanView(g_pApp->m_Renderer));
 			AddView(playersView);
-			
+
 			if (m_Proxy)
 			{
 				// if we are remote, we spawn our view and are done
@@ -89,10 +90,11 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 			shared_ptr<IGameView> aiView(CB_NEW AIView(m_pPathingGraph));
 			AddView(aiView);
 		}
-		
-		break;
 
+		break;
+	}
 	case BaseGameState::SpawningPlayersObjects:
+	{
 		if (m_Proxy)
 		{
 			// only the server needs to spawn player objects
@@ -109,7 +111,7 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 				if (pObject)
 				{
 					shared_ptr<Event_NewGameObject> pEvent(CB_NEW Event_NewGameObject(pObject->GetId(), pView->GetId()));
-					IEventManager::Get()->TriggerEvent(pEvent);  
+					IEventManager::Get()->TriggerEvent(pEvent);
 				}
 			}
 			else if (pView->GetType() == GameView_Remote)
@@ -136,6 +138,7 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 			}
 		}
 		break;
+	}
 	}
 }
 

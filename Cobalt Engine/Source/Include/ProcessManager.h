@@ -24,7 +24,7 @@ public:
 	~ProcessManager();
 
 	/// Update all processes in the process list
-	unsigned int UpdateProcesses(const float deltaTime);
+	unsigned int UpdateProcesses(float deltaTime);
 
 	/// Attach a process to the process manager
 	WeakProcessPtr AttachProcess(StrongProcessPtr pProcess);

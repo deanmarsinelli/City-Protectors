@@ -12,6 +12,8 @@
 #include "Logger.h"
 #include "SoundResourceExtraData.h"
 
+#pragma comment(lib, "Dsound.lib")
+
 DirectSoundAudio::DirectSoundAudio()
 {
 	m_pDS = nullptr;

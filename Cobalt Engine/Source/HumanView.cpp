@@ -38,10 +38,16 @@ HumanView::HumanView(shared_ptr<IRenderer> renderer)
 
 	if (renderer)
 	{
+		// create the scene graph and camera
 		m_pScene.reset(CB_NEW ScreenElementScene(renderer));
-		
+
 		Frustrum frustrum;
-		
+		frustrum.Init(CB_PI / 4.0f, 1.0f, 1.0f, 100.0f);
+		m_pCamera.reset(CB_NEW CameraNode(&Mat4x4::Identity, frustrum));
+		CB_ASSERT(m_pScene && m_pCamera && L"Out of Memory");
+
+		m_pScene->AddChild(INVALID_GAMEOBJECT_ID, m_pCamera);
+		m_pScene->SetCamera(m_pCamera);
 	}
 
 	m_LastDraw = 0;
@@ -72,9 +78,7 @@ bool HumanView::InitAudio()
 	// create and initalize the global audio system
 	if (!g_pAudio)
 	{
-#ifdef DIRECTX
 		g_pAudio = CB_NEW DirectSoundAudio();
-#endif
 	}
 
 	if (!g_pAudio)

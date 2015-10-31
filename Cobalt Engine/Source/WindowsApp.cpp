@@ -132,12 +132,14 @@ bool WindowsApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 		return false;
 	}
 	// register resource loaders
+	extern shared_ptr<IResourceLoader> CreateOggResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateWAVResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateDDSResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateJPGResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateXmlResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateSdkMeshResourceLoader();
 	extern shared_ptr<IResourceLoader> CreateLuaScriptResourceLoader();
+	m_ResCache->RegisterLoader(CreateOggResourceLoader());
 	m_ResCache->RegisterLoader(CreateWAVResourceLoader());
 	m_ResCache->RegisterLoader(CreateDDSResourceLoader());
 	m_ResCache->RegisterLoader(CreateJPGResourceLoader());
