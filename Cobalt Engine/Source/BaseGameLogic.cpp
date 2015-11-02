@@ -383,7 +383,7 @@ void BaseGameLogic::OnUpdate(float time, float deltaTime)
 	}
 }
 
-void BaseGameLogic::ChangeState(enum BaseGameState newState)
+void BaseGameLogic::ChangeState(BaseGameState newState)
 {
 	// if changing to waiting for players
 	if (newState == BaseGameState::WaitingForPlayers)

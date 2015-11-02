@@ -15,7 +15,7 @@ cbuffer cbObjectColors : register(b0)
 	float4 g_DiffuseObjectColor	: packoffset(c0);
 	float4 g_AmbientObjectColor : packoffset(c1);
 	bool   g_HasTexture : packoffset(c2.x);
-}
+};
 
 // Textures and samplers
 Texture2D g_txDiffuse    : register(t0);

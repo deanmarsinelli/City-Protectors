@@ -108,7 +108,7 @@ public:
 	virtual void OnUpdate(float time, float deltaTime);
 
 	/// Change the state of the game logic
-	virtual void ChangeState(enum BaseGameState newState);
+	virtual void ChangeState(BaseGameState newState);
 
 	/// Return the state of the game logic
 	const BaseGameState GetState() const;
