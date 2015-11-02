@@ -13,6 +13,7 @@ SkyNode::SkyNode(const char* textureFile) :
 	RenderPass::RenderPass_Sky, &Mat4x4::Identity)
 {
 	m_Active = true;
+	m_TextureBaseName = textureFile;
 }
 
 HRESULT SkyNode::PreRender(Scene* pScene)

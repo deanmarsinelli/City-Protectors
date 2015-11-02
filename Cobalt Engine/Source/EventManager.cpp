@@ -64,7 +64,7 @@ bool EventManager::AddListener(const EventListenerDelegate& eventDelegate, const
 	EventListenerList& listeners = m_EventListeners[type];
 
 	// make sure the listener is not already registered
-	for (EventListenerList::iterator it = listeners.begin(); it != listeners.end(); ++it)
+	for (auto it = listeners.begin(); it != listeners.end(); ++it)
 	{
 		if (eventDelegate == (*it))
 		{
@@ -121,7 +121,7 @@ bool EventManager::TriggerEvent(const IEventPtr& pEvent) const
 		const EventListenerList& listeners = findIt->second;
 		for (EventListenerList::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
 		{
-			EventListenerDelegate listener = *it;
+			EventListenerDelegate listener = (*it);
 			CB_LOG("Events", "Sending event " + std::string(pEvent->GetName()) + " to delegate listener."); 
 			listener(pEvent);
 			processed = true;
@@ -139,6 +139,7 @@ bool EventManager::QueueEvent(const IEventPtr& pEvent)
 	if (!pEvent)
 	{
 		CB_ERROR("Invalid Event");
+		return false;
 	}
 	CB_LOG("Events", "Attempting to queue event: " + std::string(pEvent->GetName()));
 
@@ -228,7 +229,9 @@ bool EventManager::Update(unsigned long maxMillis)
 	// process the queue of events
 	while (!m_Queues[queueToProcess].empty())
 	{
+		// process the first event and pop it
 		IEventPtr pEvent = m_Queues[queueToProcess].front();
+		m_Queues[queueToProcess].pop_front();
 		CB_LOG("EventLoop", "\t\tProcessing Event " + std::string(pEvent->GetName()));
 
 		const EventType& eventType = pEvent->GetEventType();

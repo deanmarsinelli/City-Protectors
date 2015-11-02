@@ -179,7 +179,7 @@ HRESULT D3DSkyNode11::Render(Scene* pScene)
 	V_RETURN(m_PixelShader.SetupRender(pScene, this));
 
 	// set the vertex buffer
-	UINT stride = sizeof(D3D11VertexLayout_UnlitTextured);
+	UINT stride = sizeof(D3D11Vertex_UnlitTextured);
 	UINT offset = 0;
 	DXUTGetD3D11DeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
 
