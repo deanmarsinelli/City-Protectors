@@ -10,6 +10,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "City Protectors", "City Pro
 		{102E8513-7186-4219-BFF6-BAD0C0FCC489} = {102E8513-7186-4219-BFF6-BAD0C0FCC489}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cobalt Editor DLL", "..\..\Cobalt Editor\Editor DLL\Source\Cobalt Editor DLL.vcxproj", "{57335F44-573A-4062-8072-68DF55DEAAEC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{102E8513-7186-4219-BFF6-BAD0C0FCC489} = {102E8513-7186-4219-BFF6-BAD0C0FCC489}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -24,6 +29,10 @@ Global
 		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Debug|Win32.Build.0 = Debug|Win32
 		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Release|Win32.ActiveCfg = Release|Win32
 		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Release|Win32.Build.0 = Release|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Debug|Win32.Build.0 = Debug|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Release|Win32.ActiveCfg = Release|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

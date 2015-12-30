@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{57335F44-573A-4062-8072-68DF55DEAAEC}</ProjectGuid>
+    <RootNamespace>CobaltEditorDLL</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(IncludePath); $(ProjectDir)..\..\..\Cobalt Engine\Source\Include;$(DXSDK_DIR)\Include;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\Effects11\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\DXUT\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\tinyxml\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\FastDelegate;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\luaplus51-all\Src\LuaPlus;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\libvorbis-1.3.2\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\libogg-1.3.0\Inc;</IncludePath>
+    <OutDir>$(ProjectDir)..\Lib\</OutDir>
+    <TargetName>$(ProjectName)_$(PlatformName)_$(Configuration)</TargetName>
+    <IntDir>$(ProjectDir)..\Temp\$(ProjectName)_$(PlatformName)_$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath);$(VCInstallDir)PlatformSDK\lib;$(DXSDK_DIR)Lib\x86;$(ProjectDir)..\..\..\Cobalt Engine\Lib;</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(IncludePath); $(ProjectDir)..\..\..\Cobalt Engine\Source\Include;$(DXSDK_DIR)\Include;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\Effects11\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\DXUT\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\tinyxml\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\zlib-1.2.5\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\FastDelegate;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\luaplus51-all\Src\LuaPlus;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\libvorbis-1.3.2\Inc;$(ProjectDir)..\..\..\Cobalt Engine\Source\3rdParty\libogg-1.3.0\Inc;</IncludePath>
+    <OutDir>$(ProjectDir)..\Lib\</OutDir>
+    <TargetName>$(ProjectName)_$(PlatformName)_$(Configuration)</TargetName>
+    <IntDir>$(ProjectDir)..\Temp\$(ProjectName)_$(PlatformName)_$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Cobalt Engine_Win32_Debug.lib;kernel32.lib;user32.lib;gdi32.lib;</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmtd.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Cobalt Engine_Win32_Release.lib;kernel32.lib;user32.lib;gdi32.lib;</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmtd.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Editor.h" />
+    <ClInclude Include="EditorGlobalFunctions.h" />
+    <ClInclude Include="EditorHumanView.h" />
+    <ClInclude Include="resource1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="EditorGlobalFunctions.cpp" />
+    <ClCompile Include="EditorHumanView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Cobalt Editor DLL.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
