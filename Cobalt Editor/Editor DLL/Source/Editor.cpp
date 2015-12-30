@@ -10,15 +10,28 @@
 #include <Physics.h>
 
 #include "Editor.h"
-
-#define IDI_ICON1	101
+#include "resource.h"
 
 #pragma comment(lib, "shell32.lib")
 #pragma comment(lib, "advapi32.lib")			// useful for Windows Registry queries
 #pragma comment(lib, "OleAut32.lib")			// needed for the C# / C++ BSTR conversions
 
-#pragma comment(lib, "dxut.lib")
-#pragma comment(lib, "dxutopt.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+
+#ifdef _DEBUG
+#pragma comment(lib, "d3dx9d.lib")
+#pragma comment(lib, "d3dx11d.lib")
+#pragma comment(lib, "DXUTd.lib")
+#pragma comment(lib, "DXUTOptd.lib")
+#else
+#pragma comment(lib, "d3dx9.lib")
+#pragma comment(lib, "d3dx11.lib")
+#pragma comment(lib, "DXUT.lib")
+#pragma comment(lib, "DXUTOpt.lib")
+#endif
+
+#pragma comment(lib, "DxErr.lib")
+#pragma comment(lib, "Comctl32.lib")
 
 #ifdef _DEBUG
 	#pragma comment(lib, "bulletcollision_debug.lib")
@@ -30,7 +43,7 @@
 	#pragma comment(lib, "linearmath.lib")
 #endif
 
-#pragma comment(lib, "zlibstat.lib")
+#pragma comment(lib, "zlib.lib")
 
 #ifdef _DEBUG
 	#pragma comment(lib, "libogg_staticd.lib")
@@ -86,7 +99,7 @@ BaseGameLogic* EditorApp::CreateGameAndView()
 EditorLogic::EditorLogic() : 
 BaseGameLogic()
 {
-	m_ProjectDirectory = getcwd(NULL, 0);
+	m_ProjectDirectory = _getcwd(NULL, 0);
 	int slashGamePos = m_ProjectDirectory.rfind("\\Game");
 	m_ProjectDirectory = m_ProjectDirectory.substr(0, slashGamePos);
 
@@ -140,7 +153,7 @@ shared_ptr<EditorHumanView> EditorLogic::GetHumanView()
 {
 	CB_ASSERT(m_GameViews.size() == 1);
 	shared_ptr<IGameView> pGameView = *m_GameViews.begin();
-	shared_ptr<EditorHumanView> editorHumanView = static_pointer_cast<editorHumanView>(pGameView);
+	shared_ptr<EditorHumanView> editorHumanView = static_pointer_cast<EditorHumanView>(pGameView);
 
 	return editorHumanView;
 }

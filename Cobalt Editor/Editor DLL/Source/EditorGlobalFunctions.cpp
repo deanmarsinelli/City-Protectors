@@ -166,8 +166,9 @@ void GetGameObjectList(int* gameObjectIdArrayPtrAddress, int numGameObjects)
 	if (pGame)
 	{
 		auto gameObjectMap = pGame->GetGameObjectMap();
+		int index = 0;
 
-		for (GameObjectMap::const_iterator it = gameObjectMap.begin(), int index = 0;
+		for (GameObjectMap::const_iterator it = gameObjectMap.begin();
 			it != gameObjectMap.end() && index < numGameObjects; ++it, index++)
 		{
 			GameObjectId id = it->first;

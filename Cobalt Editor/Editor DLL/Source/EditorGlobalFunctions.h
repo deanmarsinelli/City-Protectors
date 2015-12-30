@@ -29,9 +29,9 @@ extern "C" DllExport int GetGameObjectXmlSize(GameObjectId gameObjectId);
 extern "C" DllExport void GetGameObjectXml(int* gameObjectXmlPtrAddress, GameObjectId gameObjectId);
 extern "C" DllExport int PickGameObject(int* hWndPtrAddress);
 
-// Actor Modification functions
-extern "C" DllExport int CreateGameObject(BSTR bstrActorResource);
-extern "C" DllExport void ModifyGameObject(BSTR bstrActorModificationXML);
+// GameObject Modification functions
+extern "C" DllExport int CreateGameObject(BSTR bstrGameObjectResource);
+extern "C" DllExport void ModifyGameObject(BSTR bstrGameObjectModificationXML);
 extern "C" DllExport void DestroyGameObject(GameObjectId gameObjectId);
 
 // Level script additions

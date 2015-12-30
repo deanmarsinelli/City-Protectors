@@ -15,24 +15,58 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cobalt Editor DLL", "..\..\
 		{102E8513-7186-4219-BFF6-BAD0C0FCC489} = {102E8513-7186-4219-BFF6-BAD0C0FCC489}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cobalt Editor", "..\..\Cobalt Editor\Editor App\Source\Cobalt Editor.csproj", "{6D8BF432-943B-4F85-9E8C-39701211BCE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Debug|Win32.ActiveCfg = Debug|Win32
 		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Debug|Win32.Build.0 = Debug|Win32
+		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Release|Any CPU.ActiveCfg = Release|Win32
+		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Release|Win32.ActiveCfg = Release|Win32
 		{102E8513-7186-4219-BFF6-BAD0C0FCC489}.Release|Win32.Build.0 = Release|Win32
+		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Debug|Win32.ActiveCfg = Debug|Win32
 		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Debug|Win32.Build.0 = Debug|Win32
+		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Release|Any CPU.ActiveCfg = Release|Win32
+		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Release|Win32.ActiveCfg = Release|Win32
 		{60F74C52-70C4-4F76-A4E7-6F11F0F1530B}.Release|Win32.Build.0 = Release|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{57335F44-573A-4062-8072-68DF55DEAAEC}.Debug|Win32.ActiveCfg = Debug|Win32
 		{57335F44-573A-4062-8072-68DF55DEAAEC}.Debug|Win32.Build.0 = Debug|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Release|Any CPU.ActiveCfg = Release|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{57335F44-573A-4062-8072-68DF55DEAAEC}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{57335F44-573A-4062-8072-68DF55DEAAEC}.Release|Win32.ActiveCfg = Release|Win32
 		{57335F44-573A-4062-8072-68DF55DEAAEC}.Release|Win32.Build.0 = Release|Win32
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6D8BF432-943B-4F85-9E8C-39701211BCE1}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
