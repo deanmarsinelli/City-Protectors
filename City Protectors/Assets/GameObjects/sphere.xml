@@ -18,9 +18,9 @@
         <Sphere radius="0.25" segments="25"/>
 	</SphereRenderComponent>
 
-    <BaseScriptComponent>
+    <LuaScriptComponent>
         <ScriptObject constructor="AddSphere" destructor="RemoveSphere" />
         <ScriptData objectType="Sphere" />
-    </BaseScriptComponent>
+    </LuaScriptComponent>
 
 </GameObject>

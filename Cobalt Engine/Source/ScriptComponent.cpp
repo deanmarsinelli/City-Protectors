@@ -52,10 +52,10 @@ bool LuaScriptComponent::Init(TiXmlElement* pData)
 	CB_ASSERT(pStateManager);
 
 	// load the <LuaScriptObject> tag and validate it
-	TiXmlElement* pScriptObjectElement = pData->FirstChildElement("LuaScriptObject");
+	TiXmlElement* pScriptObjectElement = pData->FirstChildElement("ScriptObject");
 	if (!pScriptObjectElement)
 	{
-		CB_ERROR("No <LuaScriptObject> tag in XML");
+		CB_ERROR("No <ScriptObject> tag in XML");
 		return true;
 	}
 
@@ -106,7 +106,7 @@ bool LuaScriptComponent::Init(TiXmlElement* pData)
 	}
 
 	// read the <LuaScriptData> tag
-	TiXmlElement* pScriptDataElement = pData->FirstChildElement("LuaScriptData");
+	TiXmlElement* pScriptDataElement = pData->FirstChildElement("ScriptData");
 	if (pScriptDataElement)
 	{
 		if (m_ScriptObject.IsNil())
@@ -139,7 +139,7 @@ TiXmlElement* LuaScriptComponent::GenerateXml()
 {
 	// serialize this component to an xml element
 	TiXmlElement* pBaseElement = CB_NEW TiXmlElement(GetName());
-	TiXmlElement* pScriptObjectElement = CB_NEW TiXmlElement("LuaScriptObject");
+	TiXmlElement* pScriptObjectElement = CB_NEW TiXmlElement("ScriptObject");
 	
 	if (!m_ScriptObjectName.empty())
 		pScriptObjectElement->SetAttribute("var", m_ScriptObjectName.c_str());

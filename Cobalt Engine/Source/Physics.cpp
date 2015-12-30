@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <btBulletDynamicsCommon.h>
 #include <btBulletCollisionCommon.h>
+#include <iterator>
 #include <memory>
 #include <set>
 #include <string>

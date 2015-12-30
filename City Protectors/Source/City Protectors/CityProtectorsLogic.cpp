@@ -107,7 +107,7 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 			if (pView->GetType() == GameView_Human)
 			{
 				// create the game object and send an event
-				StrongGameObjectPtr pObject = CreateGameObject("objects\\player_teapot.xml", nullptr);
+				StrongGameObjectPtr pObject = CreateGameObject("gameobjects\\player_teapot.xml", nullptr);
 				if (pObject)
 				{
 					shared_ptr<Event_NewGameObject> pEvent(CB_NEW Event_NewGameObject(pObject->GetId(), pView->GetId()));
@@ -118,7 +118,7 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 			{
 				// cast to remote view, create the object, and send an event
 				shared_ptr<NetworkGameView> pNetworkGameView = static_pointer_cast<NetworkGameView, IGameView>(pView);
-				StrongGameObjectPtr pObject = CreateGameObject("objects\\remote_teapot.xml", nullptr);
+				StrongGameObjectPtr pObject = CreateGameObject("gameobjects\\remote_teapot.xml", nullptr);
 				if (pObject)
 				{
 					shared_ptr<Event_NewGameObject> pEvent(CB_NEW Event_NewGameObject(pObject->GetId(), pNetworkGameView->GetId()));
@@ -129,7 +129,7 @@ void CityProtectorsLogic::ChangeState(BaseGameState newState)
 			{
 				// cast to ai view, create the object, and send an event
 				shared_ptr<AIView> pAiView = static_pointer_cast<AIView, IGameView>(pView);
-				StrongGameObjectPtr pObject = CreateGameObject("objects\\ai_teapot.xml", nullptr);
+				StrongGameObjectPtr pObject = CreateGameObject("gameobjects\\ai_teapot.xml", nullptr);
 				if (pObject)
 				{
 					shared_ptr<Event_NewGameObject> pEvent(CB_NEW Event_NewGameObject(pObject->GetId(), pAiView->GetId()));

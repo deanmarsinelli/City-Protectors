@@ -17,10 +17,10 @@
     </TeapotRenderComponent>
 
  <!--  [rez] TODO: Figure out how network players work.  Maybe they don't need a type?
-    <BaseScriptComponent>
+    <LuaScriptComponent>
         <ScriptObject constructor="AddEnemy" destructor="RemoveEnemy" />
         <ScriptData objectType="Teapot" />
-    </BaseScriptComponent>
+    </LuaScriptComponent>
 -->
 
 </GameObject>

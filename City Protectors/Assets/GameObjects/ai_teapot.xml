@@ -18,10 +18,10 @@
     </TeapotRenderComponent>
 
 
-    <BaseScriptComponent>
+    <LuaScriptComponent>
         <ScriptObject constructor="AddEnemy" destructor="RemoveEnemy" />
         <ScriptData objectType="Teapot" />
-    </BaseScriptComponent>
+    </LuaScriptComponent>
 
 	
 </GameObject>
